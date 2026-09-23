@@ -1,8 +1,6 @@
 # Tutor Matemático — Verificación Simbólica y Diagnóstico de Errores
 
-Prototipo del proyecto integrador: "Evaluación Comparativa de una Arquitectura de Tutoría con
-Verificación Simbólica y Diagnóstico de Errores en Ecuaciones de Primer Grado con una Incógnita
-para Noveno de EGB".
+Prototipo del proyecto integrador: "Evaluación Comparativa de la Generación de Retroalimentación Pedagógica con LLM frente a Plantillas Contextualizadas en un Tutor con Verificación Simbólica de Errores Algebraicos para Noveno de EGB."
 
 ## Estructura del proyecto
 
@@ -37,21 +35,13 @@ pip install -r requirements.txt
 ## Ejecutar las pruebas
 
 ```bash
-pytest tests/ -v
+pytest tests/test_verificador.py -v
 ```
 
-## Ejecutar el servidor de desarrollo
-
-```bash
-uvicorn src.api.main:app --reload
-```
-
-Luego abre http://127.0.0.1:8000/docs para ver la documentación interactiva de la API.
 
 ## Próximos pasos (semana 2 en adelante)
 
 - [ ] Completar el árbol de decisión en `src/diagnostico/diagnostico.py` para las 5 categorías.
-- [ ] Ampliar el verificador para manejar más de una incógnita por nombre (actualmente asume `x`).
 - [ ] Implementar `src/generador/llm.py` con la integración a la API de Claude/OpenAI.
 - [ ] Implementar `src/generador/plantillas.py` con las plantillas contextualizadas por categoría.
 - [ ] Empezar a poblar `benchmark/casos/` con los primeros casos anotados.

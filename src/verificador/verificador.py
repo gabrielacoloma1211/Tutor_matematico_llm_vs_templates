@@ -128,15 +128,6 @@ def verificar_paso(s_i: str, s_i_mas_1: str, variable: str = "x") -> ResultadoVe
     """
     Verifica si el paso de S_i a S_{i+1} conserva la solución de la ecuación.
 
-    Ejemplos
-    --------
-    >>> r = verificar_paso("6*x - 4 = 3", "6*x = 3 + 4")
-    >>> r.valido
-    True
-
-    >>> r = verificar_paso("6*x - 4 = 3", "6*x = 3 - 4")
-    >>> r.valido
-    False
     """
     izq_i, der_i = parsear_ecuacion(s_i, variable)
     izq_i1, der_i1 = parsear_ecuacion(s_i_mas_1, variable)
@@ -158,3 +149,4 @@ def verificar_paso(s_i: str, s_i_mas_1: str, variable: str = "x") -> ResultadoVe
             diferencia=str(diferencia),
         ),
     )
+

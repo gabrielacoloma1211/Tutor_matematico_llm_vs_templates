@@ -1,0 +1,44 @@
+{
+  "categorias": [
+    {
+      "id": "error_signo",
+      "nombre": "Error de signo (transposición incorrecta)",
+      "definicion": "Al mover un término de un lado a otro de la ecuación, el estudiante no cambia su signo.",
+      "plantilla_referencia": "Revisa el signo del término {termino}: al moverlo al otro lado de la ecuación, su signo debe cambiar."
+    },
+    {
+      "id": "distributiva_incorrecta",
+      "nombre": "Aplicación incorrecta de la propiedad distributiva",
+      "definicion": "Al expandir una expresión con paréntesis, el estudiante no multiplica el factor por todos los términos dentro del paréntesis, o lo hace con el signo equivocado.",
+      "plantilla_referencia": "Al aplicar la propiedad distributiva, recuerda multiplicar {factor} por cada término dentro del paréntesis, no solo por el primero."
+    },
+    {
+      "id": "operacion_un_lado",
+      "nombre": "Operación realizada únicamente en un lado de la ecuación",
+      "definicion": "El estudiante suma, resta, multiplica o divide un valor en un solo lado de la ecuación, rompiendo la igualdad.",
+      "plantilla_referencia": "Recuerda que cualquier operación que realices debe aplicarse a ambos lados de la ecuación para mantener la igualdad."
+    },
+    {
+      "id": "simplificacion_aritmetica",
+      "nombre": "Simplificación aritmética incorrecta",
+      "definicion": "El estudiante combina correctamente los términos (aplica la operación algebraica correcta) pero se equivoca en el cálculo numérico al hacerlo.",
+      "plantilla_referencia": "Revisa el cálculo numérico de este paso: la operación que aplicaste es correcta, pero el resultado no lo es."
+    },
+    {
+      "id": "division_coeficiente_equivocado",
+      "nombre": "División por coeficiente equivocado",
+      "definicion": "Al despejar la incógnita, el estudiante divide ambos lados por un número que no es el coeficiente de la incógnita.",
+      "plantilla_referencia": "Para despejar la incógnita, debes dividir ambos lados entre el coeficiente que la acompaña, en este caso {coeficiente}."
+    },
+    {
+      "id": "indeterminado",
+      "nombre": "Indeterminado",
+      "definicion": "Categoría de reserva para pasos donde el árbol de decisión no puede asignar con confianza ninguna de las 5 categorías anteriores.",
+      "plantilla_referencia": null
+    }
+  ],
+  "fuentes": [
+    "I. Moreno and L. Cobo, \"Secuencia de enseñanza para solucionar ecuaciones de primer grado con una incógnita,\" Revista EMA, vol. 2, no. 3, pp. 247-258, 1997.",
+    "Y. Durán Vargas, \"Comprensión de las ecuaciones de primer grado en secundaria desde la teoría APOE,\" Tesis de licenciatura, Fac. Cienc. Físico Matemáticas, Benemérita Univ. Autónoma de Puebla, Puebla, México, 2024."
+  ]
+}

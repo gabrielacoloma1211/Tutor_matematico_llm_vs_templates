@@ -1,0 +1,53 @@
+# Virtual environments
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Testing
+.pytest_cache/
+
+# Environment variables / API keys
+.env
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+venv/
+.venv/
+__pycache__/
+*.pyc
+.env
+.DS_Store
+.pytest_cache/# Entornos virtuales
+venv/
+env/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# Variables de entorno (API keys, etc.)
+.env
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Resultados de experimentos (no versionar salidas grandes)
+resultados/*.csv
+resultados/*.json
+!resultados/.gitkeep

@@ -39,7 +39,7 @@ pytest tests/test_verificador.py -v
 ```
 
 
-## Próximos pasos (semana 2 en adelante)
+## Próximos pasos 
 
 - [ ] Completar el árbol de decisión en `src/diagnostico/diagnostico.py` para las 5 categorías.
 - [ ] Implementar `src/generador/llm.py` con la integración a la API de Claude/OpenAI.

@@ -36,6 +36,10 @@ class Discrepancia:
     forma_normalizada_s_i: str
     forma_normalizada_s_i_mas_1: str
     diferencia: str
+    izq_i: sp.Expr           
+    der_i: sp.Expr           
+    izq_i_mas_1: sp.Expr     
+    der_i_mas_1: sp.Expr     
 
 
 @dataclass
@@ -68,8 +72,8 @@ def parsear_ecuacion(ecuacion: str, variable: str = "x"):
     local_dict = {variable: simbolo}
 
     try:
-        izq = parse_expr(izq_str.strip(), local_dict=local_dict, transformations=_TRANSFORMATIONS)
-        der = parse_expr(der_str.strip(), local_dict=local_dict, transformations=_TRANSFORMATIONS)
+        izq = parse_expr(izq_str.strip(), local_dict=local_dict, transformations=_TRANSFORMATIONS, evaluate=False)
+        der = parse_expr(der_str.strip(), local_dict=local_dict, transformations=_TRANSFORMATIONS, evaluate=False)
     except Exception as e:
         raise ErrorDeParseo(f"No se pudo interpretar la ecuación '{ecuacion}': {e}") from e
 
@@ -78,7 +82,7 @@ def parsear_ecuacion(ecuacion: str, variable: str = "x"):
 
 def normalizar(izq: sp.Expr, der: sp.Expr):
     #llevamos la ecuación a la forma 'expresión = 0' y la expandimos
-    return sp.expand(izq - der)
+    return sp.expand(izq - der).doit()
 
 
 def _son_proporcionales(expr1: sp.Expr, expr2: sp.Expr):
@@ -140,13 +144,17 @@ def verificar_paso(s_i: str, s_i_mas_1: str, variable: str = "x") -> ResultadoVe
     if proporcionales:
         return ResultadoVerificacion(valido=True)
 
-    diferencia = sp.expand(norm_i - norm_i1)
+    diferencia = sp.expand(norm_i - norm_i1).doit()
     return ResultadoVerificacion(
         valido=False,
         discrepancia=Discrepancia(
             forma_normalizada_s_i=str(norm_i),
             forma_normalizada_s_i_mas_1=str(norm_i1),
             diferencia=str(diferencia),
+            izq_i=izq_i,              
+            der_i=der_i,              
+            izq_i_mas_1=izq_i1,       
+            der_i_mas_1=der_i1,       
         ),
     )
 

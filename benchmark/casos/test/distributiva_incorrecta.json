@@ -1,0 +1,244 @@
+[
+  {
+    "id": "TEST-014",
+    "categoria": "distributiva_incorrecta",
+    "enunciado": "Resuelve: 2(x + 3) = 14",
+    "solucion_correcta": [
+      "2(x + 3) = 14",
+      "2x + 6 = 14",
+      "2x = 14 - 6",
+      "2x = 8",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "2(x + 3) = 14",
+      "2x + 3 = 14",
+      "2x = 14 - 3",
+      "2x = 11",
+      "x = 11/2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x + 6 = 14",
+    "pista_referencia": "Recuerda que el 2 que está afuera del paréntesis multiplica a todos los términos dentro del paréntesis.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-015",
+    "categoria": "distributiva_incorrecta",
+    "enunciado": "Resuelve: 6(2x - 10) = 12",
+    "solucion_correcta": [
+      "6(2x - 10) = 12",
+      "12x - 60 = 12",
+      "12x = 12 + 60",
+      "12x = 72",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "6(2x - 10) = 12",
+      "12x - 10 = 12",
+      "12x = 12 + 10",
+      "12x = 22",
+      "x = 22/12"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "12x - 60 = 12",
+    "pista_referencia": "Revisa la multiplicación con el segundo término dentro del paréntesis.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-016",
+    "categoria": "distributiva_incorrecta",
+    "enunciado": "Resuelve: 4(x - 3) + 2 = 18",
+    "solucion_correcta": [
+      "4(x - 3) + 2 = 18",
+      "4x - 12 + 2 = 18",
+      "4x = 18 + 12 - 2",
+      "4x = 28",
+      "x = 7"
+    ],
+    "resolucion_estudiante": [
+      "4(x - 3) + 2 = 18",
+      "x - 12 + 2 = 18",
+      "x = 18 + 12 - 2",
+      "x = 28"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "4x - 12 + 2 = 18",
+    "pista_referencia": "El número 4 multiplicando al paréntesis debe multiplicar a ambos términos.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-017",
+    "categoria": "distributiva_incorrecta",
+    "enunciado": "Resuelve: 2/3(x + 6) - 1 = 5",
+    "solucion_correcta": [
+      "2/3(x + 6) - 1 = 5",
+      "2x/3 + 12/3 - 1 = 5",
+      "2x + 12 - 3 = 15",
+      "2x = 15 - 12 + 3",
+      "2x = 6",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "2/3(x + 6) - 1 = 5",
+      "x + 12/3 - 1 = 5",
+      "x + 4 - 1 = 5",
+      "x = 5 - 4 + 1",
+      "x = 2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x/3 + 12/3 - 1 = 5",
+    "pista_referencia": "La fracción multiplica a ambos términos internos al paréntesis, no solo a uno.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-018",
+    "categoria": "distributiva_incorrecta",
+    "enunciado": "Resuelve: -3(x - 2) = x + 8",
+    "solucion_correcta": [
+      "-3(x - 2) = x + 8",
+      "-3x + 6 = x + 8",
+      "-3x - x = 8 - 6",
+      "-4x = 2",
+      "-x = 2/4",
+      "x = -1/2"
+    ],
+    "resolucion_estudiante": [
+      "-3(x - 2) = x + 8",
+      "-3x - 6 = x + 8",
+      "-3x - x = 8 + 6",
+      "-4x = 14",
+      "-x = 14/4",
+      "x = -14/4"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "-3x + 6 = x + 8",
+    "pista_referencia": "El signo del -3 que multiplica a todo el paréntesis se aplica a ambos términos de adentro del mismo.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-019",
+    "categoria": "distributiva_incorrecta",
+    "enunciado": "Resuelve: -1/2(2x + 6) = 4",
+    "solucion_correcta": [
+      "-1/2(2x + 6) = 4",
+      "-2x/2 - 6/2 = 4",
+      "-x - 3 = 4",
+      "-x = 4 + 3",
+      "-x = 7",
+      "x = -7"
+    ],
+    "resolucion_estudiante": [
+      "-1/2(2x + 6) = 4",
+      "-2x/2 + 6/2 = 4",
+      "-x + 3 = 4",
+      "-x = 4 - 3",
+      "-x = 1",
+      "x = -1"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "-2x/2 - 6/2 = 4",
+    "pista_referencia": "El signo del factor que multiplica al paréntesis aplica a todos sus términos.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-020",
+    "categoria": "distributiva_incorrecta",
+    "enunciado": "Resuelve: x = 15 - (4x - 2)",
+    "solucion_correcta": [
+      "x = 15 - (4x - 2)",
+      "x = 15 - 4x + 2",
+      "x + 4x = 15 + 2",
+      "5x = 17",
+      "x = 17/5"
+    ],
+    "resolucion_estudiante": [
+      "x = 15 - (4x - 2)",
+      "x = 15 - 4x - 2",
+      "x + 4x = 15 - 2",
+      "5x = 13",
+      "x = 13/5"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "x = 15 - 4x + 2",
+    "pista_referencia": "Recuerda que el signo fuera del paréntesis también se multiplica por todos los términos dentro del mismo.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-021",
+    "categoria": "distributiva_incorrecta",
+    "enunciado": "Resuelve: 26 - 3x = x + 2(x + 4)",
+    "solucion_correcta": [
+      "26 - 3x = x + 2(x + 4)",
+      "-3x - x - 2(x + 4) = -26",
+      "-3x - x - 2x - 8 = -26",
+      "-3x - x - 2x = -26 + 8",
+      "-6x = -18",
+      "6x = 18",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "26 - 3x = x + 2(x + 4)",
+      "-3x - x - 2(x + 4) = -26",
+      "-3x - x - 2x - 6 = -26",
+      "-3x - x - 2x = -26 + 6",
+      "-6x = -20",
+      "6x = 20",
+      "x = 20/6"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "-3x - x - 2x - 8 = -26",
+    "pista_referencia": "Recuerda que al multiplicar un factor por un paréntesis debes multiplicar y no sumar, para todos los términos dentro de él.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-022",
+    "categoria": "distributiva_incorrecta",
+    "enunciado": "Resuelve: 2x + 1/2(x + 7) = 13",
+    "solucion_correcta": [
+      "2x + 1/2(x + 7) = 13",
+      "2x + x/2 + 7/2 = 13",
+      "4x + x + 7 = 26",
+      "4x + x = 26 - 7",
+      "5x = 19",
+      "x = 19/5"
+    ],
+    "resolucion_estudiante": [
+      "2x + 1/2(x + 7) = 13",
+      "2x + x/2 + 7 = 13",
+      "4x + x + 14 = 26",
+      "4x + x = 26 - 14",
+      "5x = 12",
+      "x = 12/5"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x + x/2 + 7/2 = 13",
+    "pista_referencia": "Acuérdate de que el 1/2 se debe multiplicar por todos los términos dentro del paréntesis.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-023",
+    "categoria": "distributiva_incorrecta",
+    "enunciado": "Resuelve: 5 - 2 + 3(2x + 1) = 9",
+    "solucion_correcta": [
+      "5 - 2 + 3(2x + 1) = 9",
+      "3 + 3(2x + 1) = 9",
+      "3 + 6x + 3 = 9",
+      "6x = 9 - 3 - 3",
+      "6x = 3",
+      "x = 3/6"
+    ],
+    "resolucion_estudiante": [
+      "5 - 2 + 3(2x + 1) = 9",
+      "3 + 3(2x + 1) = 9",
+      "3 + 6x + 1 = 9",
+      "6x = 9 - 3 - 1",
+      "6x = 5",
+      "x = 5/6"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "3 + 6x + 3 = 9",
+    "pista_referencia": "Recuerda que el 3 que se está multiplicando por un paréntesis debe hacerlo con cada término dentro del mismo.",
+    "notas": ""
+  }
+]

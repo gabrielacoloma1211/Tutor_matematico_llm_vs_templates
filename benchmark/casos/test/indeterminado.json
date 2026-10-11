@@ -1,0 +1,138 @@
+[
+  {
+    "id": "TEST-045",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: x/2 - 3 = 8",
+    "solucion_correcta": [
+      "x/2 - 3 = 8",
+      "x/2 = 8 + 3",
+      "x/2 = 11",
+      "x = 22"
+    ],
+    "resolucion_estudiante": [
+      "x/2 - 3 = 8",
+      "x/2 = 8 + 3",
+      "x/2 = 11",
+      "x = 11/2"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 22",
+    "pista_referencia": "Recuerda que cuando tú multiplicas de un lado por un número como 2, debes usar la misma operación al otro lado, no división.",
+    "notas": "No encaja: multiplica al lado izquierdo y divide en el derecho"
+  },
+  {
+    "id": "TEST-046",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: (x + 3)/3 + 2 = 9",
+    "solucion_correcta": [
+      "(x + 3)/3 + 2 = 9",
+      "x/3 + 3/3 + 2 = 9",
+      "x/3 + 1 + 2 = 9",
+      "x/3 = 9 - 1 - 2",
+      "x/3 = 6",
+      "x = 18"
+    ],
+    "resolucion_estudiante": [
+      "(x + 3)/3 + 2 = 9",
+      "x/3 + 3/3 + 2 = 9",
+      "x/3 + 1 + 2 = 9",
+      "x/3 = 9 - 1 - 2",
+      "x/3 = 6",
+      "x = 6/3",
+      "x = 2"
+    ],
+    "indice_paso_erroneo": 5,
+    "correccion_esperada": "x = 18",
+    "pista_referencia": "Acuérdate de que si en un lado de la ecuación multiplicas por un número como 3 al otro lado no puedes dividir, sino multiplicar también.",
+    "notas": "No encaja: multiplica al lado izquierdo y divide en el derecho"
+  },
+  {
+    "id": "TEST-047",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: 6x - 5 + x + 4 = 3x + 19",
+    "solucion_correcta": [
+      "6x - 5 + x + 4 = 3x + 19",
+      "6x + x - 3x = 19 + 5 - 4",
+      "4x = 20",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "6x - 5 + x + 4 = 3x + 19",
+      "6x + x + 3x = 19 + 5 + 4",
+      "10x = 28",
+      "x = 28/10"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6x + x - 3x = 19 + 5 - 4",
+    "pista_referencia": "Revisa nuevamente los signos cuando mueves un término de un lado al otro de la ecuación.",
+    "notas": "Combinado = dos errores de signo en un mismo paso"
+  },
+  {
+    "id": "TEST-048",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: 3x + 2(x + 4) - 3 = 19",
+    "solucion_correcta": [
+      "3x + 2(x + 4) - 3 = 19",
+      "3x + 2x + 8 = 19 + 3",
+      "3x + 2x = 22 - 8",
+      "5x = 14",
+      "x = 14/5"
+    ],
+    "resolucion_estudiante": [
+      "3x + 2(x + 4) - 3 = 19",
+      "3x + 2x + 4 = 19 - 3",
+      "3x + 2x = 16 - 4",
+      "5x = 12",
+      "x = 12/5"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "3x + 2x + 8 = 19 + 3",
+    "pista_referencia": "Debes revisar tu resolución de la distributiva y ten cuidado al cambiar los términos de un lado al otro de la ecuación.",
+    "notas": "Combinado = distributiva incompleta y error de signo en el mismo paso."
+  },
+  {
+    "id": "TEST-049",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: 3x + 4 + x/3 = 16",
+    "solucion_correcta": [
+      "3x + 4 + x/3 = 16",
+      "9x + x = 48 - 12",
+      "10x = 36",
+      "x = 36/10"
+    ],
+    "resolucion_estudiante": [
+      "3x + 4 + x/3 = 16",
+      "9x + x = 16 + 4",
+      "10x = 20",
+      "x = 2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "9x + x = 48 - 12",
+    "pista_referencia": "Recuerda que las operaciones que se apliquen a un lado de la ecuación también se deben aplicar al otro lado y fíjate en los signos al mover los términos.",
+    "notas": "Combinado = operación en un solo lado y error de signo en el mismo paso."
+  },
+  {
+    "id": "TEST-050",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: (x + 5)/2 + 5x = 14",
+    "solucion_correcta": [
+      "(x + 5)/2 + 5x = 14",
+      "x + 5 + 10x = 28",
+      "x + 10x = 28 - 5",
+      "11x = 23",
+      "x = 23/11"
+    ],
+    "resolucion_estudiante": [
+      "(x + 5)/2 + 5x = 14",
+      "x + 5 + 10x = 28",
+      "x + 10x = 28 - 5",
+      "11x = 23",
+      "x = 23 - 11",
+      "x = 12"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 23/11",
+    "pista_referencia": "Recuerda que si en un lado estás dividiendo en el otro lado debes repetir la operación, no restar como en este caso.",
+    "notas": "No encaja: operación equivocada al despejar."
+  }
+]

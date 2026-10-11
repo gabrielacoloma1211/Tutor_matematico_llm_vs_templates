@@ -1,0 +1,330 @@
+[
+  {
+    "id": "DEV-075",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: 4x + 3 - 2x + 5 = 18",
+    "solucion_correcta": [
+      "4x + 3 - 2x + 5 = 18",
+      "4x - 2x = 18 - 3 - 5",
+      "2x = 10",
+      "x = 10/2",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "4x + 3 - 2x + 5 = 18",
+      "4x - 2x = 18 - 3 - 5",
+      "2x = 10",
+      "x = 10/5",
+      "x = 2"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 10/2",
+    "pista_referencia": "Recuerda que al realizar una operación como la división se debe utilizar el mismo número en ambos lados.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-076",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: 5x - 4 + x + 2 = 3x + 16",
+    "solucion_correcta": [
+      "5x - 4 + x + 2 = 3x + 16",
+      "5x + x - 3x = 16 + 4 - 2",
+      "3x = 18",
+      "x = 18/3",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "5x - 4 + x + 2 = 3x + 16",
+      "5x + x - 3x = 16 + 4 - 2",
+      "3x = 18",
+      "x = 18/4"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 18/3",
+    "pista_referencia": "Acuérdate de que cuando dividas ambos lados de la ecuación debes usar el mismo número.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-077",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: x/2 + 2x + 3 = 13",
+    "solucion_correcta": [
+      "x/2 + 2x + 3 = 13",
+      "x/2 + 2x = 13 - 3",
+      "x + 4x = 26 - 6",
+      "5x = 20",
+      "x = 20/5",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "x/2 + 2x + 3 = 13",
+      "x/2 + 2x = 13 - 3",
+      "x + 4x = 26 - 6",
+      "5x = 20",
+      "x = 20/4",
+      "x = 5"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 20/5",
+    "pista_referencia": "Acuérdate de que para dividir la ecuación entre un número hay que hacerlo para el mismo en ambos lados, en este caso dividido entre 5.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-078",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: 6x - 5 - 3x + 7 = 20",
+    "solucion_correcta": [
+      "6x - 5 - 3x + 7 = 20",
+      "6x - 3x = 20 + 5 - 7",
+      "3x = 18",
+      "x = 18/3",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "6x - 5 - 3x + 7 = 20",
+      "6x - 3x = 20 + 5 - 7",
+      "3x = 18",
+      "x = 18/2",
+      "x = 9"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 18/3",
+    "pista_referencia": "Si divides un lado de la ecuación entre 3 lo debes hacer con este mismo número en el otro lado de la ecuación.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-079",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: 2x/3 + x + 4 = 14",
+    "solucion_correcta": [
+      "2x/3 + x + 4 = 14",
+      "2x/3 + x = 14 - 4",
+      "2x + 3x = 42 - 12",
+      "5x = 30",
+      "x = 30/5",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "2x/3 + x + 4 = 14",
+      "2x/3 + x = 14 - 4",
+      "2x + 3x = 42 - 12",
+      "5x = 30",
+      "x = 30/4"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 30/5",
+    "pista_referencia": "Recuerda que al dividir un lado de la ecuación entre 5 el otro lado igual debe dividirse entre el mismo número.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-080",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: 3x + 6 + x/4 = 15",
+    "solucion_correcta": [
+      "3x + 6 + x/4 = 15",
+      "3x + x/4 = 15 - 6",
+      "12x + x = 60 - 24",
+      "13x = 36",
+      "x = 36/13"
+    ],
+    "resolucion_estudiante": [
+      "3x + 6 + x/4 = 15",
+      "3x + x/4 = 15 - 6",
+      "12x + x = 60 - 24",
+      "13x = 36",
+      "x = 36/20"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 36/13",
+    "pista_referencia": "Recuerda que el número por el que se dividen ambos lados de la ecuación debe ser el mismo, no en un lado 13 y en el otro 20 como en este caso.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-081",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: 5x - 2 + x/2 = 20",
+    "solucion_correcta": [
+      "5x - 2 + x/2 = 20",
+      "5x + x/2 = 20 + 2",
+      "10x + x = 40 + 4",
+      "11x = 44",
+      "x = 44/11",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "5x - 2 + x/2 = 20",
+      "5x + x/2 = 20 + 2",
+      "10x + x = 40 + 4",
+      "11x = 44",
+      "x = 44/17"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 44/11",
+    "pista_referencia": "Acuérdate de que si decides dividir un lado de la ecuación por un número, debes usar ese mismo número para dividir el otro lado de la misma ecuación.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-082",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: 2x + 3(x + 1) = 17",
+    "solucion_correcta": [
+      "2x + 3(x + 1) = 17",
+      "2x + 3x + 3 = 17",
+      "2x + 3x = 17 - 3",
+      "5x = 14",
+      "x = 14/5"
+    ],
+    "resolucion_estudiante": [
+      "2x + 3(x + 1) = 17",
+      "2x + 3x + 3 = 17",
+      "2x + 3x = 17 - 3",
+      "5x = 14",
+      "x = 14/9"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 14/5",
+    "pista_referencia": "Recuerda que si usas un número para dividir un lado de la ecuación, en este caso 5, lo debes también usar para el otro lado de la ecuación.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-083",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: x/2 + 3x - 5 = 13",
+    "solucion_correcta": [
+      "x/2 + 3x - 5 = 13",
+      "x + 6x - 10 = 26",
+      "x + 6x = 26 + 10",
+      "7x = 36",
+      "x = 36/7"
+    ],
+    "resolucion_estudiante": [
+      "x/2 + 3x - 5 = 13",
+      "x + 6x - 10 = 26",
+      "x + 6x = 26 + 10",
+      "7x = 36",
+      "x = 36/5"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 36/7",
+    "pista_referencia": "Acuérdate de que cuando tengas que dividir por un número en ambos lados de la ecuación debe ser por el mismo.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-084",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: 6x + 2 - 4x + 5 = 14",
+    "solucion_correcta": [
+      "6x + 2 - 4x + 5 = 14",
+      "6x - 4x = 14 - 2 - 5",
+      "2x = 7",
+      "x = 7/2"
+    ],
+    "resolucion_estudiante": [
+      "6x + 2 - 4x + 5 = 14",
+      "6x - 4x = 14 - 2 - 5",
+      "2x = 7",
+      "x = 7/4"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 7/2",
+    "pista_referencia": "Debes revisar si es que estás dividiendo en los dos lados de la ecuación usando el mismo número.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-085",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: 2x/3 + x + 6 = 18",
+    "solucion_correcta": [
+      "2x/3 + x + 6 = 18",
+      "2x + 3x + 18 = 54",
+      "2x + 3x = 54 - 18",
+      "5x = 36",
+      "x = 36/5"
+    ],
+    "resolucion_estudiante": [
+      "2x/3 + x + 6 = 18",
+      "2x + 3x + 18 = 54",
+      "2x + 3x = 54 - 18",
+      "5x = 36",
+      "x = 36/3",
+      "x = 12"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 36/5",
+    "pista_referencia": "Revisa el número entre el que estás dividiendo ambos lados de la ecuación, recuerda que debe ser el mismo en ambos lados.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-086",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: 8x - (3x + 2) = 23",
+    "solucion_correcta": [
+      "8x - (3x + 2) = 23",
+      "8x - 3x - 2 = 23",
+      "8x - 3x = 23 + 2",
+      "5x = 25",
+      "x = 25/5",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "8x - (3x + 2) = 23",
+      "8x - 3x - 2 = 23",
+      "8x - 3x = 23 + 2",
+      "5x = 25",
+      "x = 25/2"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 25/5",
+    "pista_referencia": "Acuérdate de que cuando tú divides entre un número específico como el 5 en este caso, también se debe dividir entre ese mismo número al otro lado de la ecuación.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-087",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: 2(x + 5) - 4x - 4 = 21",
+    "solucion_correcta": [
+      "2(x + 5) - 4x - 4 = 21",
+      "2x + 10 - 4x - 4 = 21",
+      "2x - 4x = 21 - 10 + 4",
+      "-2x = 15",
+      "x = 15/-2",
+      "x = -15/2"
+    ],
+    "resolucion_estudiante": [
+      "2(x + 5) - 4x - 4 = 21",
+      "2x + 10 - 4x - 4 = 21",
+      "2x - 4x = 21 - 10 + 4",
+      "-2x = 15",
+      "x = 15/2"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 15/-2",
+    "pista_referencia": "Recuerda que cuando divides entre un número en ambos lados de la ecuación también debes tomar en cuenta el signo de este número, como el menos del -2.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-088",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: 4x - 5 - 6(x + 1) = 19",
+    "solucion_correcta": [
+      "4x - 5 - 6(x + 1) = 19",
+      "4x - 5 - 6x - 6 = 19",
+      "4x - 6x = 19 + 5 + 6",
+      "-2x = 30",
+      "x = 30/-2",
+      "x = -15"
+    ],
+    "resolucion_estudiante": [
+      "4x - 5 - 6(x + 1) = 19",
+      "4x - 5 - 6x - 6 = 19",
+      "4x - 6x = 19 + 5 + 6",
+      "-2x = 30",
+      "x = 30/2",
+      "x = 15"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 30/-2",
+    "pista_referencia": "Acuérdate de que cuando divides de un lado la ecuación por un número negativo, debes hacerlo en ambos lados, con signo y todo.",
+    "notas": ""
+  }
+]

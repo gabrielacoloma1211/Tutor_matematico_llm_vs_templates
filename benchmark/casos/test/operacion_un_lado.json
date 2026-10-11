@@ -1,0 +1,157 @@
+[
+  {
+    "id": "TEST-024",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: 8x - 5 = 27",
+    "solucion_correcta": [
+      "8x - 5 = 27",
+      "8x = 27 + 5",
+      "8x = 32",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "8x - 5 = 27",
+      "8x = 27",
+      "x = 27/8"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "8x = 27 + 5",
+    "pista_referencia": "Acuérdate de que cuando haces una operación como sumar 5 a un lado de la ecuación, lo debes hacer en ambos lados.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-025",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: (x - 4)/3 = 8",
+    "solucion_correcta": [
+      "(x - 4)/3 = 8",
+      "x - 4 = 24",
+      "x = 24 + 4",
+      "x = 28"
+    ],
+    "resolucion_estudiante": [
+      "(x - 4)/3 = 8",
+      "x - 4 = 8",
+      "x = 8 + 4",
+      "x = 12"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "x - 4 = 24",
+    "pista_referencia": "Recuerda que al realizar una operación como multiplicar por 3 del lado izquierdo de la ecuación, también se debe hacer al lado derecho.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-026",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: (2x+6)/3 = 8",
+    "solucion_correcta": [
+      "(2x+6)/3 = 8",
+      "2x/3 + 6/3 = 8",
+      "2x + 6 = 24",
+      "2x = 24 - 6",
+      "2x = 18",
+      "x = 9"
+    ],
+    "resolucion_estudiante": [
+      "(2x+6)/3 = 8",
+      "2x/3 + 6/3 = 8",
+      "2x + 6 = 8",
+      "2x = 8 - 6",
+      "2x = 2",
+      "x = 1"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "2x + 6 = 24",
+    "pista_referencia": "Recuerda que al multiplicar un lado de la ecuación por un número como el 3, debes hacerlo al otro lado igual para mantener la igualdad.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-027",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: 3x/4 + 2 = 8",
+    "solucion_correcta": [
+      "3x/4 + 2 = 8",
+      "3x/4 = 8 - 2",
+      "3x = 32 - 8",
+      "3x = 24",
+      "x = 8"
+    ],
+    "resolucion_estudiante": [
+      "3x/4 + 2 = 8",
+      "3x/4 = 8 - 2",
+      "3x = 8 - 2",
+      "3x = 6",
+      "x = 2"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "3x = 32 - 8",
+    "pista_referencia": "Debes recordar que al hacer una operación como multiplicar un lado de la ecuación por 4 lo debes hacer en ambos lados, no solo en uno.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-028",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: 6x + 4 = 2x + 20",
+    "solucion_correcta": [
+      "6x + 4 = 2x + 20",
+      "6x - 2x = 20 - 4",
+      "4x = 16",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "6x + 4 = 2x + 20",
+      "6x - 2x + 4 = 2x + 20",
+      "4x - 2x = 20 - 4",
+      "2x = 16",
+      "x = 8"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6x - 2x = 20 - 4",
+    "pista_referencia": "Recuerda que al sumar o en este caso restar un término como 2x en un lado de la ecuación, lo debes hacer en el otro lado también.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-029",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: 5x/2 + 5 = 11",
+    "solucion_correcta": [
+      "5x/2 + 5 = 11",
+      "5x/2 = 11 - 5",
+      "5x = 22 - 10",
+      "5x = 12",
+      "x = 12/5"
+    ],
+    "resolucion_estudiante": [
+      "5x/2 + 5 = 11",
+      "5x/2 = 11 - 5",
+      "5x = 22 - 10",
+      "5x = 12",
+      "x = 12"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 12/5",
+    "pista_referencia": "Acuérdate de que al dividir un lado de la ecuación por un número, lo debes hacer también al otro lado.",
+    "notas": ""
+  },
+  {
+    "id": "TEST-030",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: (x - 8)/2 = 6",
+    "solucion_correcta": [
+      "(x - 8)/2 = 6",
+      "x - 8 = 12",
+      "x = 12 + 8",
+      "x = 20"
+    ],
+    "resolucion_estudiante": [
+      "(x - 8)/2 = 6",
+      "x - 8 = 6",
+      "x = 6 + 8",
+      "x = 14"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "x - 8 = 12",
+    "pista_referencia": "Recuerda que cuando multiplicas un lado de la ecuación por 2, lo debes hacer en ambos lados.",
+    "notas": ""
+  }
+]

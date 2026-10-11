@@ -1,0 +1,309 @@
+[
+  {
+    "id": "DEV-047",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: 4x + 5 = 21",
+    "solucion_correcta": [
+      "4x + 5 = 21",
+      "4x = 21 - 5",
+      "4x = 16",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "4x + 5 = 21",
+      "4x = 21",
+      "x = 21/4"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "4x = 21 - 5",
+    "pista_referencia": "Recuerda que cuando restas un número a un lado de la ecuación lo debes hacer en ambos lados, en este caso el -5 que se aplicó.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-048",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: 6x + 10 = 2x + 20",
+    "solucion_correcta": [
+      "6x + 10 = 2x + 20",
+      "6x - 2x = 20 - 10",
+      "4x = 10",
+      "x = 10/4"
+    ],
+    "resolucion_estudiante": [
+      "6x + 10 = 2x + 20",
+      "6x = 2x + 20",
+      "6x - 2x = 20",
+      "4x = 20",
+      "x = 5"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6x - 2x = 20 - 10",
+    "pista_referencia": "Recuerda que todo lo que haces de un lado de la ecuación como restar 10, se debe hacer a ambos lados.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-049",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: (x + 7)/2 = 6",
+    "solucion_correcta": [
+      "(x + 7)/2 = 6",
+      "x + 7 = 12",
+      "x = 12 - 7",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "(x + 7)/2 = 6",
+      "x + 7 = 6",
+      "x = 6 - 7",
+      "x = -1"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "x + 7 = 12",
+    "pista_referencia": "Acuérdate de que si haces un cambio como la división de un número de un lado de la ecuación, lo debes hacer en ambos lados.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-050",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: (x+4)/3 = 6",
+    "solucion_correcta": [
+      "(x+4)/3 = 6",
+      "x/3 + 4/3 = 6",
+      "x + 4 = 18",
+      "x = 18 - 4",
+      "x = 14"
+    ],
+    "resolucion_estudiante": [
+      "(x+4)/3 = 6",
+      "x/3 + 4/3 = 6",
+      "x + 4 = 6",
+      "x = 6 - 4",
+      "x = 2"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "x/3 + 4/3 = 6",
+    "pista_referencia": "Recuerda que cuando multiplicas un lado de la ecuación por 3 lo debes hacer en el otro lado también.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-051",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: x/5 - x = 4 - x",
+    "solucion_correcta": [
+      "x/5 - x = 4 - x",
+      "x/5 - x + x = 4",
+      "x/5 = 4",
+      "x = 20"
+    ],
+    "resolucion_estudiante": [
+      "x/5 - x = 4 - x",
+      "x/5 - x + x = 4",
+      "x/5 = 4",
+      "x = 4"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 20",
+    "pista_referencia": "Acuérdate de que para multiplicar un número en un lado de la ecuación debes hacerlo en ambos lados para no cambiar la igualdad.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-052",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: (x - 8)/2 = 5 - 2x",
+    "solucion_correcta": [
+      "(x - 8)/2 = 5 - 2x",
+      "x/2 - 8/2 = 5 - 2x",
+      "x/2 + 2x = 5 + 8/2",
+      "x + 4x = 10 + 8",
+      "5x = 18",
+      "x = 18/5"
+    ],
+    "resolucion_estudiante": [
+      "(x - 8)/2 = 5 - 2x",
+      "x/2 - 8/2 = 5 - 2x",
+      "x/2 + 2x = 5 + 8/2",
+      "x + 4x = 5 + 4",
+      "5x = 9",
+      "x = 9/5"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x + 4x = 10 + 8",
+    "pista_referencia": "Recuerda que al multiplicar un lado de la ecuación por 2, lo debes hacer en el otro lado también para mantener la igualdad.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-053",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: 3x + 7 = 22 - x",
+    "solucion_correcta": [
+      "3x + 7 = 22 - x",
+      "3x + x = 22 - 7",
+      "4x = 15",
+      "x = 15/4"
+    ],
+    "resolucion_estudiante": [
+      "3x + 7 = 22 - x",
+      "3x + x = 22 - x",
+      "4x + x = 22",
+      "5x = 22",
+      "x = 22/5"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "3x + x = 22 - 7",
+    "pista_referencia": "Acuérdate de que cuando sumas o restas un término como una x lo debes hacer a ambos lados de la ecuación.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-054",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: 5x =  x + 16",
+    "solucion_correcta": [
+      "5x =  x + 16",
+      "5x - x = 16",
+      "4x = 16",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "5x =  x + 16",
+      "5x - x = x + 16",
+      "4x - x = 16",
+      "3x = 16",
+      "x = 16/3"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "5x - x = 16",
+    "pista_referencia": "Recuerda que al afectar un lado de la ecuación como lo es restar una x, lo debes hacer a ambos lados.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-055",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: 7x = 2x + 25",
+    "solucion_correcta": [
+      "7x = 2x + 25",
+      "7x - 2x = 25",
+      "5x = 25",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "7x = 2x + 25",
+      "7x - 2x = 2x + 25",
+      "5x - 2x = 25",
+      "3x = 25",
+      "x = 25/3"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "7x - 2x = 25",
+    "pista_referencia": "Si tú vas a restar un término como 2x en un lado de la ecuación, lo debes hacer en el otro lado también.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-056",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: (2x + 6)/4 = 5",
+    "solucion_correcta": [
+      "(2x + 6)/4 = 5",
+      "2x + 6 = 20",
+      "2x = 20 - 6",
+      "2x = 14",
+      "x = 7"
+    ],
+    "resolucion_estudiante": [
+      "(2x + 6)/4 = 5",
+      "2x + 6 = 5",
+      "2x = 5 - 6",
+      "2x = -1",
+      "x = -1/2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x + 6 = 20",
+    "pista_referencia": "Si haces una operación como multiplicar por 4 la debes hacer a ambos lados de la ecuación.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-057",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: 2x + 11 = 9",
+    "solucion_correcta": [
+      "2x + 11 = 9",
+      "2x = 9 - 11",
+      "2x = - 2",
+      "x = -1"
+    ],
+    "resolucion_estudiante": [
+      "2x + 11 = 9",
+      "2x = 9 - 11",
+      "2x = -2",
+      "x = -2"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = -1",
+    "pista_referencia": "Recuerda que cuando divides por un número como el 2, lo debes hacer en ambos lados.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-058",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: 8x - 3x = 20",
+    "solucion_correcta": [
+      "8x - 3x = 20",
+      "5x = 20",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "8x - 3x = 20",
+      "5x = 20",
+      "x = 20"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "x = 4",
+    "pista_referencia": "Acuérdate de que debes dividir entre 5 en ambos lados, no solo en uno.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-059",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: (2x + 4)/3 = 10",
+    "solucion_correcta": [
+      "(2x + 4)/3 = 10",
+      "2x + 4 = 30",
+      "2x = 30 - 4",
+      "2x = 26",
+      "x = 13"
+    ],
+    "resolucion_estudiante": [
+      "(2x + 4)/3 = 10",
+      "2x + 4 = 10",
+      "2x = 10 - 4",
+      "2x = 6",
+      "x = 3"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x + 4 = 30",
+    "pista_referencia": "Recuerda que cuando multiplicas un lado de la ecuación por un número como 3, lo debes hacer en ambos lados.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-060",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: (4x - 2)/5 = 6 - 2x",
+    "solucion_correcta": [
+      "(4x - 2)/5 = 6 - 2x",
+      "4x - 2 = 30 - 10x",
+      "4x + 10x = 30 + 2",
+      "14x = 32",
+      "x = 32/14"
+    ],
+    "resolucion_estudiante": [
+      "(4x - 2)/5 = 6 - 2x",
+      "4x - 2 = 6 - 2x",
+      "4x + 2x = 6 + 2",
+      "6x = 8",
+      "x = 8/6"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "4x - 2 = 30 - 10x",
+    "pista_referencia": "Acuérdate de que cuando multiplicas un lado de la ecuación por un término lo debes hacer en ambos lados, en este caso como lo hiciste con el 5.",
+    "notas": ""
+  }
+]

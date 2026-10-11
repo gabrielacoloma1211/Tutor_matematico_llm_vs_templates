@@ -1,0 +1,334 @@
+[
+  {
+    "id": "DEV-061",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: 2x/3 + 5 = x - 12",
+    "solucion_correcta": [
+      "2x/3 + 5 = x - 12",
+      "2x + 15 = 3x - 36",
+      "2x - 3x = -36 - 15",
+      "-x = -51",
+      "x = 51"
+    ],
+    "resolucion_estudiante": [
+      "2x/3 + 5 = x - 12",
+      "2x + 15 = 3x - 36",
+      "2x - 3x = -36 - 15",
+      "-x = -50",
+      "x = 50"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "-x = -51",
+    "pista_referencia": "Revisa la operación que hiciste del lado derecho de la ecuación, ya que la operación es correcta pero el resultado no lo es.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-062",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: 3x + 5 - 2x + 7 = 18",
+    "solucion_correcta": [
+      "3x + 5 - 2x + 7 = 18",
+      "3x - 2x = 18 - 5 - 7",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "3x + 5 - 2x + 7 = 18",
+      "3x - 2x = 18 - 5 - 7",
+      "x = 4"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "x = 6",
+    "pista_referencia": "Revisa las restas que hiciste en el paso anterior porque no están correctas.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-063",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: 4x - 3 + x + 6 = 2x + 15",
+    "solucion_correcta": [
+      "4x - 3 + x + 6 = 2x + 15",
+      "4x + x - 2x = 15 + 3 - 6",
+      "3x = 12",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "4x - 3 + x + 6 = 2x + 15",
+      "4x + x - 2x = 15 + 3 - 6",
+      "3x = 15",
+      "x = 5"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "3x = 12",
+    "pista_referencia": "Revisa el resultado de tus sumas y restas en el lado derecho de la ecuación.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-064",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: 6x + 4 - 2x = x + 14",
+    "solucion_correcta": [
+      "6x + 4 - 2x = x + 14",
+      "6x - 2x - x = 14 - 4",
+      "3x = 10",
+      "x = 10/3"
+    ],
+    "resolucion_estudiante": [
+      "6x + 4 - 2x = x + 14",
+      "6x - 2x - x = 14 - 4",
+      "3x = 14",
+      "x = 14/3"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "3x = 10",
+    "pista_referencia": "Revisa el resultado de 14 – 4, porque la respuesta no esta correcta.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-065",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: (x + 4)/2 + 7x = 13",
+    "solucion_correcta": [
+      "(x + 4)/2 + 7x = 13",
+      "x/2 + 4/2 + 7x = 13",
+      "x + 4 + 14x = 26",
+      "x + 14x = 26 - 4",
+      "15x = 22",
+      "x = 22/15"
+    ],
+    "resolucion_estudiante": [
+      "(x + 4)/2 + 7x = 13",
+      "x/2 + 4/2 + 7x = 13",
+      "x + 4 + 14x = 26",
+      "x + 14x = 26 - 4",
+      "15x = 30",
+      "x = 2"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "15x = 22",
+    "pista_referencia": "Podrías revisar de nuevo la resta que se le hace al término 26.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-066",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: 2x + 7 = 15 - x/3",
+    "solucion_correcta": [
+      "2x + 7 = 15 - x/3",
+      "6x + 21 = 45 - x",
+      "6x + x = 45 - 21",
+      "7x = 24",
+      "x = 24/7"
+    ],
+    "resolucion_estudiante": [
+      "2x + 7 = 15 - x/3",
+      "6x + 21 = 45 - x",
+      "6x + x = 45 - 21",
+      "7x = 66",
+      "x = 66/7"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "7x = 24",
+    "pista_referencia": "Acuérdate de revisar tus sumas y restas dos veces para evitar errores de cálculo.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-067",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: 4x - 5 = 13 - x/2",
+    "solucion_correcta": [
+      "4x - 5 = 13 - x/2",
+      "4x + x/2 = 13 + 5",
+      "8x + x = 26 + 10",
+      "9x = 36",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "4x - 5 = 13 - x/2",
+      "4x + x/2 = 13 + 5",
+      "8x + x = 26 + 10",
+      "8x = 36",
+      "x = 36/8"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "9x = 36",
+    "pista_referencia": "Revisa los términos de x porque sus sumas y restas no son correctas.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-068",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: 3x + 2(x + 1) = 20",
+    "solucion_correcta": [
+      "3x + 2(x + 1) = 20",
+      "3x + 2x + 2 = 20",
+      "3x + 2x = 20 - 2",
+      "5x = 18",
+      "x = 18/5"
+    ],
+    "resolucion_estudiante": [
+      "3x + 2(x + 1) = 20",
+      "3x + 2x + 2 = 20",
+      "3x + 2x = 20 - 2",
+      "6x = 18",
+      "x = 3"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "5x = 18",
+    "pista_referencia": "Acuerdate de volver a revisar la suma entre los términos que tienen la x.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-069",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: x/2 = 2 + 3x - x/3",
+    "solucion_correcta": [
+      "x/2 = 2 + 3x - x/3",
+      "x/2 + x/3 - 3x = 2",
+      "(3x + 2x)/6 - 3x = 2",
+      "3x + 2x - 18x = 12",
+      "-13x = 12",
+      "13x = -12",
+      "x = -12/13"
+    ],
+    "resolucion_estudiante": [
+      "x/2 = 2 + 3x - x/3",
+      "x/2 + x/3 - 3x = 2",
+      "(4x + 2x)/6 - 3x = 2",
+      "4x + 2x - 18x = 12",
+      "-12x = 12",
+      "12x = -12",
+      "x = -1"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "(3x + 2x)/6 - 3x = 2",
+    "pista_referencia": "Revisa nuevamente la suma de las fracciones ya que no están del todo correctas.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-070",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: 2 + x/4 = 9 - x/5",
+    "solucion_correcta": [
+      "2 + x/4 = 9 - x/5",
+      "x/4 + x/5 = 9 - 2",
+      "(5x + 4x)/20 = 7",
+      "5x + 4x = 140",
+      "9x = 140",
+      "x = 140/9"
+    ],
+    "resolucion_estudiante": [
+      "2 + x/4 = 9 - x/5",
+      "x/4 + x/5 = 9 - 2",
+      "(5x + 5x)/20 = 7",
+      "5x + 5x = 140",
+      "10x = 140",
+      "x = 14"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "(5x + 4x)/20 = 7",
+    "pista_referencia": "Deberías revisar la suma de ambas fracciones nuevamente para corregir errores de cálculo.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-071",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: 12 + x/2 = x - 1",
+    "solucion_correcta": [
+      "12 + x/2 = x - 1",
+      "x/2 - x = -1 - 12",
+      "(x - 2x)/2 = -13",
+      "x - 2x = -26",
+      "-x = -26",
+      "x = 26"
+    ],
+    "resolucion_estudiante": [
+      "12 + x/2 = x - 1",
+      "x/2 - x = -1 - 12",
+      "(x - 3x)/2 = -13",
+      "x - 3x = -26",
+      "-2x = -26",
+      "x = 13"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "(x - 2x)/2 = -13",
+    "pista_referencia": "Revisa nuevamente la suma de ambos términos que contienen la x.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-072",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: 4(x + 1) - x/2 = 15",
+    "solucion_correcta": [
+      "4(x + 1) - x/2 = 15",
+      "4x + 4 - x/2 = 15",
+      "4x - x/2 = 15 - 4",
+      "8x - x = 30 - 8",
+      "7x = 22",
+      "x = 22/7"
+    ],
+    "resolucion_estudiante": [
+      "4(x + 1) - x/2 = 15",
+      "4x + 4 - x/2 = 15",
+      "4x - x/2 = 15 - 4",
+      "8x - x = 30 - 8",
+      "7x = 21",
+      "x = 3"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "7x = 22",
+    "pista_referencia": "Revisa nuevamente la resta de los términos 30 y 8 porque no parece que es la correcta.",
+    "notas": ""
+  },
+  {
+    "id": "DEV-073",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: x/3 + 2x + 3 = 2x/3 + 8",
+    "solucion_correcta": [
+      "x/3 + 2x + 3 = 2x/3 + 8",
+      "x + 6x + 9 = 2x + 24",
+      "x + 6x - 2x = 24 - 9",
+      "5x = 15",
+      "x = 15/5",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "x/3 + 2x + 3 = 2x/3 + 8",
+      "x + 6x + 9 = 2x + 24",
+      "x + 6x - 2x = 24 - 9",
+      "5x = 15",
+      "x = 15/5",
+      "x = 4"
+    ],
+    "indice_paso_erroneo": 5,
+    "correccion_esperada": "x = 3",
+    "pista_referencia": "¿Podrías probar revisando que la división entre 15 y 5 este correcta?",
+    "notas": ""
+  },
+  {
+    "id": "DEV-074",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: 3(x - 2) - x/2 = 9",
+    "solucion_correcta": [
+      "3(x - 2) - x/2 = 9",
+      "3x - 6 - x/2 = 9",
+      "3x - x/2 = 9 + 6",
+      "6x - x = 18 + 12",
+      "5x = 30",
+      "x = 30/5",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "3(x - 2) - x/2 = 9",
+      "3x - 6 - x/2 = 9",
+      "3x - x/2 = 9 + 6",
+      "6x - x = 18 + 12",
+      "5x = 30",
+      "x = 30/5",
+      "x = 7"
+    ],
+    "indice_paso_erroneo": 6,
+    "correccion_esperada": "x = 6",
+    "pista_referencia": "Revisa nuevamente cuanto sale la división entre 30 y 5 que usas en el ejercicio.",
+    "notas": ""
+  }
+]

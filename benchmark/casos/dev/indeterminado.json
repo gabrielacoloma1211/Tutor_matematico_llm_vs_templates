@@ -1,0 +1,271 @@
+[
+  {
+    "id": "DEV-089",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: 2x - 1 = 6 + x",
+    "solucion_correcta": [
+      "2x - 1 = 6 + x",
+      "2x - x = 6 + 1",
+      "x = 7"
+    ],
+    "resolucion_estudiante": [
+      "2x - 1 = 6 + x",
+      "2x + x = 6 - 1",
+      "3x = 5",
+      "x = 5/3"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x - x = 6 + 1",
+    "pista_referencia": "Revisa los términos x y 1 al pasarlos de un lado del = al otro.",
+    "notas": "Combinado = dos errores de signo en un mismo paso."
+  },
+  {
+    "id": "DEV-090",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: x/2 + 7x/2 = 4 + 3",
+    "solucion_correcta": [
+      "x/2 + 7x/2 = 4 + 3",
+      "8x/2 = 4 + 3",
+      "8x/2 = 7",
+      "8x = 14",
+      "x = 14/8"
+    ],
+    "resolucion_estudiante": [
+      "x/2 + 7x/2 = 4 + 3",
+      "8x/2 = 4 + 3",
+      "8x/2 = 7",
+      "8x = 7/2",
+      "x = 7/16"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "8x = 14",
+    "pista_referencia": "Acuérdate de que tienes que usar la misma operación en ambos lados de la ecuación, no en uno multiplicar y en otro dividir.",
+    "notas": "No encaja: multiplica al lado izquierdo y divide en el derecho."
+  },
+  {
+    "id": "DEV-091",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: 3x/2 + 12 = 9",
+    "solucion_correcta": [
+      "3x/2 + 12 = 9",
+      "3x/2 = 9 - 12",
+      "3x/2 = -3",
+      "3x = -6",
+      "x = -2"
+    ],
+    "resolucion_estudiante": [
+      "3x/2 + 12 = 9",
+      "3x/2 = 9 - 12",
+      "3x/2 = -3",
+      "3x = -3/2",
+      "x = -3/6"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "3x = -6",
+    "pista_referencia": "Recuerda que la misma operación se debe hacer en ambos lados, en este caso estás multiplicando por 2 en un lado y dividiendo por 2 en el otro.",
+    "notas": "No encaja: multiplica al lado izquierdo y divide en el derecho"
+  },
+  {
+    "id": "DEV-092",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: 4x/3 + 13 = 2 + 8",
+    "solucion_correcta": [
+      "4x/3 + 13 = 2 + 8",
+      "4x/3 = 2 + 8 - 13",
+      "4x/3 = -3",
+      "4x = -9",
+      "x = -9/4"
+    ],
+    "resolucion_estudiante": [
+      "4x/3 + 13 = 2 + 8",
+      "4x/3 = 2 + 8 - 13",
+      "4x/3 = -3",
+      "4x = -3/3",
+      "x = -1/4"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "4x = -9",
+    "pista_referencia": "Si es que vas a multiplicar por un número, en este caso 3, en un lado de la ecuación recuerda que se debe multiplicar por este mismo número al otro lado, no dividir.",
+    "notas": "No encaja: multiplica al lado izquierdo y divide en el derecho"
+  },
+  {
+    "id": "DEV-093",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: 4x + 6 = 2x - 3 + 17",
+    "solucion_correcta": [
+      "4x + 6 = 2x - 3 + 17",
+      "4x - 2x = -3 + 17 - 6",
+      "2x = 8",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "4x + 6 = 2x - 3 + 17",
+      "4x + 2x = -3 + 17 + 6",
+      "6x = 20",
+      "x = 20/6"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "4x - 2x = -3 + 17 - 6",
+    "pista_referencia": "Revisa nuevamente los signos al cambiarlos de un lado a otro en la ecuación.",
+    "notas": "Combinado = dos errores de signo en un mismo paso"
+  },
+  {
+    "id": "DEV-094",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: x/2 + 2x + 7 = 19",
+    "solucion_correcta": [
+      "x/2 + 2x + 7 = 19",
+      "x + 4x + 14 = 38",
+      "5x = 38 - 14",
+      "5x = 24",
+      "x = 24/5"
+    ],
+    "resolucion_estudiante": [
+      "x/2 + 2x + 7 = 19",
+      "x + 4x + 14 = 38",
+      "4x = 38 + 14",
+      "4x = 52",
+      "x = 13"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "5x = 38 - 14",
+    "pista_referencia": "Revisa nuevamente tus sumas y recuerda que cuando al cambiar un término de un lado a otro debes cambiar su signo.",
+    "notas": "Combinado = error de cálculo y de signo en un mismo paso"
+  },
+  {
+    "id": "DEV-095",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: 7x - 8/2 - 3x + 6 = 22",
+    "solucion_correcta": [
+      "7x - 8/2 - 3x + 6 = 22",
+      "7x - 4 - 3x + 6 = 22",
+      "4x = 22 + 4 - 6",
+      "4x = 20",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "7x - 8/2 - 3x + 6 = 22",
+      "7x - 4 - 3x + 6 = 22",
+      "6x = 22 + 4 + 6",
+      "6x = 32",
+      "x = 32/6"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "4x = 22 + 4 - 6",
+    "pista_referencia": "Revisa nuevamente la operación con los términos de x y que se debe hacer cuando se mueve un término de un lado a otro en la ecuación.",
+    "notas": "Combinado = error de cálculo y de signo en un mismo paso"
+  },
+  {
+    "id": "DEV-096",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: 7x - 2(x - 3) + 1 = 27",
+    "solucion_correcta": [
+      "7x - 2(x - 3) + 1 = 27",
+      "7x - 2x + 6 = 27 - 1",
+      "7x - 2x = 27 - 1 - 6",
+      "5x = 20",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "7x - 2(x - 3) + 1 = 27",
+      "7x - 2x - 6 = 27 + 1",
+      "7x - 2x = 27 + 1 + 6",
+      "5x = 34",
+      "x = 34/5"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "7x - 2x + 6 = 27 - 1",
+    "pista_referencia": "Revisa tu resolución de la propiedad distributiva y también recuerda que al cambiar de un lado a otro de la ecuación también cambia su signo.",
+    "notas": "Combinado = distributiva con signo equivocado."
+  },
+  {
+    "id": "DEV-097",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: 6x - 5 + x/2 = 21",
+    "solucion_correcta": [
+      "6x - 5 + x/2 = 21",
+      "12x + x = 42 + 10",
+      "13x = 52",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "6x - 5 + x/2 = 21",
+      "12x + x = 21 - 5",
+      "13x = 16",
+      "x = 16/13"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "12x + x = 42 + 10",
+    "pista_referencia": "Debes revisar los signos de los términos al moverlos en la ecuación y también que si realizas una operación en un lado de la ecuación, lo debes hacer en el otro lado también.",
+    "notas": "Combinado = operación en un solo lado y error de signo en el mismo paso."
+  },
+  {
+    "id": "DEV-098",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: 7x - 2(x - 3) = 27",
+    "solucion_correcta": [
+      "7x - 2(x - 3) = 27",
+      "7x - 2x + 6 = 27",
+      "7x - 2x = 27 - 6",
+      "5x = 21",
+      "x = 21/5"
+    ],
+    "resolucion_estudiante": [
+      "7x - 2(x - 3) = 27",
+      "7x - 2x + 6 = 27",
+      "7x - 2x = 27 - 6",
+      "4x = 20",
+      "x = 5"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "5x = 21",
+    "pista_referencia": "Revisa tus sumas y restas al realizar las operaciones con términos semejantes.",
+    "notas": "Combinado = dos errores de cálculo en el mismo paso."
+  },
+  {
+    "id": "DEV-099",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: 6x + 5 - (x + 4) = 21",
+    "solucion_correcta": [
+      "6x + 5 - (x + 4) = 21",
+      "6x + 5 - x - 4 = 21",
+      "6x - x = 21 - 5 + 4",
+      "5x = 20",
+      "x = 20/5",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "6x + 5 - (x + 4) = 21",
+      "6x + 5 - x - 4 = 21",
+      "6x - x = 21 - 5 + 4",
+      "5x = 20",
+      "x = 20 - 5",
+      "x = 15"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 20/5",
+    "pista_referencia": "Recuerda que cuando divides en un lado de la ecuación, debes hacer lo mismo del otro lado. No restar como lo estás haciendo en este caso.",
+    "notas": "No encaja: operación equivocada al despejar."
+  },
+  {
+    "id": "DEV-100",
+    "categoria": "indeterminado",
+    "enunciado": "Resuelve: 9x - (3x + 5) = 25",
+    "solucion_correcta": [
+      "9x - (3x + 5) = 25",
+      "9x - 3x - 5 = 25",
+      "9x - 3x = 25 + 5",
+      "6x = 30",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "9x - (3x + 5) = 25",
+      "9x - 3x - 5 = 25",
+      "x = 25"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "9x - 3x = 25 + 5",
+    "pista_referencia": "Recuerda que al sumar o restar entre términos, lo debes hacer solo entre términos semejantes como lo son los términos que vienen acompañados de x.",
+    "notas": "No encaja: suma términos que no son semejantes."
+  }
+]

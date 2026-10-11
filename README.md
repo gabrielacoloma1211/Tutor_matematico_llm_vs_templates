@@ -37,6 +37,7 @@ es cómo se genera la pista pedagógica.
 ├── benchmark/
 │   ├── casos/dev/        # 100 casos de desarrollo (para diseñar y probar las reglas)
 │   ├── casos/test/       # 50 casos de evaluación final (no se usan para diseñar reglas)
+│   ├── casos/ejemplos/   # 6 casos de ejemplo del formato (no forman parte del benchmark)
 │   ├── validar_casos.py  # comprueba la consistencia matemática de los casos
 │   └── README.md         # formato de los casos y cómo se elaboraron
 └── data/

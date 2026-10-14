@@ -128,6 +128,19 @@ def _son_proporcionales(expr1: sp.Expr, expr2: sp.Expr):
     return False, None
 
 
+def ecuaciones_equivalentes(izq_a: sp.Expr, der_a: sp.Expr, izq_b: sp.Expr, der_b: sp.Expr) -> bool:
+    """
+    Indica si las ecuaciones A y B son equivalentes.
+
+    Es el mismo criterio de validez que usa verificar_paso: llevar cada
+    ecuación a la forma "expresión = 0", expandir, y comprobar que las dos
+    expresiones son proporcionales. Está disponible para que otros módulos
+    comparen ecuaciones sin repetir esta lógica.
+    """
+    proporcionales, _k = _son_proporcionales(normalizar(izq_a, der_a), normalizar(izq_b, der_b))
+    return proporcionales
+
+
 def verificar_paso(s_i: str, s_i_mas_1: str, variable: str = "x") -> ResultadoVerificacion:
     """
     Verifica si el paso de S_i a S_{i+1} conserva la solución de la ecuación.

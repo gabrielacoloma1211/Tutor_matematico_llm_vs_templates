@@ -143,15 +143,16 @@
     ],
     "resolucion_estudiante": [
       "3x + 7 = 22 - x",
-      "3x + x = 22 - x",
-      "4x + x = 22",
-      "5x = 22",
-      "x = 22/5"
+      "3x + x + 7 = 22 - x",
+      "4x + 7 = 22 - x",
+      "5x + 7 = 22",
+      "5x = 15",
+      "x = 3"
     ],
     "indice_paso_erroneo": 1,
-    "correccion_esperada": "3x + x = 22 - 7",
+    "correccion_esperada": "3x + x + 7 = 22",
     "pista_referencia": "Acuérdate de que cuando sumas o restas un término como una x lo debes hacer a ambos lados de la ecuación.",
-    "notas": ""
+    "notas": "Revisado: el caso original tenía dos operaciones en un solo lado (quitaba el 7 y sumaba x); se simplificó a una sola."
   },
   {
     "id": "DEV-054",

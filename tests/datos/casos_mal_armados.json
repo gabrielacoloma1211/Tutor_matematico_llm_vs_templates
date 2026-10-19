@@ -1,0 +1,235 @@
+[
+  {
+    "id": "paso_marcado_como_erroneo_que_en_realidad_es_valido",
+    "descripcion": "El paso marcado como erróneo es en realidad válido.",
+    "error_esperado": "VÁLIDO",
+    "caso": {
+      "id": "ejemplo-signo",
+      "categoria": "error_signo",
+      "enunciado": "Resuelve: 6x - 4 = 3",
+      "solucion_correcta": [
+        "6x - 4 = 3",
+        "6x = 3 + 4",
+        "6x = 7",
+        "x = 7/6"
+      ],
+      "resolucion_estudiante": [
+        "6x - 4 = 3",
+        "6x = 3 + 4",
+        "6x = -1",
+        "x = -1/6"
+      ],
+      "indice_paso_erroneo": 1,
+      "correccion_esperada": "6x = 3 + 4",
+      "pista_referencia": "Revisa el signo del término -4: al pasarlo al otro lado de la igualdad, su signo cambia.",
+      "fuente": "ejemplo de formato (no forma parte del benchmark)"
+    }
+  },
+  {
+    "id": "error_en_un_paso_que_no_es_el_marcado",
+    "descripcion": "El error real queda un paso antes del marcado.",
+    "error_esperado": null,
+    "caso": {
+      "id": "ejemplo-signo",
+      "categoria": "error_signo",
+      "enunciado": "Resuelve: 6x - 4 = 3",
+      "solucion_correcta": [
+        "6x - 4 = 3",
+        "6x = 3 + 4",
+        "6x = 7",
+        "x = 7/6"
+      ],
+      "resolucion_estudiante": [
+        "6x - 4 = 3",
+        "6x = 3 - 4",
+        "6x = -1",
+        "x = -1/6"
+      ],
+      "indice_paso_erroneo": 2,
+      "correccion_esperada": "6x = 3 + 4",
+      "pista_referencia": "Revisa el signo del término -4: al pasarlo al otro lado de la igualdad, su signo cambia.",
+      "fuente": "ejemplo de formato (no forma parte del benchmark)"
+    }
+  },
+  {
+    "id": "correccion_esperada_invalida",
+    "descripcion": "La corrección esperada es el propio paso con error.",
+    "error_esperado": "correccion_esperada",
+    "caso": {
+      "id": "ejemplo-signo",
+      "categoria": "error_signo",
+      "enunciado": "Resuelve: 6x - 4 = 3",
+      "solucion_correcta": [
+        "6x - 4 = 3",
+        "6x = 3 + 4",
+        "6x = 7",
+        "x = 7/6"
+      ],
+      "resolucion_estudiante": [
+        "6x - 4 = 3",
+        "6x = 3 - 4",
+        "6x = -1",
+        "x = -1/6"
+      ],
+      "indice_paso_erroneo": 1,
+      "correccion_esperada": "6x = 3 - 4",
+      "pista_referencia": "Revisa el signo del término -4: al pasarlo al otro lado de la igualdad, su signo cambia.",
+      "fuente": "ejemplo de formato (no forma parte del benchmark)"
+    }
+  },
+  {
+    "id": "solucion_correcta_con_un_paso_invalido",
+    "descripcion": "Un paso de la solución correcta no es válido.",
+    "error_esperado": "solucion_correcta",
+    "caso": {
+      "id": "ejemplo-signo",
+      "categoria": "error_signo",
+      "enunciado": "Resuelve: 6x - 4 = 3",
+      "solucion_correcta": [
+        "6x - 4 = 3",
+        "6x = 3 + 4",
+        "6x = 8",
+        "x = 7/6"
+      ],
+      "resolucion_estudiante": [
+        "6x - 4 = 3",
+        "6x = 3 - 4",
+        "6x = -1",
+        "x = -1/6"
+      ],
+      "indice_paso_erroneo": 1,
+      "correccion_esperada": "6x = 3 + 4",
+      "pista_referencia": "Revisa el signo del término -4: al pasarlo al otro lado de la igualdad, su signo cambia.",
+      "fuente": "ejemplo de formato (no forma parte del benchmark)"
+    }
+  },
+  {
+    "id": "campo_faltante",
+    "descripcion": "Falta el campo pista_referencia.",
+    "error_esperado": "faltan campos",
+    "caso": {
+      "id": "ejemplo-signo",
+      "categoria": "error_signo",
+      "enunciado": "Resuelve: 6x - 4 = 3",
+      "solucion_correcta": [
+        "6x - 4 = 3",
+        "6x = 3 + 4",
+        "6x = 7",
+        "x = 7/6"
+      ],
+      "resolucion_estudiante": [
+        "6x - 4 = 3",
+        "6x = 3 - 4",
+        "6x = -1",
+        "x = -1/6"
+      ],
+      "indice_paso_erroneo": 1,
+      "correccion_esperada": "6x = 3 + 4",
+      "fuente": "ejemplo de formato (no forma parte del benchmark)"
+    }
+  },
+  {
+    "id": "categoria_inexistente",
+    "descripcion": "La categoría no existe en la taxonomía.",
+    "error_esperado": "no existe en la taxonomía",
+    "caso": {
+      "id": "ejemplo-signo",
+      "categoria": "error_inventado",
+      "enunciado": "Resuelve: 6x - 4 = 3",
+      "solucion_correcta": [
+        "6x - 4 = 3",
+        "6x = 3 + 4",
+        "6x = 7",
+        "x = 7/6"
+      ],
+      "resolucion_estudiante": [
+        "6x - 4 = 3",
+        "6x = 3 - 4",
+        "6x = -1",
+        "x = -1/6"
+      ],
+      "indice_paso_erroneo": 1,
+      "correccion_esperada": "6x = 3 + 4",
+      "pista_referencia": "Revisa el signo del término -4: al pasarlo al otro lado de la igualdad, su signo cambia.",
+      "fuente": "ejemplo de formato (no forma parte del benchmark)"
+    }
+  },
+  {
+    "id": "indice_fuera_de_rango",
+    "descripcion": "El índice del paso erróneo está fuera de rango.",
+    "error_esperado": null,
+    "caso": {
+      "id": "ejemplo-signo",
+      "categoria": "error_signo",
+      "enunciado": "Resuelve: 6x - 4 = 3",
+      "solucion_correcta": [
+        "6x - 4 = 3",
+        "6x = 3 + 4",
+        "6x = 7",
+        "x = 7/6"
+      ],
+      "resolucion_estudiante": [
+        "6x - 4 = 3",
+        "6x = 3 - 4",
+        "6x = -1",
+        "x = -1/6"
+      ],
+      "indice_paso_erroneo": 99,
+      "correccion_esperada": "6x = 3 + 4",
+      "pista_referencia": "Revisa el signo del término -4: al pasarlo al otro lado de la igualdad, su signo cambia.",
+      "fuente": "ejemplo de formato (no forma parte del benchmark)"
+    }
+  },
+  {
+    "id": "ecuacion_que_no_se_puede_interpretar",
+    "descripcion": "Una ecuación con dos signos '='.",
+    "error_esperado": "no se pudo interpretar",
+    "caso": {
+      "id": "ejemplo-signo",
+      "categoria": "error_signo",
+      "enunciado": "Resuelve: 6x - 4 = 3",
+      "solucion_correcta": [
+        "6x - 4 = 3",
+        "6x = = 3",
+        "6x = 7",
+        "x = 7/6"
+      ],
+      "resolucion_estudiante": [
+        "6x - 4 = 3",
+        "6x = 3 - 4",
+        "6x = -1",
+        "x = -1/6"
+      ],
+      "indice_paso_erroneo": 1,
+      "correccion_esperada": "6x = 3 + 4",
+      "pista_referencia": "Revisa el signo del término -4: al pasarlo al otro lado de la igualdad, su signo cambia.",
+      "fuente": "ejemplo de formato (no forma parte del benchmark)"
+    }
+  },
+  {
+    "id": "caracteres_que_sympy_interpretaria_mal",
+    "descripcion": "Signo menos largo (U+2212), típico al copiar desde Word: SymPy no da error sino una interpretación incorrecta.",
+    "error_esperado": "caracteres no permitidos",
+    "caso": {
+      "id": "ejemplo-signo",
+      "categoria": "error_signo",
+      "enunciado": "Resuelve: 6x - 4 = 3",
+      "solucion_correcta": [
+        "6x \u2212 4 = 3",
+        "6x = 3 + 4",
+        "6x = 7",
+        "x = 7/6"
+      ],
+      "resolucion_estudiante": [
+        "6x \u2212 4 = 3",
+        "6x = 3 - 4",
+        "6x = -1",
+        "x = -1/6"
+      ],
+      "indice_paso_erroneo": 1,
+      "correccion_esperada": "6x = 3 + 4",
+      "pista_referencia": "Revisa el signo del término -4: al pasarlo al otro lado de la igualdad, su signo cambia.",
+      "fuente": "ejemplo de formato (no forma parte del benchmark)"
+    }
+  }
+]

@@ -4,10 +4,6 @@ Prototipo del proyecto integrador (USFQ): *"Evaluación Comparativa de la Genera
 Pedagógica con LLM frente a Plantillas Contextualizadas en un Tutor con Verificación Simbólica de Errores
 Algebraicos para Noveno de EGB"*.
 
-El sistema revisa, paso a paso, la resolución de ecuaciones de primer grado con una incógnita. Cuando un estudiante
-comete un error, identifica de qué tipo es y genera una pista pedagógica. El proyecto compara **dos formas de generar
-esa pista**: con un LLM y con plantillas contextualizadas, manteniendo idénticos todo lo demás.
-
 ## Cómo funciona
 
 ```
@@ -24,78 +20,8 @@ Verificador simbólico (SymPy, determinista)
                             └── plantilla contextualizada (versión de referencia)
 ```
 
-`S_i` es el paso anterior y `S_i+1` es el paso que escribe el estudiante. El verificador y el diagnóstico son los
-mismos en las dos configuraciones que se comparan; lo único que cambia es el generador de la pista.
-
-## Estado actual
-
-| Componente | Estado |
-|---|---|
-| Verificador simbólico | Implementado y probado. Cuando un paso es inválido, la discrepancia conserva también las expresiones originales de cada lado, sin expandir. |
-| Módulo de diagnóstico | Implementado: árbol de decisión de 6 preguntas, probado con los casos dev. Falta la evaluación final con el conjunto test. |
-| Benchmark | 150 casos (100 dev + 50 test), elaborados y etiquetados por la autora y validados con el verificador. |
-| Generador con plantillas | Esqueleto: falta rellenar las variables de cada plantilla. |
-| Generador con LLM | Esqueleto: el prompt está diseñado; falta la integración con la API. |
-| API | `/salud` y `/verificar` (verificador → diagnóstico); aún sin generador. |
-| Evaluación con docentes | Pendiente. |
-
-## Cómo ejecutarlo
-
-**Instalación**
-
-```bash
-python -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-**Pruebas automáticas**
-
-```bash
-pytest
-```
-
-**Evaluar el diagnóstico sobre los casos dev** (matriz de confusión, precisión, recall y F1 por categoría)
-
-```bash
-python evaluacion/evaluar_diagnostico.py
-```
-
-**Validar la consistencia matemática de los casos del benchmark**
-
-```bash
-python benchmark/validar_casos.py                  # casos dev
-python benchmark/validar_casos.py benchmark/casos/test
-```
-
-**Servidor de desarrollo**
-
-```bash
-uvicorn src.api.main:app --reload
-```
-
-Documentación interactiva en http://127.0.0.1:8000/docs. Ejemplo de uso:
-
-```bash
-curl -X POST http://127.0.0.1:8000/verificar \
-  -H "Content-Type: application/json" \
-  -d '{"s_i": "3(x - 4) = 12", "s_i_mas_1": "3x - 4 = 12"}'
-```
-
-```json
-{
-  "valido": false,
-  "categoria_id": "distributiva_incorrecta",
-  "categoria_nombre": "Aplicación incorrecta de la propiedad distributiva",
-  "discrepancia": {
-    "diferencia": "-8",
-    "regla": "distributiva_incorrecta",
-    "variante": "omite_factor",
-    "factor": "3",
-    "explicacion": "no multiplicó un término del paréntesis por el factor"
-  }
-}
-```
+El verificador y el diagnóstico son los mismos en las dos configuraciones que se comparan; lo único que cambia
+es cómo se genera la pista pedagógica.
 
 ## Estructura del proyecto
 
@@ -107,54 +33,90 @@ curl -X POST http://127.0.0.1:8000/verificar \
 │   │   ├── llm.py            # arquitectura propuesta (usa un LLM)
 │   │   └── plantillas.py     # versión de referencia (plantillas contextualizadas, sin LLM)
 │   └── api/              # Backend FastAPI que expone el sistema
+├── tests/                # Pruebas (verificador, discrepancia, diagnóstico y benchmark)
+│   └── datos/            # ejemplos de las pruebas en JSON (no están escritos dentro del código)
 ├── benchmark/
 │   ├── casos/dev/        # 100 casos de desarrollo (para diseñar y probar las reglas)
 │   ├── casos/test/       # 50 casos de evaluación final (no se usan para diseñar reglas)
-│   ├── casos/ejemplos/   # 6 casos de ejemplo del formato (no forman parte del benchmark)
-│   └── validar_casos.py  # comprueba la consistencia matemática de los casos
+│   ├── casos/ampliado/   # 100 casos adicionales generados por un LLM, conjunto aparte (ver más abajo)
+│   ├── casos/variaciones/# 2 lotes de 50 variaciones de AMP-010 y AMP-071 (otros números)
+│   ├── generar_variaciones.py  # crea las variaciones con números al azar (semilla fija)
+│   ├── validar_casos.py  # comprueba la consistencia matemática de los casos
+│   └── README.md         # formato de los casos y cómo se elaboraron
 ├── evaluacion/
-│   └── evaluar_diagnostico.py   # mide el diagnóstico frente a las categorías asignadas por la autora
-├── tests/                # Pruebas automáticas (verificador, discrepancia, diagnóstico y benchmark)
+│   ├── evaluar_diagnostico.py  # exactitud y macro-F1 sobre dev (o test, una sola vez)
+│   ├── evaluar_ampliado.py     # lo mismo sobre el conjunto ampliado, separado en ajuste y reservados
+│   ├── evaluar_variaciones.py  # el diagnóstico sobre las variaciones
+│   └── resultados/             # resultados guardados con fecha + notas de los ajustes
 └── data/
     └── taxonomia.json    # Las 6 categorías de error (5 + indeterminado)
 ```
 
-## Taxonomía de errores
+## Estado actual
 
-| Categoría | Qué significa | Ejemplo (paso anterior → paso del estudiante) |
-|---|---|---|
-| `error_signo` | Al mover un término de lado, no le cambia el signo | `6x - 4 = 3` → `6x = 3 - 4` |
-| `distributiva_incorrecta` | Al quitar un paréntesis, no multiplica el factor por todos los términos, o lo hace con el signo equivocado | `3(x - 4) = 12` → `3x - 4 = 12` |
-| `operacion_un_lado` | Suma, resta, multiplica o divide un valor en un solo lado de la ecuación | `2x + 3 = 11` → `2x = 11` |
-| `simplificacion_aritmetica` | Plantea bien la operación, pero se equivoca en el cálculo numérico | `2x = 10 - 3` → `2x = 6` |
-| `division_coeficiente_equivocado` | Al despejar, divide entre un número que no es el coeficiente de la incógnita | `5x = 20` → `x = 20/4` |
-| `indeterminado` | Dos errores combinados en un paso, o un error que no encaja en ninguna de las anteriores | `2(x + 3) - 4 = 6` → `2x + 3 = 6 - 4` |
+| Componente | Estado |
+|---|---|
+| Verificador simbólico | Implementado y probado (casos válidos, inválidos y errores de parseo). La discrepancia conserva las expresiones de cada lado sin expandir y también el texto de las ecuaciones tal como se escribieron (SymPy simplifica y pierde, por ejemplo, el paréntesis de `3x + (x - 7)` o el `- 7` de `2x + 7 - 7`). |
+| Benchmark | 150 casos (100 dev + 50 test), elaborados y etiquetados por la autora y validados con el verificador. Además, un conjunto ampliado de 100 casos generados por un LLM y etiquetados por la autora, y 100 variaciones (ver abajo). |
+| Módulo de diagnóstico | Implementado: árbol de decisión de 6 categorías (distributiva, un solo lado, aritmética, división, signo, indeterminado) más detectores de errores que la taxonomía no tiene como categoría (orden de operaciones, factor común mal sacado, cada lado por su propio denominador), que se informan como `indeterminado` con su explicación. Sobre los casos dev: 100/100. |
+| Evaluación del diagnóstico | Dev 100/100. El conjunto test (50) está reservado para una única evaluación final. Conjunto ampliado y variaciones: ver las secciones de abajo. |
+| Generador con plantillas | Esqueleto: falta rellenar las variables de cada plantilla. |
+| Generador con LLM | Esqueleto: el prompt está diseñado; falta la integración con la API. |
+| API | `/salud` y `/verificar` (verificador → diagnóstico); aún sin generador. |
 
-## Módulo de diagnóstico
+## Instalación
 
-Recibe la discrepancia que reporta el verificador y la clasifica con un árbol de decisión. Las preguntas se hacen en
-este orden y la primera que se cumple asigna la categoría:
+```bash
+python -m venv venv
+source venv/bin/activate  # En Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-| # | Pregunta | Categoría |
-|---|---|---|
-| 1 | ¿Falla en un término distribuido? | `distributiva_incorrecta` |
-| 2 | ¿Se operó solo en un lado? | `operacion_un_lado` |
-| 3 | ¿Operación bien, cálculo mal? | `simplificacion_aritmetica` |
-| 4 | ¿Divisor final incorrecto? | `division_coeficiente_equivocado` |
-| 5 | ¿Un término cambió de signo? | `error_signo` |
-| 6 | Ninguna aplica con claridad | `indeterminado` |
+## Ejecutar las pruebas
 
-Las preguntas 1, 2 y 5 se responden generando las versiones erróneas típicas del paso anterior y comprobando si el
-paso del estudiante coincide con alguna de ellas. Las preguntas 3 y 4 comparan el paso con el paso correcto. Además de
-la categoría, el diagnóstico devuelve una explicación (por ejemplo, el término o el factor involucrado) que luego puede
-usar el generador.
+```bash
+pytest
+```
+
+## Validar el benchmark
+
+```bash
+python benchmark/validar_casos.py                  # casos dev
+python benchmark/validar_casos.py benchmark/casos/test
+python benchmark/validar_casos.py benchmark/casos/variaciones
+```
+
+## Evaluar el diagnóstico
+
+```bash
+python evaluacion/evaluar_diagnostico.py                                  # dev
+python evaluacion/evaluar_diagnostico.py --conjunto test --evaluacion-final   # una sola vez, al final
+python evaluacion/evaluar_ampliado.py --guardar --etiqueta _ajustado      # conjunto ampliado
+python evaluacion/evaluar_variaciones.py variaciones_nuevas.json --guardar
+```
+
+Cada comando imprime la matriz de confusión, la precisión, el recall y el F1 por categoría y el macro-F1.
+
+## Ejecutar el servidor de desarrollo
+
+```bash
+uvicorn src.api.main:app --reload
+```
+
+Luego abre http://127.0.0.1:8000/docs para ver la documentación interactiva de la API.
+
+## Próximos pasos
+
+- [x] Completar las reglas del árbol de decisión en `src/diagnostico/diagnostico.py` y probarlas con los casos dev.
+- [x] Agregar pruebas específicas del módulo de diagnóstico (`tests/datos/diagnostico.json`).
+- [x] Probar el diagnóstico con un conjunto aparte (ampliado) y con variaciones de los casos que fallan.
+- [ ] Implementar `src/generador/plantillas.py` con las plantillas contextualizadas por categoría.
+- [ ] Implementar `src/generador/llm.py` con la integración a la API del LLM.
+- [ ] Evaluación final: exactitud y macro-F1 sobre los casos test (una sola vez), y rúbrica de calidad pedagógica con docentes.
 
 ## Benchmark
 
-El benchmark es un conjunto de **150 casos** de resolución de ecuaciones de primer grado con una incógnita. Cada caso
-contiene la resolución correcta paso a paso y una resolución de un estudiante con un error en un paso concreto. Los
-ejercicios provienen de material público; los errores fueron simulados de manera controlada por la autora a partir de
-la taxonomía, y la categoría de cada caso fue asignada por la autora.
+El benchmark es un conjunto de **150 casos** de resolución de ecuaciones de primer grado con una incógnita. Cada caso contiene la resolución correcta paso a paso y una resolución de un estudiante con un error en un paso concreto. Los casos y la categoría de error de cada uno fueron elaborados y asignados por la autora.
 
 ### Organización
 
@@ -163,7 +125,7 @@ la taxonomía, y la categoría de cada caso fue asignada por la autora.
 | `benchmark/casos/dev/` | 100 | Diseñar y probar las reglas del módulo de diagnóstico |
 | `benchmark/casos/test/` | 50 | Evaluación final. No se usa para diseñar ni ajustar reglas |
 
-Cada carpeta tiene un archivo `.json` por categoría. Los dos conjuntos no comparten ecuaciones iniciales.
+Cada carpeta tiene un archivo `.json` por categoría de la taxonomía (`data/taxonomia.json`). Los dos conjuntos no comparten ecuaciones iniciales.
 
 | Categoría | dev | test |
 |---|---|---|
@@ -200,38 +162,37 @@ Cada carpeta tiene un archivo `.json` por categoría. Los dos conjuntos no compa
 - **Un solo error por caso.** Después del error, el estudiante sigue resolviendo normalmente desde su resultado equivocado.
 - **Casos indeterminados.** Son pasos que combinan dos errores o que tienen un error que no encaja en ninguna de las otras cinco categorías. En el campo `notas` se explica cómo los clasificaría la autora, por ejemplo `"Combinado = dos errores de signo en un mismo paso."`.
 - **Variedad.** Hay ecuaciones con fracciones (65 casos), con paréntesis (76) y con la incógnita en ambos lados (56). El error aparece en el paso 1 en 68 casos y en el paso 2 o posterior en 82.
-- **Transiciones.** Los 150 casos suman 1.216 transiciones algebraicas entre pasos consecutivos: 1.066 válidas y 150 inválidas (una por caso).
+- **Transiciones.** Los 150 casos suman 1.215 transiciones algebraicas entre pasos consecutivos: 1.065 válidas y 150 inválidas (una por caso). Sobre ellas se evaluará la clasificación de cada transición como válida o inválida, y sobre los 150 pasos erróneos, la clasificación del tipo de error.
 
-## Evaluación
+## Conjunto ampliado (100 casos generados por un LLM)
 
-Se evalúan dos cosas por separado:
+Conjunto **aparte** del benchmark (no se mezcla con dev ni test). Un LLM generó 100 variaciones de los casos de la autora, con errores nuevos; la autora las revisó y asignó la categoría oficial. Sirve para ver cómo se comporta el diagnóstico con errores que no vio al diseñar las reglas y para ampliar su repertorio.
 
-- **El verificador y el diagnóstico**, de forma automática sobre el benchmark:
-  - la clasificación de cada transición como válida o inválida, con exactitud (*accuracy*);
-  - la clasificación del tipo de error de los 150 pasos erróneos, con *macro-F1* sobre las 6 categorías.
-- **La calidad pedagógica de las pistas**, con una rúbrica aplicada de forma ciega por docentes de Matemática.
+| Archivo (`benchmark/casos/ampliado/`) | Contenido |
+|---|---|
+| `ampliado_original_llm.json` | Los 100 casos tal como los generó el LLM, con la categoría que propuso. |
+| `ampliado.json` | Los mismos casos con la categoría oficial de la autora (`categoria`). Conserva la propuesta del LLM (`categoria_propuesta_llm`) y, cuando la autora volvió a revisar un caso, la categoría anterior (`categoria_antes_de_ver_diagnostico`). `tipo_de_novedad`: variante_nueva, estructura_nueva, combinado o fuera_de_taxonomia. |
+| `particion.json` | Separa los casos de **ajuste** (74, se usan para modificar reglas) de los **reservados** (26, solo se miden) y marca la muestra de revisión ciega. |
 
-Con el conjunto dev se diseñan y ajustan las reglas. El conjunto test se usa una sola vez, al final; por eso
-`evaluacion/evaluar_diagnostico.py` solo lo ejecuta si se pide explícitamente:
+Resultados (`evaluacion/resultados/`):
 
-```bash
-python evaluacion/evaluar_diagnostico.py --conjunto test --evaluacion-final
-```
+| Etapa | Exactitud |
+|---|---|
+| Diagnóstico congelado antes de ajustar (`ampliado_2026-10-14.txt`) | 67/100 |
+| Diagnóstico ajustado (`ampliado_2026-10-15_ajustado.txt`) | 99/100 (macro-F1 0.99); ajuste 73/74, reservados 26/26 |
 
-## Limitaciones conocidas
+Los fallos se clasifican en *seguros* (responde `indeterminado` o falla sin clasificar) y *peligrosos* (devuelve otra categoría). El caso que sigue mal es AMP-071, una coincidencia numérica (ver variaciones). Como las reglas se ajustaron mirando este conjunto, la cifra del diagnóstico ajustado es optimista: la medición más limpia es la de los casos reservados y la del lote nuevo de variaciones.
 
-- **Los errores son simulados.** Los resultados miden el reconocimiento de los patrones de error de la taxonomía, no
-  el desempeño frente a errores espontáneos de estudiantes reales, que suelen ser más variados.
-- **Las reglas se diseñaron con los casos dev.** Los resultados sobre dev no representan el desempeño del sistema; el
-  resultado válido es el del conjunto test.
-- **Algunos pasos admiten dos lecturas.** Por ejemplo, ignorar el factor de un paréntesis equivale a dividir solo un
-  lado entre ese factor. En esos casos el diagnóstico responde según el orden de las preguntas del árbol.
-- **Lo que no reconoce queda como `indeterminado`.** Un error que no corresponde a ninguna variante programada no se
-  fuerza a una categoría.
+El detalle de qué regla se cambió por qué caso está en `evaluacion/resultados/ajustes_tras_conjunto_ampliado.md`. Dev sigue en 100/100 y pasan las 634 pruebas.
 
-## Próximos pasos
+## Variaciones de los casos que fallan
 
-- [ ] Evaluar el diagnóstico sobre el conjunto test.
-- [ ] Implementar `src/generador/plantillas.py` con las plantillas contextualizadas por categoría.
-- [ ] Implementar `src/generador/llm.py` con la integración a la API del LLM.
-- [ ] Evaluar la calidad pedagógica de las pistas con docentes, mediante la rúbrica.
+La verificación es por equivalencia de solución, así que dos errores en un mismo paso pueden dar por casualidad la misma solución que un error y se leen como si fuera uno. Para comprobar si un caso era coincidencia numérica o una regla faltante, `benchmark/generar_variaciones.py` repite el mismo tipo de error con otros números (semilla fija; descarta las variaciones que resultan válidas por casualidad). Se hicieron 50 variaciones de AMP-010 y AMP-071 (`variaciones.json`, revisadas por la autora) y un lote independiente de otras 50 (`variaciones_nuevas.json`, etiquetas por construcción).
+
+| Etapa | AMP-010 (25) | AMP-071 (25) | Total |
+|---|---|---|---|
+| Diagnóstico congelado (`variaciones_2026-10-15_congelado.txt`) | 0/25 | 20/25 | 20/50 |
+| Con la regla nueva, mismas 50 (no es independiente) | 25/25 | 20/25 | 45/50 |
+| Lote nuevo, no usado para diseñar la regla | 25/25 | 23/25 | 48/50 |
+
+AMP-071 era en buena parte coincidencia numérica (con otros números se queda en `indeterminado`). AMP-010 no: faltaba reconocer que el estudiante multiplicó cada lado por su propio denominador, y se agregó esa regla.

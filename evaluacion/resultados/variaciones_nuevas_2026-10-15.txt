@@ -1,0 +1,8 @@
+AMP-010: 25 variaciones | etiqueta esperada: indeterminado | acierta 25/25
+   respuestas del diagnóstico: indeterminado=25
+AMP-071: 25 variaciones | etiqueta esperada: indeterminado | acierta 23/25
+   respuestas del diagnóstico: indeterminado=23, distributiva_incorrecta=2
+TOTAL: 48/50
+Fallos:
+  VAL-044 5(x + 2) = 3x + 6 -> 5x + 2 + 3x = 6  diag=distributiva_incorrecta
+  VAL-050 4(x + 1) = 3x + 1 -> 4x + 1 + 3x = 1  diag=distributiva_incorrecta

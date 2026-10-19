@@ -1,0 +1,36 @@
+AMP-010: 25 variaciones | etiqueta esperada: indeterminado | acierta 0/25
+   respuestas del diagnóstico: simplificacion_aritmetica=23, distributiva_incorrecta=2
+AMP-071: 25 variaciones | etiqueta esperada: indeterminado | acierta 20/25
+   respuestas del diagnóstico: indeterminado=20, distributiva_incorrecta=3, error_signo=2
+TOTAL: 20/50
+Fallos:
+  VAR-001 (x + 7)/4 = 2x/6 -> x + 7 = 2x  diag=simplificacion_aritmetica
+  VAR-002 (x + 8)/3 = 2x/5 -> x + 8 = 2x  diag=simplificacion_aritmetica
+  VAR-003 5x/4 = (x - 3)/5 -> 5x = x - 3  diag=simplificacion_aritmetica
+  VAR-004 (x + 7)/5 = 4x/2 -> x + 7 = 4x  diag=simplificacion_aritmetica
+  VAR-005 4x/5 = (x + 4)/2 -> 4x = x + 4  diag=simplificacion_aritmetica
+  VAR-006 6x/5 = (x + 3)/6 -> 6x = x + 3  diag=simplificacion_aritmetica
+  VAR-007 (x - 5)/3 = 2x/2 -> x - 5 = 2x  diag=simplificacion_aritmetica
+  VAR-008 6x/2 = (x + 4)/5 -> 6x = x + 4  diag=simplificacion_aritmetica
+  VAR-009 (x + 5)/2 = 3x/5 -> x + 5 = 3x  diag=simplificacion_aritmetica
+  VAR-010 (x + 8)/4 = 6x/5 -> x + 8 = 6x  diag=simplificacion_aritmetica
+  VAR-011 3x/4 = (x - 1)/2 -> 3x = x - 1  diag=simplificacion_aritmetica
+  VAR-012 4x/3 = (x - 1)/5 -> 4x = x - 1  diag=simplificacion_aritmetica
+  VAR-013 (x + 5)/4 = 5x/3 -> x + 5 = 5x  diag=simplificacion_aritmetica
+  VAR-014 5x/2 = (x - 1)/5 -> 5x = x - 1  diag=simplificacion_aritmetica
+  VAR-015 6x/2 = (x - 3)/3 -> 6x = x - 3  diag=simplificacion_aritmetica
+  VAR-016 2x/4 = (x + 2)/3 -> 2x = x + 2  diag=distributiva_incorrecta
+  VAR-017 6x/5 = (x - 5)/6 -> 6x = x - 5  diag=simplificacion_aritmetica
+  VAR-018 6x/3 = (x + 7)/4 -> 6x = x + 7  diag=simplificacion_aritmetica
+  VAR-019 (x + 3)/5 = 6x/3 -> x + 3 = 6x  diag=distributiva_incorrecta
+  VAR-020 3x/5 = (x - 9)/2 -> 3x = x - 9  diag=simplificacion_aritmetica
+  VAR-021 (x + 5)/5 = 2x/6 -> x + 5 = 2x  diag=simplificacion_aritmetica
+  VAR-022 6x/3 = (x - 7)/6 -> 6x = x - 7  diag=simplificacion_aritmetica
+  VAR-023 5x/4 = (x + 4)/6 -> 5x = x + 4  diag=simplificacion_aritmetica
+  VAR-024 5x/4 = (x + 5)/3 -> 5x = x + 5  diag=simplificacion_aritmetica
+  VAR-025 6x/4 = (x - 6)/3 -> 6x = x - 6  diag=simplificacion_aritmetica
+  VAR-028 3(x + 2) = 2x + 2 -> 3x + 2 + 2x = 2  diag=distributiva_incorrecta
+  VAR-038 2(x - 8) = x + 4 -> 2x - 8 + x = 4  diag=error_signo
+  VAR-042 2(x + 2) = 3x + 7 -> 2x + 2 + 3x = 7  diag=distributiva_incorrecta
+  VAR-043 4(x + 2) = x + 12 -> 4x + 2 + x = 12  diag=distributiva_incorrecta
+  VAR-047 2(x - 4) = x + 2 -> 2x - 4 + x = 2  diag=error_signo

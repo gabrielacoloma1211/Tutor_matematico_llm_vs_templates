@@ -1,0 +1,30 @@
+{
+  "paso_valido": {
+    "descripcion": "Un paso válido no genera discrepancia.",
+    "s_i": "3(x - 4) = 12",
+    "s_i_mas_1": "3x - 12 = 12"
+  },
+  "distributiva_incompleta": {
+    "descripcion": "No multiplica el -4 por 3. La discrepancia conserva el paréntesis original y las formas normalizadas.",
+    "s_i": "3(x - 4) = 12",
+    "s_i_mas_1": "3x - 4 = 12",
+    "esperado": {
+      "tipo_izq_i": "Mul",
+      "der_i": "12",
+      "izq_i_expandida": "3*x - 12",
+      "tipo_izq_i_mas_1": "Add",
+      "der_i_mas_1": "12",
+      "forma_normalizada_s_i": "3*x - 24",
+      "forma_normalizada_s_i_mas_1": "3*x - 16",
+      "diferencia": "-8"
+    }
+  },
+  "otro_origen_mismo_resultado": {
+    "descripcion": "Se cambió el término -12. Al normalizar es idéntico a la distributiva incompleta, pero el lado izquierdo original no tiene paréntesis.",
+    "s_i": "3x - 12 = 12",
+    "s_i_mas_1": "3x - 4 = 12",
+    "esperado": {
+      "tipo_izq_i": "Add"
+    }
+  }
+}

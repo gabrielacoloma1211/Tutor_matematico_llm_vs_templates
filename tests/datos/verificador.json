@@ -1,0 +1,86 @@
+{
+  "pasos": [
+    {
+      "id": "transposicion_correcta",
+      "descripcion": "Pasa un término al otro lado cambiándole el signo.",
+      "s_i": "6*x - 4 = 3",
+      "s_i_mas_1": "6*x = 3 + 4",
+      "valido": true
+    },
+    {
+      "id": "distributiva_correcta",
+      "descripcion": "Expande un paréntesis multiplicando todos los términos.",
+      "s_i": "3*(x - 4) = 12",
+      "s_i_mas_1": "3*x - 12 = 12",
+      "valido": true
+    },
+    {
+      "id": "multiplicar_ambos_lados",
+      "descripcion": "Multiplicar toda la ecuación por una constante no debe cambiar su validez.",
+      "s_i": "x + 5 = 12",
+      "s_i_mas_1": "2*x + 10 = 24",
+      "valido": true
+    },
+    {
+      "id": "reordenar_lados",
+      "descripcion": "Intercambiar los lados de la ecuación.",
+      "s_i": "x + 5 = 12",
+      "s_i_mas_1": "12 = x + 5",
+      "valido": true
+    },
+    {
+      "id": "multiplicar_por_el_mcm_bien_hecho",
+      "descripcion": "Multiplica ambos lados por 6 y calcula bien (6 por 5 es 30).",
+      "s_i": "x/2 + x/3 = 5",
+      "s_i_mas_1": "3x + 2x = 30",
+      "valido": true
+    },
+    {
+      "id": "error_de_signo",
+      "descripcion": "Ejemplo de la taxonomía: error de signo.",
+      "s_i": "6*x - 4 = 3",
+      "s_i_mas_1": "6*x = 3 - 4",
+      "valido": false
+    },
+    {
+      "id": "distributiva_incompleta",
+      "descripcion": "Ejemplo de la taxonomía: no multiplica el -4 por 3.",
+      "s_i": "3*(x - 4) = 12",
+      "s_i_mas_1": "3*x - 4 = 12",
+      "valido": false
+    },
+    {
+      "id": "operacion_solo_en_un_lado",
+      "descripcion": "Ejemplo de la taxonomía: restó 5 solo del lado izquierdo.",
+      "s_i": "x + 5 = 12",
+      "s_i_mas_1": "x = 12",
+      "valido": false
+    },
+    {
+      "id": "simplificacion_aritmetica_incorrecta",
+      "descripcion": "Ejemplo de la taxonomía: 10 - 3 = 7, no 6.",
+      "s_i": "2*x = 10 - 3",
+      "s_i_mas_1": "2*x = 6",
+      "valido": false
+    },
+    {
+      "id": "division_por_coeficiente_equivocado",
+      "descripcion": "Ejemplo de la taxonomía: dividió por 4, no por 5.",
+      "s_i": "5*x = 20",
+      "s_i_mas_1": "x = 5",
+      "valido": false
+    }
+  ],
+  "ecuaciones_mal_escritas": [
+    {
+      "id": "sin_signo_igual",
+      "descripcion": "Una ecuación sin signo '=' no se puede interpretar.",
+      "ecuacion": "6*x - 4"
+    },
+    {
+      "id": "dos_signos_igual",
+      "descripcion": "Una ecuación con dos signos '=' no se puede interpretar.",
+      "ecuacion": "6*x = 4 = 2"
+    }
+  ]
+}

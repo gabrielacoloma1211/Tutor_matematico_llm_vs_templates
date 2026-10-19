@@ -1,0 +1,2457 @@
+[
+  {
+    "id": "AMP-001",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 5x + 8 = 2x - 13",
+    "solucion_correcta": [
+      "5x + 8 = 2x - 13",
+      "5x - 2x + 8 = -13",
+      "3x + 8 = -13",
+      "3x = -13 - 8",
+      "3x = -21",
+      "x = -7"
+    ],
+    "resolucion_estudiante": [
+      "5x + 8 = 2x - 13",
+      "5x - 2x + 8 = -13",
+      "3x + 8 = -13",
+      "3x = 13 - 8",
+      "3x = 5",
+      "x = 5/3"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "3x = -13 - 8",
+    "pista_referencia": "Fíjate en el -13: ese término no se movió de lado, así que su signo debe quedarse igual.",
+    "notas": "Al pasar el +8 al otro lado le cambia bien el signo, pero también cambia el signo del -13, que no se movió."
+  },
+  {
+    "id": "AMP-002",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 15 = 4x - 9",
+    "solucion_correcta": [
+      "15 = 4x - 9",
+      "4x - 9 = 15",
+      "4x = 15 + 9",
+      "4x = 24",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "15 = 4x - 9",
+      "4x - 9 = -15",
+      "4x = -15 + 9",
+      "4x = -6",
+      "x = -6/4",
+      "x = -3/2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "4x - 9 = 15",
+    "pista_referencia": "Cuando solo intercambias los dos lados de la igualdad, ningún término cambia de signo.",
+    "notas": "Al intercambiar los lados de la ecuación le cambia el signo al 15 como si lo hubiera transpuesto."
+  },
+  {
+    "id": "AMP-003",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 7x - (-4) = 3x + 20",
+    "solucion_correcta": [
+      "7x - (-4) = 3x + 20",
+      "7x - 3x - (-4) = 20",
+      "4x - (-4) = 20",
+      "4x = 20 - 4",
+      "4x = 16",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "7x - (-4) = 3x + 20",
+      "7x - 3x - (-4) = 20",
+      "4x - (-4) = 20",
+      "4x = 20 + 4",
+      "4x = 24",
+      "x = 6"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "4x = 20 - 4",
+    "pista_referencia": "Antes de pasar el término, piensa qué valor tiene realmente - (-4): ¿es positivo o negativo?",
+    "notas": "Interpreta - (-4) como -4 y al pasarlo escribe +4, cuando en realidad es +4 y debía pasar como -4."
+  },
+  {
+    "id": "AMP-004",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 9 - 2x + 3 = 2",
+    "solucion_correcta": [
+      "9 - 2x + 3 = 2",
+      "12 - 2x = 2",
+      "-2x = 2 - 12",
+      "-2x = -10",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "9 - 2x + 3 = 2",
+      "12 - 2x = 2",
+      "2x = 2 - 12",
+      "2x = -10",
+      "x = -5"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "-2x = 2 - 12",
+    "pista_referencia": "Al pasar el 12, revisa el signo del término con x que se quedó en su lugar: el menos le pertenece a él.",
+    "notas": "Al trasponer el 12 se lleva también el signo menos que pertenecía a -2x y lo deja como 2x."
+  },
+  {
+    "id": "AMP-005",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 2(3(x - 1) + 5) = 22",
+    "solucion_correcta": [
+      "2(3(x - 1) + 5) = 22",
+      "6(x - 1) + 10 = 22",
+      "6x - 6 + 10 = 22",
+      "6x + 4 = 22",
+      "6x = 18",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "2(3(x - 1) + 5) = 22",
+      "6(2x - 2) + 10 = 22",
+      "12x - 12 + 10 = 22",
+      "12x - 2 = 22",
+      "12x = 24",
+      "x = 2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6(x - 1) + 10 = 22",
+    "pista_referencia": "En los paréntesis anidados, el 2 de afuera multiplica una sola vez a cada término del paréntesis grande; revisa si lo aplicaste de más.",
+    "notas": "Multiplica el 2 exterior por el 3 y además por los términos del paréntesis interior, aplicando el factor dos veces."
+  },
+  {
+    "id": "AMP-006",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 4(x + 2) - 3 = 2x + 15",
+    "solucion_correcta": [
+      "4(x + 2) - 3 = 2x + 15",
+      "4x + 8 - 3 = 2x + 15",
+      "4x + 5 = 2x + 15",
+      "4x - 2x = 15 - 5",
+      "2x = 10",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "4(x + 2) - 3 = 2x + 15",
+      "4x + 8 - 12 = 2x + 15",
+      "4x - 4 = 2x + 15",
+      "4x - 2x = 15 + 4",
+      "2x = 19",
+      "x = 19/2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "4x + 8 - 3 = 2x + 15",
+    "pista_referencia": "El 4 solo multiplica a lo que está dentro del paréntesis; revisa qué pasó con el -3 que está afuera.",
+    "notas": "Además de distribuir el 4 dentro del paréntesis, multiplica también el -3 que está fuera de él."
+  },
+  {
+    "id": "AMP-007",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: (6x - 9)/3 + 4 = x + 9",
+    "solucion_correcta": [
+      "(6x - 9)/3 + 4 = x + 9",
+      "(6x - 9)/3 = x + 9 - 4",
+      "(6x - 9)/3 = x + 5",
+      "2x - 3 = x + 5",
+      "2x - x = 5 + 3",
+      "x = 8"
+    ],
+    "resolucion_estudiante": [
+      "(6x - 9)/3 + 4 = x + 9",
+      "(6x - 9)/3 = x + 9 - 4",
+      "(6x - 9)/3 = x + 5",
+      "2x - 9 = x + 5",
+      "2x - x = 5 + 9",
+      "x = 14"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "2x - 3 = x + 5",
+    "pista_referencia": "El denominador 3 divide a todo el numerador, no solo al primer término.",
+    "notas": "Al simplificar (6x - 9)/3 divide el 6x entre 3 pero deja el -9 sin dividir."
+  },
+  {
+    "id": "AMP-008",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 8 - 3(x - 2) = x + 4",
+    "solucion_correcta": [
+      "8 - 3(x - 2) = x + 4",
+      "8 - 3x + 6 = x + 4",
+      "14 - 3x = x + 4",
+      "-3x - x = 4 - 14",
+      "-4x = -10",
+      "x = 5/2"
+    ],
+    "resolucion_estudiante": [
+      "8 - 3(x - 2) = x + 4",
+      "5(x - 2) = x + 4",
+      "5x - 10 = x + 4",
+      "5x - x = 4 + 10",
+      "4x = 14",
+      "x = 7/2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "8 - 3x + 6 = x + 4",
+    "pista_referencia": "Recuerda el orden de las operaciones: primero se multiplica el 3 por el paréntesis y después se resta.",
+    "notas": "Resta 8 - 3 antes de multiplicar el 3 por el paréntesis, sin respetar el orden de las operaciones."
+  },
+  {
+    "id": "AMP-009",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 3 - 2x = 4x + 15",
+    "solucion_correcta": [
+      "3 - 2x = 4x + 15",
+      "3 - 2x - 4x = 15",
+      "3 - 6x = 15",
+      "-6x = 15 - 3",
+      "-6x = 12",
+      "x = -2"
+    ],
+    "resolucion_estudiante": [
+      "3 - 2x = 4x + 15",
+      "3 - 2x - 4x = 15",
+      "3 - 6x = 15",
+      "-3 + 6x = 15",
+      "6x = 15 + 3",
+      "6x = 18",
+      "x = 3"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "-3 + 6x = -15",
+    "pista_referencia": "Si cambias todos los signos de un lado para que la x quede positiva, debes hacer lo mismo con el otro lado.",
+    "notas": "Multiplica por -1 solo el lado izquierdo para volver positivo el término con x y deja el 15 igual."
+  },
+  {
+    "id": "AMP-010",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 3x/2 = (x + 5)/4",
+    "solucion_correcta": [
+      "3x/2 = (x + 5)/4",
+      "6x = x + 5",
+      "6x - x = 5",
+      "5x = 5",
+      "x = 1"
+    ],
+    "resolucion_estudiante": [
+      "3x/2 = (x + 5)/4",
+      "3x = x + 5",
+      "3x - x = 5",
+      "2x = 5",
+      "x = 5/2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6x = x + 5",
+    "pista_referencia": "Para quitar los denominadores multiplica ambos lados por el mismo número, por ejemplo el 4.",
+    "notas": "Multiplica el lado izquierdo por 2 y el derecho por 4, cada uno por su propio denominador."
+  },
+  {
+    "id": "AMP-011",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 0.3x + 1.2 = 0.1x + 3",
+    "solucion_correcta": [
+      "0.3x + 1.2 = 0.1x + 3",
+      "0.3x - 0.1x = 3 - 1.2",
+      "0.2x = 1.8",
+      "2x = 18",
+      "x = 9"
+    ],
+    "resolucion_estudiante": [
+      "0.3x + 1.2 = 0.1x + 3",
+      "0.3x - 0.1x = 3 - 1.2",
+      "0.2x = 1.8",
+      "2x = 1.8",
+      "x = 0.9"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "2x = 18",
+    "pista_referencia": "Para quitar el decimal multiplicaste por 10; revisa si lo hiciste en los dos lados.",
+    "notas": "Multiplica por 10 el lado izquierdo para eliminar el decimal pero no multiplica el 1.8 del lado derecho."
+  },
+  {
+    "id": "AMP-012",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: (x + 6)/2 + 1 = 6",
+    "solucion_correcta": [
+      "(x + 6)/2 + 1 = 6",
+      "(x + 6)/2 = 6 - 1",
+      "(x + 6)/2 = 5",
+      "x + 6 = 10",
+      "x = 10 - 6",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "(x + 6)/2 + 1 = 6",
+      "(x + 6)/2 = 6 - 1",
+      "(x + 6)/2 = 5",
+      "x/2 = 5 - 6",
+      "x/2 = -1",
+      "x = -2"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x + 6 = 10",
+    "pista_referencia": "El 6 está dentro de una fracción dividida entre 2; quita primero el denominador antes de pasar el 6.",
+    "notas": "Saca el 6 del numerador restándolo al otro lado, lo que equivale a restar 3 a la izquierda pero 6 a la derecha."
+  },
+  {
+    "id": "AMP-013",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 2.5x - 1.3 = 0.5x + 0.7",
+    "solucion_correcta": [
+      "2.5x - 1.3 = 0.5x + 0.7",
+      "2.5x - 0.5x = 0.7 + 1.3",
+      "2x = 2",
+      "x = 1"
+    ],
+    "resolucion_estudiante": [
+      "2.5x - 1.3 = 0.5x + 0.7",
+      "2.5x - 0.5x = 0.7 + 1.3",
+      "2x = 1.10",
+      "x = 0.55"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "2x = 2",
+    "pista_referencia": "Revisa la suma de decimales: cuando las décimas suman 10, eso equivale a una unidad completa.",
+    "notas": "Al sumar 0.7 + 1.3 junta las décimas como 10 y escribe 1.10 en lugar de llevar la unidad y obtener 2."
+  },
+  {
+    "id": "AMP-014",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: x/4 + 5 = 2",
+    "solucion_correcta": [
+      "x/4 + 5 = 2",
+      "x/4 = 2 - 5",
+      "x/4 = -3",
+      "x = -3 * 4",
+      "x = -12"
+    ],
+    "resolucion_estudiante": [
+      "x/4 + 5 = 2",
+      "x/4 = 2 - 5",
+      "x/4 = -3",
+      "x = -3 * 4",
+      "x = 12"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = -12",
+    "pista_referencia": "Repasa la ley de signos de la multiplicación: negativo por positivo, ¿qué signo da?",
+    "notas": "Al multiplicar -3 por 4 aplica mal la ley de signos y obtiene 12 positivo."
+  },
+  {
+    "id": "AMP-015",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: (3/2)x - 5 = 7",
+    "solucion_correcta": [
+      "(3/2)x - 5 = 7",
+      "(3/2)x = 7 + 5",
+      "(3/2)x = 12",
+      "x = 12 * 2/3",
+      "x = 24/3",
+      "x = 8"
+    ],
+    "resolucion_estudiante": [
+      "(3/2)x - 5 = 7",
+      "(3/2)x = 7 + 5",
+      "(3/2)x = 12",
+      "x = 12 * 2/3",
+      "x = 24/36",
+      "x = 2/3"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 24/3",
+    "pista_referencia": "Cuando multiplicas un entero por una fracción, el entero multiplica solo al numerador.",
+    "notas": "Al calcular 12 * 2/3 multiplica el 12 por el numerador y también por el denominador."
+  },
+  {
+    "id": "AMP-016",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 5x + 3 * 2 = 2x + 15",
+    "solucion_correcta": [
+      "5x + 3 * 2 = 2x + 15",
+      "5x - 2x = 15 - 3 * 2",
+      "3x = 15 - 6",
+      "3x = 9",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "5x + 3 * 2 = 2x + 15",
+      "5x - 2x = 15 - 3 * 2",
+      "3x = 12 * 2",
+      "3x = 24",
+      "x = 8"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "3x = 15 - 6",
+    "pista_referencia": "En 15 - 3 * 2, recuerda qué operación se resuelve primero.",
+    "notas": "Calcula 15 - 3 antes de multiplicar por 2, sin respetar la prioridad de la multiplicación."
+  },
+  {
+    "id": "AMP-017",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: (2/3)x + 1 = 9",
+    "solucion_correcta": [
+      "(2/3)x + 1 = 9",
+      "(2/3)x = 9 - 1",
+      "(2/3)x = 8",
+      "x = 8 * 3/2",
+      "x = 24/2",
+      "x = 12"
+    ],
+    "resolucion_estudiante": [
+      "(2/3)x + 1 = 9",
+      "(2/3)x = 9 - 1",
+      "(2/3)x = 8",
+      "x = 8 * 2/3",
+      "x = 16/3"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 8 * 3/2",
+    "pista_referencia": "Dividir entre 2/3 es lo mismo que multiplicar por su recíproco; revisa qué fracción usaste.",
+    "notas": "Para despejar x multiplica por 2/3 en lugar de multiplicar por el recíproco 3/2."
+  },
+  {
+    "id": "AMP-018",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 7x - 4 = 3x + 20",
+    "solucion_correcta": [
+      "7x - 4 = 3x + 20",
+      "7x - 3x = 20 + 4",
+      "4x = 24",
+      "x = 24/4",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "7x - 4 = 3x + 20",
+      "7x - 3x = 20 + 4",
+      "4x = 24",
+      "x = 4/24",
+      "x = 1/6"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 24/4",
+    "pista_referencia": "Para despejar x divides el término independiente entre el coeficiente; revisa cuál va arriba y cuál abajo.",
+    "notas": "Invierte la división y escribe el coeficiente 4 sobre 24 en lugar de 24 entre 4."
+  },
+  {
+    "id": "AMP-019",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 0.5x + 2 = 5",
+    "solucion_correcta": [
+      "0.5x + 2 = 5",
+      "0.5x = 5 - 2",
+      "0.5x = 3",
+      "x = 3/0.5",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "0.5x + 2 = 5",
+      "0.5x = 5 - 2",
+      "0.5x = 3",
+      "x = 3/5",
+      "x = 0.6"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 3/0.5",
+    "pista_referencia": "El coeficiente de x es 0.5, no 5; fíjate en el punto decimal antes de dividir.",
+    "notas": "Ignora el punto decimal del coeficiente y divide entre 5 en vez de entre 0.5."
+  },
+  {
+    "id": "AMP-020",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 2x/5 - 3 = 3",
+    "solucion_correcta": [
+      "2x/5 - 3 = 3",
+      "2x/5 = 3 + 3",
+      "2x/5 = 6",
+      "x = 6 * 5/2",
+      "x = 30/2",
+      "x = 15"
+    ],
+    "resolucion_estudiante": [
+      "2x/5 - 3 = 3",
+      "2x/5 = 3 + 3",
+      "2x/5 = 6",
+      "x = 6/2",
+      "x = 3"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 6 * 5/2",
+    "pista_referencia": "El coeficiente de x no es solo 2: la x también está dividida entre 5.",
+    "notas": "Divide entre 2 como si fuera el coeficiente, sin tener en cuenta que el coeficiente real es 2/5."
+  },
+  {
+    "id": "AMP-021",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 6 + 2x + 3 = 5x - 11",
+    "solucion_correcta": [
+      "6 + 2x + 3 = 5x - 11",
+      "9 + 2x = 5x - 11",
+      "2x - 5x = -11 - 9",
+      "-3x = -20",
+      "x = 20/3"
+    ],
+    "resolucion_estudiante": [
+      "6 + 2x + 3 = 5x - 11",
+      "9 + 2x = 5x - 11",
+      "2x - 9 = 5x - 11",
+      "2x - 5x = -11 + 9",
+      "-3x = -2",
+      "x = 2/3"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "2x + 9 = 5x - 11",
+    "pista_referencia": "Cambiar el orden de los términos dentro del mismo lado no cambia sus signos; el 9 no ha cruzado el igual.",
+    "notas": "Al reordenar los términos del lado izquierdo le cambia el signo al 9 como si lo hubiera pasado al otro lado."
+  },
+  {
+    "id": "AMP-022",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: x/2 - (x - 4)/3 = 1",
+    "solucion_correcta": [
+      "x/2 - (x - 4)/3 = 1",
+      "x/2 = 1 + (x - 4)/3",
+      "3x = 6 + 2(x - 4)",
+      "3x = 6 + 2x - 8",
+      "3x - 2x = -2",
+      "x = -2"
+    ],
+    "resolucion_estudiante": [
+      "x/2 - (x - 4)/3 = 1",
+      "x/2 = 1 + (x + 4)/3",
+      "3x = 6 + 2(x + 4)",
+      "3x = 6 + 2x + 8",
+      "3x - 2x = 14",
+      "x = 14"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "x/2 = 1 + (x - 4)/3",
+    "pista_referencia": "Al pasar la fracción completa al otro lado solo cambia el signo que está delante de ella, no los signos de adentro del numerador.",
+    "notas": "Al pasar la fracción (x - 4)/3 al otro lado cambia el signo de la fracción y también, de más, el signo del -4 del numerador."
+  },
+  {
+    "id": "AMP-023",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 7x - 9 = 3x + 11",
+    "solucion_correcta": [
+      "7x - 9 = 3x + 11",
+      "7x - 3x = 11 + 9",
+      "4x = 20",
+      "x = 20/4",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "7x - 9 = 3x + 11",
+      "7x - 3x = 11 + 9",
+      "4x = 20",
+      "x = 20/(-4)",
+      "x = -5"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 20/4",
+    "pista_referencia": "El cambio de signo es para lo que pasa sumando o restando; lo que pasa dividiendo conserva su signo.",
+    "notas": "Aplica la regla de cambiar el signo al coeficiente 4 que pasa dividiendo y divide entre -4."
+  },
+  {
+    "id": "AMP-024",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 6x - 5 = 2x + 5 + 12",
+    "solucion_correcta": [
+      "6x - 5 = 2x + 5 + 12",
+      "6x - 2x - 5 = 5 + 12",
+      "4x - 5 = 5 + 12",
+      "4x = 5 + 12 + 5",
+      "4x = 22",
+      "x = 11/2"
+    ],
+    "resolucion_estudiante": [
+      "6x - 5 = 2x + 5 + 12",
+      "6x - 2x - 5 = 5 + 12",
+      "4x - 5 = 5 + 12",
+      "4x = 12",
+      "x = 3"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "4x = 5 + 12 + 5",
+    "pista_referencia": "Solo puedes eliminar un término de los dos lados si es exactamente el mismo, con el mismo signo; compara el -5 y el +5.",
+    "notas": "Tacha el -5 de la izquierda con el +5 de la derecha como si fueran iguales, aunque tienen signos opuestos."
+  },
+  {
+    "id": "AMP-025",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 6x + 10 - 2x - 2 = 20",
+    "solucion_correcta": [
+      "6x + 10 - 2x - 2 = 20",
+      "4x + 8 = 20",
+      "4(x + 2) = 20",
+      "x + 2 = 5",
+      "x = 5 - 2",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "6x + 10 - 2x - 2 = 20",
+      "4x + 8 = 20",
+      "4(x + 8) = 20",
+      "x + 8 = 5",
+      "x = 5 - 8",
+      "x = -3"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "4(x + 2) = 20",
+    "pista_referencia": "Al sacar el 4 como factor común, cada término de adentro debe estar dividido entre 4; comprueba multiplicando de nuevo.",
+    "notas": "Al sacar factor común 4 de 4x + 8 deja el 8 sin dividir y escribe 4(x + 8)."
+  },
+  {
+    "id": "AMP-026",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: (7 - 4)(x + 2) = 2x + 9",
+    "solucion_correcta": [
+      "(7 - 4)(x + 2) = 2x + 9",
+      "3(x + 2) = 2x + 9",
+      "3x + 6 = 2x + 9",
+      "3x - 2x = 9 - 6",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "(7 - 4)(x + 2) = 2x + 9",
+      "7 - 4x - 8 = 2x + 9",
+      "-4x - 1 = 2x + 9",
+      "-4x - 2x = 9 + 1",
+      "-6x = 10",
+      "x = -10/6",
+      "x = -5/3"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "3(x + 2) = 2x + 9",
+    "pista_referencia": "El factor que multiplica al paréntesis es todo (7 - 4); resuélvelo primero y luego distribuye.",
+    "notas": "Distribuye solo el 4 sobre (x + 2) en lugar de multiplicar el factor completo (7 - 4) = 3."
+  },
+  {
+    "id": "AMP-027",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 4(5 - x) + 3 = 2x + 5",
+    "solucion_correcta": [
+      "4(5 - x) + 3 = 2x + 5",
+      "4(5 - x) = 2x + 5 - 3",
+      "4(5 - x) = 2x + 2",
+      "20 - 4x = 2x + 2",
+      "-4x - 2x = 2 - 20",
+      "-6x = -18",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "4(5 - x) + 3 = 2x + 5",
+      "4(5 - x) = 2x + 5 - 3",
+      "4(5 - x) = 2x + 2",
+      "20 + 4x = 2x + 2",
+      "4x - 2x = 2 - 20",
+      "2x = -18",
+      "x = -9"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "20 - 4x = 2x + 2",
+    "pista_referencia": "Dentro del paréntesis la x tiene signo menos; al multiplicar por 4 ese signo se conserva.",
+    "notas": "Con un factor positivo, al multiplicar 4 por -x pierde el signo menos y escribe +4x."
+  },
+  {
+    "id": "AMP-028",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 3x + (x - 7) = 9",
+    "solucion_correcta": [
+      "3x + (x - 7) = 9",
+      "3x + x - 7 = 9",
+      "4x - 7 = 9",
+      "4x = 9 + 7",
+      "4x = 16",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "3x + (x - 7) = 9",
+      "3x - x + 7 = 9",
+      "2x + 7 = 9",
+      "2x = 9 - 7",
+      "2x = 2",
+      "x = 1"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "3x + x - 7 = 9",
+    "pista_referencia": "Cuando delante del paréntesis hay un signo más, los términos de adentro conservan sus signos.",
+    "notas": "Quita un paréntesis precedido de signo + cambiando los signos de adentro como si hubiera un signo -."
+  },
+  {
+    "id": "AMP-029",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: x/4 - 1 = 2 + x/2",
+    "solucion_correcta": [
+      "x/4 - 1 = 2 + x/2",
+      "x/4 = 2 + x/2 + 1",
+      "x/4 = 3 + x/2",
+      "x = 12 + 2x",
+      "x - 2x = 12",
+      "-x = 12",
+      "x = -12"
+    ],
+    "resolucion_estudiante": [
+      "x/4 - 1 = 2 + x/2",
+      "x/4 = 2 + x/2 + 1",
+      "x/4 = 3 + x/2",
+      "x = 3 + 2x",
+      "x - 2x = 3",
+      "-x = 3",
+      "x = -3"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 12 + 2x",
+    "pista_referencia": "Al multiplicar toda la ecuación por 4, también los términos sin denominador deben multiplicarse.",
+    "notas": "Multiplica por 4 los términos con fracción de ambos lados pero deja sin multiplicar el 3, que no tiene denominador."
+  },
+  {
+    "id": "AMP-030",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 5x + 7 = 3x + 15",
+    "solucion_correcta": [
+      "5x + 7 = 3x + 15",
+      "5x + 7 - 3x = 3x + 15 - 3x",
+      "2x + 7 = 15",
+      "2x + 7 - 7 = 15 - 7",
+      "2x = 8",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "5x + 7 = 3x + 15",
+      "5x + 7 - 3x = 3x + 15 - 3x",
+      "2x + 7 = 15",
+      "2x + 7 - 7 = 15 + 7",
+      "2x = 22",
+      "x = 11"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "2x + 7 - 7 = 15 - 7",
+    "pista_referencia": "Para mantener la balanza en equilibrio, la operación que haces a un lado debe ser exactamente la misma en el otro.",
+    "notas": "Escribe la operación en ambos lados, pero resta 7 a la izquierda y suma 7 a la derecha."
+  },
+  {
+    "id": "AMP-031",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: (x + 2)/5 = (x - 1)/2",
+    "solucion_correcta": [
+      "(x + 2)/5 = (x - 1)/2",
+      "2(x + 2) = 5(x - 1)",
+      "2x + 4 = 5x - 5",
+      "2x - 5x = -5 - 4",
+      "-3x = -9",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "(x + 2)/5 = (x - 1)/2",
+      "5(x + 2) = 2(x - 1)",
+      "5x + 10 = 2x - 2",
+      "5x - 2x = -2 - 10",
+      "3x = -12",
+      "x = -4"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2(x + 2) = 5(x - 1)",
+    "pista_referencia": "En una multiplicación en cruz, cada numerador se multiplica por el denominador del otro lado.",
+    "notas": "Al multiplicar en cruz multiplica cada numerador por su propio denominador en vez de por el del otro lado."
+  },
+  {
+    "id": "AMP-032",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 7x + 4 = 2x + 19",
+    "solucion_correcta": [
+      "7x + 4 = 2x + 19",
+      "7x + 4 - 2x = 2x + 19 - 2x",
+      "5x + 4 = 19",
+      "5x = 15",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "7x + 4 = 2x + 19",
+      "7x + 4 - 2x = 2x + 19 - 2",
+      "5x + 4 = 2x + 17",
+      "5x - 2x = 17 - 4",
+      "3x = 13",
+      "x = 13/3"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "7x + 4 - 2x = 2x + 19 - 2x",
+    "pista_referencia": "Lo que restas a la izquierda es 2x; revisa si al lado derecho restaste exactamente lo mismo.",
+    "notas": "Resta 2x en el lado izquierdo pero en el lado derecho resta solo 2, sin la x."
+  },
+  {
+    "id": "AMP-033",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 2x + 3.75 = x + 5.2",
+    "solucion_correcta": [
+      "2x + 3.75 = x + 5.2",
+      "2x - x = 5.2 - 3.75",
+      "x = 1.45"
+    ],
+    "resolucion_estudiante": [
+      "2x + 3.75 = x + 5.2",
+      "2x - x = 5.2 - 3.75",
+      "x = 2.55"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "x = 1.45",
+    "pista_referencia": "Escribe 5.2 como 5.20 y resta columna por columna; cuando la cifra de arriba es menor, tienes que pedir prestado.",
+    "notas": "Al restar 5.2 - 3.75 resta en cada columna la cifra menor de la mayor sin pedir prestado y obtiene 2.55."
+  },
+  {
+    "id": "AMP-034",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: (3/4)x + 2 = 12/5",
+    "solucion_correcta": [
+      "(3/4)x + 2 = 12/5",
+      "(3/4)x = 12/5 - 2",
+      "(3/4)x = 2/5",
+      "x = 2/5 * 4/3",
+      "x = 8/15"
+    ],
+    "resolucion_estudiante": [
+      "(3/4)x + 2 = 12/5",
+      "(3/4)x = 12/5 - 2",
+      "(3/4)x = 2/5",
+      "x = 2/5 * 4/3",
+      "x = 6/20",
+      "x = 3/10"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 8/15",
+    "pista_referencia": "Para multiplicar fracciones se multiplica numerador por numerador y denominador por denominador, no en cruz.",
+    "notas": "Al multiplicar 2/5 por 4/3 multiplica en cruz (2 por 3 y 5 por 4) en lugar de en línea."
+  },
+  {
+    "id": "AMP-035",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: x/3 + 0.5 = 2",
+    "solucion_correcta": [
+      "x/3 + 0.5 = 2",
+      "x/3 + 1/2 = 2",
+      "x/3 = 2 - 1/2",
+      "x/3 = 3/2",
+      "x = 9/2"
+    ],
+    "resolucion_estudiante": [
+      "x/3 + 0.5 = 2",
+      "x/3 + 1/5 = 2",
+      "x/3 = 2 - 1/5",
+      "x/3 = 9/5",
+      "x = 27/5"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "x/3 + 1/2 = 2",
+    "pista_referencia": "Revisa cómo pasaste 0.5 a fracción: 0.5 son cinco décimas.",
+    "notas": "Convierte el decimal 0.5 en la fracción 1/5 en lugar de 5/10 = 1/2."
+  },
+  {
+    "id": "AMP-036",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 3x + 1/4 = 2x + 3",
+    "solucion_correcta": [
+      "3x + 1/4 = 2x + 3",
+      "3x - 2x = 3 - 1/4",
+      "x = 11/4"
+    ],
+    "resolucion_estudiante": [
+      "3x + 1/4 = 2x + 3",
+      "3x - 2x = 3 - 1/4",
+      "x = 2/4",
+      "x = 1/2"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "x = 11/4",
+    "pista_referencia": "Para restar una fracción a un número entero, escribe primero el entero como fracción con el mismo denominador.",
+    "notas": "Al calcular 3 - 1/4 resta el entero al numerador y conserva el denominador, obteniendo 2/4."
+  },
+  {
+    "id": "AMP-037",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 7x - 2x + 4 = 19",
+    "solucion_correcta": [
+      "7x - 2x + 4 = 19",
+      "5x + 4 = 19",
+      "5x = 19 - 4",
+      "5x = 15",
+      "x = 15/5",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "7x - 2x + 4 = 19",
+      "5x + 4 = 19",
+      "5x = 19 - 4",
+      "5x = 15",
+      "x = 15/7"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 15/5",
+    "pista_referencia": "Divide entre el coeficiente que tiene la x en el paso actual, no en la ecuación original.",
+    "notas": "Divide entre 7, el coeficiente que tenía la x en el enunciado, en vez de entre el coeficiente actual 5."
+  },
+  {
+    "id": "AMP-038",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 5x + 4 = 2x + 16",
+    "solucion_correcta": [
+      "5x + 4 = 2x + 16",
+      "5x - 2x = 16 - 4",
+      "(5 - 2)x = 12",
+      "x = 12/(5 - 2)",
+      "x = 12/3",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "5x + 4 = 2x + 16",
+      "5x - 2x = 16 - 4",
+      "(5 - 2)x = 12",
+      "x = 12/5 - 2",
+      "x = 2/5"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 12/(5 - 2)",
+    "pista_referencia": "El coeficiente de x es todo el paréntesis (5 - 2); al dividir, el divisor debe ir completo entre paréntesis.",
+    "notas": "Al dividir entre el coeficiente (5 - 2) omite el paréntesis y en realidad divide solo entre 5."
+  },
+  {
+    "id": "AMP-039",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: x/2 + x/3 = 5",
+    "solucion_correcta": [
+      "x/2 + x/3 = 5",
+      "3x + 2x = 30",
+      "5x = 30",
+      "x = 30/5",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "x/2 + x/3 = 5",
+      "3x + 2x = 30",
+      "5x = 30",
+      "x = 30/6",
+      "x = 5"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 30/5",
+    "pista_referencia": "El 6 ya lo usaste para quitar los denominadores; ahora divide entre el número que acompaña a la x.",
+    "notas": "Divide entre 6, el denominador común que usó antes, en lugar de entre el coeficiente 5."
+  },
+  {
+    "id": "AMP-040",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 2.5x - 3 = 7",
+    "solucion_correcta": [
+      "2.5x - 3 = 7",
+      "2.5x = 7 + 3",
+      "2.5x = 10",
+      "x = 10/2.5",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "2.5x - 3 = 7",
+      "2.5x = 7 + 3",
+      "2.5x = 10",
+      "x = 10/2",
+      "x = 5"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 10/2.5",
+    "pista_referencia": "El coeficiente de x es 2.5 completo; no puedes quedarte solo con la parte entera.",
+    "notas": "Descarta la parte decimal del coeficiente 2.5 y divide solo entre 2."
+  },
+  {
+    "id": "AMP-041",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 7x - 2 + 3x = 2x + 14",
+    "solucion_correcta": [
+      "7x - 2 + 3x = 2x + 14",
+      "7x - 2 + 3x - 2x = 14",
+      "7x + 3x - 2x = 14 + 2",
+      "8x = 16",
+      "x = 2"
+    ],
+    "resolucion_estudiante": [
+      "7x - 2 + 3x = 2x + 14",
+      "7x - 2 + 3x - 2x = 14",
+      "7x - 3x - 2x = 14 + 2",
+      "2x = 16",
+      "x = 8"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "7x + 3x - 2x = 14 + 2",
+    "pista_referencia": "Cuando sacas el -2 de en medio, el signo menos se va con él; fíjate qué signo tenía el 3x que se quedó.",
+    "notas": "Al pasar el -2 al otro lado, el 3x que venía después se queda con el signo menos que era del 2."
+  },
+  {
+    "id": "AMP-042",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: x/2 - 3 = x/4 + 1",
+    "solucion_correcta": [
+      "x/2 - 3 = x/4 + 1",
+      "2x - 12 = x + 4",
+      "2x - x = 4 + 12",
+      "x = 16"
+    ],
+    "resolucion_estudiante": [
+      "x/2 - 3 = x/4 + 1",
+      "2x + 12 = x + 4",
+      "2x - x = 4 - 12",
+      "x = -8"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x - 12 = x + 4",
+    "pista_referencia": "Al multiplicar toda la ecuación por 4 ningún término cambia de lado, así que ningún signo debe cambiar.",
+    "notas": "Al multiplicar ambos lados por 4 le cambia el signo al -3 como si lo hubiera trasladado al otro lado."
+  },
+  {
+    "id": "AMP-043",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: (x + 1)/3 + 1 = 3/5",
+    "solucion_correcta": [
+      "(x + 1)/3 + 1 = 3/5",
+      "(x + 1)/3 = 3/5 - 1",
+      "(x + 1)/3 = -2/5",
+      "5(x + 1) = -2 * 3",
+      "5x + 5 = -6",
+      "5x = -6 - 5",
+      "5x = -11",
+      "x = -11/5"
+    ],
+    "resolucion_estudiante": [
+      "(x + 1)/3 + 1 = 3/5",
+      "(x + 1)/3 = 3/5 - 1",
+      "(x + 1)/3 = -2/5",
+      "5(x + 1) = 2 * 3",
+      "5x + 5 = 6",
+      "5x = 6 - 5",
+      "5x = 1",
+      "x = 1/5"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "5(x + 1) = -2 * 3",
+    "pista_referencia": "Al multiplicar en cruz, revisa qué pasó con el signo negativo de la fracción -2/5.",
+    "notas": "Al multiplicar en cruz pierde el signo negativo de la fracción -2/5 y escribe 2 * 3."
+  },
+  {
+    "id": "AMP-044",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 11 - 6x = 29",
+    "solucion_correcta": [
+      "11 - 6x = 29",
+      "-6x = 29 - 11",
+      "-6x = 18",
+      "x = 18/(-6)",
+      "x = -3"
+    ],
+    "resolucion_estudiante": [
+      "11 - 6x = 29",
+      "-6x = 29 - 11",
+      "-6x = 18",
+      "x = -18/(-6)",
+      "x = 3"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 18/(-6)",
+    "pista_referencia": "Al dividir entre -6, el 18 del otro lado no cambia de signo; solo se divide.",
+    "notas": "Al pasar el -6 a dividir, además le cambia el signo al 18, que no se movió."
+  },
+  {
+    "id": "AMP-045",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 3(x + 4) - x = x + 20",
+    "solucion_correcta": [
+      "3(x + 4) - x = x + 20",
+      "3(x + 4) = x + 20 + x",
+      "3(x + 4) = 2x + 20",
+      "3x + 12 = 2x + 20",
+      "3x - 2x = 20 - 12",
+      "x = 8"
+    ],
+    "resolucion_estudiante": [
+      "3(x + 4) - x = x + 20",
+      "3(x + 4) = x + 20 + x",
+      "3(x + 4) = 2x + 20",
+      "3(3x + 12) = 2x + 20",
+      "9x + 36 = 2x + 20",
+      "9x - 2x = 20 - 36",
+      "7x = -16",
+      "x = -16/7"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "3x + 12 = 2x + 20",
+    "pista_referencia": "Cuando ya multiplicaste el 3 por cada término, el 3 y el paréntesis desaparecen; no los vuelvas a escribir.",
+    "notas": "Distribuye el 3 dentro del paréntesis pero deja también el factor 3 afuera, multiplicando dos veces."
+  },
+  {
+    "id": "AMP-046",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 2x - (5 - (x + 1)) = 8",
+    "solucion_correcta": [
+      "2x - (5 - (x + 1)) = 8",
+      "2x - 5 + (x + 1) = 8",
+      "2x - 5 + x + 1 = 8",
+      "3x - 4 = 8",
+      "3x = 12",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "2x - (5 - (x + 1)) = 8",
+      "2x - 5 - (x + 1) = 8",
+      "2x - 5 - x - 1 = 8",
+      "x - 6 = 8",
+      "x = 14"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x - 5 + (x + 1) = 8",
+    "pista_referencia": "El signo menos de afuera afecta a todo lo que hay dentro, incluido el signo que está delante del paréntesis interior.",
+    "notas": "Al quitar el paréntesis exterior cambia el signo del 5 pero no el del paréntesis interior, que debía pasar de - a +."
+  },
+  {
+    "id": "AMP-047",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 5(2x - 3) = 4x + 10",
+    "solucion_correcta": [
+      "5(2x - 3) = 4x + 10",
+      "10x - 15 = 4x + 10",
+      "10x - 4x = 10 + 15",
+      "6x = 25",
+      "x = 25/6"
+    ],
+    "resolucion_estudiante": [
+      "5(2x - 3) = 4x + 10",
+      "10x - 15x = 4x + 10",
+      "-5x = 4x + 10",
+      "-5x - 4x = 10",
+      "-9x = 10",
+      "x = -10/9"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "10x - 15 = 4x + 10",
+    "pista_referencia": "El 5 multiplica a cada término tal como está: si el término no tiene x, el producto tampoco la tiene.",
+    "notas": "Al multiplicar 5 por -3 le agrega una x al resultado y escribe -15x en lugar de -15."
+  },
+  {
+    "id": "AMP-048",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 3(4 - x) = x + 2",
+    "solucion_correcta": [
+      "3(4 - x) = x + 2",
+      "12 - 3x = x + 2",
+      "-3x - x = 2 - 12",
+      "-4x = -10",
+      "x = 5/2"
+    ],
+    "resolucion_estudiante": [
+      "3(4 - x) = x + 2",
+      "12 - 3 = x + 2",
+      "9 = x + 2",
+      "9 - 2 = x",
+      "x = 7"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "12 - 3x = x + 2",
+    "pista_referencia": "Al multiplicar 3 por -x el resultado conserva la x; revisa qué quedó de ese término.",
+    "notas": "Al multiplicar 3 por -x pierde la x y escribe solo -3."
+  },
+  {
+    "id": "AMP-049",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 2(x + 3) + 1 = 15",
+    "solucion_correcta": [
+      "2(x + 3) + 1 = 15",
+      "2(x + 3) = 15 - 1",
+      "2(x + 3) = 14",
+      "2x + 6 = 14",
+      "2x = 8",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "2(x + 3) + 1 = 15",
+      "2(x + 3) = 15 - 1",
+      "2(x + 3) = 14",
+      "2(x + 3 - 3) = 14 - 3",
+      "2x = 11",
+      "x = 11/2"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "2x + 6 = 14",
+    "pista_referencia": "Restar 3 dentro del paréntesis no es lo mismo que restar 3 al lado izquierdo, porque ese 3 está multiplicado por 2.",
+    "notas": "Resta 3 dentro del paréntesis, lo que equivale a restar 6 a la izquierda, pero al lado derecho solo le resta 3."
+  },
+  {
+    "id": "AMP-050",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 2/3 = (x - 1)/6",
+    "solucion_correcta": [
+      "2/3 = (x - 1)/6",
+      "4 = x - 1",
+      "4 + 1 = x",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "2/3 = (x - 1)/6",
+      "3/2 = (x - 1)/6",
+      "9 = x - 1",
+      "9 + 1 = x",
+      "x = 10"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "4 = x - 1",
+    "pista_referencia": "Si inviertes la fracción de un lado, la igualdad se rompe a menos que también inviertas la del otro lado.",
+    "notas": "Invierte la fracción 2/3 del lado izquierdo y deja igual el lado derecho."
+  },
+  {
+    "id": "AMP-051",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 0.25x + 2 = 3.5",
+    "solucion_correcta": [
+      "0.25x + 2 = 3.5",
+      "0.25x = 3.5 - 2",
+      "0.25x = 1.5",
+      "25x = 150",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "0.25x + 2 = 3.5",
+      "0.25x = 3.5 - 2",
+      "0.25x = 1.5",
+      "25x = 15",
+      "x = 15/25",
+      "x = 3/5"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "25x = 150",
+    "pista_referencia": "Para quitar los decimales debes multiplicar ambos lados por el mismo número; 0.25 necesita 100, así que el 1.5 también se multiplica por 100.",
+    "notas": "Para quitar los puntos decimales multiplica el lado izquierdo por 100 y el derecho solo por 10."
+  },
+  {
+    "id": "AMP-052",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 8x + 6 = 6x + 16",
+    "solucion_correcta": [
+      "8x + 6 = 6x + 16",
+      "8x - 6x + 6 = 16",
+      "2x + 6 = 16",
+      "2x = 16 - 6",
+      "2x = 10",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "8x + 6 = 6x + 16",
+      "8x - 6x + 6 = 16",
+      "2x + 6 = 16",
+      "x + 6 = 8",
+      "x = 8 - 6",
+      "x = 2"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "2x = 16 - 6",
+    "pista_referencia": "Si quieres dividir entre 2, debes dividir todos los términos de ambos lados; mejor pasa primero el 6.",
+    "notas": "Divide entre 2 el término 2x y el lado derecho, pero deja el +6 sin dividir."
+  },
+  {
+    "id": "AMP-053",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: (1/2)x + 2 = 11/4",
+    "solucion_correcta": [
+      "(1/2)x + 2 = 11/4",
+      "(1/2)x = 11/4 - 2",
+      "(1/2)x = 3/4",
+      "x = (3/4)/(1/2)",
+      "x = 3/4 * 2",
+      "x = 3/2"
+    ],
+    "resolucion_estudiante": [
+      "(1/2)x + 2 = 11/4",
+      "(1/2)x = 11/4 - 2",
+      "(1/2)x = 3/4",
+      "x = (3/4)/(1/2)",
+      "x = 3/8"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 3/4 * 2",
+    "pista_referencia": "Para dividir entre una fracción se multiplica por su recíproco; revisa cómo hiciste la división.",
+    "notas": "Al dividir 3/4 entre 1/2 multiplica las fracciones en lugar de multiplicar por el recíproco 2/1."
+  },
+  {
+    "id": "AMP-054",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 3x - 1.5 = 5.7",
+    "solucion_correcta": [
+      "3x - 1.5 = 5.7",
+      "3x = 5.7 + 1.5",
+      "3x = 7.2",
+      "x = 7.2/3",
+      "x = 2.4"
+    ],
+    "resolucion_estudiante": [
+      "3x - 1.5 = 5.7",
+      "3x = 5.7 + 1.5",
+      "3x = 7.2",
+      "x = 7.2/3",
+      "x = 24"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 2.4",
+    "pista_referencia": "Al dividir un decimal entre un entero, el punto decimal del cociente va en la misma posición que en el dividendo.",
+    "notas": "Divide 72 entre 3 correctamente pero olvida colocar el punto decimal y escribe 24 en lugar de 2.4."
+  },
+  {
+    "id": "AMP-055",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 39x - 5 = 8",
+    "solucion_correcta": [
+      "39x - 5 = 8",
+      "39x = 8 + 5",
+      "39x = 13",
+      "x = 13/39",
+      "x = 1/3"
+    ],
+    "resolucion_estudiante": [
+      "39x - 5 = 8",
+      "39x = 8 + 5",
+      "39x = 13",
+      "x = 13/39",
+      "x = 1/9"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 1/3",
+    "pista_referencia": "Para simplificar una fracción divides el numerador y el denominador entre el mismo número, no tachas cifras iguales.",
+    "notas": "Simplifica 13/39 tachando el dígito 3 que aparece arriba y abajo, y obtiene 1/9."
+  },
+  {
+    "id": "AMP-056",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: x/10 + 2 = 5.6",
+    "solucion_correcta": [
+      "x/10 + 2 = 5.6",
+      "x/10 = 5.6 - 2",
+      "x/10 = 3.6",
+      "x = 3.6 * 10",
+      "x = 36"
+    ],
+    "resolucion_estudiante": [
+      "x/10 + 2 = 5.6",
+      "x/10 = 5.6 - 2",
+      "x/10 = 3.6",
+      "x = 3.6 * 10",
+      "x = 0.36"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 36",
+    "pista_referencia": "Al multiplicar por 10, el número se hace más grande: ¿hacia qué lado debe moverse el punto decimal?",
+    "notas": "Al multiplicar 3.6 por 10 corre el punto decimal hacia la izquierda en lugar de hacia la derecha."
+  },
+  {
+    "id": "AMP-057",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 3(2x - 1) = 15",
+    "solucion_correcta": [
+      "3(2x - 1) = 15",
+      "2x - 1 = 15/3",
+      "2x - 1 = 5",
+      "2x = 6",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "3(2x - 1) = 15",
+      "2x - 1 = 15/2",
+      "2x = 15/2 + 1",
+      "2x = 17/2",
+      "x = 17/4"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x - 1 = 15/3",
+    "pista_referencia": "El número que multiplica a todo el paréntesis es el 3; ese es el que pasa a dividir para quitarlo.",
+    "notas": "Para quitar el paréntesis divide el lado derecho entre 2, el coeficiente de x de adentro, en vez de entre el factor 3."
+  },
+  {
+    "id": "AMP-058",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 7x + 2 = 32",
+    "solucion_correcta": [
+      "7x + 2 = 32",
+      "7x = 32 - 2",
+      "7x = 30",
+      "x = 30/7"
+    ],
+    "resolucion_estudiante": [
+      "7x + 2 = 32",
+      "7x = 32 - 2",
+      "7x = 30",
+      "x = 30/6",
+      "x = 5"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 30/7",
+    "pista_referencia": "La solución no tiene que ser un número entero; divide entre el coeficiente real aunque la división no sea exacta.",
+    "notas": "Como 30 no es divisible entre 7, divide entre 6 para obtener un resultado exacto."
+  },
+  {
+    "id": "AMP-059",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: x + 4x - 3 = 22",
+    "solucion_correcta": [
+      "x + 4x - 3 = 22",
+      "x + 4x = 22 + 3",
+      "x + 4x = 25",
+      "5x = 25",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "x + 4x - 3 = 22",
+      "x + 4x = 22 + 3",
+      "x + 4x = 25",
+      "x = 25/4"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "5x = 25",
+    "pista_referencia": "Antes de dividir, junta todos los términos con x; la x sola también cuenta como 1x.",
+    "notas": "Divide entre 4, el coeficiente de uno solo de los términos con x, sin haber sumado x + 4x."
+  },
+  {
+    "id": "AMP-060",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "variante_nueva",
+    "enunciado": "Resuelve: 2x + 5 = x + 20",
+    "solucion_correcta": [
+      "2x + 5 = x + 20",
+      "2x - x + 5 = 20",
+      "x + 5 = 20",
+      "x = 20 - 5",
+      "x = 15"
+    ],
+    "resolucion_estudiante": [
+      "2x + 5 = x + 20",
+      "2x - x + 5 = 20",
+      "x + 5 = 20",
+      "x = 20/5",
+      "x = 4"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 20 - 5",
+    "pista_referencia": "El 5 está sumando a la x, no multiplicándola; piensa cuál es la operación inversa de la suma.",
+    "notas": "Divide entre 5, que está sumando a la x, en lugar de restarlo; el coeficiente de x es 1."
+  },
+  {
+    "id": "AMP-061",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: 4x + 7 = 2x + 19",
+    "solucion_correcta": [
+      "4x + 7 = 2x + 19",
+      "4x - 2x + 7 = 19",
+      "4x - 2x = 19 - 7",
+      "2x = 12",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "4x + 7 = 2x + 19",
+      "4x - 2x + 7 = 19",
+      "4x - 2x = 18 - 7",
+      "2x = 11",
+      "x = 11/2"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "4x - 2x = 19 - 7",
+    "pista_referencia": "Compara con cuidado los números de este paso con los del paso anterior; alguno cambió al copiarlo.",
+    "notas": "Error de transcripción: al copiar el paso anterior escribe 18 en lugar de 19."
+  },
+  {
+    "id": "AMP-062",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: 5x + 3 - x = 2x + 11",
+    "solucion_correcta": [
+      "5x + 3 - x = 2x + 11",
+      "5x - x - 2x = 11 - 3",
+      "2x = 8",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "5x + 3 - x = 2x + 11",
+      "5x - 2x = 11 - 3",
+      "3x = 8",
+      "x = 8/3"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "5x - x - 2x = 11 - 3",
+    "pista_referencia": "Cuenta cuántos términos con x había en el paso anterior y cuántos escribiste ahora.",
+    "notas": "Omite el término -x al reescribir la ecuación; simplemente lo olvida."
+  },
+  {
+    "id": "AMP-063",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: 6x - 5 = 2x + 7",
+    "solucion_correcta": [
+      "6x - 5 = 2x + 7",
+      "6x - 5 - 2x = 7",
+      "6x - 2x = 7 + 5",
+      "4x = 12",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "6x - 5 = 2x + 7",
+      "6x - 5 - 2x = 7",
+      "6x - 2 = 7 + 5",
+      "6x = 12 + 2",
+      "6x = 14",
+      "x = 7/3"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "6x - 2x = 7 + 5",
+    "pista_referencia": "Revisa el término -2x: al copiarlo, ¿conservó su x?",
+    "notas": "Al reescribir el paso pierde la x del término -2x y lo convierte en la constante -2."
+  },
+  {
+    "id": "AMP-064",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: (x + 5)/5 + 2 = 5",
+    "solucion_correcta": [
+      "(x + 5)/5 + 2 = 5",
+      "(x + 5)/5 = 5 - 2",
+      "(x + 5)/5 = 3",
+      "x + 5 = 15",
+      "x = 10"
+    ],
+    "resolucion_estudiante": [
+      "(x + 5)/5 + 2 = 5",
+      "(x + 5)/5 = 5 - 2",
+      "(x + 5)/5 = 3",
+      "x = 3"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x + 5 = 15",
+    "pista_referencia": "Solo puedes simplificar factores que multiplican a todo el numerador; el 5 de arriba está sumando.",
+    "notas": "Cancela mal la fracción: tacha el 5 que suma en el numerador con el 5 del denominador."
+  },
+  {
+    "id": "AMP-065",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: x/2 + 3 = 7",
+    "solucion_correcta": [
+      "x/2 + 3 = 7",
+      "x/2 = 7 - 3",
+      "x/2 = 4",
+      "x = 8"
+    ],
+    "resolucion_estudiante": [
+      "x/2 + 3 = 7",
+      "x/5 = 7",
+      "x = 35"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "x/2 = 7 - 3",
+    "pista_referencia": "El 3 no está en el denominador: primero se divide x entre 2 y después se suma 3.",
+    "notas": "Error de orden de operaciones: lee x/2 + 3 como x/(2 + 3) y suma el 3 al denominador."
+  },
+  {
+    "id": "AMP-066",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: (2/3)x - 1 = 5",
+    "solucion_correcta": [
+      "(2/3)x - 1 = 5",
+      "(2/3)x = 5 + 1",
+      "(2/3)x = 6",
+      "2x = 18",
+      "x = 9"
+    ],
+    "resolucion_estudiante": [
+      "(2/3)x - 1 = 5",
+      "(2/3)x = 5 + 1",
+      "(3/2)x = 6",
+      "3x = 12",
+      "x = 4"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "(2/3)x = 6",
+    "pista_referencia": "Mira el coeficiente de x en el paso anterior y compáralo con el que escribiste ahora.",
+    "notas": "Al copiar el término invierte la fracción del coeficiente y escribe 3/2 en lugar de 2/3."
+  },
+  {
+    "id": "AMP-067",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: 2.9x + 1 = 6.8",
+    "solucion_correcta": [
+      "2.9x + 1 = 6.8",
+      "2.9x = 6.8 - 1",
+      "2.9x = 5.8",
+      "x = 5.8/2.9",
+      "x = 2"
+    ],
+    "resolucion_estudiante": [
+      "2.9x + 1 = 6.8",
+      "2.9x = 6.8 - 1",
+      "2.9x = 5.8",
+      "3x = 5.8",
+      "x = 58/30",
+      "x = 29/15"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 5.8/2.9",
+    "pista_referencia": "En una ecuación no puedes redondear un coeficiente; trabaja con el 2.9 exacto.",
+    "notas": "Redondea el coeficiente 2.9 a 3 para facilitar la división, cambiando la ecuación."
+  },
+  {
+    "id": "AMP-068",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: x - 4 * 2 = 10",
+    "solucion_correcta": [
+      "x - 4 * 2 = 10",
+      "x - 8 = 10",
+      "x = 10 + 8",
+      "x = 18"
+    ],
+    "resolucion_estudiante": [
+      "x - 4 * 2 = 10",
+      "2x - 8 = 10",
+      "2x = 18",
+      "x = 9"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "x - 8 = 10",
+    "pista_referencia": "El 2 solo multiplica al 4, porque no hay paréntesis; la x no se multiplica.",
+    "notas": "Error de orden de operaciones: interpreta x - 4 * 2 como (x - 4) * 2 y multiplica también la x."
+  },
+  {
+    "id": "AMP-069",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: 7x - 3 = 4x + 5 + 4",
+    "solucion_correcta": [
+      "7x - 3 = 4x + 5 + 4",
+      "7x - 3 = 4x + 9",
+      "7x - 4x = 9 + 3",
+      "3x = 12",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "7x - 3 = 4x + 5 + 4",
+      "7x - 3 = 4x + 9",
+      "7x - 4x - 4x = 9 + 3",
+      "-x = 12",
+      "x = -12"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "7x - 4x = 9 + 3",
+    "pista_referencia": "Cada término se pasa una sola vez; revisa si escribiste alguno de más.",
+    "notas": "Escribe dos veces el término -4x al pasarlo al lado izquierdo, duplicándolo."
+  },
+  {
+    "id": "AMP-070",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: 5x - 13 = 22",
+    "solucion_correcta": [
+      "5x - 13 = 22",
+      "5x = 22 + 13",
+      "5x = 35",
+      "x = 7"
+    ],
+    "resolucion_estudiante": [
+      "5x - 13 = 22",
+      "x + 5 - 13 = 22",
+      "x - 8 = 22",
+      "x = 22 + 8",
+      "x = 30"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "5x = 22 + 13",
+    "pista_referencia": "Recuerda que 5x significa 5 por x, no 5 más x.",
+    "notas": "Interpreta 5x como x + 5, confundiendo la multiplicación implícita con una suma."
+  },
+  {
+    "id": "AMP-071",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "combinado",
+    "enunciado": "Resuelve: 3(x - 2) = x + 4",
+    "solucion_correcta": [
+      "3(x - 2) = x + 4",
+      "3x - 6 - x = 4",
+      "2x - 6 = 4",
+      "2x = 10",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "3(x - 2) = x + 4",
+      "3x - 2 + x = 4",
+      "4x - 2 = 4",
+      "4x = 4 + 2",
+      "4x = 6",
+      "x = 3/2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "3x - 6 - x = 4",
+    "pista_referencia": "En este paso hay dos cosas que revisar: cómo multiplicaste el 3 y el signo de la x que pasaste a la izquierda.",
+    "notas": "Combina distributiva_incorrecta (no multiplica el -2 por 3) y error_signo (pasa la x a la izquierda sin cambiarle el signo)."
+  },
+  {
+    "id": "AMP-072",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "combinado",
+    "enunciado": "Resuelve: 7x - 4 = 3x + 5 + 3",
+    "solucion_correcta": [
+      "7x - 4 = 3x + 5 + 3",
+      "7x - 4 = 3x + 8",
+      "4x = 8 + 4",
+      "4x = 12",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "7x - 4 = 3x + 5 + 3",
+      "7x - 4 = 3x + 8",
+      "5x = 8 - 4",
+      "5x = 4",
+      "x = 4/5"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "4x = 8 + 4",
+    "pista_referencia": "Revisa la resta de los coeficientes de x y también el signo del -4 al pasarlo al otro lado.",
+    "notas": "Combina simplificacion_aritmetica (calcula 7x - 3x como 5x) y error_signo (pasa el -4 sin cambiarle el signo)."
+  },
+  {
+    "id": "AMP-073",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "combinado",
+    "enunciado": "Resuelve: x/4 - 2 = 5",
+    "solucion_correcta": [
+      "x/4 - 2 = 5",
+      "x - 8 = 20",
+      "x = 20 + 8",
+      "x = 28"
+    ],
+    "resolucion_estudiante": [
+      "x/4 - 2 = 5",
+      "x - 2 = 24",
+      "x = 24 + 2",
+      "x = 26"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "x - 8 = 20",
+    "pista_referencia": "Al multiplicar por 4 hazlo con todos los términos, y revisa también el resultado de 5 por 4.",
+    "notas": "Combina operacion_un_lado (multiplica por 4 pero deja el -2 sin multiplicar) y simplificacion_aritmetica (calcula 5 * 4 = 24)."
+  },
+  {
+    "id": "AMP-074",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "combinado",
+    "enunciado": "Resuelve: 5x - 2(x + 4) = 10",
+    "solucion_correcta": [
+      "5x - 2(x + 4) = 10",
+      "3x - 8 = 10",
+      "3x = 18",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "5x - 2(x + 4) = 10",
+      "4x + 8 = 10",
+      "4x = 2",
+      "x = 1/2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "3x - 8 = 10",
+    "pista_referencia": "Revisa el signo de -2 por 4 y también la resta de 5x - 2x.",
+    "notas": "Combina distributiva_incorrecta (escribe -2 * 4 como +8) y simplificacion_aritmetica (calcula 5x - 2x como 4x)."
+  },
+  {
+    "id": "AMP-075",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "combinado",
+    "enunciado": "Resuelve: 5x + 6 = 2x + 21",
+    "solucion_correcta": [
+      "5x + 6 = 2x + 21",
+      "5x - 2x + 6 = 21",
+      "3x + 6 = 21",
+      "x = (21 - 6)/3",
+      "x = 15/3",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "5x + 6 = 2x + 21",
+      "5x - 2x + 6 = 21",
+      "3x + 6 = 21",
+      "x = (21 + 6)/2",
+      "x = 27/2"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = (21 - 6)/3",
+    "pista_referencia": "Al despejar en un solo paso, revisa el signo con que pasa el 6 y entre qué número divides.",
+    "notas": "Combina error_signo (pasa el +6 sin cambiarle el signo) y division_coeficiente_equivocado (divide entre 2 en vez de 3)."
+  },
+  {
+    "id": "AMP-076",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "combinado",
+    "enunciado": "Resuelve: x/3 - 4 = 7 - 5",
+    "solucion_correcta": [
+      "x/3 - 4 = 7 - 5",
+      "x/3 - 4 = 2",
+      "x/3 = 2 + 4",
+      "x/3 = 6",
+      "x = 18"
+    ],
+    "resolucion_estudiante": [
+      "x/3 - 4 = 7 - 5",
+      "x/3 - 4 = 2",
+      "x = 2 - 4",
+      "x = -2"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "x/3 = 2 + 4",
+    "pista_referencia": "Revisa qué pasó con el denominador 3 y con el signo del -4 al pasarlo al otro lado.",
+    "notas": "Combina operacion_un_lado (quita el denominador 3 sin multiplicar el otro lado) y error_signo (pasa el -4 sin cambiarle el signo)."
+  },
+  {
+    "id": "AMP-077",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "combinado",
+    "enunciado": "Resuelve: 2(x + 1)/3 = 4",
+    "solucion_correcta": [
+      "2(x + 1)/3 = 4",
+      "2(x + 1) = 12",
+      "2x + 2 = 12",
+      "2x = 10",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "2(x + 1)/3 = 4",
+      "2x + 1 = 4",
+      "2x = 3",
+      "x = 3/2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2(x + 1) = 12",
+    "pista_referencia": "Quita primero el denominador multiplicando ambos lados por 3, y luego multiplica el 2 por cada término del paréntesis.",
+    "notas": "Combina operacion_un_lado (elimina el denominador 3 sin multiplicar el 4) y distributiva_incorrecta (no multiplica el 1 por 2)."
+  },
+  {
+    "id": "AMP-078",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "combinado",
+    "enunciado": "Resuelve: 4x - 3 = 2x + 9",
+    "solucion_correcta": [
+      "4x - 3 = 2x + 9",
+      "4x - 2x = 9 + 3",
+      "2x = 9 + 3",
+      "x = 12/2",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "4x - 3 = 2x + 9",
+      "4x - 2x = 9 + 3",
+      "2x = 9 + 3",
+      "x = 13/3"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 12/2",
+    "pista_referencia": "Revisa la suma 9 + 3 y también cuál es el coeficiente de x antes de dividir.",
+    "notas": "Combina simplificacion_aritmetica (suma 9 + 3 = 13) y division_coeficiente_equivocado (divide entre 3 en vez de 2)."
+  },
+  {
+    "id": "AMP-079",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "combinado",
+    "enunciado": "Resuelve: 5x - 10 = 20",
+    "solucion_correcta": [
+      "5x - 10 = 20",
+      "5x = 20 + 10",
+      "x = (20 + 10)/5",
+      "x = 30/5",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "5x - 10 = 20",
+      "5x = 20 + 10",
+      "x = 20/4 + 10",
+      "x = 5 + 10",
+      "x = 15"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "x = (20 + 10)/5",
+    "pista_referencia": "Al dividir, todo el lado derecho se divide, y el divisor debe ser el coeficiente de x.",
+    "notas": "Combina operacion_un_lado (divide solo el 20 y no el 10) y division_coeficiente_equivocado (divide entre 4 en vez de 5)."
+  },
+  {
+    "id": "AMP-080",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "combinado",
+    "enunciado": "Resuelve: 4x - (x + 5) = x + 3",
+    "solucion_correcta": [
+      "4x - (x + 5) = x + 3",
+      "4x - x - 5 - x = 3",
+      "2x - 5 = 3",
+      "2x = 8",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "4x - (x + 5) = x + 3",
+      "4x - x + 5 + x = 3",
+      "4x + 5 = 3",
+      "4x = 3 - 5",
+      "4x = -2",
+      "x = -1/2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "4x - x - 5 - x = 3",
+    "pista_referencia": "Revisa los signos al quitar el paréntesis precedido de menos y el signo de la x que pasaste al lado izquierdo.",
+    "notas": "Combina distributiva_incorrecta (con el menos delante del paréntesis deja +5) y error_signo (pasa la x de la derecha sin cambiarle el signo)."
+  },
+  {
+    "id": "AMP-081",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: -1.2x + 3.5 = -0.4x - 1.3",
+    "solucion_correcta": [
+      "-1.2x + 3.5 = -0.4x - 1.3",
+      "-1.2x + 0.4x = -1.3 - 3.5",
+      "-0.8x = -4.8",
+      "x = 6"
+    ],
+    "resolucion_estudiante": [
+      "-1.2x + 3.5 = -0.4x - 1.3",
+      "-1.2x - 0.4x = -1.3 - 3.5",
+      "-1.6x = -4.8",
+      "x = 3"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "-1.2x + 0.4x = -1.3 - 3.5",
+    "pista_referencia": "Revisa el signo del -0.4x al pasarlo al lado izquierdo.",
+    "notas": "Pasa el término -0.4x al lado izquierdo sin cambiarle el signo."
+  },
+  {
+    "id": "AMP-082",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: (x - 2)/3 + (x + 1)/4 = 5/6",
+    "solucion_correcta": [
+      "(x - 2)/3 + (x + 1)/4 = 5/6",
+      "4(x - 2) + 3(x + 1) = 10",
+      "4x - 8 + 3x + 3 = 10",
+      "7x - 5 = 10",
+      "7x = 10 + 5",
+      "7x = 15",
+      "x = 15/7"
+    ],
+    "resolucion_estudiante": [
+      "(x - 2)/3 + (x + 1)/4 = 5/6",
+      "4(x - 2) + 3(x + 1) = 10",
+      "4x - 8 + 3x + 3 = 10",
+      "7x - 5 = 10",
+      "7x = 10 - 5",
+      "7x = 5",
+      "x = 5/7"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "7x = 10 + 5",
+    "pista_referencia": "Ya quitaste bien los denominadores; ahora revisa el signo del -5 al pasarlo al otro lado.",
+    "notas": "Pasa el -5 al lado derecho sin cambiarle el signo."
+  },
+  {
+    "id": "AMP-083",
+    "categoria_propuesta": "error_signo",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: 2(3 - (x - 4)) = x + 5",
+    "solucion_correcta": [
+      "2(3 - (x - 4)) = x + 5",
+      "2(3 - x + 4) = x + 5",
+      "2(7 - x) = x + 5",
+      "14 - 2x = x + 5",
+      "-2x - x = 5 - 14",
+      "-3x = -9",
+      "x = 3"
+    ],
+    "resolucion_estudiante": [
+      "2(3 - (x - 4)) = x + 5",
+      "2(3 - x + 4) = x + 5",
+      "2(7 - x) = x + 5",
+      "14 - 2x = x + 5",
+      "-2x - x = 5 + 14",
+      "-3x = 19",
+      "x = -19/3"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "-2x - x = 5 - 14",
+    "pista_referencia": "Los paréntesis están bien resueltos; fíjate en el signo del 14 cuando lo pasas a la derecha.",
+    "notas": "Pasa el +14 al lado derecho sin cambiarle el signo."
+  },
+  {
+    "id": "AMP-084",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: 3x - 2(4 - (x + 1)) = 10",
+    "solucion_correcta": [
+      "3x - 2(4 - (x + 1)) = 10",
+      "3x - 2(4 - x - 1) = 10",
+      "3x - 2(3 - x) = 10",
+      "3x - 6 + 2x = 10",
+      "5x - 6 = 10",
+      "5x = 16",
+      "x = 16/5"
+    ],
+    "resolucion_estudiante": [
+      "3x - 2(4 - (x + 1)) = 10",
+      "3x - 2(4 - x - 1) = 10",
+      "3x - 2(3 - x) = 10",
+      "3x - 6 - 2x = 10",
+      "x - 6 = 10",
+      "x = 16"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "3x - 6 + 2x = 10",
+    "pista_referencia": "Al multiplicar -2 por -x, recuerda la ley de signos: menos por menos da más.",
+    "notas": "Al distribuir -2 sobre (3 - x) escribe -2x en lugar de +2x."
+  },
+  {
+    "id": "AMP-085",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: -0.5(4x - 6) = -3x + 7",
+    "solucion_correcta": [
+      "-0.5(4x - 6) = -3x + 7",
+      "-2x + 3 = -3x + 7",
+      "-2x + 3x = 7 - 3",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "-0.5(4x - 6) = -3x + 7",
+      "-2x - 3 = -3x + 7",
+      "-2x + 3x = 7 + 3",
+      "x = 10"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "-2x + 3 = -3x + 7",
+    "pista_referencia": "El -0.5 multiplica también al -6; revisa el signo de ese producto.",
+    "notas": "Al multiplicar -0.5 por -6 escribe -3 en lugar de +3."
+  },
+  {
+    "id": "AMP-086",
+    "categoria_propuesta": "distributiva_incorrecta",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: x/2 - (x - 3)/5 = 3",
+    "solucion_correcta": [
+      "x/2 - (x - 3)/5 = 3",
+      "5x - 2(x - 3) = 30",
+      "5x - 2x + 6 = 30",
+      "3x + 6 = 30",
+      "3x = 24",
+      "x = 8"
+    ],
+    "resolucion_estudiante": [
+      "x/2 - (x - 3)/5 = 3",
+      "5x - 2(x - 3) = 30",
+      "5x - 2x - 6 = 30",
+      "3x - 6 = 30",
+      "3x = 36",
+      "x = 12"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "5x - 2x + 6 = 30",
+    "pista_referencia": "El signo menos que estaba delante de la fracción ahora acompaña al 2; multiplica -2 por cada término del paréntesis.",
+    "notas": "Al distribuir -2 sobre (x - 3) escribe -6 en lugar de +6."
+  },
+  {
+    "id": "AMP-087",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: 0.4(x + 5) = 0.2x + 3",
+    "solucion_correcta": [
+      "0.4(x + 5) = 0.2x + 3",
+      "0.4x + 2 = 0.2x + 3",
+      "4x + 20 = 2x + 30",
+      "4x - 2x = 30 - 20",
+      "2x = 10",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "0.4(x + 5) = 0.2x + 3",
+      "0.4x + 2 = 0.2x + 3",
+      "4x + 20 = 0.2x + 3",
+      "4x - 0.2x = 3 - 20",
+      "3.8x = -17",
+      "x = -17/3.8"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "4x + 20 = 2x + 30",
+    "pista_referencia": "Multiplicaste por 10 para quitar los decimales; el lado derecho también debe multiplicarse por 10.",
+    "notas": "Multiplica por 10 solo el lado izquierdo para eliminar los decimales."
+  },
+  {
+    "id": "AMP-088",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: (2x + 1)/3 - (x - 4)/2 = 1",
+    "solucion_correcta": [
+      "(2x + 1)/3 - (x - 4)/2 = 1",
+      "2(2x + 1) - 3(x - 4) = 6",
+      "4x + 2 - 3x + 12 = 6",
+      "x + 14 = 6",
+      "x = 6 - 14",
+      "x = -8"
+    ],
+    "resolucion_estudiante": [
+      "(2x + 1)/3 - (x - 4)/2 = 1",
+      "2(2x + 1) - 3(x - 4) = 1",
+      "4x + 2 - 3x + 12 = 1",
+      "x + 14 = 1",
+      "x = 1 - 14",
+      "x = -13"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2(2x + 1) - 3(x - 4) = 6",
+    "pista_referencia": "Al multiplicar por 6 para quitar los denominadores, el 1 del lado derecho también se multiplica.",
+    "notas": "Multiplica el lado izquierdo por 6 para quitar los denominadores pero deja el 1 de la derecha sin multiplicar."
+  },
+  {
+    "id": "AMP-089",
+    "categoria_propuesta": "operacion_un_lado",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: -7x + 4 = -3x - 12",
+    "solucion_correcta": [
+      "-7x + 4 = -3x - 12",
+      "-7x + 3x + 4 = -12",
+      "-4x + 4 = -12",
+      "-4x = -12 - 4",
+      "-4x = -16",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "-7x + 4 = -3x - 12",
+      "-7x + 3x + 4 = -12",
+      "-4x + 4 = -12",
+      "-4x = -12",
+      "x = 3"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "-4x = -12 - 4",
+    "pista_referencia": "Para quitar el +4 de la izquierda le restaste 4; esa resta también debe hacerse a la derecha.",
+    "notas": "Elimina el +4 del lado izquierdo restándolo solo en ese lado y deja el -12 igual."
+  },
+  {
+    "id": "AMP-090",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: 1.5x - 2.25 = 3.5x + 0.75",
+    "solucion_correcta": [
+      "1.5x - 2.25 = 3.5x + 0.75",
+      "1.5x - 3.5x = 0.75 + 2.25",
+      "-2x = 3",
+      "x = -3/2"
+    ],
+    "resolucion_estudiante": [
+      "1.5x - 2.25 = 3.5x + 0.75",
+      "1.5x - 3.5x = 0.75 + 2.25",
+      "2x = 3",
+      "x = 3/2"
+    ],
+    "indice_paso_erroneo": 2,
+    "correccion_esperada": "-2x = 3",
+    "pista_referencia": "Revisa la resta 1.5x - 3.5x: si restas un número mayor, ¿qué signo tiene el resultado?",
+    "notas": "Calcula 1.5x - 3.5x como 2x en lugar de -2x."
+  },
+  {
+    "id": "AMP-091",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: 5 - 2(3x - (x - 4)) = 1",
+    "solucion_correcta": [
+      "5 - 2(3x - (x - 4)) = 1",
+      "5 - 2(3x - x + 4) = 1",
+      "5 - 2(2x + 4) = 1",
+      "5 - 4x - 8 = 1",
+      "-3 - 4x = 1",
+      "-4x = 4",
+      "x = -1"
+    ],
+    "resolucion_estudiante": [
+      "5 - 2(3x - (x - 4)) = 1",
+      "5 - 2(3x - x + 4) = 1",
+      "5 - 2(2x + 4) = 1",
+      "5 - 4x - 8 = 1",
+      "3 - 4x = 1",
+      "-4x = -2",
+      "x = 1/2"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "-3 - 4x = 1",
+    "pista_referencia": "Revisa la operación 5 - 8: el resultado es negativo.",
+    "notas": "Calcula 5 - 8 como 3 en lugar de -3."
+  },
+  {
+    "id": "AMP-092",
+    "categoria_propuesta": "simplificacion_aritmetica",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: (x + 2)/4 = (2x - 1)/6",
+    "solucion_correcta": [
+      "(x + 2)/4 = (2x - 1)/6",
+      "6(x + 2) = 4(2x - 1)",
+      "6x + 12 = 8x - 4",
+      "6x - 8x = -4 - 12",
+      "-2x = -16",
+      "x = 8"
+    ],
+    "resolucion_estudiante": [
+      "(x + 2)/4 = (2x - 1)/6",
+      "6(x + 2) = 4(2x - 1)",
+      "6x + 12 = 8x - 4",
+      "6x - 8x = -4 - 12",
+      "-2x = -8",
+      "x = 4"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "-2x = -16",
+    "pista_referencia": "Revisa -4 - 12: cuando restas a un número negativo, el resultado se aleja más del cero.",
+    "notas": "Calcula -4 - 12 como -8 en lugar de -16."
+  },
+  {
+    "id": "AMP-093",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: -3(x + 2) = 5x - 4",
+    "solucion_correcta": [
+      "-3(x + 2) = 5x - 4",
+      "-3x - 6 = 5x - 4",
+      "-3x - 5x = -4 + 6",
+      "-8x = 2",
+      "x = 2/(-8)",
+      "x = -1/4"
+    ],
+    "resolucion_estudiante": [
+      "-3(x + 2) = 5x - 4",
+      "-3x - 6 = 5x - 4",
+      "-3x - 5x = -4 + 6",
+      "-8x = 2",
+      "x = 2/(-3)",
+      "x = -2/3"
+    ],
+    "indice_paso_erroneo": 4,
+    "correccion_esperada": "x = 2/(-8)",
+    "pista_referencia": "El coeficiente de x en este paso es -8; divide ambos lados entre ese número.",
+    "notas": "Divide entre -3, el factor del enunciado, en lugar de entre el coeficiente -8."
+  },
+  {
+    "id": "AMP-094",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: 0.6x - 1.5 = 0.2x + 0.5",
+    "solucion_correcta": [
+      "0.6x - 1.5 = 0.2x + 0.5",
+      "0.6x - 0.2x = 0.5 + 1.5",
+      "0.4x = 2",
+      "x = 2/0.4",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "0.6x - 1.5 = 0.2x + 0.5",
+      "0.6x - 0.2x = 0.5 + 1.5",
+      "0.4x = 2",
+      "x = 2/0.2",
+      "x = 10"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 2/0.4",
+    "pista_referencia": "El número que acompaña a la x ahora es 0.4; ese es el divisor.",
+    "notas": "Divide entre 0.2 en lugar de entre el coeficiente 0.4."
+  },
+  {
+    "id": "AMP-095",
+    "categoria_propuesta": "division_coeficiente_equivocado",
+    "tipo_de_novedad": "estructura_nueva",
+    "enunciado": "Resuelve: 2x/3 + x/6 = -5",
+    "solucion_correcta": [
+      "2x/3 + x/6 = -5",
+      "4x + x = -30",
+      "5x = -30",
+      "x = -30/5",
+      "x = -6"
+    ],
+    "resolucion_estudiante": [
+      "2x/3 + x/6 = -5",
+      "4x + x = -30",
+      "5x = -30",
+      "x = -30/4",
+      "x = -15/2"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = -30/5",
+    "pista_referencia": "Antes de dividir, mira cuál es el coeficiente total de x después de juntar 4x + x.",
+    "notas": "Divide entre 4 en lugar de entre el coeficiente 5."
+  },
+  {
+    "id": "AMP-096",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: (x + 3)/2 = 2x - 6",
+    "solucion_correcta": [
+      "(x + 3)/2 = 2x - 6",
+      "x + 3 = 4x - 12",
+      "x - 4x = -12 - 3",
+      "-3x = -15",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "(x + 3)/2 = 2x - 6",
+      "x + 3/2 = 2x - 6",
+      "x - 2x = -6 - 3/2",
+      "-x = -15/2",
+      "x = 15/2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "x + 3 = 4x - 12",
+    "pista_referencia": "El paréntesis indica que el 2 divide a todo x + 3; no lo borres al copiar.",
+    "notas": "Al copiar la ecuación quita el paréntesis del numerador y el 2 pasa a dividir solo al 3."
+  },
+  {
+    "id": "AMP-097",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: x/2 + 1 = 3/4",
+    "solucion_correcta": [
+      "x/2 + 1 = 3/4",
+      "x/2 = 3/4 - 1",
+      "x/2 = -1/4",
+      "x = -1/2"
+    ],
+    "resolucion_estudiante": [
+      "x/2 + 1 = 3/4",
+      "4x + 1 = 6",
+      "4x = 5",
+      "x = 5/4"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "x/2 = 3/4 - 1",
+    "pista_referencia": "La multiplicación en cruz solo sirve cuando cada lado es una sola fracción; aquí hay un +1 que lo impide.",
+    "notas": "Aplica multiplicación en cruz entre x/2 y 3/4 aunque el lado izquierdo tiene además el término +1, que copia sin cambios."
+  },
+  {
+    "id": "AMP-098",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: x + 2x - 4 = 11",
+    "solucion_correcta": [
+      "x + 2x - 4 = 11",
+      "3x - 4 = 11",
+      "3x = 15",
+      "x = 5"
+    ],
+    "resolucion_estudiante": [
+      "x + 2x - 4 = 11",
+      "1 + 2x - 4 = 11",
+      "2x - 3 = 11",
+      "2x = 14",
+      "x = 7"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "3x - 4 = 11",
+    "pista_referencia": "Que la x no tenga número delante significa que su coeficiente es 1, no que la x valga 1.",
+    "notas": "Reemplaza la x sola por el número 1, confundiendo coeficiente 1 con valor 1."
+  },
+  {
+    "id": "AMP-099",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: x/4 + 2 = 5",
+    "solucion_correcta": [
+      "x/4 + 2 = 5",
+      "x/4 = 5 - 2",
+      "x/4 = 3",
+      "x = 12"
+    ],
+    "resolucion_estudiante": [
+      "x/4 + 2 = 5",
+      "x/4 = 5 - 2",
+      "x/4 = 3",
+      "x - 4 = 3",
+      "x = 7"
+    ],
+    "indice_paso_erroneo": 3,
+    "correccion_esperada": "x = 12",
+    "pista_referencia": "La raya de fracción significa dividir, no restar; piensa qué operación deshace una división.",
+    "notas": "Interpreta la raya de fracción x/4 como una resta y escribe x - 4."
+  },
+  {
+    "id": "AMP-100",
+    "categoria_propuesta": "indeterminado",
+    "tipo_de_novedad": "fuera_de_taxonomia",
+    "enunciado": "Resuelve: 3 + x/2 = 5",
+    "solucion_correcta": [
+      "3 + x/2 = 5",
+      "x/2 = 5 - 3",
+      "x/2 = 2",
+      "x = 4"
+    ],
+    "resolucion_estudiante": [
+      "3 + x/2 = 5",
+      "3 + x = 10",
+      "x = 10 - 3",
+      "x = 7"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "x/2 = 5 - 3",
+    "pista_referencia": "El 2 solo divide a la x, no al 3; no hay paréntesis que agrupe 3 + x.",
+    "notas": "Error de orden de operaciones: lee 3 + x/2 como (3 + x)/2 y multiplica todo por 2 sin multiplicar el 3."
+  }
+]

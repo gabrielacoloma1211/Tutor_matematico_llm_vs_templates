@@ -5,8 +5,10 @@ Pruebas del benchmark
    (se valida con el verificador determinista).
 2) El propio validador debe detectar casos mal construidos; si no lo hiciera,
    un caso con errores podría ser incluido en el benchmark.
+
+Los casos mal construidos (copias de un ejemplo con un defecto cada una) están
+en tests/datos/casos_mal_armados.json.
 """
-import copy
 from collections import Counter
 
 import pytest
@@ -19,6 +21,7 @@ from benchmark.validar_casos import (
     cargar_casos,
     validar_caso,
 )
+from tests.datos import cargar
 
 DIR_DEV = RAIZ / "benchmark" / "casos" / "dev"
 DIR_TEST = RAIZ / "benchmark" / "casos" / "test"
@@ -96,64 +99,12 @@ def test_los_ejemplos_cubren_todas_las_categorias():
     assert {c["categoria"] for _, c in CASOS_EJEMPLO} == set(CATEGORIAS)
 
 
-@pytest.fixture
-def caso_valido():
-    # primer ejemplo (error de signo), copiado para poder modificarlo
-    return copy.deepcopy(CASOS_EJEMPLO[0][1])
+DEFECTOS = cargar("casos_mal_armados")
 
 
-def test_detecta_paso_marcado_como_erroneo_que_en_realidad_es_valido(caso_valido):
-    i = caso_valido["indice_paso_erroneo"]
-    caso_valido["resolucion_estudiante"][i] = caso_valido["correccion_esperada"]
-    errores = validar_caso(caso_valido)
-    assert any("VÁLIDO" in e for e in errores)
-
-
-def test_detecta_error_en_un_paso_que_no_es_el_marcado(caso_valido):
-    caso_valido["indice_paso_erroneo"] += 1  # el error real queda un paso antes
-    assert validar_caso(caso_valido) != []
-
-
-def test_detecta_correccion_esperada_invalida(caso_valido):
-    i = caso_valido["indice_paso_erroneo"]
-    caso_valido["correccion_esperada"] = caso_valido["resolucion_estudiante"][i]  # el paso con error
-    errores = validar_caso(caso_valido)
-    assert any("correccion_esperada" in e for e in errores)
-
-
-def test_detecta_solucion_correcta_con_un_paso_invalido(caso_valido):
-    caso_valido["solucion_correcta"][2] = "6x = 8"
-    errores = validar_caso(caso_valido)
-    assert any("solucion_correcta" in e for e in errores)
-
-
-def test_detecta_campo_faltante(caso_valido):
-    del caso_valido["pista_referencia"]
-    errores = validar_caso(caso_valido)
-    assert any("faltan campos" in e for e in errores)
-
-
-def test_detecta_categoria_inexistente(caso_valido):
-    caso_valido["categoria"] = "error_inventado"
-    errores = validar_caso(caso_valido)
-    assert any("no existe en la taxonomía" in e for e in errores)
-
-
-def test_detecta_indice_fuera_de_rango(caso_valido):
-    caso_valido["indice_paso_erroneo"] = 99
-    assert validar_caso(caso_valido) != []
-
-
-def test_reporta_ecuacion_que_no_se_puede_interpretar(caso_valido):
-    caso_valido["solucion_correcta"][1] = "6x = = 3"
-    errores = validar_caso(caso_valido)
-    assert any("no se pudo interpretar" in e for e in errores)
-
-
-def test_detecta_caracteres_que_sympy_interpretaria_mal(caso_valido):
-    # el signo menos "−" (U+2212) que usa word, no da error de parseo
-    # en SymPy sino una interpretación incorrecta; el validador debe rechazarlo
-    caso_valido["solucion_correcta"][0] = "6x \u2212 4 = 3"
-    caso_valido["resolucion_estudiante"][0] = "6x \u2212 4 = 3"
-    errores = validar_caso(caso_valido)
-    assert any("caracteres no permitidos" in e for e in errores)
+@pytest.mark.parametrize("defecto", DEFECTOS, ids=[d["id"] for d in DEFECTOS])
+def test_el_validador_detecta_los_casos_mal_armados(defecto):
+    errores = validar_caso(defecto["caso"])
+    assert errores != [], defecto["descripcion"]
+    if defecto["error_esperado"]:
+        assert any(defecto["error_esperado"] in e for e in errores), defecto["descripcion"]

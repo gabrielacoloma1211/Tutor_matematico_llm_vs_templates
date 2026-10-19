@@ -1,0 +1,952 @@
+[
+  {
+    "id": "VAR-001",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: (x + 7)/4 = 2x/6",
+    "solucion_correcta": [
+      "(x + 7)/4 = 2x/6",
+      "6(x + 7) = 8x"
+    ],
+    "resolucion_estudiante": [
+      "(x + 7)/4 = 2x/6",
+      "x + 7 = 2x"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6(x + 7) = 8x",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-002",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: (x + 8)/3 = 2x/5",
+    "solucion_correcta": [
+      "(x + 8)/3 = 2x/5",
+      "5(x + 8) = 6x"
+    ],
+    "resolucion_estudiante": [
+      "(x + 8)/3 = 2x/5",
+      "x + 8 = 2x"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "5(x + 8) = 6x",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-003",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 5x/4 = (x - 3)/5",
+    "solucion_correcta": [
+      "5x/4 = (x - 3)/5",
+      "25x = 4(x - 3)"
+    ],
+    "resolucion_estudiante": [
+      "5x/4 = (x - 3)/5",
+      "5x = x - 3"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "25x = 4(x - 3)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-004",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: (x + 7)/5 = 4x/2",
+    "solucion_correcta": [
+      "(x + 7)/5 = 4x/2",
+      "2(x + 7) = 20x"
+    ],
+    "resolucion_estudiante": [
+      "(x + 7)/5 = 4x/2",
+      "x + 7 = 4x"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2(x + 7) = 20x",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-005",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 4x/5 = (x + 4)/2",
+    "solucion_correcta": [
+      "4x/5 = (x + 4)/2",
+      "8x = 5(x + 4)"
+    ],
+    "resolucion_estudiante": [
+      "4x/5 = (x + 4)/2",
+      "4x = x + 4"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "8x = 5(x + 4)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-006",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 6x/5 = (x + 3)/6",
+    "solucion_correcta": [
+      "6x/5 = (x + 3)/6",
+      "36x = 5(x + 3)"
+    ],
+    "resolucion_estudiante": [
+      "6x/5 = (x + 3)/6",
+      "6x = x + 3"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "36x = 5(x + 3)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-007",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: (x - 5)/3 = 2x/2",
+    "solucion_correcta": [
+      "(x - 5)/3 = 2x/2",
+      "2(x - 5) = 6x"
+    ],
+    "resolucion_estudiante": [
+      "(x - 5)/3 = 2x/2",
+      "x - 5 = 2x"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2(x - 5) = 6x",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-008",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 6x/2 = (x + 4)/5",
+    "solucion_correcta": [
+      "6x/2 = (x + 4)/5",
+      "30x = 2(x + 4)"
+    ],
+    "resolucion_estudiante": [
+      "6x/2 = (x + 4)/5",
+      "6x = x + 4"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "30x = 2(x + 4)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-009",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: (x + 5)/2 = 3x/5",
+    "solucion_correcta": [
+      "(x + 5)/2 = 3x/5",
+      "5(x + 5) = 6x"
+    ],
+    "resolucion_estudiante": [
+      "(x + 5)/2 = 3x/5",
+      "x + 5 = 3x"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "5(x + 5) = 6x",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-010",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: (x + 8)/4 = 6x/5",
+    "solucion_correcta": [
+      "(x + 8)/4 = 6x/5",
+      "5(x + 8) = 24x"
+    ],
+    "resolucion_estudiante": [
+      "(x + 8)/4 = 6x/5",
+      "x + 8 = 6x"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "5(x + 8) = 24x",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-011",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 3x/4 = (x - 1)/2",
+    "solucion_correcta": [
+      "3x/4 = (x - 1)/2",
+      "6x = 4(x - 1)"
+    ],
+    "resolucion_estudiante": [
+      "3x/4 = (x - 1)/2",
+      "3x = x - 1"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6x = 4(x - 1)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-012",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 4x/3 = (x - 1)/5",
+    "solucion_correcta": [
+      "4x/3 = (x - 1)/5",
+      "20x = 3(x - 1)"
+    ],
+    "resolucion_estudiante": [
+      "4x/3 = (x - 1)/5",
+      "4x = x - 1"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "20x = 3(x - 1)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-013",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: (x + 5)/4 = 5x/3",
+    "solucion_correcta": [
+      "(x + 5)/4 = 5x/3",
+      "3(x + 5) = 20x"
+    ],
+    "resolucion_estudiante": [
+      "(x + 5)/4 = 5x/3",
+      "x + 5 = 5x"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "3(x + 5) = 20x",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-014",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 5x/2 = (x - 1)/5",
+    "solucion_correcta": [
+      "5x/2 = (x - 1)/5",
+      "25x = 2(x - 1)"
+    ],
+    "resolucion_estudiante": [
+      "5x/2 = (x - 1)/5",
+      "5x = x - 1"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "25x = 2(x - 1)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-015",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 6x/2 = (x - 3)/3",
+    "solucion_correcta": [
+      "6x/2 = (x - 3)/3",
+      "18x = 2(x - 3)"
+    ],
+    "resolucion_estudiante": [
+      "6x/2 = (x - 3)/3",
+      "6x = x - 3"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "18x = 2(x - 3)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-016",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 2x/4 = (x + 2)/3",
+    "solucion_correcta": [
+      "2x/4 = (x + 2)/3",
+      "6x = 4(x + 2)"
+    ],
+    "resolucion_estudiante": [
+      "2x/4 = (x + 2)/3",
+      "2x = x + 2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6x = 4(x + 2)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-017",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 6x/5 = (x - 5)/6",
+    "solucion_correcta": [
+      "6x/5 = (x - 5)/6",
+      "36x = 5(x - 5)"
+    ],
+    "resolucion_estudiante": [
+      "6x/5 = (x - 5)/6",
+      "6x = x - 5"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "36x = 5(x - 5)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-018",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 6x/3 = (x + 7)/4",
+    "solucion_correcta": [
+      "6x/3 = (x + 7)/4",
+      "24x = 3(x + 7)"
+    ],
+    "resolucion_estudiante": [
+      "6x/3 = (x + 7)/4",
+      "6x = x + 7"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "24x = 3(x + 7)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-019",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: (x + 3)/5 = 6x/3",
+    "solucion_correcta": [
+      "(x + 3)/5 = 6x/3",
+      "3(x + 3) = 30x"
+    ],
+    "resolucion_estudiante": [
+      "(x + 3)/5 = 6x/3",
+      "x + 3 = 6x"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "3(x + 3) = 30x",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-020",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 3x/5 = (x - 9)/2",
+    "solucion_correcta": [
+      "3x/5 = (x - 9)/2",
+      "6x = 5(x - 9)"
+    ],
+    "resolucion_estudiante": [
+      "3x/5 = (x - 9)/2",
+      "3x = x - 9"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6x = 5(x - 9)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-021",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: (x + 5)/5 = 2x/6",
+    "solucion_correcta": [
+      "(x + 5)/5 = 2x/6",
+      "6(x + 5) = 10x"
+    ],
+    "resolucion_estudiante": [
+      "(x + 5)/5 = 2x/6",
+      "x + 5 = 2x"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6(x + 5) = 10x",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-022",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 6x/3 = (x - 7)/6",
+    "solucion_correcta": [
+      "6x/3 = (x - 7)/6",
+      "36x = 3(x - 7)"
+    ],
+    "resolucion_estudiante": [
+      "6x/3 = (x - 7)/6",
+      "6x = x - 7"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "36x = 3(x - 7)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-023",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 5x/4 = (x + 4)/6",
+    "solucion_correcta": [
+      "5x/4 = (x + 4)/6",
+      "30x = 4(x + 4)"
+    ],
+    "resolucion_estudiante": [
+      "5x/4 = (x + 4)/6",
+      "5x = x + 4"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "30x = 4(x + 4)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-024",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 5x/4 = (x + 5)/3",
+    "solucion_correcta": [
+      "5x/4 = (x + 5)/3",
+      "15x = 4(x + 5)"
+    ],
+    "resolucion_estudiante": [
+      "5x/4 = (x + 5)/3",
+      "5x = x + 5"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "15x = 4(x + 5)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-025",
+    "caso_semilla": "AMP-010",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 6x/4 = (x - 6)/3",
+    "solucion_correcta": [
+      "6x/4 = (x - 6)/3",
+      "18x = 4(x - 6)"
+    ],
+    "resolucion_estudiante": [
+      "6x/4 = (x - 6)/3",
+      "6x = x - 6"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "18x = 4(x - 6)",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-010 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-026",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 2(x + 5) = 3x + 7",
+    "solucion_correcta": [
+      "2(x + 5) = 3x + 7",
+      "2x + 10 - 3x = 7"
+    ],
+    "resolucion_estudiante": [
+      "2(x + 5) = 3x + 7",
+      "2x + 5 + 3x = 7"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x + 10 - 3x = 7",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-027",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 6(x - 4) = x + 6",
+    "solucion_correcta": [
+      "6(x - 4) = x + 6",
+      "6x - 24 - x = 6"
+    ],
+    "resolucion_estudiante": [
+      "6(x - 4) = x + 6",
+      "6x - 4 + x = 6"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6x - 24 - x = 6",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-028",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 3(x + 2) = 2x + 2",
+    "solucion_correcta": [
+      "3(x + 2) = 2x + 2",
+      "3x + 6 - 2x = 2"
+    ],
+    "resolucion_estudiante": [
+      "3(x + 2) = 2x + 2",
+      "3x + 2 + 2x = 2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "3x + 6 - 2x = 2",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-029",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 6(x - 1) = 2x + 10",
+    "solucion_correcta": [
+      "6(x - 1) = 2x + 10",
+      "6x - 6 - 2x = 10"
+    ],
+    "resolucion_estudiante": [
+      "6(x - 1) = 2x + 10",
+      "6x - 1 + 2x = 10"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6x - 6 - 2x = 10",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-030",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 4(x + 9) = 3x + 11",
+    "solucion_correcta": [
+      "4(x + 9) = 3x + 11",
+      "4x + 36 - 3x = 11"
+    ],
+    "resolucion_estudiante": [
+      "4(x + 9) = 3x + 11",
+      "4x + 9 + 3x = 11"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "4x + 36 - 3x = 11",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-031",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 6(x - 5) = x + 5",
+    "solucion_correcta": [
+      "6(x - 5) = x + 5",
+      "6x - 30 - x = 5"
+    ],
+    "resolucion_estudiante": [
+      "6(x - 5) = x + 5",
+      "6x - 5 + x = 5"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6x - 30 - x = 5",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-032",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 2(x + 4) = 2x + 2",
+    "solucion_correcta": [
+      "2(x + 4) = 2x + 2",
+      "2x + 8 - 2x = 2"
+    ],
+    "resolucion_estudiante": [
+      "2(x + 4) = 2x + 2",
+      "2x + 4 + 2x = 2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x + 8 - 2x = 2",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-033",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 2(x + 2) = 2x + 11",
+    "solucion_correcta": [
+      "2(x + 2) = 2x + 11",
+      "2x + 4 - 2x = 11"
+    ],
+    "resolucion_estudiante": [
+      "2(x + 2) = 2x + 11",
+      "2x + 2 + 2x = 11"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x + 4 - 2x = 11",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-034",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 2(x + 7) = 3x + 5",
+    "solucion_correcta": [
+      "2(x + 7) = 3x + 5",
+      "2x + 14 - 3x = 5"
+    ],
+    "resolucion_estudiante": [
+      "2(x + 7) = 3x + 5",
+      "2x + 7 + 3x = 5"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x + 14 - 3x = 5",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-035",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 6(x - 7) = 3x + 6",
+    "solucion_correcta": [
+      "6(x - 7) = 3x + 6",
+      "6x - 42 - 3x = 6"
+    ],
+    "resolucion_estudiante": [
+      "6(x - 7) = 3x + 6",
+      "6x - 7 + 3x = 6"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6x - 42 - 3x = 6",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-036",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 3(x - 1) = 3x + 2",
+    "solucion_correcta": [
+      "3(x - 1) = 3x + 2",
+      "3x - 3 - 3x = 2"
+    ],
+    "resolucion_estudiante": [
+      "3(x - 1) = 3x + 2",
+      "3x - 1 + 3x = 2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "3x - 3 - 3x = 2",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-037",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 2(x + 4) = 3x + 7",
+    "solucion_correcta": [
+      "2(x + 4) = 3x + 7",
+      "2x + 8 - 3x = 7"
+    ],
+    "resolucion_estudiante": [
+      "2(x + 4) = 3x + 7",
+      "2x + 4 + 3x = 7"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x + 8 - 3x = 7",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-038",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 2(x - 8) = x + 4",
+    "solucion_correcta": [
+      "2(x - 8) = x + 4",
+      "2x - 16 - x = 4"
+    ],
+    "resolucion_estudiante": [
+      "2(x - 8) = x + 4",
+      "2x - 8 + x = 4"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x - 16 - x = 4",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-039",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 6(x + 9) = 3x + 6",
+    "solucion_correcta": [
+      "6(x + 9) = 3x + 6",
+      "6x + 54 - 3x = 6"
+    ],
+    "resolucion_estudiante": [
+      "6(x + 9) = 3x + 6",
+      "6x + 9 + 3x = 6"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6x + 54 - 3x = 6",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-040",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 5(x - 8) = 4x + 6",
+    "solucion_correcta": [
+      "5(x - 8) = 4x + 6",
+      "5x - 40 - 4x = 6"
+    ],
+    "resolucion_estudiante": [
+      "5(x - 8) = 4x + 6",
+      "5x - 8 + 4x = 6"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "5x - 40 - 4x = 6",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-041",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 6(x - 3) = 4x + 7",
+    "solucion_correcta": [
+      "6(x - 3) = 4x + 7",
+      "6x - 18 - 4x = 7"
+    ],
+    "resolucion_estudiante": [
+      "6(x - 3) = 4x + 7",
+      "6x - 3 + 4x = 7"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "6x - 18 - 4x = 7",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-042",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 2(x + 2) = 3x + 7",
+    "solucion_correcta": [
+      "2(x + 2) = 3x + 7",
+      "2x + 4 - 3x = 7"
+    ],
+    "resolucion_estudiante": [
+      "2(x + 2) = 3x + 7",
+      "2x + 2 + 3x = 7"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x + 4 - 3x = 7",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-043",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 4(x + 2) = x + 12",
+    "solucion_correcta": [
+      "4(x + 2) = x + 12",
+      "4x + 8 - x = 12"
+    ],
+    "resolucion_estudiante": [
+      "4(x + 2) = x + 12",
+      "4x + 2 + x = 12"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "4x + 8 - x = 12",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-044",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 5(x - 9) = 3x + 12",
+    "solucion_correcta": [
+      "5(x - 9) = 3x + 12",
+      "5x - 45 - 3x = 12"
+    ],
+    "resolucion_estudiante": [
+      "5(x - 9) = 3x + 12",
+      "5x - 9 + 3x = 12"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "5x - 45 - 3x = 12",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-045",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 5(x + 1) = x + 9",
+    "solucion_correcta": [
+      "5(x + 1) = x + 9",
+      "5x + 5 - x = 9"
+    ],
+    "resolucion_estudiante": [
+      "5(x + 1) = x + 9",
+      "5x + 1 + x = 9"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "5x + 5 - x = 9",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-046",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 4(x - 3) = x + 12",
+    "solucion_correcta": [
+      "4(x - 3) = x + 12",
+      "4x - 12 - x = 12"
+    ],
+    "resolucion_estudiante": [
+      "4(x - 3) = x + 12",
+      "4x - 3 + x = 12"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "4x - 12 - x = 12",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-047",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 2(x - 4) = x + 2",
+    "solucion_correcta": [
+      "2(x - 4) = x + 2",
+      "2x - 8 - x = 2"
+    ],
+    "resolucion_estudiante": [
+      "2(x - 4) = x + 2",
+      "2x - 4 + x = 2"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x - 8 - x = 2",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-048",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 2(x - 5) = 3x + 10",
+    "solucion_correcta": [
+      "2(x - 5) = 3x + 10",
+      "2x - 10 - 3x = 10"
+    ],
+    "resolucion_estudiante": [
+      "2(x - 5) = 3x + 10",
+      "2x - 5 + 3x = 10"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "2x - 10 - 3x = 10",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-049",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 4(x - 9) = 4x + 10",
+    "solucion_correcta": [
+      "4(x - 9) = 4x + 10",
+      "4x - 36 - 4x = 10"
+    ],
+    "resolucion_estudiante": [
+      "4(x - 9) = 4x + 10",
+      "4x - 9 + 4x = 10"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "4x - 36 - 4x = 10",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  },
+  {
+    "id": "VAR-050",
+    "caso_semilla": "AMP-071",
+    "tipo_de_novedad": "variacion",
+    "enunciado": "Resuelve: 3(x + 2) = 4x + 7",
+    "solucion_correcta": [
+      "3(x + 2) = 4x + 7",
+      "3x + 6 - 4x = 7"
+    ],
+    "resolucion_estudiante": [
+      "3(x + 2) = 4x + 7",
+      "3x + 2 + 4x = 7"
+    ],
+    "indice_paso_erroneo": 1,
+    "correccion_esperada": "3x + 6 - 4x = 7",
+    "pista_referencia": "",
+    "notas": "Variación de AMP-071 con otros números.",
+    "categoria": "indeterminado"
+  }
+]

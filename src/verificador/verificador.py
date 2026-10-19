@@ -39,7 +39,12 @@ class Discrepancia:
     izq_i: sp.Expr           
     der_i: sp.Expr           
     izq_i_mas_1: sp.Expr     
-    der_i_mas_1: sp.Expr     
+    der_i_mas_1: sp.Expr
+
+    # las ecuaciones tal como se escribieron (texto). SymPy pierde algo de estructura al
+    # parsear: "3x + (x - 7)" se convierte en "3x + x - 7" y el paréntesis desaparece.
+    texto_i: str = ""
+    texto_i_mas_1: str = ""
 
 
 @dataclass
@@ -130,12 +135,12 @@ def _son_proporcionales(expr1: sp.Expr, expr2: sp.Expr):
 
 def ecuaciones_equivalentes(izq_a: sp.Expr, der_a: sp.Expr, izq_b: sp.Expr, der_b: sp.Expr) -> bool:
     """
-    Indica si las ecuaciones A y B son equivalentes.
+    Indica si las ecuaciones A y B son equivalentes (tienen la misma solución).
 
     Es el mismo criterio de validez que usa verificar_paso: llevar cada
     ecuación a la forma "expresión = 0", expandir, y comprobar que las dos
     expresiones son proporcionales. Está disponible para que otros módulos
-    comparen ecuaciones sin repetir esta lógica.
+    (por ejemplo, el de diagnóstico) comparen ecuaciones sin repetir esta lógica.
     """
     proporcionales, _k = _son_proporcionales(normalizar(izq_a, der_a), normalizar(izq_b, der_b))
     return proporcionales
@@ -167,7 +172,9 @@ def verificar_paso(s_i: str, s_i_mas_1: str, variable: str = "x") -> ResultadoVe
             izq_i=izq_i,              
             der_i=der_i,              
             izq_i_mas_1=izq_i1,       
-            der_i_mas_1=der_i1,       
+            der_i_mas_1=der_i1,
+            texto_i=s_i,
+            texto_i_mas_1=s_i_mas_1,
         ),
     )
 

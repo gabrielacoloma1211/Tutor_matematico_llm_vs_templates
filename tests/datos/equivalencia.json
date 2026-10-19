@@ -1,0 +1,66 @@
+{
+  "equivalentes": [
+    {
+      "id": "transponer_un_termino",
+      "descripcion": "Transponer un término.",
+      "ecuacion_a": "6x - 4 = 3",
+      "ecuacion_b": "6x = 3 + 4"
+    },
+    {
+      "id": "multiplicar_ambos_lados",
+      "descripcion": "Multiplicar ambos lados.",
+      "ecuacion_a": "x + 5 = 12",
+      "ecuacion_b": "2x + 10 = 24"
+    },
+    {
+      "id": "distributiva_bien_aplicada",
+      "descripcion": "Propiedad distributiva bien aplicada.",
+      "ecuacion_a": "3(x - 4) = 12",
+      "ecuacion_b": "3x - 12 = 12"
+    },
+    {
+      "id": "intercambiar_los_lados",
+      "descripcion": "Intercambiar los lados.",
+      "ecuacion_a": "x + 5 = 12",
+      "ecuacion_b": "12 = x + 5"
+    },
+    {
+      "id": "quitar_un_denominador_en_ambos_lados",
+      "descripcion": "Quitar un denominador en ambos lados.",
+      "ecuacion_a": "x/2 + 3 = 7",
+      "ecuacion_b": "x + 6 = 14"
+    },
+    {
+      "id": "con_la_expresion_sin_evaluar",
+      "descripcion": "El diagnóstico la usa con los árboles originales (evaluate=False) del paso anterior.",
+      "ecuacion_a": "3(x - 4) = 12",
+      "ecuacion_b": "x - 4 = 4"
+    }
+  ],
+  "no_equivalentes": [
+    {
+      "id": "error_de_signo",
+      "descripcion": "Error de signo.",
+      "ecuacion_a": "6x - 4 = 3",
+      "ecuacion_b": "6x = 3 - 4"
+    },
+    {
+      "id": "distributiva_incompleta",
+      "descripcion": "Distributiva incompleta.",
+      "ecuacion_a": "3(x - 4) = 12",
+      "ecuacion_b": "3x - 4 = 12"
+    },
+    {
+      "id": "operacion_en_un_solo_lado",
+      "descripcion": "Operación en un solo lado.",
+      "ecuacion_a": "2x + 3 = 11",
+      "ecuacion_b": "2x = 11"
+    },
+    {
+      "id": "division_entre_un_numero_equivocado",
+      "descripcion": "División entre un número equivocado.",
+      "ecuacion_a": "5x = 20",
+      "ecuacion_b": "x = 5"
+    }
+  ]
+}

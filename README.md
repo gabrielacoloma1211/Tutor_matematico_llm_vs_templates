@@ -47,6 +47,7 @@ es cómo se genera la pista pedagógica.
 │   ├── evaluar_diagnostico.py  # exactitud y macro-F1 sobre dev (o test, una sola vez)
 │   ├── evaluar_ampliado.py     # lo mismo sobre el conjunto ampliado, separado en ajuste y reservados
 │   ├── evaluar_variaciones.py  # el diagnóstico sobre las variaciones
+│   ├── medir_latencia.py       # latencia del verificador y del diagnóstico (dev)
 │   └── resultados/             # resultados guardados con fecha + notas de los ajustes
 └── data/
     └── taxonomia.json    # Las 6 categorías de error (5 + indeterminado)
@@ -93,6 +94,7 @@ python evaluacion/evaluar_diagnostico.py                                  # dev
 python evaluacion/evaluar_diagnostico.py --conjunto test --evaluacion-final   # una sola vez, al final
 python evaluacion/evaluar_ampliado.py --guardar --etiqueta _ajustado      # conjunto ampliado
 python evaluacion/evaluar_variaciones.py variaciones_nuevas.json --guardar
+python evaluacion/medir_latencia.py --repeticiones 10 --guardar   # latencia (no usa test)
 ```
 
 Cada comando imprime la matriz de confusión, la precisión, el recall y el F1 por categoría y el macro-F1.
@@ -105,14 +107,6 @@ uvicorn src.api.main:app --reload
 
 Luego abre http://127.0.0.1:8000/docs para ver la documentación interactiva de la API.
 
-## Próximos pasos
-
-- [x] Completar las reglas del árbol de decisión en `src/diagnostico/diagnostico.py` y probarlas con los casos dev.
-- [x] Agregar pruebas específicas del módulo de diagnóstico (`tests/datos/diagnostico.json`).
-- [x] Probar el diagnóstico con un conjunto aparte (ampliado) y con variaciones de los casos que fallan.
-- [ ] Implementar `src/generador/plantillas.py` con las plantillas contextualizadas por categoría.
-- [ ] Implementar `src/generador/llm.py` con la integración a la API del LLM.
-- [ ] Evaluación final: exactitud y macro-F1 sobre los casos test (una sola vez), y rúbrica de calidad pedagógica con docentes.
 
 ## Benchmark
 
@@ -196,3 +190,12 @@ La verificación es por equivalencia de solución, así que dos errores en un mi
 | Lote nuevo, no usado para diseñar la regla | 25/25 | 23/25 | 48/50 |
 
 AMP-071 era en buena parte coincidencia numérica (con otros números se queda en `indeterminado`). AMP-010 no: faltaba reconocer que el estudiante multiplicó cada lado por su propio denominador, y se agregó esa regla.
+
+## Próximos pasos
+
+- [x] Completar las reglas del árbol de decisión en `src/diagnostico/diagnostico.py` y probarlas con los casos dev.
+- [x] Agregar pruebas específicas del módulo de diagnóstico (`tests/datos/diagnostico.json`).
+- [x] Probar el diagnóstico con un conjunto aparte (ampliado) y con variaciones de los casos que fallan.
+- [ ] Implementar `src/generador/plantillas.py` con las plantillas contextualizadas por categoría.
+- [ ] Implementar `src/generador/llm.py` con la integración a la API del LLM.
+- [ ] Evaluación final: exactitud y macro-F1 sobre los casos test (una sola vez), y rúbrica de calidad pedagógica con docentes.

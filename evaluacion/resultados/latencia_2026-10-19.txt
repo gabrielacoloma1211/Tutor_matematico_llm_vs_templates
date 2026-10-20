@@ -1,0 +1,5 @@
+Latencia sobre dev (100 casos), 10 repeticiones por llamada (se usa la mediana), 1 pasada de calentamiento descartada.
+Python 3.13.16 | SymPy 1.13.3 | Linux-6.18.44-fc-v139-x86_64-with-glibc2.39 | x86_64
+verificador     401 llamadas | media    2.2 | mediana    2.0 | p95    3.3 | máx    4.7  (ms)
+diagnóstico     100 llamadas | media    7.6 | mediana    4.8 | p95   27.0 | máx   42.6  (ms)
+suma de medias (un paso inválido): 9.8 ms

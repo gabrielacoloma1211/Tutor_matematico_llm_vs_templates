@@ -1,0 +1,5 @@
+Latencia sobre dev (100 casos), 10 repeticiones por llamada (se usa la mediana), 1 pasada de calentamiento descartada.
+Python 3.12.2 | SymPy 1.13.3 | macOS-15.5-arm64-arm-64bit | arm
+verificador     401 llamadas | media    0.6 | mediana    0.5 | p95    1.2 | máx    1.4  (ms)
+diagnóstico     100 llamadas | media    3.7 | mediana    2.4 | p95   13.6 | máx   19.9  (ms)
+suma de medias (un paso inválido): 4.3 ms

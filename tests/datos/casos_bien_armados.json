@@ -1,0 +1,120 @@
+[
+  {
+    "id": "ejemplo-despeje-invertido",
+    "descripcion": "Caso bien armado que el validador debe aceptar.",
+    "caso": {
+      "id": "ejemplo-despeje-invertido",
+      "categoria": "error_signo",
+      "enunciado": "Resuelve: 6x - 4 = 3",
+      "solucion_correcta": [
+        "6x - 4 = 3",
+        "6x = 3 + 4",
+        "7/6 = x"
+      ],
+      "resolucion_estudiante": [
+        "6x - 4 = 3",
+        "6x = 3 - 4",
+        "6x = -1",
+        "x = -1/6"
+      ],
+      "indice_paso_erroneo": 1,
+      "correccion_esperada": "6x = 3 + 4",
+      "pista_referencia": "Revisa el signo del término -4: al pasarlo al otro lado de la igualdad, su signo cambia.",
+      "fuente": "ejemplo de formato (no forma parte del benchmark)"
+    }
+  },
+  {
+    "id": "ejemplo-despeje-decimal",
+    "descripcion": "Caso bien armado que el validador debe aceptar.",
+    "caso": {
+      "id": "ejemplo-despeje-decimal",
+      "categoria": "error_signo",
+      "enunciado": "Resuelve: 2x = 1",
+      "solucion_correcta": [
+        "2x = 1",
+        "x = 0.5"
+      ],
+      "resolucion_estudiante": [
+        "2x = 1",
+        "x = 1 + 2"
+      ],
+      "indice_paso_erroneo": 1,
+      "correccion_esperada": "x = 1/2",
+      "pista_referencia": "Revisa el signo del término -4: al pasarlo al otro lado de la igualdad, su signo cambia.",
+      "fuente": "ejemplo de formato (no forma parte del benchmark)"
+    }
+  },
+  {
+    "id": "ejemplo-enunciado-sin-espacios",
+    "descripcion": "Caso bien armado que el validador debe aceptar.",
+    "caso": {
+      "id": "ejemplo-enunciado-sin-espacios",
+      "categoria": "error_signo",
+      "enunciado": "Resuelve:6x-4=3",
+      "solucion_correcta": [
+        "6x - 4 = 3",
+        "6x = 3 + 4",
+        "6x = 7",
+        "x = 7/6"
+      ],
+      "resolucion_estudiante": [
+        "6x - 4 = 3",
+        "6x = 3 - 4",
+        "6x = -1",
+        "x = -1/6"
+      ],
+      "indice_paso_erroneo": 1,
+      "correccion_esperada": "6x = 3 + 4",
+      "pista_referencia": "Revisa el signo del término -4: al pasarlo al otro lado de la igualdad, su signo cambia.",
+      "fuente": "ejemplo de formato (no forma parte del benchmark)"
+    }
+  },
+  {
+    "id": "ejemplo-despeje-negativo",
+    "descripcion": "Caso bien armado que el validador debe aceptar.",
+    "caso": {
+      "id": "ejemplo-despeje-negativo",
+      "categoria": "error_signo",
+      "enunciado": "Resuelve: x + 5 = 2",
+      "solucion_correcta": [
+        "x + 5 = 2",
+        "x = 2 - 5",
+        "x = -3"
+      ],
+      "resolucion_estudiante": [
+        "x + 5 = 2",
+        "x = 2 + 5",
+        "x = 7"
+      ],
+      "indice_paso_erroneo": 1,
+      "correccion_esperada": "x = 2 - 5",
+      "pista_referencia": "Revisa el signo del término -4: al pasarlo al otro lado de la igualdad, su signo cambia.",
+      "fuente": "ejemplo de formato (no forma parte del benchmark)"
+    }
+  },
+  {
+    "id": "ejemplo-coeficientes-decimales",
+    "descripcion": "Con coeficientes decimales el valor se comprueba en exacto, sin residuo de punto flotante.",
+    "caso": {
+      "id": "ejemplo-coeficientes-decimales",
+      "categoria": "error_signo",
+      "enunciado": "Resuelve: 0.3x + 1.2 = 0.1x + 3",
+      "solucion_correcta": [
+        "0.3x + 1.2 = 0.1x + 3",
+        "0.3x - 0.1x = 3 - 1.2",
+        "0.2x = 1.8",
+        "x = 9"
+      ],
+      "resolucion_estudiante": [
+        "0.3x + 1.2 = 0.1x + 3",
+        "0.3x - 0.1x = 3 + 1.2",
+        "0.2x = 4.2",
+        "x = 21"
+      ],
+      "indice_paso_erroneo": 1,
+      "correccion_esperada": "0.3x - 0.1x = 3 - 1.2",
+      "pista_referencia": "Revisa el signo del término 1.2: al pasarlo al otro lado de la igualdad, su signo cambia.",
+      "fuente": "ejemplo de formato (no forma parte del benchmark)"
+    }
+  }
+]

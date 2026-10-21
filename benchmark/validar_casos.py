@@ -11,6 +11,10 @@ determinista (src/verificador). Es decir, revisa que:
      al error.
   4. El caso tenga todos los campos y una categoría que exista en la taxonomía.
 
+  5. La ecuación inicial de solucion_correcta sea la del enunciado ("Resuelve: <ecuación>").
+  6. El último paso de solucion_correcta sea el despeje de la incógnita ("x = valor") y
+     ese valor satisfaga la ecuación inicial.
+
 IMPORTANTE: este validador no asigna ni verifica la categoría de error.
 La categoría la establece la autora al elaborar el caso; este
 validador solo comprueba la consistencia matemática y no asigna etiquetas.
@@ -32,7 +36,8 @@ RAIZ = Path(__file__).resolve().parent.parent
 if str(RAIZ) not in sys.path:
     sys.path.insert(0, str(RAIZ))
 
-from src.verificador.verificador import verificar_paso, ErrorDeParseo  # noqa: E402
+import sympy as sp  
+from src.verificador.verificador import verificar_paso, parsear_ecuacion, ErrorDeParseo  
 
 CAMPOS_OBLIGATORIOS = [
     "id",
@@ -120,8 +125,60 @@ def _revisar_transicion(anterior, siguiente, donde, errores):
         return None
 
 
-def validar_caso(caso):
-    """Devuelve la lista de problemas encontrados (lista vacía = caso consistente)"""
+_ENUNCIADO = re.compile(r"^\s*Resuelve\s*:\s*(.+?)\s*$")
+
+
+def _revisar_enunciado(caso, sol):
+    """El enunciado debe ser 'Resuelve: <ecuación>' y la ecuación debe ser la inicial de la solución."""
+    m = _ENUNCIADO.match(caso["enunciado"]) if isinstance(caso["enunciado"], str) else None
+    if not m:
+        return [f"enunciado ('{caso['enunciado']}') debe tener la forma 'Resuelve: <ecuación>'"]
+    del_enunciado = m.group(1).replace(" ", "")
+    if del_enunciado != sol[0].replace(" ", ""):
+        return [
+            f"la ecuación inicial de solucion_correcta ('{sol[0]}') no corresponde al enunciado "
+            f"('{m.group(1)}')"
+        ]
+    return []
+
+
+def _revisar_despeje(sol):
+    """El último paso de la solución debe ser 'x = valor' (o 'valor = x') y el valor debe satisfacer la ecuación inicial."""
+    try:
+        izq_u, der_u = parsear_ecuacion(sol[-1])
+        izq_0, der_0 = parsear_ecuacion(sol[0])
+    except ErrorDeParseo:
+        return []  # ya se informa en la revisión de transiciones
+    x = sp.Symbol("x")
+    if izq_u == x and not der_u.free_symbols:
+        valor = der_u
+    elif der_u == x and not izq_u.free_symbols:
+        valor = izq_u
+    else:
+        return [
+            f"el último paso de solucion_correcta ('{sol[-1]}') debe ser el despeje de la incógnita "
+            "(por ejemplo 'x = 3'), con la x sola a un lado y un número al otro"
+        ]
+    # Todo en racionales exactos: con coeficientes decimales (0.3x) el residuo en
+    # punto flotante quedaría ~1e-16 aunque el valor sea correcto
+    valor = sp.nsimplify(valor.doit(), rational=True)
+    dif = sp.nsimplify((izq_0 - der_0).doit(), rational=True)
+    residuo = sp.simplify(dif.subs(x, valor).doit())
+    if residuo != 0:
+        return [
+            f"el valor del último paso de solucion_correcta ('{sol[-1]}') no satisface la ecuación "
+            f"inicial '{sol[0]}': al reemplazar la x queda una diferencia de {residuo}"
+        ]
+    return []
+
+
+def validar_caso(caso, exigir_despeje=True):
+    """
+    Devuelve la lista de problemas encontrados (lista vacía = caso consistente).
+
+    `exigir_despeje=False` se usa solo para las variaciones, que son un único paso
+    y no resuelven la ecuación completa.
+    """
     faltan = [c for c in CAMPOS_OBLIGATORIOS if c not in caso]
     if faltan:
         return [f"faltan campos obligatorios: {', '.join(faltan)}"]
@@ -155,6 +212,9 @@ def validar_caso(caso):
             "debe ser la misma ecuación"
         )
 
+    # 0. La ecuación inicial corresponde al enunciado
+    errores.extend(_revisar_enunciado(caso, sol))
+
     # 1. Solución correcta: todas las transiciones deben ser válidas
     for i in range(1, len(sol)):
         r = _revisar_transicion(sol[i - 1], sol[i], f"solucion_correcta, paso {i}", errores)
@@ -163,6 +223,10 @@ def validar_caso(caso):
                 f"solucion_correcta, paso {i}: '{sol[i - 1]}' -> '{sol[i]}' "
                 "debería ser válido pero el verificador lo marca inválido"
             )
+
+    # 1b. El último paso de la solución es el despeje y satisface la ecuación inicial
+    if exigir_despeje:
+        errores.extend(_revisar_despeje(sol))
 
     # 2. Resolución del estudiante: solo el paso `idx` debe ser inválido
     for i in range(1, len(est)):

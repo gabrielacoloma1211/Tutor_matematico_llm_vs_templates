@@ -26,9 +26,9 @@ RAIZ = Path(__file__).resolve().parent.parent
 if str(RAIZ) not in sys.path:
     sys.path.insert(0, str(RAIZ))
 
-from benchmark.validar_casos import cargar_casos  
-from src.diagnostico.diagnostico import diagnosticar  
-from src.verificador.verificador import verificar_paso 
+from benchmark.validar_casos import cargar_casos  # noqa: E402
+from src.diagnostico.diagnostico import diagnosticar  # noqa: E402
+from src.verificador.verificador import verificar_paso  # noqa: E402
 
 CATEGORIAS = [
     "error_signo",
@@ -48,7 +48,7 @@ CORTO = {
 }
 
 
-def predecir(caso):
+def predecir(caso) -> str:
     """Categoría que asigna el diagnóstico al paso erróneo del caso."""
     k = caso["indice_paso_erroneo"]
     pasos = caso["resolucion_estudiante"]
@@ -69,6 +69,23 @@ def metricas(confusion):
         filas[cat] = (precision, recall, f1, tp + fn)
     macro_f1 = sum(f[2] for f in filas.values()) / len(CATEGORIAS)
     return filas, macro_f1
+
+
+def macro_f1_presentes(filas):
+    """Macro-F1 solo con las categorías que tienen casos. Devuelve (valor, cuántas categorías, cuáles faltan)."""
+    presentes = [c for c in CATEGORIAS if filas[c][3] > 0]
+    faltan = [c for c in CATEGORIAS if filas[c][3] == 0]
+    valor = sum(filas[c][2] for c in presentes) / len(presentes) if presentes else 0.0
+    return valor, len(presentes), faltan
+
+
+def texto_macro_presentes(filas):
+    valor, n, faltan = macro_f1_presentes(filas)
+    if not faltan:
+        return ""
+    nombres = ", ".join(CORTO[c] for c in faltan)
+    return (f"macro-F1 solo con las {n} categorías que tienen casos: {valor:.2f} "
+            f"(sin casos, no evaluadas: {nombres}; con las 6 categorías la categoría sin casos cuenta F1 = 0)")
 
 
 def main(argv=None):
@@ -104,6 +121,9 @@ def main(argv=None):
         print(f"{CORTO[cat]:<10}{n:>7}{precision:>11.2f}{recall:>9.2f}{f1:>7.2f}")
     aciertos = sum(confusion[(c, c)] for c in CATEGORIAS)
     print(f"\nExactitud: {aciertos}/{len(casos)} = {aciertos / len(casos):.2f}   |   macro-F1: {macro_f1:.2f}")
+    extra = texto_macro_presentes(filas)
+    if extra:
+        print(extra)
 
     if args.conjunto == "dev" and errores:
         print(f"\nCasos mal clasificados ({len(errores)}):")

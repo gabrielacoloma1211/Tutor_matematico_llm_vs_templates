@@ -1,0 +1,197 @@
+{
+ "descripcion": "Entradas para probar la validación de seguridad (src/verificador/entrada.py).",
+ "admitidas": [
+  {
+   "id": "basica",
+   "ecuacion": "6x - 4 = 3"
+  },
+  {
+   "id": "sin_espacios",
+   "ecuacion": "6x-4=3"
+  },
+  {
+   "id": "decimal",
+   "ecuacion": "0.5x + 1.25 = 3"
+  },
+  {
+   "id": "fraccion",
+   "ecuacion": "3x/2 = (x + 5)/4"
+  },
+  {
+   "id": "parentesis",
+   "ecuacion": "4(x - 2) + 3 = 19"
+  },
+  {
+   "id": "signo_unario",
+   "ecuacion": "-x + 3 = -2"
+  },
+  {
+   "id": "resta_de_negativo",
+   "ecuacion": "3 - -2 = x"
+  },
+  {
+   "id": "anidado_en_el_limite",
+   "ecuacion": "((((x)))) = 1"
+  },
+  {
+   "id": "varios_parentesis_de_grado_1",
+   "ecuacion": "2(x + 1) - 3(x - 1) = 4"
+  }
+ ],
+ "mal_escritas": [
+  {
+   "id": "operador_sin_operando",
+   "ecuacion": "3x + = 7"
+  },
+  {
+   "id": "lado_vacio",
+   "ecuacion": "= 7"
+  },
+  {
+   "id": "parentesis_sin_cerrar",
+   "ecuacion": "3(x + 1 = 7"
+  },
+  {
+   "id": "parentesis_sin_abrir",
+   "ecuacion": "3x + 1) = 7"
+  },
+  {
+   "id": "parentesis_vacio",
+   "ecuacion": "3() = 7"
+  },
+  {
+   "id": "dos_signos_seguidos",
+   "ecuacion": "3 - - - x = 7"
+  },
+  {
+   "id": "dos_numeros_seguidos",
+   "ecuacion": "3 4 = x"
+  },
+  {
+   "id": "numero_despues_de_x",
+   "ecuacion": "x3 = 7"
+  },
+  {
+   "id": "sin_signo_igual",
+   "ecuacion": "3x + 2"
+  },
+  {
+   "id": "dos_signos_igual",
+   "ecuacion": "3x = 7 = 2"
+  },
+  {
+   "id": "potencia_con_doble_asterisco",
+   "ecuacion": "x**2 = 4"
+  },
+  {
+   "id": "comparacion",
+   "ecuacion": "x == 1"
+  }
+ ],
+ "no_permitidas": [
+  {
+   "id": "codigo_python",
+   "ecuacion": "__import__('os').system('ls') = 1"
+  },
+  {
+   "id": "funcion_de_sympy",
+   "ecuacion": "sin(x) = 1"
+  },
+  {
+   "id": "identificador_largo",
+   "ecuacion": "abc = 1"
+  },
+  {
+   "id": "otra_variable",
+   "ecuacion": "6y = 3"
+  },
+  {
+   "id": "constante_pi",
+   "ecuacion": "x = pi"
+  },
+  {
+   "id": "notacion_cientifica",
+   "ecuacion": "x = 1e5"
+  },
+  {
+   "id": "potencia_con_circunflejo",
+   "ecuacion": "x^2 = 4"
+  },
+  {
+   "id": "modulo",
+   "ecuacion": "x % 2 = 1"
+  },
+  {
+   "id": "punto_y_coma",
+   "ecuacion": "x = 1; 2"
+  },
+  {
+   "id": "corchetes",
+   "ecuacion": "[x] = 1"
+  },
+  {
+   "id": "signo_menos_tipografico",
+   "ecuacion": "6x − 4 = 3"
+  },
+  {
+   "id": "digitos_de_otro_alfabeto",
+   "ecuacion": "x = ٣"
+  },
+  {
+   "id": "salto_de_linea",
+   "ecuacion": "x = 1\n+ 2"
+  },
+  {
+   "id": "tabulacion",
+   "ecuacion": "x =\t1"
+  },
+  {
+   "id": "coma_decimal",
+   "ecuacion": "x = 1,5"
+  }
+ ],
+ "demasiado_complejas": [
+  {
+   "id": "x_por_x",
+   "ecuacion": "x*x = 4"
+  },
+  {
+   "id": "x_por_x_implicito",
+   "ecuacion": "x(x + 1) = 4"
+  },
+  {
+   "id": "dividir_entre_x",
+   "ecuacion": "1/x = 2"
+  },
+  {
+   "id": "numero_demasiado_largo",
+   "ecuacion": "x = 1234567890"
+  },
+  {
+   "id": "anidado_mas_alla_del_limite",
+   "ecuacion": "(((((((x))))))) = 1"
+  },
+  {
+   "id": "mas_de_cien_caracteres",
+   "ecuacion": "x = 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1"
+  },
+  {
+   "id": "mas_de_sesenta_simbolos",
+   "ecuacion": "x = 1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1"
+  },
+  {
+   "id": "producto_de_parentesis_con_x",
+   "ecuacion": "(x + 1)(x - 1) = 4"
+  }
+ ],
+ "division_entre_cero": [
+  {
+   "id": "entre_cero_directo",
+   "ecuacion": "x = 1/0"
+  },
+  {
+   "id": "entre_cero_calculado",
+   "ecuacion": "x = 1/(2 - 2)"
+  }
+ ]
+}

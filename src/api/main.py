@@ -5,8 +5,8 @@ Expone el pipeline verificador -> diagnóstico. La generación de
 retroalimentación (con LLM o con plantilla) se conectará aquí, 
 una vez implementados ambos componentes.
 """
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, Field
 
 from src.verificador.verificador import verificar_paso, ErrorDeParseo
 from src.diagnostico.diagnostico import diagnosticar, obtener_categoria
@@ -19,8 +19,9 @@ app = FastAPI(
 
 
 class PasoRequest(BaseModel):
-    s_i: str
-    s_i_mas_1: str
+    # tope de tamaño antes de procesar nada; el límite fino lo aplica validar_ecuacion
+    s_i: str = Field(max_length=1000)
+    s_i_mas_1: str = Field(max_length=1000)
 
 
 class PasoResponse(BaseModel):
@@ -41,11 +42,18 @@ def verificar(paso: PasoRequest):
     """
     Recibe un paso de un estudiante (S_i -> S_{i+1}) y devuelve si es válido;
     si no lo es, incluye además la categoría de error diagnosticada.
+
+    Si alguna de las dos ecuaciones no se puede interpretar (por ejemplo "3x + = 7"),
+    responde HTTP 422 con un error de formato. `valido=False` queda reservado para
+    pasos que se procesaron bien pero cuya transformación algebraica es incorrecta.
     """
     try:
         resultado_verificacion = verificar_paso(paso.s_i, paso.s_i_mas_1)
     except ErrorDeParseo as e:
-        return PasoResponse(valido=False, discrepancia={"error_de_parseo": str(e)})
+        raise HTTPException(
+            status_code=422,
+            detail={"tipo": e.tipo, "mensaje": str(e)},
+        ) from e
 
     if resultado_verificacion.valido:
         return PasoResponse(valido=True)

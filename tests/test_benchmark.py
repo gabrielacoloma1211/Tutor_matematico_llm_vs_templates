@@ -108,3 +108,28 @@ def test_el_validador_detecta_los_casos_mal_armados(defecto):
     assert errores != [], defecto["descripcion"]
     if defecto["error_esperado"]:
         assert any(defecto["error_esperado"] in e for e in errores), defecto["descripcion"]
+
+
+BIEN_ARMADOS = cargar("casos_bien_armados")
+
+
+@pytest.mark.parametrize("ejemplo", BIEN_ARMADOS, ids=[e["id"] for e in BIEN_ARMADOS])
+def test_el_validador_acepta_variantes_validas_de_enunciado_y_despeje(ejemplo):
+    assert validar_caso(ejemplo["caso"]) == []
+
+
+def _casos_json(ruta):
+    import json
+    return json.loads((RAIZ / "benchmark" / "casos" / ruta).read_text(encoding="utf-8"))
+
+
+def test_el_conjunto_ampliado_cumple_enunciado_y_despeje():
+    casos = _casos_json("ampliado/ampliado.json")
+    assert len(casos) == 100
+    assert [c["id"] for c in casos if validar_caso(c)] == []
+
+
+def test_las_variaciones_se_validan_sin_exigir_despeje():
+    casos = _casos_json("variaciones/variaciones.json") + _casos_json("variaciones/variaciones_nuevas.json")
+    assert [c["id"] for c in casos if validar_caso(c, exigir_despeje=False)] == []
+    assert all(validar_caso(c) for c in casos)  # con la exigencia completa no son casos de benchmark

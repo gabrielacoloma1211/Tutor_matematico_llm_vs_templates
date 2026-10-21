@@ -20,6 +20,8 @@ from typing import Optional
 
 import sympy as sp
 
+from src.verificador.entrada import EntradaNoPermitida, validar_ecuacion
+
 from sympy.parsing.sympy_parser import (
     parse_expr,
     standard_transformations,
@@ -28,6 +30,13 @@ from sympy.parsing.sympy_parser import (
 
 #implicit multiplication es para poder evitar el uso obligatorio de 3*x en vez de solo 3x
 _TRANSFORMATIONS = standard_transformations + (implicit_multiplication_application,)
+
+# Defensa adicional: parse_expr solo conoce estos nombres (no el espacio de nombres completo de
+# SymPy ni el de Python). La validación previa de entrada.py ya impide cualquier otro identificador.
+_NOMBRES_PERMITIDOS = {
+    "Integer": sp.Integer, "Float": sp.Float, "Rational": sp.Rational, "Symbol": sp.Symbol,
+    "Add": sp.Add, "Mul": sp.Mul, "Pow": sp.Pow,
+}
 
 
 @dataclass
@@ -41,8 +50,8 @@ class Discrepancia:
     izq_i_mas_1: sp.Expr     
     der_i_mas_1: sp.Expr
 
-    # las ecuaciones tal como se escribieron (texto). SymPy pierde algo de estructura al
-    # parsear: "3x + (x - 7)" se convierte en "3x + x - 7" y el paréntesis desaparece.
+    # las ecuaciones tal como se escribieron. SymPy pierde algo de estructura al
+    # parsear: "3x + (x - 7)" se convierte en "3x + x - 7" y el paréntesis desaparece
     texto_i: str = ""
     texto_i_mas_1: str = ""
 
@@ -55,9 +64,14 @@ class ResultadoVerificacion:
 
 class ErrorDeParseo(Exception):
     """
-    Se lanza cuando una ecuación no puede interpretarse simbólicamente 
-    osea hay un error de entrada
+    Se lanza cuando una ecuación no puede procesarse: hay un error de entrada, no un
+    error matemático. `tipo` es "error_de_formato" (mal escrita) o "entrada_no_permitida"
+    (usa algo que el proyecto no admite; ver entrada.py).
     """
+
+    def __init__(self, mensaje, tipo="error_de_formato"):
+        super().__init__(mensaje)
+        self.tipo = tipo
 
 
 def parsear_ecuacion(ecuacion: str, variable: str = "x"):
@@ -65,22 +79,26 @@ def parsear_ecuacion(ecuacion: str, variable: str = "x"):
     Convierte una cadena de texto tipo "3*x + 2 = 5" en un par (lado_izq, lado_der)
     de expresiones simbólicas de SymPy.
     """
-    if "=" not in ecuacion:
-        raise ErrorDeParseo(f"La ecuación '{ecuacion}' no contiene un signo '='.")
+    # Antes de llamar a SymPy (parse_expr evalúa texto), la entrada pasa por la validación
+    # de seguridad: caracteres, estructura, longitud y complejidad.
+    try:
+        validar_ecuacion(ecuacion)
+    except EntradaNoPermitida as e:
+        raise ErrorDeParseo(f"La ecuación '{ecuacion[:60]}' no se puede procesar: {e}.", tipo=e.tipo) from e
 
     partes = ecuacion.split("=")
-    if len(partes) != 2:
-        raise ErrorDeParseo(f"La ecuación '{ecuacion}' debe tener exactamente un '='.")
-
     izq_str, der_str = partes
     simbolo = sp.symbols(variable)
     local_dict = {variable: simbolo}
 
     try:
-        izq = parse_expr(izq_str.strip(), local_dict=local_dict, transformations=_TRANSFORMATIONS, evaluate=False)
-        der = parse_expr(der_str.strip(), local_dict=local_dict, transformations=_TRANSFORMATIONS, evaluate=False)
+        izq = parse_expr(izq_str.strip(), local_dict=local_dict, global_dict=dict(_NOMBRES_PERMITIDOS), transformations=_TRANSFORMATIONS, evaluate=False)
+        der = parse_expr(der_str.strip(), local_dict=local_dict, global_dict=dict(_NOMBRES_PERMITIDOS), transformations=_TRANSFORMATIONS, evaluate=False)
     except Exception as e:
         raise ErrorDeParseo(f"No se pudo interpretar la ecuación '{ecuacion}': {e}") from e
+
+    if any(lado.doit().has(sp.zoo, sp.nan, sp.oo, -sp.oo) for lado in (izq, der)):
+        raise ErrorDeParseo(f"La ecuación '{ecuacion}' tiene una división entre cero.", tipo="entrada_no_permitida")
 
     return izq, der
 

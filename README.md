@@ -63,7 +63,7 @@ es cómo se genera la pista pedagógica.
 | Evaluación del diagnóstico | Dev 100/100. El conjunto test (50) está reservado para una única evaluación final. Conjunto ampliado y variaciones: ver las secciones de abajo. |
 | Generador con plantillas | Esqueleto: falta rellenar las variables de cada plantilla. |
 | Generador con LLM | Esqueleto: el prompt está diseñado; falta la integración con la API. |
-| API | `/salud` y `/verificar` (verificador → diagnóstico); aún sin generador. |
+| API | `/salud` y `/verificar` (verificador → diagnóstico); una ecuación mal escrita responde HTTP 422 (error de formato), no `valido=false`; aún sin generador. Toda entrada pasa por `src/verificador/entrada.py` antes de llegar a SymPy (solo expresiones de primer grado, con límites de longitud y complejidad). |
 
 ## Instalación
 
@@ -177,7 +177,7 @@ Resultados (`evaluacion/resultados/`):
 
 Los fallos se clasifican en *seguros* (responde `indeterminado` o falla sin clasificar) y *peligrosos* (devuelve otra categoría). El caso que sigue mal es AMP-071, una coincidencia numérica (ver variaciones). Como las reglas se ajustaron mirando este conjunto, la cifra del diagnóstico ajustado es optimista: la medición más limpia es la de los casos reservados y la del lote nuevo de variaciones.
 
-El detalle de qué regla se cambió por qué caso está en `evaluacion/resultados/ajustes_tras_conjunto_ampliado.md`. Dev sigue en 100/100 y pasan las 634 pruebas.
+El detalle de qué regla se cambió por qué caso está en `evaluacion/resultados/ajustes_tras_conjunto_ampliado.md`. Dev sigue en 100/100 y pasan las 710 pruebas.
 
 ## Variaciones de los casos que fallan
 

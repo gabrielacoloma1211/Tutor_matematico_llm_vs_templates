@@ -23,7 +23,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 if str(RAIZ) not in sys.path:
     sys.path.insert(0, str(RAIZ))
 
-from evaluacion.evaluar_diagnostico import CATEGORIAS, CORTO, metricas, predecir  # noqa: E402
+from evaluacion.evaluar_diagnostico import CATEGORIAS, CORTO, metricas, predecir, texto_macro_presentes  # noqa: E402
 
 DIR = RAIZ / "benchmark" / "casos" / "ampliado"
 
@@ -40,6 +40,9 @@ def resumen(casos, preds, titulo):
     for cat in CATEGORIAS:
         p, r, f, n = filas[cat]
         out.append(f"{CORTO[cat]:<10}{n:>6}{p:>7.2f}{r:>8.2f}{f:>6.2f}")
+    extra = texto_macro_presentes(filas)
+    if extra:
+        out.append(extra)
     return "\n".join(out)
 
 
@@ -55,7 +58,7 @@ def main(argv=None):
     for c in casos:
         try:
             preds[c["id"]] = predecir(c)
-        except Exception as e:  # el diagnóstico falló: se registra como ERROR, no se oculta
+        except Exception as e:  # el diagnóstico falló: se registra como error
             preds[c["id"]] = "ERROR"
             print(f"AVISO: {c['id']} produjo {type(e).__name__}")
 

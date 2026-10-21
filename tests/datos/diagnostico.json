@@ -617,5 +617,90 @@
     "s_i": "(x + 7)/4 = 2x/6",
     "s_i_mas_1": "x + 7 = 2x",
     "categoria_esperada": "indeterminado"
+  },
+  {
+    "id": "dos_productos_con_el_mismo_factor_distribuye_el_primero",
+    "grupo": "distributiva",
+    "descripcion": "Hay otro producto con el mismo factor 3 pero distinto paréntesis: no debe bloquear al primero.",
+    "s_i": "3(x + 4) + 3(x - 2) = 30",
+    "s_i_mas_1": "3x + 4 + 3(x - 2) = 30",
+    "categoria_esperada": "distributiva_incorrecta",
+    "detalles": {
+      "variante": "omite_factor"
+    }
+  },
+  {
+    "id": "dos_productos_con_el_mismo_factor_distribuye_el_segundo",
+    "grupo": "distributiva",
+    "descripcion": "Distribuye mal el segundo y conserva el primero.",
+    "s_i": "3(x + 4) + 3(x - 2) = 30",
+    "s_i_mas_1": "3(x + 4) + 3x - 2 = 30",
+    "categoria_esperada": "distributiva_incorrecta",
+    "detalles": {
+      "variante": "omite_factor"
+    }
+  },
+  {
+    "id": "explicacion_sin_decimales_largos",
+    "grupo": "division",
+    "descripcion": "El divisor decimal se muestra como fracción, no como 0.200000000000000.",
+    "s_i": "0.4x = 2",
+    "s_i_mas_1": "x = 2/0.2",
+    "categoria_esperada": "division_coeficiente_equivocado",
+    "detalles": {
+      "explicacion": "dividió entre 1/5 en vez de dividir entre el coeficiente 2/5"
+    }
+  },
+  {
+    "id": "explicacion_sin_productos_por_uno",
+    "grupo": "division",
+    "descripcion": "La explicación no muestra 1*2.",
+    "s_i": "(5 - 2)x = 12",
+    "s_i_mas_1": "x = 12/5 - 2",
+    "categoria_esperada": "division_coeficiente_equivocado",
+    "detalles": {
+      "explicacion": "el coeficiente es 5 - 2, pero dividió solo entre 5"
+    }
+  },
+  {
+    "id": "signo_opuesto_sin_espacios",
+    "grupo": "signo",
+    "descripcion": "El formato de espacios no cambia la explicación.",
+    "s_i": "2x + 7 = 15",
+    "s_i_mas_1": "2x+7-7 = 15+7",
+    "categoria_esperada": "error_signo",
+    "detalles": {
+      "explicacion": "a la izquierda restó 7 pero a la derecha sumó 7: la operación tiene signo opuesto en cada lado"
+    }
+  },
+  {
+    "id": "distributiva_con_parentesis_que_cambia_de_signo_no_es_distributiva",
+    "grupo": "distributiva",
+    "descripcion": "3(x + 4) -> 3(x - 4) no es un error de distributiva: aún no distribuyó.",
+    "s_i": "3(x + 4) = 24",
+    "s_i_mas_1": "3(x - 4) = 24",
+    "categoria_esperada": "simplificacion_aritmetica"
+  },
+  {
+    "id": "dividir_con_divisor_decimal",
+    "grupo": "division",
+    "descripcion": "Divisor decimal escrito por el estudiante.",
+    "s_i": "4x = 20",
+    "s_i_mas_1": "x = 20/0.5",
+    "categoria_esperada": "division_coeficiente_equivocado",
+    "detalles": {
+      "explicacion": "dividió entre 1/2 en vez de dividir entre el coeficiente 4"
+    }
+  },
+  {
+    "id": "dividir_con_divisor_entero_distinto_del_coeficiente",
+    "grupo": "division",
+    "descripcion": "El divisor se conserva tal como lo escribió: 20/5 no se convierte en 4.",
+    "s_i": "4x = 20",
+    "s_i_mas_1": "x = 20/5",
+    "categoria_esperada": "division_coeficiente_equivocado",
+    "detalles": {
+      "explicacion": "dividió entre 5 en vez de dividir entre el coeficiente 4"
+    }
   }
 ]

@@ -33,20 +33,22 @@ es cómo se genera la pista pedagógica.
 │   │   ├── llm.py            # arquitectura propuesta (usa un LLM)
 │   │   └── plantillas.py     # versión de referencia (plantillas contextualizadas, sin LLM)
 │   └── api/              # Backend FastAPI que expone el sistema
-├── tests/                # Pruebas (verificador, discrepancia, diagnóstico y benchmark)
+├── tests/                # Pruebas (verificador, entrada, API, diagnóstico, benchmark y prueba ciega)
 │   └── datos/            # ejemplos de las pruebas en JSON (no están escritos dentro del código)
 ├── benchmark/
 │   ├── casos/dev/        # 100 casos de desarrollo (para diseñar y probar las reglas)
 │   ├── casos/test/       # 50 casos de evaluación final (no se usan para diseñar reglas)
 │   ├── casos/ampliado/   # 100 casos adicionales generados por un LLM, conjunto aparte (ver más abajo)
 │   ├── casos/variaciones/# 2 lotes de 50 variaciones de AMP-010 y AMP-071 (otros números)
+│   ├── casos/prueba_ciega/ # 100 casos generados por un LLM solo para medir (no se ajusta nada con ellos)
 │   ├── generar_variaciones.py  # crea las variaciones con números al azar (semilla fija)
-│   ├── validar_casos.py  # comprueba la consistencia matemática de los casos
+│   ├── validar_casos.py  # comprueba la consistencia matemática de los casos (enunciado, pasos, despeje)
 │   └── README.md         # formato de los casos y cómo se elaboraron
 ├── evaluacion/
 │   ├── evaluar_diagnostico.py  # exactitud y macro-F1 sobre dev (o test, una sola vez)
 │   ├── evaluar_ampliado.py     # lo mismo sobre el conjunto ampliado, separado en ajuste y reservados
 │   ├── evaluar_variaciones.py  # el diagnóstico sobre las variaciones
+│   ├── evaluar_prueba_ciega.py # mide el diagnóstico sobre la prueba ciega (guarda huellas del código y los casos)
 │   ├── medir_latencia.py       # latencia del verificador y del diagnóstico (dev)
 │   └── resultados/             # resultados guardados con fecha + notas de los ajustes
 └── data/
@@ -58,9 +60,9 @@ es cómo se genera la pista pedagógica.
 | Componente | Estado |
 |---|---|
 | Verificador simbólico | Implementado y probado (casos válidos, inválidos y errores de parseo). La discrepancia conserva las expresiones de cada lado sin expandir y también el texto de las ecuaciones tal como se escribieron (SymPy simplifica y pierde, por ejemplo, el paréntesis de `3x + (x - 7)` o el `- 7` de `2x + 7 - 7`). |
-| Benchmark | 150 casos (100 dev + 50 test), elaborados y etiquetados por la autora y validados con el verificador. Además, un conjunto ampliado de 100 casos generados por un LLM y etiquetados por la autora, y 100 variaciones (ver abajo). |
+| Benchmark | 150 casos (100 dev + 50 test), elaborados y etiquetados por la autora y validados con el verificador. Además, un conjunto ampliado de 100 casos generados por un LLM y etiquetados por la autora, 100 variaciones y una prueba ciega de 100 casos generados por un LLM solo para medir (ver abajo). El validador comprueba también que el enunciado coincida con la ecuación inicial y que el último paso sea el despeje (`x = valor`) y satisfaga esa ecuación. |
 | Módulo de diagnóstico | Implementado: árbol de decisión de 6 categorías (distributiva, un solo lado, aritmética, división, signo, indeterminado) más detectores de errores que la taxonomía no tiene como categoría (orden de operaciones, factor común mal sacado, cada lado por su propio denominador), que se informan como `indeterminado` con su explicación. Sobre los casos dev: 100/100. |
-| Evaluación del diagnóstico | Dev 100/100. El conjunto test (50) está reservado para una única evaluación final. Conjunto ampliado y variaciones: ver las secciones de abajo. |
+| Evaluación del diagnóstico | Dev 100/100. El conjunto test (50) está reservado para una única evaluación final. **Prueba ciega: 83/100, macro-F1 0.83** (medición sin ajustes). Conjunto ampliado y variaciones: ver las secciones de abajo. |
 | Generador con plantillas | Esqueleto: falta rellenar las variables de cada plantilla. |
 | Generador con LLM | Esqueleto: el prompt está diseñado; falta la integración con la API. |
 | API | `/salud` y `/verificar` (verificador → diagnóstico); una ecuación mal escrita responde HTTP 422 (error de formato), no `valido=false`; aún sin generador. Toda entrada pasa por `src/verificador/entrada.py` antes de llegar a SymPy (solo expresiones de primer grado, con límites de longitud y complejidad). |
@@ -84,8 +86,10 @@ pytest
 ```bash
 python benchmark/validar_casos.py                  # casos dev
 python benchmark/validar_casos.py benchmark/casos/test
-python benchmark/validar_casos.py benchmark/casos/variaciones
+python benchmark/validar_casos.py benchmark/casos/prueba_ciega
 ```
+
+Las variaciones son de un solo paso y no terminan en `x = valor`, por eso solo se validan desde `generar_variaciones.py`, que desactiva la comprobación del despeje (`validar_caso(..., exigir_despeje=False)`).
 
 ## Evaluar el diagnóstico
 
@@ -95,6 +99,7 @@ python evaluacion/evaluar_diagnostico.py --conjunto test --evaluacion-final   # 
 python evaluacion/evaluar_ampliado.py --guardar --etiqueta _ajustado      # conjunto ampliado
 python evaluacion/evaluar_variaciones.py variaciones_nuevas.json --guardar
 python evaluacion/medir_latencia.py --repeticiones 10 --guardar   # latencia (no usa test)
+python evaluacion/evaluar_prueba_ciega.py --medicion-sin-ajuste --guardar   # prueba ciega (solo mide)
 ```
 
 Cada comando imprime la matriz de confusión, la precisión, el recall y el F1 por categoría y el macro-F1.
@@ -106,6 +111,7 @@ uvicorn src.api.main:app --reload
 ```
 
 Luego abre http://127.0.0.1:8000/docs para ver la documentación interactiva de la API.
+
 
 
 ## Benchmark
@@ -177,7 +183,7 @@ Resultados (`evaluacion/resultados/`):
 
 Los fallos se clasifican en *seguros* (responde `indeterminado` o falla sin clasificar) y *peligrosos* (devuelve otra categoría). El caso que sigue mal es AMP-071, una coincidencia numérica (ver variaciones). Como las reglas se ajustaron mirando este conjunto, la cifra del diagnóstico ajustado es optimista: la medición más limpia es la de los casos reservados y la del lote nuevo de variaciones.
 
-El detalle de qué regla se cambió por qué caso está en `evaluacion/resultados/ajustes_tras_conjunto_ampliado.md`. Dev sigue en 100/100 y pasan las 710 pruebas.
+El detalle de qué regla se cambió por qué caso está en `evaluacion/resultados/ajustes_tras_conjunto_ampliado.md`. Dev sigue en 100/100 y pasan las 815 pruebas.
 
 ## Variaciones de los casos que fallan
 
@@ -191,11 +197,36 @@ La verificación es por equivalencia de solución, así que dos errores en un mi
 
 AMP-071 era en buena parte coincidencia numérica (con otros números se queda en `indeterminado`). AMP-010 no: faltaba reconocer que el estudiante multiplicó cada lado por su propio denominador, y se agregó esa regla.
 
+## Prueba ciega (100 casos generados por un LLM, solo para medir)
+
+Tercer conjunto aparte, pedido por el tutor. A diferencia del ampliado, **no se ajusta nada con él**: el diagnóstico queda congelado antes de medir y los fallos se informan pero no se usan para cambiar reglas. Los casos los generó un LLM en una conversación aparte, sin acceso al repositorio, con el prompt de `benchmark/casos/prueba_ciega/PROMPT_generacion.md`. La categoría la asigna la autora antes de ver la respuesta del diagnóstico.
+
+| Archivo | Contenido |
+|---|---|
+| `benchmark/casos/prueba_ciega/prueba_ciega.json` | Los 100 casos (16 por categoría, 20 `indeterminado`; 50 variante_nueva, 30 estructura_nueva, 10 combinado, 10 fuera_de_taxonomia). |
+| `benchmark/casos/prueba_ciega/PROMPT_generacion.md` | El prompt con el que se pidieron los casos. |
+| `evaluacion/evaluar_prueba_ciega.py` | Valida los casos, mide el diagnóstico y guarda el resultado con la huella (sha256) del código del verificador, del diagnóstico y de la taxonomía, y la de los casos. Si cambian en una corrida posterior, avisa que la prueba dejó de ser ciega. Exige `--medicion-sin-ajuste`. |
+| `tests/test_prueba_ciega.py` | 104 pruebas: casos consistentes, ids únicos, ecuaciones iniciales distintas de las de otros conjuntos y comportamiento del script. |
+
+Resultado (`evaluacion/resultados/prueba_ciega_2026-10-26.txt`, código de huella `6104dd981861a6ce`, casos `b08ec1075f6bacb4`): **83/100, macro-F1 0.83**.
+
+| Categoría | Casos | Precisión | Recall | F1 |
+|---|---|---|---|---|
+| Error de signo | 16 | 0.84 | 1.00 | 0.91 |
+| Distributiva | 16 | 0.81 | 0.81 | 0.81 |
+| Operación en un solo lado | 16 | 1.00 | 0.94 | 0.97 |
+| Simplificación aritmética | 16 | 0.79 | 0.94 | 0.86 |
+| División por coeficiente | 16 | 1.00 | 0.62 | 0.77 |
+| Indeterminado | 20 | 0.67 | 0.70 | 0.68 |
+
+De los 17 fallos, 7 fueron seguros (responde `indeterminado`) y 10 peligrosos (otra categoría). Los puntos débiles son la división por coeficiente (5 de sus 16 casos quedaron en `indeterminado`) y `indeterminado`. Con 100 casos, el intervalo de confianza del 95 % de la exactitud va de 0.74 a 0.89. Si se cambia código o etiquetas después de esta medición, deja de ser una prueba ciega y hay que declararlo como ajuste.
+
 ## Próximos pasos
 
 - [x] Completar las reglas del árbol de decisión en `src/diagnostico/diagnostico.py` y probarlas con los casos dev.
 - [x] Agregar pruebas específicas del módulo de diagnóstico (`tests/datos/diagnostico.json`).
 - [x] Probar el diagnóstico con un conjunto aparte (ampliado) y con variaciones de los casos que fallan.
+- [x] Medir el diagnóstico congelado con una prueba ciega de 100 casos nuevos (83/100).
 - [ ] Implementar `src/generador/plantillas.py` con las plantillas contextualizadas por categoría.
 - [ ] Implementar `src/generador/llm.py` con la integración a la API del LLM.
 - [ ] Evaluación final: exactitud y macro-F1 sobre los casos test (una sola vez), y rúbrica de calidad pedagógica con docentes.

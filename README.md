@@ -41,9 +41,7 @@ es cómo se genera la pista pedagógica.
 │   ├── casos/ampliado/   # 100 casos adicionales generados por un LLM, conjunto aparte (ver más abajo)
 │   ├── casos/variaciones/# 2 lotes de 50 variaciones de AMP-010 y AMP-071 (otros números)
 │   ├── casos/prueba_ciega/ # 100 casos generados por un LLM solo para medir (no se ajusta nada con ellos)
-│   ├── generar_variaciones.py  # crea las variaciones con números al azar (semilla fija)
 │   ├── validar_casos.py  # comprueba la consistencia matemática de los casos (enunciado, pasos, despeje)
-│   └── README.md         # formato de los casos y cómo se elaboraron
 ├── evaluacion/
 │   ├── evaluar_diagnostico.py  # exactitud y macro-F1 sobre dev (o test, una sola vez)
 │   ├── evaluar_ampliado.py     # lo mismo sobre el conjunto ampliado, separado en ajuste y reservados
@@ -204,7 +202,6 @@ Tercer conjunto aparte, pedido por el tutor. A diferencia del ampliado, **no se 
 | Archivo | Contenido |
 |---|---|
 | `benchmark/casos/prueba_ciega/prueba_ciega.json` | Los 100 casos (16 por categoría, 20 `indeterminado`; 50 variante_nueva, 30 estructura_nueva, 10 combinado, 10 fuera_de_taxonomia). |
-| `benchmark/casos/prueba_ciega/PROMPT_generacion.md` | El prompt con el que se pidieron los casos. |
 | `evaluacion/evaluar_prueba_ciega.py` | Valida los casos, mide el diagnóstico y guarda el resultado con la huella (sha256) del código del verificador, del diagnóstico y de la taxonomía, y la de los casos. Si cambian en una corrida posterior, avisa que la prueba dejó de ser ciega. Exige `--medicion-sin-ajuste`. |
 | `tests/test_prueba_ciega.py` | 104 pruebas: casos consistentes, ids únicos, ecuaciones iniciales distintas de las de otros conjuntos y comportamiento del script. |
 

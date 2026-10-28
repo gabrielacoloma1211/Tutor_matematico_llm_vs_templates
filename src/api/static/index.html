@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tu compañero para resolver ecuaciones</title>
+<style>
+  :root {
+    --crema: #f7efdf;
+    --cuadricula: #e6dbc2;
+    --hoja: #fffaf0;
+    --negro: #14120f;
+    --apagado: #6b6355;
+    --amarillo: #f3d55b;
+    --rosa: #ecb6dc;
+    --rosa-fuerte: #c4478f;
+    --verde: #97ab68;
+    --verde-oscuro: #3f5a1d;
+    --azul: #b9c7ee;
+    --linea: #cfc3a8;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    --sans: "Avenir Next", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { color-scheme: light; }
+  body {
+    margin: 0;
+    background-color: var(--crema);
+    background-image:
+      linear-gradient(var(--cuadricula) 1px, transparent 1px),
+      linear-gradient(90deg, var(--cuadricula) 1px, transparent 1px);
+    background-size: 28px 28px;
+    color: var(--negro);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  .pagina { max-width: 46rem; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
+  header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1.25rem 2rem; margin-bottom: 1.5rem; }
+  h1 { font-size: 2.25rem; line-height: 1.05; margin: 0; letter-spacing: -0.03em; font-weight: 750; max-width: 24rem; }
+
+  fieldset.modo { border: 0; margin: 0; padding: 0; }
+  fieldset.modo legend { padding: 0; font-size: .9375rem; font-weight: 600; margin-bottom: .4rem; }
+  .selector { display: inline-flex; gap: .4rem; }
+  .selector label { position: relative; cursor: pointer; }
+  .selector input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .selector span { display: block; padding: .4rem 1.1rem; border-radius: 999px; font-weight: 650; font-size: .95rem; border: 1.5px dashed var(--negro); background: transparent; }
+  .selector input:checked + span { background: var(--negro); color: #fff; border-style: solid; }
+  .selector input:focus-visible + span { outline: 3px solid var(--rosa-fuerte); outline-offset: 2px; }
+
+  /* la hoja: margen rosa a la izquierda, como un cuaderno */
+  .hoja { background: var(--hoja); border: 2px solid var(--negro); border-radius: 22px; padding: 1.5rem 1.25rem 1.5rem 4.25rem; position: relative; overflow: hidden; }
+  .hoja::before { content: ""; position: absolute; top: 0; bottom: 0; left: 3.25rem; width: 2px; background: var(--rosa-fuerte); opacity: .6; }
+  .consigna { margin: 0 0 1.25rem; font-size: 1.125rem; max-width: 34rem; }
+
+  ol.pasos { list-style: none; margin: 0; padding: 0; }
+  .paso { position: relative; padding: .5rem 0; }
+  .paso .n { position: absolute; left: -3.25rem; top: .75rem; width: 2.25rem; text-align: right; font-family: var(--mono); font-size: .85rem; color: var(--apagado); }
+  .ecuacion { font-family: var(--mono); font-size: 1.5rem; color: var(--negro); letter-spacing: .01em; overflow-wrap: anywhere; }
+  .paso.ok .ecuacion::after { content: "\2713"; color: var(--verde-oscuro); font-family: var(--sans); font-size: 1.1rem; margin-left: .75rem; font-weight: 800; }
+
+  .intento .ecuacion { text-decoration: underline wavy var(--rosa-fuerte) 2px; text-underline-offset: 6px; }
+  .nota { margin: .75rem 0 .25rem; padding: 1rem 1.25rem; background: var(--rosa); border-radius: 18px; max-width: 36rem; }
+  .nota .tipo { font-weight: 750; font-size: 1.125rem; margin: 0 0 .25rem; }
+  .nota p { margin: 0; }
+  .nota .meta { margin-top: .6rem; font-size: .8125rem; color: #4a3b44; }
+  .nota.neutra { background: var(--azul); }
+  .nota.neutra .meta { color: #3b4260; }
+  .nota.final { background: var(--verde); }
+  .nota.final .meta { color: #2c3a14; }
+  .nota button { margin-top: .6rem; }
+
+  .entrada { margin-top: 1rem; padding-top: 1rem; border-top: 2px dashed var(--linea); }
+  .entrada label { display: block; font-weight: 650; margin-bottom: .4rem; }
+  .fila { display: flex; gap: .5rem; flex-wrap: wrap; }
+  input[type=text] { flex: 1 1 14rem; min-width: 0; font-family: var(--mono); font-size: 1.35rem; color: var(--negro); padding: .55rem .9rem; background: #fff; border: 2px solid var(--negro); border-radius: 14px; }
+  input[type=text]:focus-visible { outline: 3px solid var(--rosa-fuerte); outline-offset: 2px; }
+  button { font: inherit; font-weight: 700; cursor: pointer; padding: .55rem 1.3rem; border-radius: 999px; border: 2px solid var(--negro); background: var(--negro); color: #fff; }
+  button.suave { background: transparent; color: var(--negro); border-style: dashed; }
+  button:focus-visible { outline: 3px solid var(--rosa-fuerte); outline-offset: 2px; }
+  button:disabled { opacity: .6; cursor: progress; }
+  .teclas { display: flex; gap: .4rem; margin-top: .7rem; flex-wrap: wrap; }
+  .teclas button { font-family: var(--mono); font-size: 1.05rem; min-width: 2.7rem; padding: .3rem .6rem; background: var(--amarillo); color: var(--negro); border: 2px solid var(--negro); border-radius: 12px; }
+  .pie { margin-top: 1.5rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .ayuda { font-size: .875rem; color: var(--apagado); margin: 0; max-width: 30rem; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .intento .ecuacion { animation: subrayar .5s ease-out; }
+    @keyframes subrayar { from { text-decoration-color: transparent; } to { text-decoration-color: var(--rosa-fuerte); } }
+  }
+  @media (max-width: 30rem) {
+    h1 { font-size: 1.85rem; }
+    .hoja { padding-left: 3rem; }
+    .hoja::before { left: 2.4rem; }
+    .paso .n { left: -2.7rem; width: 1.75rem; }
+    .ecuacion { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+<div class="pagina">
+  <header>
+    <h1>Tu compañero para resolver ecuaciones</h1>
+    <fieldset class="modo">
+      <legend>¿Quién quieres que te ayude con este ejercicio?</legend>
+      <div class="selector" role="radiogroup">
+        <label><input type="radio" name="modo" value="plantilla" checked><span>Plantillas</span></label>
+        <label><input type="radio" name="modo" value="llm"><span>IA</span></label>
+      </div>
+    </fieldset>
+  </header>
+
+  <main class="hoja" id="hoja">
+    <p class="consigna" id="consigna">¡Hola! Escribe la ecuación que quieres resolver y yo te voy diciendo cómo vas, paso a paso.</p>
+    <ol class="pasos" id="pasos"></ol>
+    <div id="avisos" aria-live="polite"></div>
+
+    <form class="entrada" id="forma" autocomplete="off">
+      <label for="campo" id="etiqueta">¿Qué ecuación vamos a resolver?</label>
+      <div class="fila">
+        <input type="text" id="campo" inputmode="text" spellcheck="false" autocapitalize="off" placeholder="3x - 4 = 11" maxlength="100">
+        <button type="submit" id="enviar">Empezar</button>
+      </div>
+      <div class="teclas" aria-label="Teclas rápidas">
+        <button type="button" data-t="x">x</button>
+        <button type="button" data-t="(">(</button>
+        <button type="button" data-t=")">)</button>
+        <button type="button" data-t="/">/</button>
+        <button type="button" data-t="=">=</button>
+      </div>
+    </form>
+
+    <div class="pie">
+      <p class="ayuda">Puedes escribir 3x o 3*x, fracciones como 5/2 y decimales con punto.</p>
+      <button type="button" class="suave" id="reiniciar">Otra ecuación</button>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var pasos = [];
+  var terminado = false, fallo = false, intento = null;
+  var $ = function (id) { return document.getElementById(id); };
+  var lista = $("pasos"), avisos = $("avisos"), campo = $("campo"), enviar = $("enviar");
+
+  function modo() { return document.querySelector("input[name=modo]:checked").value; }
+  function limpiar(t) {
+    return t.replace(/[−–]/g, "-").replace(/[×·]/g, "*").replace(/,/g, ".").replace(/\s+/g, " ").trim();
+  }
+  function el(tag, cls, texto) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (texto !== undefined) e.textContent = texto;
+    return e;
+  }
+  function linea(texto, cls, n) {
+    var li = el("li", "paso " + (cls || ""));
+    li.appendChild(el("span", "n", n === undefined ? "" : String(n)));
+    li.appendChild(el("div", "ecuacion", texto));
+    return li;
+  }
+  function dibujar() {
+    lista.textContent = "";
+    pasos.forEach(function (p, i) { lista.appendChild(linea(p, i === 0 ? "" : "ok", i === 0 ? "" : i)); });
+    if (fallo && intento) lista.appendChild(linea(intento, "intento"));
+    var inicial = pasos.length === 0;
+    $("etiqueta").textContent = fallo ? "Inténtalo de nuevo"
+      : inicial ? "¿Qué ecuación vamos a resolver?" : "¿Cuál es tu siguiente paso?";
+    enviar.textContent = inicial ? "Empezar" : fallo ? "Probar otra vez" : "Revisar paso";
+    campo.placeholder = inicial ? "3x - 4 = 11" : "3x = 11 + 4";
+    $("consigna").hidden = !inicial;
+    $("forma").hidden = terminado;
+  }
+  function aviso(tipo, cls, mensaje, meta, extra) {
+    avisos.textContent = "";
+    var n = el("div", "nota " + (cls || ""));
+    n.appendChild(el("p", "tipo", tipo));
+    if (mensaje) n.appendChild(el("p", "", mensaje));
+    if (meta) n.appendChild(el("p", "meta", meta));
+    if (extra) n.appendChild(extra);
+    avisos.appendChild(n);
+  }
+  function mensajeDeError(cuerpo) {
+    var d = cuerpo && cuerpo.detail;
+    if (d && typeof d === "object" && !Array.isArray(d) && d.mensaje) return d.mensaje;
+    return "Revisa que cada paso sea una ecuación con un solo signo = y que solo use números, x, + - * / y paréntesis.";
+  }
+  function esResultado(t) { return /^x=-?[\d.\/]+$/.test(t.replace(/\s/g, "")); }
+
+  $("forma").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var texto = limpiar(campo.value);
+    if (!texto) { aviso("Escribe una ecuación", "neutra", "El campo está vacío."); campo.focus(); return; }
+    if (pasos.length === 0) {
+      if (texto.split("=").length !== 2) { aviso("Falta el signo =", "neutra", "Una ecuación tiene dos lados separados por un solo signo =."); return; }
+      enviar.disabled = true; enviar.textContent = "Revisando…";
+      fetch("/verificar", { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ s_i: texto, s_i_mas_1: texto }) })
+      .then(function (r) { return r.json().then(function (c) { return { r: r, c: c }; }); })
+      .then(function (x) {
+        enviar.disabled = false;
+        if (x.r.status === 422) { dibujar(); aviso("Hmm, no puedo empezar con esa ecuación", "neutra", mensajeDeError(x.c)); campo.focus(); return; }
+        pasos.push(texto); avisos.textContent = ""; campo.value = ""; dibujar(); campo.focus();
+      }).catch(function () { enviar.disabled = false; dibujar(); aviso("No pude conectarme con el tutor", "neutra", "Revisa que el servidor esté encendido e inténtalo de nuevo."); });
+      return;
+    }
+    var anterior = pasos[pasos.length - 1];
+    enviar.disabled = true; enviar.textContent = "Revisando…";
+    fetch("/verificar", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ s_i: anterior, s_i_mas_1: texto, modo: modo() })
+    }).then(function (r) { return r.json().then(function (c) { return { r: r, c: c }; }); })
+    .then(function (x) {
+      if (x.r.status === 422) { fallo = true; intento = null; dibujar(); aviso("Hmm, no entendí ese paso", "neutra", mensajeDeError(x.c)); return; }
+      if (x.r.status === 503) {
+        fallo = true; intento = null; dibujar();
+        var cambiar = el("button", "suave", "Usar plantillas");
+        cambiar.type = "button";
+        cambiar.onclick = function () { document.querySelector("input[name=modo][value=plantilla]").checked = true; avisos.textContent = ""; };
+        aviso("La IA no está disponible ahora", "neutra", "No pude pedirle la pista. Puedes intentar de nuevo o usar las plantillas.", null, cambiar);
+        return;
+      }
+      if (!x.r.ok) { fallo = true; intento = null; dibujar(); aviso("Algo falló", "neutra", "El servidor no pudo revisar el paso. Intenta de nuevo."); return; }
+      var c = x.c;
+      if (c.valido) {
+        fallo = false; intento = null; pasos.push(texto); campo.value = "";
+        if (esResultado(texto)) {
+          terminado = true; dibujar();
+          aviso("¡Muy bien! Llegaste al resultado", "final", "Cada paso que escribiste conserva la solución de la ecuación.");
+        } else { dibujar(); avisos.textContent = ""; }
+        campo.focus();
+        return;
+      }
+      fallo = true; intento = texto; dibujar();
+      var g = c.generacion || {};
+      var meta = (c.modo === "llm" && g.usado_llm ? "Pista de la IA" : "Pista de plantillas") +
+        (g.latencia_ms !== undefined ? " · " + (g.latencia_ms >= 1000 ? (g.latencia_ms / 1000).toFixed(1) + " s" : g.latencia_ms < 1 ? "menos de 1 ms" : Math.round(g.latencia_ms) + " ms") : "") +
+        (c.categoria_nombre ? " · " + c.categoria_nombre : "");
+      aviso("Una pista para ti", "", c.pista, meta);
+      campo.focus();
+    }).catch(function () {
+      fallo = true; intento = null; dibujar(); aviso("No pude conectarme con el tutor", "neutra", "Revisa que el servidor esté encendido e inténtalo de nuevo.");
+    }).then(function () { enviar.disabled = false; dibujar(); });
+  });
+
+  document.querySelectorAll(".teclas button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var s = campo.selectionStart, e = campo.selectionEnd, v = campo.value;
+      campo.value = v.slice(0, s) + b.dataset.t + v.slice(e);
+      campo.focus(); campo.selectionStart = campo.selectionEnd = s + b.dataset.t.length;
+    });
+  });
+  $("reiniciar").addEventListener("click", function () { pasos = []; terminado = false; fallo = false; intento = null; avisos.textContent = ""; campo.value = ""; dibujar(); campo.focus(); });
+  dibujar();
+})();
+</script>
+</body>
+</html>

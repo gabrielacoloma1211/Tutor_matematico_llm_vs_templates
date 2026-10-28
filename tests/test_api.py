@@ -65,3 +65,71 @@ def test_un_paso_matematicamente_incorrecto_responde_200_con_diagnostico():
 
 def test_salud():
     assert cliente.get("/salud").json() == {"estado": "ok"}
+
+
+# ---- generación de la pista (modo plantilla / llm) ----
+from types import SimpleNamespace
+
+from src.generador import llm as generador_llm
+
+
+def _con_modo(paso, modo):
+    return cliente.post("/verificar", json={"s_i": paso["s_i"], "s_i_mas_1": paso["s_i_mas_1"], "modo": modo})
+
+
+def test_por_defecto_la_pista_es_de_plantilla():
+    cuerpo = _post(DATOS["paso_invalido"]).json()
+    assert cuerpo["modo"] == "plantilla"
+    assert cuerpo["pista"] and "{" not in cuerpo["pista"]
+    assert cuerpo["generacion"]["usado_llm"] is False
+
+
+def test_un_paso_valido_no_trae_pista():
+    cuerpo = _post(DATOS["paso_valido"]).json()
+    assert cuerpo["pista"] is None
+
+
+def test_un_modo_desconocido_responde_422():
+    assert _con_modo(DATOS["paso_invalido"], "otro").status_code == 422
+
+
+def test_modo_llm_devuelve_la_pista_y_el_registro(monkeypatch):
+    falso = SimpleNamespace(texto="Pista de prueba.", usado_llm=True, latencia_ms=812.34,
+                            modelo="modelo-falso", tokens_entrada=100, tokens_salida=25)
+    monkeypatch.setattr(generador_llm, "generar_retroalimentacion_llm", lambda *a, **k: falso)
+    cuerpo = _con_modo(DATOS["paso_invalido"], "llm").json()
+    assert cuerpo["modo"] == "llm" and cuerpo["pista"] == "Pista de prueba."
+    assert cuerpo["generacion"] == {"latencia_ms": 812.3, "usado_llm": True, "modelo": "modelo-falso",
+                                    "tokens_entrada": 100, "tokens_salida": 25}
+    assert cuerpo["categoria_id"] == DATOS["paso_invalido"]["categoria_id"]
+
+
+def test_modo_llm_sin_servicio_responde_503(monkeypatch):
+    def falla(*a, **k):
+        raise generador_llm.LLMNoDisponible("sin clave")
+    monkeypatch.setattr(generador_llm, "generar_retroalimentacion_llm", falla)
+    r = _con_modo(DATOS["paso_invalido"], "llm")
+    assert r.status_code == 503
+    assert r.json()["detail"]["tipo"] == "llm_no_disponible"
+
+
+def test_la_interfaz_se_sirve_en_la_raiz():
+    r = cliente.get("/")
+    assert r.status_code == 200 and "text/html" in r.headers["content-type"]
+
+
+# ---- ecuaciones con solución x = 0: fuera del alcance (criterio ambiguo) ----
+SOLUCION_CERO = DATOS["solucion_cero"]
+
+
+@pytest.mark.parametrize("entrada", SOLUCION_CERO, ids=[e["id"] for e in SOLUCION_CERO])
+def test_una_ecuacion_con_solucion_cero_responde_422(entrada):
+    r = _post(entrada)
+    assert r.status_code == 422
+    assert r.json()["detail"]["tipo"] == "entrada_no_permitida"
+    assert "valido" not in r.json()
+
+
+def test_una_ecuacion_normal_enviada_como_paso_inicial_responde_valido():
+    paso = DATOS["paso_valido"]
+    assert _post({"s_i": paso["s_i"], "s_i_mas_1": paso["s_i"]}).json()["valido"] is True

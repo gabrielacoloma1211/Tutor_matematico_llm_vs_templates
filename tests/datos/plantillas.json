@@ -1,0 +1,51 @@
+[
+  {
+    "id": "AMP-001",
+    "s_i": "3x + 8 = -13",
+    "s_i_mas_1": "3x = 13 - 8",
+    "categoria_esperada": "error_signo",
+    "retroalimentacion_esperada": "Revisa el signo del término -13: al moverlo al otro lado de la ecuación, su signo debe cambiar."
+  },
+  {
+    "id": "AMP-005",
+    "s_i": "2(3(x - 1) + 5) = 22",
+    "s_i_mas_1": "6(2x - 2) + 10 = 22",
+    "categoria_esperada": "distributiva_incorrecta",
+    "retroalimentacion_esperada": "Al aplicar la propiedad distributiva, recuerda multiplicar 2 por cada término dentro del paréntesis, no solo por el primero."
+  },
+  {
+    "id": "AMP-008",
+    "s_i": "8 - 3(x - 2) = x + 4",
+    "s_i_mas_1": "5(x - 2) = x + 4",
+    "categoria_esperada": "indeterminado",
+    "retroalimentacion_esperada": "Revisa este paso con más cuidado. No pudimos identificar el tipo exacto de error."
+  },
+  {
+    "id": "AMP-011",
+    "s_i": "0.2x = 1.8",
+    "s_i_mas_1": "2x = 1.8",
+    "categoria_esperada": "operacion_un_lado",
+    "retroalimentacion_esperada": "Recuerda que cualquier operación que realices debe aplicarse a ambos lados de la ecuación para mantener la igualdad."
+  },
+  {
+    "id": "AMP-013",
+    "s_i": "2.5x - 0.5x = 0.7 + 1.3",
+    "s_i_mas_1": "2x = 1.10",
+    "categoria_esperada": "simplificacion_aritmetica",
+    "retroalimentacion_esperada": "Revisa el cálculo numérico de este paso: la operación que aplicaste es correcta, pero el resultado no lo es."
+  },
+  {
+    "id": "AMP-019",
+    "s_i": "0.5x = 3",
+    "s_i_mas_1": "x = 3/5",
+    "categoria_esperada": "division_coeficiente_equivocado",
+    "retroalimentacion_esperada": "Para despejar la incógnita, debes dividir ambos lados entre el coeficiente que la acompaña, en este caso 0.5."
+  },
+  {
+    "id": "AMP-042",
+    "s_i": "x/2 - 3 = x/4 + 1",
+    "s_i_mas_1": "2x + 12 = x + 4",
+    "categoria_esperada": "error_signo",
+    "retroalimentacion_esperada": "Revisa el signo de -12: al multiplicar por 4, el signo del término se conserva."
+  }
+]

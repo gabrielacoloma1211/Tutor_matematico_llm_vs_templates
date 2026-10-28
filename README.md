@@ -42,7 +42,6 @@ es cómo se genera la pista pedagógica.
 │   ├── casos/variaciones/# 2 lotes de 50 variaciones de AMP-010 y AMP-071 (otros números)
 │   ├── casos/prueba_ciega/ # 100 casos generados por un LLM solo para medir (no se ajusta nada con ellos)
 │   ├── validar_casos.py  # comprueba la consistencia matemática de los casos (enunciado, pasos, despeje)
-│   └── README.md         # formato de los casos y cómo se elaboraron
 ├── evaluacion/
 │   ├── evaluar_diagnostico.py  # exactitud y macro-F1 sobre dev (o test, una sola vez)
 │   ├── evaluar_ampliado.py     # lo mismo sobre el conjunto ampliado, separado en ajuste y reservados
@@ -232,7 +231,7 @@ Si falta un dato, devuelve el mensaje general en lugar de dejar una `{variable}`
 
 ## Prueba ciega (100 casos generados por un LLM, solo para medir)
 
-Tercer conjunto aparte, pedido por el tutor. A diferencia del ampliado, **no se ajusta nada con él**: el diagnóstico queda congelado antes de medir y los fallos se informan pero no se usan para cambiar reglas. Los casos los generó un LLM en una conversación aparte, sin acceso al repositorio, con el prompt de `benchmark/casos/prueba_ciega/PROMPT_generacion.md`. La categoría la asigna la autora antes de ver la respuesta del diagnóstico.
+Tercer conjunto aparte, pedido por el tutor. A diferencia del ampliado, **no se ajusta nada con él**: el diagnóstico queda congelado antes de medir y los fallos se informan pero no se usan para cambiar reglas. La categoría la asigna la autora antes de ver la respuesta del diagnóstico.
 
 | Archivo | Contenido |
 |---|---|

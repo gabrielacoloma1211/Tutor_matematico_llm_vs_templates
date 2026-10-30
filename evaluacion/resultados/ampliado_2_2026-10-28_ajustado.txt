@@ -1,0 +1,60 @@
+== TODOS: 100 casos | exactitud 96/100 = 0.96 | macro-F1 0.96
+            SIGNO DISTRIB  UNLADO   ARITM     DIV   INDET
+SIGNO          16       0       0       0       0       0
+DISTRIB         0      17       0       0       0       0
+UNLADO          0       0      16       0       0       0
+ARITM           0       0       0      15       0       1
+DIV             0       0       0       0      14       0
+INDET           1       2       0       0       0      18
+categoría  casos   prec  recall    F1
+SIGNO         16   0.94    1.00  0.97
+DISTRIB       17   0.89    1.00  0.94
+UNLADO        16   1.00    1.00  1.00
+ARITM         16   1.00    0.94  0.97
+DIV           14   1.00    1.00  1.00
+INDET         21   0.95    0.86  0.90
+
+== AJUSTE: 75 casos | exactitud 73/75 = 0.97 | macro-F1 0.97
+            SIGNO DISTRIB  UNLADO   ARITM     DIV   INDET
+SIGNO          12       0       0       0       0       0
+DISTRIB         0      13       0       0       0       0
+UNLADO          0       0      12       0       0       0
+ARITM           0       0       0      12       0       0
+DIV             0       0       0       0      12       0
+INDET           1       1       0       0       0      12
+categoría  casos   prec  recall    F1
+SIGNO         12   0.92    1.00  0.96
+DISTRIB       13   0.93    1.00  0.96
+UNLADO        12   1.00    1.00  1.00
+ARITM         12   1.00    1.00  1.00
+DIV           12   1.00    1.00  1.00
+INDET         14   1.00    0.86  0.92
+
+== RESERVADOS: 25 casos | exactitud 23/25 = 0.92 | macro-F1 0.93
+            SIGNO DISTRIB  UNLADO   ARITM     DIV   INDET
+SIGNO           4       0       0       0       0       0
+DISTRIB         0       4       0       0       0       0
+UNLADO          0       0       4       0       0       0
+ARITM           0       0       0       3       0       1
+DIV             0       0       0       0       2       0
+INDET           0       1       0       0       0       6
+categoría  casos   prec  recall    F1
+SIGNO          4   1.00    1.00  1.00
+DISTRIB        4   0.80    1.00  0.89
+UNLADO         4   1.00    1.00  1.00
+ARITM          4   1.00    0.75  0.86
+DIV            2   1.00    1.00  1.00
+INDET          7   0.86    0.86  0.86
+
+== Por tipo de novedad (seguro = responde indeterminado o falla sin clasificar; peligroso = otra categoría)
+tipo de novedad      casos  aciertos  seguros  peligrosos
+variante_nueva          50        50        0           0
+estructura_nueva        30        29        1           0
+combinado               10         8        0           2
+fuera_de_taxonomia      10         9        0           1
+
+== Casos mal clasificados (4)
+  AMP2-023 tipo combinado          autora: INDET    diagnóstico: SIGNO
+  AMP2-071 tipo combinado          autora: INDET    diagnóstico: DISTRIB
+  AMP2-090 tipo estructura_nueva   autora: ARITM    diagnóstico: INDET
+  AMP2-099 tipo fuera_de_taxonomia autora: INDET    diagnóstico: DISTRIB

@@ -116,6 +116,18 @@ def _productos_con_parentesis(expr):
     return []
 
 
+def _productos_anidados(expr):
+    """
+    Todos los productos 'factor * (suma)' de un lado, a cualquier profundidad (2(3 + 2(x - 1))
+    tiene el producto externo y el interno), del más externo al más interno.
+    """
+    encontrados = []
+    for nodo in sp.preorder_traversal(expr):
+        if isinstance(nodo, sp.Mul) and any(isinstance(f, sp.Add) for f in _factores(nodo)) and nodo not in encontrados:
+            encontrados.append(nodo)
+    return encontrados
+
+
 def _expansiones_erroneas(producto):
     """
     Genera las expansiones erróneas típicas de 'k * (t1 + ... + tn)': en un
@@ -147,8 +159,8 @@ def _expansiones_erroneas(producto):
             # Con un factor 1 o -1 sumar y multiplicar no tienen sentido como confusión: solo es un signo.
             # Sumar en vez de multiplicar solo es un error plausible con los números
             # del paréntesis (2(x + 4) -> 2x + 6), no con el término de la incógnita.
-            yield "suma_factor", con(k + t), k # k + t en vez de k * t
-            yield "suma_magnitudes", con(sp.sign(k * coef) * (abs(k) + abs(coef)) * mono), k # |k| + |t|, con el signo de k*t
+            yield "suma_factor", con(k + t), k                                             # k + t en vez de k * t
+            yield "suma_magnitudes", con(sp.sign(k * coef) * (abs(k) + abs(coef)) * mono), k   # |k| + |t|, con el signo de k*t
 
 
 def _es_parentesis_con_mas(d: Discrepancia):
@@ -171,6 +183,72 @@ def _es_parentesis_con_mas(d: Discrepancia):
                 "factor": "1",
                 "explicacion": _DESCRIPCION_DISTRIBUTIVA["parentesis_con_mas"],
             }
+    return None
+
+
+def _terminos_de_un_texto(contenido: str):
+    """Parte 'a - b + c' (sin mirar dentro de paréntesis) en [(+1, 'a'), (-1, 'b'), (+1, 'c')]."""
+    terminos, signo, actual, nivel = [], 1, "", 0
+    for ch in contenido:
+        if ch in "+-" and nivel == 0:
+            if actual.strip():
+                terminos.append((signo, actual.strip()))
+            signo, actual = (1 if ch == "+" else -1), ""
+            continue
+        nivel += ch == "("
+        nivel -= ch == ")"
+        actual += ch
+    if actual.strip():
+        terminos.append((signo, actual.strip()))
+    return terminos
+
+
+def _es_parentesis_con_menos(d: Discrepancia):
+    """
+    Un paréntesis precedido de '-' se quita sin cambiar el signo de todos sus términos:
+    -(3x - 5) -> -3x - 5 (el 5 debía quedar +5), o x - (2x + 1) -> x - 2x + 1.
+    Se prueba, para cada paréntesis con un menos delante, dejar sin cambiar el signo de un término
+    (o de todos). Se necesita el texto de S_i porque SymPy distribuye ese menos al parsear.
+    """
+    if not d.texto_i:
+        return None
+    texto = d.texto_i
+    for m in re.finditer(r"-\s*\(", texto):
+        abre = m.end() - 1
+        nivel, cierra = 0, None
+        for i in range(abre, len(texto)):
+            nivel += texto[i] == "("
+            nivel -= texto[i] == ")"
+            if nivel == 0:
+                cierra = i
+                break
+        if cierra is None:
+            continue
+        terminos = _terminos_de_un_texto(texto[abre + 1:cierra])
+        if not terminos:
+            continue
+        # j = None: quita el paréntesis sin cambiar ningún signo; j = k: solo el término k conserva su signo
+        for j in [None] + list(range(len(terminos))):
+            partes = []
+            for k, (signo, t) in enumerate(terminos):
+                nuevo = signo if (j is None or k == j) else -signo
+                partes.append(("+ " if nuevo > 0 else "- ") + t)
+            erroneo = texto[:m.start()] + " ".join(partes) + texto[cierra + 1:]
+            try:
+                izq_w, der_w = parsear_ecuacion(erroneo)
+            except Exception:
+                continue
+            if ecuaciones_equivalentes(izq_w, der_w, d.izq_i, d.der_i):
+                continue  # esa lectura no cambia la ecuación: no es un error
+            # Se compara lado por lado (no solo por la solución): si el estudiante además pasó términos
+            # de un lado al otro, el error puede ser otro (de signo al cambiar de lado).
+            if (_forma(izq_w), _forma(der_w)) == (_forma(d.izq_i_mas_1), _forma(d.der_i_mas_1)):
+                return {
+                    "regla": "distributiva_incorrecta",
+                    "variante": "signo",
+                    "factor": "-1",
+                    "explicacion": _DESCRIPCION_DISTRIBUTIVA["signo"],
+                }
     return None
 
 
@@ -210,7 +288,7 @@ def _terminos_en_valor_absoluto(suma):
     """Los términos de una suma sin importar su signo: x - 4 -> {(1, x), (4, 1)}."""
     terminos = Counter()
     for t in sp.Add.make_args(suma):
-        coef, resto = t.doit().as_coeff_Mul()  
+        coef, resto = t.doit().as_coeff_Mul()  # doit: el parser deja productos como 1*4 sin calcular
         terminos[(abs(sp.nsimplify(coef)), resto)] += 1
     return terminos
 
@@ -248,12 +326,13 @@ def _sigue_el_producto(escrito, producto):
 
 
 def _es_distributiva(d: Discrepancia):
-    respuesta = _es_parentesis_con_mas(d) or _es_factor_repetido_afuera(d)
+    """Pregunta 1. Devuelve un dict con los detalles si la respuesta es sí; si no, None."""
+    respuesta = _es_parentesis_con_mas(d) or _es_parentesis_con_menos(d) or _es_factor_repetido_afuera(d)
     if respuesta:
         return respuesta
     for nombre, lado, otro in (("izq", d.izq_i, d.der_i), ("der", d.der_i, d.izq_i)):
         escrito = (d.izq_i_mas_1, d.der_i_mas_1)  # el producto pudo haber cambiado de lado
-        for producto in _productos_con_parentesis(lado):
+        for producto in _productos_anidados(lado):
             if _sigue_el_producto(escrito, producto):
                 continue  # el estudiante sigue con el paréntesis y el mismo factor: aún no distribuyó
             for tipo, expansion, k in _expansiones_erroneas(producto):
@@ -349,6 +428,9 @@ def _hipotesis_un_lado(d: Discrepancia):
             coef = abs(sp.nsimplify(coef))
             if mono.free_symbols and coef.is_Rational and coef.p != 1:
                 divisores.add(int(coef.p))
+    # también con signo negativo: multiplicar o dividir por -2 solo en un lado (para dejar la x positiva)
+    multiplicadores = multiplicadores | {-c for c in multiplicadores}
+    divisores = divisores | {-c for c in divisores}
 
     for nombre, lado, otro in (("izq", d.izq_i, d.der_i), ("der", d.der_i, d.izq_i)):
         def ensamblar(nuevo):
@@ -486,30 +568,28 @@ def _es_aritmetica(d: Discrepancia):
 # DIVISOR INCORRECTO
 # --------------------------------------------------------------------------
 def _division_escrita(expr, numerador):
-    """Si 'expr' está escrito como 'numerador / d' con d numérico, devuelve d; si no, None."""
+    """Si 'expr' está escrito como 'numerador / d' con d entero, devuelve d; si no, None."""
     if not isinstance(expr, sp.Mul):
         return None
     factores = _factores(expr)
-    divisores = [f for f in factores if isinstance(f, sp.Pow) and f.exp == -1 and f.base.is_Number]
+    divisores = [f for f in factores if isinstance(f, sp.Pow) and f.exp == -1 and not f.base.free_symbols]
     if len(divisores) != 1:
         return None
     resto = [f for f in factores if f is not divisores[0]]
-    if sp.Mul(*resto) != numerador:
+    if sp.nsimplify(sp.Mul(*resto)) != sp.nsimplify(numerador):  # 7.5 y 15/2 son el mismo número
         return None
     return divisores[0].base
 
 
 def _es_division(d: Discrepancia):
     """
-    El paso anterior es 'a x = b' (a entero distinto de 0 y de 1, b un número) y el
-    estudiante despeja escribiendo 'x = b / d' con un divisor d que no es a.
-    El divisor tiene que estar escrito en el paso: si solo aparece el
-    resultado no se puede saber por cuánto dividió.
+    El paso anterior es 'a x = b' (o 'b = a x'; a distinto de 0 y de 1, b un número) y el
+    estudiante despeja escribiendo 'x = b / d' (o 'b / d = x') con un divisor d que no es a.
+    El coeficiente puede ser entero, decimal o una fracción como 3x/5. El divisor puede ser un
+    número o una fracción (6/(5/3)). El divisor tiene que estar escrito en el paso: si solo
+    aparece el resultado no se puede saber por cuánto dividió.
     """
-    for izq, der, izq_n, der_n in (
-        (d.izq_i, d.der_i, d.izq_i_mas_1, d.der_i_mas_1),
-        (d.der_i, d.izq_i, d.der_i_mas_1, d.izq_i_mas_1),
-    ):
+    for izq, der in ((d.izq_i, d.der_i), (d.der_i, d.izq_i)):
         forma_izq, forma_der = _forma(izq), _forma(der)
         incognitas = [m for m in forma_izq if m != 1]
         if len(incognitas) != 1 or len(forma_izq) != 1 or not set(forma_der) <= {1}:
@@ -517,22 +597,28 @@ def _es_division(d: Discrepancia):
         x = incognitas[0]
         a, b = forma_izq[x], forma_der.get(1, 0)
         escrito_decimal = any(n.is_Float for n in sp.preorder_traversal(izq))
-        if not a.is_Integer and not escrito_decimal:
-            # Con un coeficiente fraccionario (x/2 = 11 -> x = 11/2) el estudiante multiplica un
-            # lado y divide el otro: no es "dividir entre un número equivocado". Se deja como
-            # indeterminado, igual que en el benchmark.
+        if not escrito_decimal and not (a.is_Integer or (a.is_Rational and a.p != 1)):
+            # Con x/2 = 11 -> x = 11/2 el estudiante multiplica un lado y divide el otro: no es
+            # "dividir entre un número equivocado". Se deja como indeterminado, igual que en el benchmark.
             continue
-        if a == 1 or _forma(izq_n) != {x: 1}:
+        if a == 1:
             continue
-        divisor = _division_escrita(der_n, b)
-        if divisor is None or sp.nsimplify(divisor) == a:
-            continue
-        return {
-            "regla": "division_coeficiente_equivocado",
-            "coeficiente": str(a),
-            "divisor_usado": str(divisor),
-            "explicacion": f"dividió entre {divisor} en vez de dividir entre el coeficiente {a}",
-        }
+        for izq_n, der_n in ((d.izq_i_mas_1, d.der_i_mas_1), (d.der_i_mas_1, d.izq_i_mas_1)):
+            if _forma(izq_n) != {x: 1}:
+                continue
+            divisor = _division_escrita(der_n, b)
+            if divisor is None or sp.simplify(sp.nsimplify(sp.sympify(divisor).doit()) - sp.nsimplify(a)) == 0:
+                continue
+            if not a.is_Integer and not escrito_decimal and sp.nsimplify(sp.sympify(divisor).doit()).is_Integer:
+                # (2/3)x = 6 -> x = 6/2: con un coeficiente fraccionario, dividir entre un entero es
+                # mezclar numerador y denominador, no "dividir entre un número equivocado" (indeterminado).
+                continue
+            return {
+                "regla": "division_coeficiente_equivocado",
+                "coeficiente": str(a),
+                "divisor_usado": str(divisor),
+                "explicacion": f"dividió entre {divisor} en vez de dividir entre el coeficiente {a}",
+            }
     return _es_division_con_parentesis(d)
 
 
@@ -604,7 +690,7 @@ def _es_division_con_parentesis(d: Discrepancia):
 # --------------------------------------------------------------------------
 def _es_signo(d: Discrepancia):
     """
-    Hipótesis: un término t pasó al otro lado de la igualdad sin cambiarle el
+    Hipótesis: un término t pasó al otro lado de la igualdad SIN cambiarle el
     signo (en vez de restarlo en ambos lados, lo sumó en el otro). Se usan los
     términos tal como están escritos en S_i. Solo se contempla UN término mal;
     dos errores de signo en el mismo paso quedan como indeterminado.
@@ -686,12 +772,46 @@ def _es_signo_dentro_de_lo_que_pasa(d: Discrepancia):
 # --------------------------------------------------------------------------
 # Errores fuera de la taxonomía que se reconocen para dar una explicación propia
 # --------------------------------------------------------------------------
+def _denominador_escrito(termino):
+    """Si el término trae un '/n' con n un número entero, devuelve n; si no, None."""
+    for f in _factores(termino):
+        if isinstance(f, sp.Pow) and f.exp == -1 and f.base.is_Integer and f.base > 1:
+            return int(f.base)
+    return None
+
+
+def _es_division_de_toda_la_suma(d: Discrepancia):
+    """
+    Lee '6 + 4x/2' como '(6 + 4x)/2': la división solo era del último término y la aplica a toda la suma.
+    """
+    for nombre, lado, otro in (("izq", d.izq_i, d.der_i), ("der", d.der_i, d.izq_i)):
+        terminos = list(sp.Add.make_args(lado))
+        if len(terminos) < 2:
+            continue
+        for j, t in enumerate(terminos):
+            c = _denominador_escrito(t)
+            if c is None or not t.free_symbols:
+                continue  # 3 - 1/4 con números solos es un cálculo; esta lectura es la de 6 + 4x/2
+            erroneo = sp.Add(*[(u * c if i == j else u) for i, u in enumerate(terminos)]) / c
+            izq_w, der_w = (erroneo, otro) if nombre == "izq" else (otro, erroneo)
+            if ecuaciones_equivalentes(izq_w, der_w, d.izq_i, d.der_i):
+                continue
+            if ecuaciones_equivalentes(izq_w, der_w, d.izq_i_mas_1, d.der_i_mas_1):
+                return {
+                    "regla": "orden_de_operaciones",
+                    "explicacion": f"dividió entre {c} toda la suma, y la división era solo de un término",
+                }
+    return None
+
+
 def _es_orden_de_operaciones(d: Discrepancia):
     """
     Hace la suma o la resta antes de la multiplicación: 8 - 3(x - 2) -> (8 - 3)(x - 2), o
     x - 4*2 -> (x - 4)*2. Se prueba, para cada término u y cada producto p = k*m de un mismo
     lado, la lectura equivocada (u + k)*m.
     """
+    if _es_division_de_toda_la_suma(d):
+        return _es_division_de_toda_la_suma(d)
     for nombre, lado, otro in (("izq", d.izq_i, d.der_i), ("der", d.der_i, d.izq_i)):
         if not isinstance(lado, sp.Add):
             continue
@@ -737,6 +857,8 @@ def _es_factor_comun_mal_sacado(d: Discrepancia):
         k = sp.Mul(*[f for f in factores if f is not sumas[0]])
         if not k.is_Integer or k in (0, 1, -1):
             continue
+        if _productos_anidados(antes):
+            continue  # el lado ya tenía un paréntesis con factor: no sacó un factor común, aplicó mal una distributiva
         fa, fd = _forma(antes), _forma(despues)
         if set(fa) != set(fd):
             continue
@@ -747,6 +869,35 @@ def _es_factor_comun_mal_sacado(d: Discrepancia):
                 "factor": str(k),
                 "explicacion": f"sacó el factor común {k} sin dividir uno de los términos entre {k}",
             }
+    return None
+
+
+def _es_cada_fraccion_por_su_denominador(d: Discrepancia):
+    """
+    Para quitar denominadores distintos se multiplica todo por el mínimo común múltiplo L. El
+    estudiante multiplica cada fracción u/n por su propio denominador n en lugar de por L/n:
+    (x + 1)/2 + x/3 = 4 -> 2(x + 1) + 3x = 24 (debía ser 3(x + 1) + 2x = 24).
+    """
+    terminos_i = list(sp.Add.make_args(d.izq_i)), list(sp.Add.make_args(d.der_i))
+    denominadores = {n for lado in terminos_i for t in lado for n in [_denominador_escrito(t)] if n}
+    if len(denominadores) < 2:
+        return None
+    L = int(sp.ilcm(*denominadores))
+    lados = []
+    for lado in terminos_i:
+        # u/n -> n*u (el numerador por su propio denominador); un término sin fracción se multiplica por L
+        lados.append(sp.Add(*[t * (_denominador_escrito(t) ** 2 if _denominador_escrito(t) else L) for t in lado]))
+    # la parte derecha puede no tener fracciones: se multiplica por L; si las tiene, se trata igual
+    correcto = (_forma(L * d.izq_i), _forma(L * d.der_i))
+    hipotesis = (_forma(lados[0]), _forma(lados[1]))
+    if hipotesis == correcto:
+        return None  # con estos denominadores multiplicar por el propio o por L/n da lo mismo: no hay error
+    # se compara término a término (no solo por la solución), para no confundirlo con otro error
+    if hipotesis == (_forma(d.izq_i_mas_1), _forma(d.der_i_mas_1)):
+        return {
+            "regla": "cada_fraccion_por_su_denominador",
+            "explicacion": "para quitar los denominadores multiplicó cada fracción por su propio denominador en vez de por el mínimo común múltiplo",
+        }
     return None
 
 
@@ -809,7 +960,8 @@ def _diagnosticar_sin_limpiar(discrepancia: Discrepancia) -> ResultadoDiagnostic
 
     # Errores que la taxonomía no tiene como categoría: se reconocen primero para que no se
     # confundan con otra categoría, pero se informan como "indeterminado" con su explicación.
-    for detector in (_es_orden_de_operaciones, _es_factor_comun_mal_sacado, _es_cada_lado_por_su_denominador):
+    for detector in (_es_orden_de_operaciones, _es_factor_comun_mal_sacado, _es_cada_lado_por_su_denominador,
+                     _es_cada_fraccion_por_su_denominador):
         respuesta = detector(discrepancia)
         if respuesta:
             return ResultadoDiagnostico("indeterminado", {**detalles, **respuesta})
@@ -823,6 +975,11 @@ def _diagnosticar_sin_limpiar(discrepancia: Discrepancia) -> ResultadoDiagnostic
     respuesta = _es_un_lado(discrepancia)
     if respuesta:
         return ResultadoDiagnostico("operacion_un_lado", {**detalles, **respuesta})
+
+    # 3a. Despeje: ¿dividió entre un número que no es el coeficiente?
+    respuesta = _es_division(discrepancia)
+    if respuesta:
+        return ResultadoDiagnostico("division_coeficiente_equivocado", {**detalles, **respuesta})
 
     # 3. ¿Operación bien, cálculo mal?
     respuesta = _es_aritmetica(discrepancia)
@@ -853,6 +1010,7 @@ def obtener_categoria(categoria_id: str):
         if categoria["id"] == categoria_id:
             return categoria
     raise ValueError(f"Categoría desconocida: {categoria_id}")
+
 
 def diagnosticar(discrepancia: Discrepancia) -> ResultadoDiagnostico:
     """Ejecuta el diagnóstico y limpia los textos de los detalles antes de devolverlos."""

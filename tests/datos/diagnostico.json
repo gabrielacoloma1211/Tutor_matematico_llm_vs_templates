@@ -702,5 +702,117 @@
     "detalles": {
       "explicacion": "dividió entre 5 en vez de dividir entre el coeficiente 4"
     }
+  },
+  {
+    "id": "division_lado_invertido",
+    "grupo": "division",
+    "descripcion": "El número queda a la izquierda: 20 = 4x. Divide entre 5.",
+    "s_i": "20 = 4x",
+    "s_i_mas_1": "x = 20/5",
+    "categoria_esperada": "division_coeficiente_equivocado"
+  },
+  {
+    "id": "division_decimal_con_lados_invertidos",
+    "grupo": "division",
+    "descripcion": "Coeficiente decimal con la incógnita a la derecha.",
+    "s_i": "9 = 1.5x",
+    "s_i_mas_1": "x = 9/3",
+    "categoria_esperada": "division_coeficiente_equivocado"
+  },
+  {
+    "id": "division_coeficiente_fraccion_divisor_fraccion",
+    "grupo": "division",
+    "descripcion": "Coeficiente 2/3: divide entre 3/2 (la fracción invertida).",
+    "s_i": "2x/3 = 8",
+    "s_i_mas_1": "x = 8/(3/2)",
+    "categoria_esperada": "division_coeficiente_equivocado"
+  },
+  {
+    "id": "division_coeficiente_fraccion_divisor_un_cuarto",
+    "grupo": "division",
+    "descripcion": "Coeficiente 5/4: divide entre 1/4.",
+    "s_i": "5x/4 = 10",
+    "s_i_mas_1": "x = 10/(1/4)",
+    "categoria_esperada": "division_coeficiente_equivocado"
+  },
+  {
+    "id": "division_coeficiente_fraccion_divisor_entero",
+    "grupo": "indeterminado",
+    "descripcion": "Coeficiente fraccionario y divisor entero: sigue siendo indeterminado.",
+    "s_i": "2x/3 = 8",
+    "s_i_mas_1": "x = 8/2",
+    "categoria_esperada": "indeterminado"
+  },
+  {
+    "id": "menos_delante_del_parentesis_un_signo",
+    "grupo": "distributiva",
+    "descripcion": "-(2x - 7): el -7 debía quedar +7.",
+    "s_i": "-(2x - 7) = 9",
+    "s_i_mas_1": "-2x - 7 = 9",
+    "categoria_esperada": "distributiva_incorrecta"
+  },
+  {
+    "id": "menos_delante_del_parentesis_en_medio",
+    "grupo": "distributiva",
+    "descripcion": "5 - (3x + 2): el 2 debía quedar -2.",
+    "s_i": "5 - (3x + 2) = 4",
+    "s_i_mas_1": "5 - 3x + 2 = 4",
+    "categoria_esperada": "distributiva_incorrecta"
+  },
+  {
+    "id": "parentesis_dentro_de_parentesis_factor_interno",
+    "grupo": "distributiva",
+    "descripcion": "3(2 + 4(x - 1)): el 4 no multiplica al -1.",
+    "s_i": "3(2 + 4(x - 1)) = 30",
+    "s_i_mas_1": "3(2 + 4x - 1) = 30",
+    "categoria_esperada": "distributiva_incorrecta"
+  },
+  {
+    "id": "parentesis_dentro_de_parentesis_con_menos",
+    "grupo": "distributiva",
+    "descripcion": "2(x - (3x + 4)): el 4 queda con signo +.",
+    "s_i": "2(x - (3x + 4)) = 10",
+    "s_i_mas_1": "2(x - 3x + 4) = 10",
+    "categoria_esperada": "distributiva_incorrecta"
+  },
+  {
+    "id": "un_lado_multiplica_por_negativo",
+    "grupo": "un_solo_lado",
+    "descripcion": "Multiplica por -3 solo el lado izquierdo.",
+    "s_i": "-x/3 + 2 = 5",
+    "s_i_mas_1": "x - 6 = 5",
+    "categoria_esperada": "operacion_un_lado"
+  },
+  {
+    "id": "division_de_toda_la_suma",
+    "grupo": "indeterminado",
+    "descripcion": "Lee 4 + 6x/3 como (4 + 6x)/3: orden de operaciones, fuera de la taxonomía.",
+    "s_i": "4 + 6x/3 = 10",
+    "s_i_mas_1": "(4 + 6x)/3 = 10",
+    "categoria_esperada": "indeterminado"
+  },
+  {
+    "id": "cada_fraccion_por_su_denominador",
+    "grupo": "indeterminado",
+    "descripcion": "Al quitar denominadores multiplica cada numerador por su propio denominador.",
+    "s_i": "(x + 2)/3 + x/2 = 5",
+    "s_i_mas_1": "3(x + 2) + 2x = 30",
+    "categoria_esperada": "indeterminado"
+  },
+  {
+    "id": "signo_al_pasar_el_menos_del_parentesis",
+    "grupo": "signo",
+    "descripcion": "Quitar - (-4) y pasar el 4 sin cambiarle el signo es error de signo, no de distributiva.",
+    "s_i": "4x - (-4) = 20",
+    "s_i_mas_1": "4x = 20 + 4",
+    "categoria_esperada": "error_signo"
+  },
+  {
+    "id": "fraccion_numerica_calculada_mal",
+    "grupo": "aritmetica",
+    "descripcion": "Fracción solo con números: es un cálculo, no el orden de operaciones.",
+    "s_i": "3x - 2x = 3 - 1/4",
+    "s_i_mas_1": "x = 2/4",
+    "categoria_esperada": "simplificacion_aritmetica"
   }
 ]

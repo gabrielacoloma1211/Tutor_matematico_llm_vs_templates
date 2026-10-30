@@ -1,0 +1,38 @@
+huella del código: e0564c0a9af76791
+huella de los casos: 6d31f84d6570f9db
+
+== PRUEBA CIEGA: 100 casos | exactitud 89/100 = 0.89 | macro-F1 0.90
+            SIGNO DISTRIB  UNLADO   ARITM     DIV   INDET
+SIGNO          15       0       0       1       0       0
+DISTRIB         0      16       0       0       0       0
+UNLADO          0       0      13       0       0       3
+ARITM           0       0       0      14       0       2
+DIV             0       0       0       0      16       0
+INDET           2       1       0       2       0      15
+categoría  casos   prec  recall    F1
+SIGNO         16   0.88    0.94  0.91
+DISTRIB       16   0.94    1.00  0.97
+UNLADO        16   1.00    0.81  0.90
+ARITM         16   0.82    0.88  0.85
+DIV           16   1.00    1.00  1.00
+INDET         20   0.75    0.75  0.75
+
+== Por tipo de novedad (seguro = responde indeterminado o falla sin clasificar; peligroso = otra categoría)
+tipo de novedad      casos  aciertos  seguros  peligrosos
+variante_nueva          50        46        3           1
+estructura_nueva        30        28        2           0
+combinado               10         7        0           3
+fuera_de_taxonomia      10         8        0           2
+
+== Casos mal clasificados (11). Se informan, no se usan para ajustar.
+  PC-010   tipo variante_nueva     autora: UNLADO   diagnóstico: INDET
+  PC-015   tipo variante_nueva     autora: ARITM    diagnóstico: INDET
+  PC-035   tipo variante_nueva     autora: UNLADO   diagnóstico: INDET
+  PC-041   tipo estructura_nueva   autora: ARITM    diagnóstico: INDET
+  PC-062   tipo estructura_nueva   autora: UNLADO   diagnóstico: INDET
+  PC-063   tipo variante_nueva     autora: SIGNO    diagnóstico: ARITM
+  PC-071   tipo combinado          autora: INDET    diagnóstico: SIGNO
+  PC-072   tipo combinado          autora: INDET    diagnóstico: SIGNO
+  PC-074   tipo fuera_de_taxonomia autora: INDET    diagnóstico: DISTRIB
+  PC-075   tipo fuera_de_taxonomia autora: INDET    diagnóstico: ARITM
+  PC-096   tipo combinado          autora: INDET    diagnóstico: ARITM

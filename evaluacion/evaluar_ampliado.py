@@ -26,6 +26,7 @@ if str(RAIZ) not in sys.path:
 from evaluacion.evaluar_diagnostico import CATEGORIAS, CORTO, metricas, predecir, texto_macro_presentes  # noqa: E402
 
 DIR = RAIZ / "benchmark" / "casos" / "ampliado"
+CONJUNTOS = {"ampliado": ("ampliado", "ampliado.json"), "ampliado_2": ("ampliado_2", "ampliado_2.json")}
 
 
 def resumen(casos, preds, titulo):
@@ -49,21 +50,25 @@ def resumen(casos, preds, titulo):
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--guardar", action="store_true")
+    ap.add_argument("--conjunto", choices=sorted(CONJUNTOS), default="ampliado",
+                    help="ampliado (el primero) o ampliado_2 (la primera prueba ciega, ya usada para ajustar)")
     ap.add_argument("--etiqueta", default="", help="se agrega al nombre del archivo guardado (p. ej. ajustado)")
     args = ap.parse_args(argv)
 
-    casos = json.load(open(DIR / "ampliado.json", encoding="utf-8"))
-    part = json.load(open(DIR / "particion.json", encoding="utf-8"))
+    carpeta, archivo = CONJUNTOS[args.conjunto]
+    dir_ = RAIZ / "benchmark" / "casos" / carpeta
+    casos = json.load(open(dir_ / archivo, encoding="utf-8"))
+    part = json.load(open(dir_ / "particion.json", encoding="utf-8"))
     preds = {}
     for c in casos:
         try:
             preds[c["id"]] = predecir(c)
-        except Exception as e:  # el diagnóstico falló: se registra como error
+        except Exception as e:  # el diagnóstico falló: se registra como ERROR, no se oculta
             preds[c["id"]] = "ERROR"
             print(f"AVISO: {c['id']} produjo {type(e).__name__}")
 
     partes = [resumen(casos, preds, "TODOS")]
-    for nombre, ids in (("AJUSTE", part["ajuste"]), ("RESERVADOS", part["reservados_30"])):
+    for nombre, ids in (("AJUSTE", part["ajuste"]), ("RESERVADOS", (part.get("reservados_30") or part["reservados"]))):
         partes.append(resumen([c for c in casos if c["id"] in set(ids)], preds, nombre))
 
     # fallos por tipo de novedad: seguros (dice indeterminado) o peligrosos (otra categoría)
@@ -83,8 +88,8 @@ def main(argv=None):
     if args.guardar:
         d = RAIZ / "evaluacion" / "resultados"
         d.mkdir(exist_ok=True)
-        (d / f"ampliado_{date.today().isoformat()}{args.etiqueta}.txt").write_text(texto + "\n", encoding="utf-8")
-        (d / f"ampliado_{date.today().isoformat()}{args.etiqueta}_predicciones.json").write_text(
+        (d / f"{args.conjunto}_{date.today().isoformat()}{args.etiqueta}.txt").write_text(texto + "\n", encoding="utf-8")
+        (d / f"{args.conjunto}_{date.today().isoformat()}{args.etiqueta}_predicciones.json").write_text(
             json.dumps(preds, indent=2, ensure_ascii=False), encoding="utf-8")
     return 0
 

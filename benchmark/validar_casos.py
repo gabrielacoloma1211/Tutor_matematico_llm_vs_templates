@@ -36,8 +36,8 @@ RAIZ = Path(__file__).resolve().parent.parent
 if str(RAIZ) not in sys.path:
     sys.path.insert(0, str(RAIZ))
 
-import sympy as sp  
-from src.verificador.verificador import verificar_paso, parsear_ecuacion, ErrorDeParseo  
+import sympy as sp  # noqa: E402
+from src.verificador.verificador import verificar_paso, parsear_ecuacion, ErrorDeParseo  # noqa: E402
 
 CAMPOS_OBLIGATORIOS = [
     "id",
@@ -260,6 +260,8 @@ def cargar_casos(directorio):
     """Lee todos los *.json de un directorio. Devuelve [(nombre_archivo, caso), ...]."""
     casos = []
     for ruta in sorted(Path(directorio).glob("*.json")):
+        if ruta.name == "particion.json":
+            continue  # no es una lista de casos: separa casos de ajuste y reservados
         try:
             with open(ruta, encoding="utf-8") as f:
                 datos = json.load(f)

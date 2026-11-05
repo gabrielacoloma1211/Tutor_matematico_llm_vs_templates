@@ -1,0 +1,162 @@
+{
+  "P001": {
+    "caso": "AMP-006",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P002": {
+    "caso": "DEV-061",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P003": {
+    "caso": "PC-066",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P004": {
+    "caso": "AMP2-018",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P005": {
+    "caso": "DEV-061",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P006": {
+    "caso": "PC-061",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P007": {
+    "caso": "PC-061",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P008": {
+    "caso": "DEV-014",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P009": {
+    "caso": "AMP-011",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P010": {
+    "caso": "PC-085",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P011": {
+    "caso": "AMP2-018",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P012": {
+    "caso": "AMP2-078",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P013": {
+    "caso": "AMP-011",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P014": {
+    "caso": "DEV-067",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P015": {
+    "caso": "PC-067",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P016": {
+    "caso": "PC-067",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P017": {
+    "caso": "DEV-020",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P018": {
+    "caso": "PC-085",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P019": {
+    "caso": "AMP2-080",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P020": {
+    "caso": "DEV-037",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P021": {
+    "caso": "DEV-083",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P022": {
+    "caso": "PC-066",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P023": {
+    "caso": "AMP2-080",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P024": {
+    "caso": "AMP2-006",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P025": {
+    "caso": "DEV-083",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P026": {
+    "caso": "AMP-034",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P027": {
+    "caso": "DEV-020",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P028": {
+    "caso": "DEV-014",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P029": {
+    "caso": "AMP-034",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P030": {
+    "caso": "AMP-037",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P031": {
+    "caso": "PC-036",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P032": {
+    "caso": "AMP-037",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P033": {
+    "caso": "PC-053",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P034": {
+    "caso": "AMP2-006",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P035": {
+    "caso": "DEV-067",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P036": {
+    "caso": "DEV-037",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P037": {
+    "caso": "PC-053",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P038": {
+    "caso": "AMP-006",
+    "modelo": "claude-haiku-5-5"
+  },
+  "P039": {
+    "caso": "PC-036",
+    "modelo": "claude-sonnet-5-5"
+  },
+  "P040": {
+    "caso": "AMP2-078",
+    "modelo": "claude-haiku-5-5"
+  }
+}

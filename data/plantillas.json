@@ -1,0 +1,41 @@
+{
+  "mensaje_general": "Revisa este paso con más cuidado. No pudimos identificar el tipo exacto de error.",
+  "signo": {
+    "mismo_lado": "Revisa el signo del término {termino}: como sigue en el mismo lado de la ecuación, su signo no debe cambiar.",
+    "neutra": "Revisa los signos de este paso: un término solo cambia de signo cuando lo pasas al otro lado de la ecuación.",
+    "al_multiplicar": "Al multiplicar por {multiplicador}, cada término conserva su signo: revisa los signos de tu resultado.",
+    "operacion_opuesta": "Revisa los signos: si sumas o restas {termino} en los dos lados de la ecuación, la operación debe ser la misma en cada lado.",
+    "parentesis": "Al pasar un término con paréntesis al otro lado, cambia el signo de todo lo que tiene dentro, no solo el del primer término."
+  },
+  "distributiva": {
+    "signo": "Al multiplicar {factor} por cada término del paréntesis, revisa el signo de cada resultado.",
+    "suma_factor": "La propiedad distributiva pide multiplicar, no sumar: multiplica {factor} por cada término del paréntesis.",
+    "suma_magnitudes": "La propiedad distributiva pide multiplicar, no sumar: multiplica {factor} por cada término del paréntesis.",
+    "agrega_incognita": "Al multiplicar {factor} por un número, el resultado no lleva x: la x solo aparece si el término que multiplicas ya la tenía.",
+    "pierde_incognita": "Al multiplicar {factor} por un término que tiene x, el resultado también tiene x: revisa que no se haya perdido.",
+    "parentesis_con_mas": "Cuando el paréntesis tiene un + delante, al quitarlo los signos de adentro no cambian.",
+    "factor_doble": "Revisa que el {factor} multiplique a cada término una sola vez.",
+    "termino_externo": "El {factor} solo multiplica lo que está dentro del paréntesis: los términos que quedan fuera no se multiplican.",
+    "factor_repetido_afuera": "Después de multiplicar {factor} por cada término del paréntesis, el {factor} ya no debe quedar escrito afuera.",
+    "un_termino_del_factor": "Al multiplicar dos paréntesis, cada término de uno debe multiplicar a cada término del otro."
+  },
+  "division": {
+    "factor": "Para quitar el {coeficiente} que multiplica al paréntesis, debes dividir ambos lados entre {coeficiente}.",
+    "suma": "Para despejar la incógnita, debes dividir ambos lados entre todo el coeficiente que la acompaña, en este caso ({coeficiente}), no solo entre uno de sus términos."
+  },
+  "aritmetica": {
+    "lado": "Revisa el cálculo numérico del lado {lado}: la operación que aplicaste es correcta, pero el resultado no lo es."
+  },
+  "un_lado": {
+    "plantilla": "{operacion} solo en el lado {lado}, pero cualquier operación que realices debe aplicarse a ambos lados de la ecuación para mantener la igualdad.",
+    "verbos": {
+      "restó": "Restaste",
+      "sumó": "Sumaste",
+      "multiplicó por": "Multiplicaste por",
+      "dividió entre": "Dividiste entre"
+    }
+  },
+  "avisos_api": {
+    "solucion_cero": "Por ahora no reviso ecuaciones cuya solución es x = 0 (las que no tienen un número suelto, como 2x = 5x), porque no puedo distinguir un paso correcto de uno incorrecto. Prueba con otra ecuación."
+  }
+}

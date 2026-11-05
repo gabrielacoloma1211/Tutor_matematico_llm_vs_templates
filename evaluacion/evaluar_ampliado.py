@@ -15,7 +15,6 @@ Uso (desde la raíz del repositorio):
 import argparse
 import json
 import sys
-from collections import Counter
 from datetime import date
 from pathlib import Path
 
@@ -23,28 +22,12 @@ RAIZ = Path(__file__).resolve().parent.parent
 if str(RAIZ) not in sys.path:
     sys.path.insert(0, str(RAIZ))
 
-from evaluacion.evaluar_diagnostico import CATEGORIAS, CORTO, metricas, predecir, texto_macro_presentes  # noqa: E402
+from evaluacion.comun import (  # noqa: E402
+    guardar_resultado, lista_de_fallos, predecir_todos, resumen, tabla_por_novedad,
+)
 
 DIR = RAIZ / "benchmark" / "casos" / "ampliado"
 CONJUNTOS = {"ampliado": ("ampliado", "ampliado.json"), "ampliado_2": ("ampliado_2", "ampliado_2.json")}
-
-
-def resumen(casos, preds, titulo):
-    confusion = Counter((c["categoria"], preds[c["id"]]) for c in casos)
-    filas, macro = metricas(confusion)
-    ok = sum(confusion[(k, k)] for k in CATEGORIAS)
-    out = [f"== {titulo}: {len(casos)} casos | exactitud {ok}/{len(casos)} = {ok/len(casos):.2f} | macro-F1 {macro:.2f}"]
-    out.append(f"{'':<9}" + "".join(f"{CORTO[c]:>8}" for c in CATEGORIAS))
-    for real in CATEGORIAS:
-        out.append(f"{CORTO[real]:<9}" + "".join(f"{confusion[(real, p)]:>8}" for p in CATEGORIAS))
-    out.append(f"{'categoría':<10}{'casos':>6}{'prec':>7}{'recall':>8}{'F1':>6}")
-    for cat in CATEGORIAS:
-        p, r, f, n = filas[cat]
-        out.append(f"{CORTO[cat]:<10}{n:>6}{p:>7.2f}{r:>8.2f}{f:>6.2f}")
-    extra = texto_macro_presentes(filas)
-    if extra:
-        out.append(extra)
-    return "\n".join(out)
 
 
 def main(argv=None):
@@ -59,38 +42,19 @@ def main(argv=None):
     dir_ = RAIZ / "benchmark" / "casos" / carpeta
     casos = json.load(open(dir_ / archivo, encoding="utf-8"))
     part = json.load(open(dir_ / "particion.json", encoding="utf-8"))
-    preds = {}
-    for c in casos:
-        try:
-            preds[c["id"]] = predecir(c)
-        except Exception as e:  # el diagnóstico falló: se registra como ERROR, no se oculta
-            preds[c["id"]] = "ERROR"
-            print(f"AVISO: {c['id']} produjo {type(e).__name__}")
+    preds = predecir_todos(casos)
 
     partes = [resumen(casos, preds, "TODOS")]
     for nombre, ids in (("AJUSTE", part["ajuste"]), ("RESERVADOS", (part.get("reservados_30") or part["reservados"]))):
         partes.append(resumen([c for c in casos if c["id"] in set(ids)], preds, nombre))
 
     # fallos por tipo de novedad: seguros (dice indeterminado) o peligrosos (otra categoría)
-    tabla = [f"{'tipo de novedad':<20}{'casos':>6}{'aciertos':>10}{'seguros':>9}{'peligrosos':>12}"]
-    for tipo in ("variante_nueva", "estructura_nueva", "combinado", "fuera_de_taxonomia"):
-        cs = [c for c in casos if c["tipo_de_novedad"] == tipo]
-        ac = sum(preds[c["id"]] == c["categoria"] for c in cs)
-        seg = sum(preds[c["id"]] != c["categoria"] and preds[c["id"]] in ("indeterminado", "ERROR") for c in cs)
-        tabla.append(f"{tipo:<20}{len(cs):>6}{ac:>10}{seg:>9}{len(cs)-ac-seg:>12}")
-    partes.append("== Por tipo de novedad (seguro = responde indeterminado o falla sin clasificar; peligroso = otra categoría)\n" + "\n".join(tabla))
-
-    fallos = [f"  {c['id']:<8} tipo {c['tipo_de_novedad']:<18} autora: {CORTO[c['categoria']]:<8} diagnóstico: {CORTO.get(preds[c['id']], "ERROR")}"
-              for c in casos if preds[c["id"]] != c["categoria"]]
-    partes.append(f"== Casos mal clasificados ({len(fallos)})\n" + "\n".join(fallos))
+    partes.append(tabla_por_novedad(casos, preds))
+    partes.append(lista_de_fallos(casos, preds))
     texto = "\n\n".join(partes)
     print(texto)
     if args.guardar:
-        d = RAIZ / "evaluacion" / "resultados"
-        d.mkdir(exist_ok=True)
-        (d / f"{args.conjunto}_{date.today().isoformat()}{args.etiqueta}.txt").write_text(texto + "\n", encoding="utf-8")
-        (d / f"{args.conjunto}_{date.today().isoformat()}{args.etiqueta}_predicciones.json").write_text(
-            json.dumps(preds, indent=2, ensure_ascii=False), encoding="utf-8")
+        guardar_resultado(args.conjunto, f"{args.conjunto}_{date.today().isoformat()}{args.etiqueta}", texto, preds)
     return 0
 
 

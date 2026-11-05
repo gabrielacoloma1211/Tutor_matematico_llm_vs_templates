@@ -1,0 +1,839 @@
+{
+  "parametros": {
+    "temperatura": null,
+    "max_tokens": 1024
+  },
+  "resumen": {
+    "claude-sonnet-5-5": {
+      "llamadas": 20,
+      "fallaron": 0,
+      "revelan_solucion": 0,
+      "muy_largas": 0,
+      "cortadas": 0,
+      "latencia_media_ms": 2718,
+      "costo_total_usd": 0.0485
+    },
+    "claude-haiku-5-5": {
+      "llamadas": 20,
+      "fallaron": 1,
+      "revelan_solucion": 0,
+      "muy_largas": 0,
+      "cortadas": 0,
+      "latencia_media_ms": 3389,
+      "costo_total_usd": 0.0069
+    }
+  },
+  "filas": [
+    {
+      "caso": "AMP2-078",
+      "categoria": "error_signo",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "error_signo",
+      "pista": "¡Buen intento! Fíjate en el término -10 que cambió de lado. Cuando un término cruza el signo igual, hace la operación inversa. Piensa: ¿qué operación cancela un \"restar 10\" y cómo se ve eso al otro lado? Revísalo y vuelve a escribir ese paso.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 6561,
+      "tokens_entrada": 507,
+      "tokens_salida": 109,
+      "costo_usd": 0.002104,
+      "revela_solucion": false,
+      "palabras": 44,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "DEV-014",
+      "categoria": "error_signo",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "error_signo",
+      "pista": "Vas bien, ¡ánimo! Fíjate en el término 2x: cuando un término cruza el signo igual, debe hacer la operación contraria. Piensa qué pasa con su signo al cambiar de lado y revisa cómo quedaría ese paso.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 5005,
+      "tokens_entrada": 510,
+      "tokens_salida": 246,
+      "costo_usd": 0.00348,
+      "revela_solucion": false,
+      "palabras": 36,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "DEV-020",
+      "categoria": "error_signo",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "error_signo",
+      "pista": "Vas por buen camino al querer dejar el término con x solo. Piensa en qué operación \"deshace\" al -6 y qué le pasa a su signo cuando cruza el signo igual. Revisa ese paso y compáralo con lo que escribiste.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 1960,
+      "tokens_entrada": 499,
+      "tokens_salida": 86,
+      "costo_usd": 0.001858,
+      "revela_solucion": false,
+      "palabras": 40,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "PC-053",
+      "categoria": "error_signo",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "error_signo",
+      "pista": "Vas muy bien al agrupar los términos con x de un lado y los números del otro. Fíjate en x/4: cuando un término cruza el signo igual, ¿qué pasa con su signo? Piensa qué operación \"deshace\" a un término que está sumando.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 2098,
+      "tokens_entrada": 513,
+      "tokens_salida": 89,
+      "costo_usd": 0.001916,
+      "revela_solucion": false,
+      "palabras": 42,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "DEV-037",
+      "categoria": "distributiva_incorrecta",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "distributiva_incorrecta",
+      "pista": "Vas por buen camino con la fracción. Fíjate ahora en el segundo paréntesis: el factor que lo multiplica es -2. Revisa qué signo resulta al multiplicarlo por cada término de adentro, sobre todo por el -1.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 2064,
+      "tokens_entrada": 553,
+      "tokens_salida": 87,
+      "costo_usd": 0.001976,
+      "revela_solucion": false,
+      "palabras": 36,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP-006",
+      "categoria": "distributiva_incorrecta",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "distributiva_incorrecta",
+      "pista": "Vas muy bien, solo revisa un detalle. La propiedad distributiva el 4 solo la aplica a lo que está dentro del paréntesis. Mira el -3: ¿está dentro o fuera de ese paréntesis? Piensa si el 4 debería afectarlo.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 1995,
+      "tokens_entrada": 549,
+      "tokens_salida": 98,
+      "costo_usd": 0.002078,
+      "revela_solucion": false,
+      "palabras": 38,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP2-006",
+      "categoria": "distributiva_incorrecta",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "distributiva_incorrecta",
+      "pista": "Vas muy bien al repartir el -2 entre los dos términos del paréntesis. Fíjate ahora en el segundo término: ¿qué signo resulta al multiplicar un número negativo por uno positivo? Revisa esa multiplicación otra vez.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 1924,
+      "tokens_entrada": 529,
+      "tokens_salida": 90,
+      "costo_usd": 0.001958,
+      "revela_solucion": false,
+      "palabras": 35,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP2-080",
+      "categoria": "distributiva_incorrecta",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "distributiva_incorrecta",
+      "pista": "Vas muy bien al querer quitar el paréntesis. Recuerda que el 8 que está afuera actúa sobre todo lo que hay adentro, no solo sobre el primer término. Revisa si el segundo término también recibió su multiplicación.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 2547,
+      "tokens_entrada": 530,
+      "tokens_salida": 86,
+      "costo_usd": 0.00192,
+      "revela_solucion": false,
+      "palabras": 37,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP-011",
+      "categoria": "operacion_un_lado",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "operacion_un_lado",
+      "pista": "Vas por buen camino al querer quitar el decimal. Piensa en la ecuación como una balanza: si cambias el peso de un platillo, ¿qué debes hacer con el otro para que siga equilibrada? Revisa si hiciste lo mismo en ambos lados.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 1943,
+      "tokens_entrada": 505,
+      "tokens_salida": 95,
+      "costo_usd": 0.00196,
+      "revela_solucion": false,
+      "palabras": 41,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "PC-036",
+      "categoria": "operacion_un_lado",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "operacion_un_lado",
+      "pista": "¡Vas por buen camino al querer eliminar el -4! Piensa en la ecuación como una balanza: si cambias el peso de un lado, la otra parte se desequilibra. ¿Qué tendrías que hacer también en el lado derecho para que siga equilibrada?",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 2223,
+      "tokens_entrada": 515,
+      "tokens_salida": 95,
+      "costo_usd": 0.00198,
+      "revela_solucion": false,
+      "palabras": 41,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "PC-061",
+      "categoria": "operacion_un_lado",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "operacion_un_lado",
+      "pista": "Piensa en la ecuación como una balanza: para que siga equilibrada, lo que haces en un platillo debes hacerlo también en el otro. Revisa si el 12 llegó a ambos lados, y recuerda que cada término debe multiplicarse por él.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 1952,
+      "tokens_entrada": 523,
+      "tokens_salida": 90,
+      "costo_usd": 0.001946,
+      "revela_solucion": false,
+      "palabras": 40,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "PC-085",
+      "categoria": "operacion_un_lado",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "operacion_un_lado",
+      "pista": "Vas por buen camino al querer eliminar el denominador. Piensa en la ecuación como una balanza: si cambias el peso de un lado, ¿qué debes hacer en el otro para que siga equilibrada? Revisa si hiciste eso con el 7.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 2161,
+      "tokens_entrada": 508,
+      "tokens_salida": 90,
+      "costo_usd": 0.001916,
+      "revela_solucion": false,
+      "palabras": 40,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "PC-066",
+      "categoria": "simplificacion_aritmetica",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "simplificacion_aritmetica",
+      "pista": "Vas bien, la idea de agrupar los términos está correcta. Mira solo el lado izquierdo y repite esa suma con calma; puedes sumar primero las decenas y luego las unidades. ¡Seguro encuentras el detalle!",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 3679,
+      "tokens_entrada": 541,
+      "tokens_salida": 334,
+      "costo_usd": 0.004422,
+      "revela_solucion": false,
+      "palabras": 34,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP-034",
+      "categoria": "simplificacion_aritmetica",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "simplificacion_aritmetica",
+      "pista": "Vas bien al plantear la multiplicación de fracciones. Revisa con calma cada producto: ¿qué números se multiplican entre sí en el numerador y cuáles en el denominador? Comprueba cada resultado antes de simplificar. ¡Tú puedes encontrarlo!",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 4915,
+      "tokens_entrada": 543,
+      "tokens_salida": 390,
+      "costo_usd": 0.004986,
+      "revela_solucion": false,
+      "palabras": 36,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "DEV-067",
+      "categoria": "simplificacion_aritmetica",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "simplificacion_aritmetica",
+      "pista": "Vas por buen camino al juntar los términos con x. Fíjate bien en la suma del lado izquierdo: revisa cuánto da 8x + x. Recuerda que x equivale a 1x. ¿Qué número obtienes al sumar los coeficientes?",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 1457,
+      "tokens_entrada": 537,
+      "tokens_salida": 91,
+      "costo_usd": 0.001984,
+      "revela_solucion": false,
+      "palabras": 37,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "DEV-061",
+      "categoria": "simplificacion_aritmetica",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "simplificacion_aritmetica",
+      "pista": "Vas muy bien con el lado izquierdo. Revisa con calma el cálculo del lado derecho: al sumar dos números negativos, se juntan sus valores y se conserva el signo. Haz de nuevo esa cuenta, fijándote en las unidades.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 3415,
+      "tokens_entrada": 536,
+      "tokens_salida": 316,
+      "costo_usd": 0.004232,
+      "revela_solucion": false,
+      "palabras": 38,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP-037",
+      "categoria": "division_coeficiente_equivocado",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "division_coeficiente_equivocado",
+      "pista": "¡Vas por buen camino al querer dejar la x sola! Fíjate bien en qué número está multiplicando a la x. Para que ese número desaparezca, debes dividir ambos lados justamente entre él. ¿Coincide con el que usaste?",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 2019,
+      "tokens_entrada": 511,
+      "tokens_salida": 87,
+      "costo_usd": 0.001892,
+      "revela_solucion": false,
+      "palabras": 37,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "DEV-083",
+      "categoria": "division_coeficiente_equivocado",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "division_coeficiente_equivocado",
+      "pista": "Vas muy bien al querer despejar la x. Fíjate en qué número está multiplicando a la x en 7x = 36. Para dejarla sola, ¿por cuál número tendrías que dividir ambos lados? Revisa ese paso con calma.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 1924,
+      "tokens_entrada": 511,
+      "tokens_salida": 87,
+      "costo_usd": 0.001892,
+      "revela_solucion": false,
+      "palabras": 37,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "PC-067",
+      "categoria": "division_coeficiente_equivocado",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "division_coeficiente_equivocado",
+      "pista": "¡Vas por buen camino! Fíjate en el número que acompaña a la x: ¿es exactamente el que usaste para dividir? Recuerda que el signo también forma parte del coeficiente. Revisa ese detalle y vuelve a intentarlo, seguro lo logras.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 2244,
+      "tokens_entrada": 511,
+      "tokens_salida": 98,
+      "costo_usd": 0.002002,
+      "revela_solucion": false,
+      "palabras": 39,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP2-018",
+      "categoria": "division_coeficiente_equivocado",
+      "modelo": "claude-sonnet-5-5",
+      "diagnostico": "division_coeficiente_equivocado",
+      "pista": "¡Vas muy bien con la idea de dividir! Fíjate bien en el número que acompaña a la x: ¿tiene algún signo que debas tener en cuenta? Al dividir, ese número debe quedar completo, con todo y su signo. Revisa ese detalle.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "text"
+      ],
+      "latencia_ms": 2276,
+      "tokens_entrada": 511,
+      "tokens_salida": 95,
+      "costo_usd": 0.001972,
+      "revela_solucion": false,
+      "palabras": 41,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP2-078",
+      "categoria": "error_signo",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "error_signo",
+      "pista": "¡Vas muy bien con el 7x! Revisa el -10 que pasaste al otro lado: ¿qué debe pasarle al signo cuando un término cruza el signo igual? Piensa en la operación contraria para mantener la igualdad.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 3661,
+      "tokens_entrada": 507,
+      "tokens_salida": 562,
+      "costo_usd": 0.0003317,
+      "revela_solucion": false,
+      "palabras": 35,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "DEV-014",
+      "categoria": "error_signo",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "error_signo",
+      "pista": "Revisa con calma el paso en el que el 2x pasó al lado izquierdo. Cuando un término cambia de lado en una ecuación, ¿qué le pasa a su signo? Vuelve a escribir ese paso con esa idea en mente.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 2997,
+      "tokens_entrada": 510,
+      "tokens_salida": 606,
+      "costo_usd": 0.000354,
+      "revela_solucion": false,
+      "palabras": 39,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "DEV-020",
+      "categoria": "error_signo",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "error_signo",
+      "pista": "Revisa con calma el -6 que pasaste al otro lado. ¿Qué le pasa a su signo cuando un término cambia de lado en una ecuación? Recuerda que la igualdad debe mantenerse en equilibrio.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 3492,
+      "tokens_entrada": 499,
+      "tokens_salida": 648,
+      "costo_usd": 0.0003739,
+      "revela_solucion": false,
+      "palabras": 33,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "PC-053",
+      "categoria": "error_signo",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "error_signo",
+      "pista": "Revisa con calma cómo pasaste el término x/4 de un lado al otro de la igualdad. Cuando un término cambia de lado, ¿qué le pasa a su signo? Vuelve a escribir ese paso con esa regla en mente.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 3031,
+      "tokens_entrada": 513,
+      "tokens_salida": 573,
+      "costo_usd": 0.0003378,
+      "revela_solucion": false,
+      "palabras": 38,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "DEV-037",
+      "categoria": "distributiva_incorrecta",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "distributiva_incorrecta",
+      "pista": "Revisa con calma el segundo paréntesis: el -2 debe multiplicar a cada término de adentro, incluido el -1. Fíjate bien en el signo que resulta de multiplicar dos números negativos.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 2665,
+      "tokens_entrada": 553,
+      "tokens_salida": 502,
+      "costo_usd": 0.0003063,
+      "revela_solucion": false,
+      "palabras": 30,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP-006",
+      "categoria": "distributiva_incorrecta",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "distributiva_incorrecta",
+      "pista": "Fíjate bien en el -3, que está fuera del paréntesis. ¿Ese término debería multiplicarse por el 4 que está afuera? Revisa qué le corresponde hacer a ese -3 al desarrollar la expresión.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 3445,
+      "tokens_entrada": 549,
+      "tokens_salida": 647,
+      "costo_usd": 0.0003784,
+      "revela_solucion": false,
+      "palabras": 32,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP2-006",
+      "categoria": "distributiva_incorrecta",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "distributiva_incorrecta",
+      "pista": "Revisa el signo con el que obtuviste cada producto al multiplicar por -2. Recuerda que un número negativo por uno positivo da un resultado negativo. ¿Qué pasa con el 5 al multiplicarlo por -2?",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 4343,
+      "tokens_entrada": 529,
+      "tokens_salida": 989,
+      "costo_usd": 0.0005474,
+      "revela_solucion": false,
+      "palabras": 34,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP2-080",
+      "categoria": "distributiva_incorrecta",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "distributiva_incorrecta",
+      "pista": "Buen intento, vas por buen camino. Fíjate en el 8 que está afuera del paréntesis: ¿con cuántos de los términos que hay dentro debería multiplicarse? Revisa tu paso con esa idea.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 3053,
+      "tokens_entrada": 530,
+      "tokens_salida": 634,
+      "costo_usd": 0.00037,
+      "revela_solucion": false,
+      "palabras": 31,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP-011",
+      "categoria": "operacion_un_lado",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "operacion_un_lado",
+      "pista": null,
+      "error": "El LLM devolvió una respuesta vacía (fin=max_tokens, bloques=['thinking'], tokens_salida=1024, max_tokens=1024). | El LLM devolvió una respuesta vacía (fin=max_tokens, bloques=['thinking'], tokens_salida=1024, max_tokens=1024)."
+    },
+    {
+      "caso": "PC-036",
+      "categoria": "operacion_un_lado",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "operacion_un_lado",
+      "pista": "Mira bien el paso que escribiste: ¿cambiaste los dos lados de la ecuación o solo uno? Recuerda que una ecuación es como una balanza. Si modificas un lado, ¿qué debes hacer con el otro para que siga en equilibrio?",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 3715,
+      "tokens_entrada": 515,
+      "tokens_salida": 773,
+      "costo_usd": 0.000438,
+      "revela_solucion": false,
+      "palabras": 39,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "PC-061",
+      "categoria": "operacion_un_lado",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "operacion_un_lado",
+      "pista": "Revisa con calma lo que hiciste con el 12. ¿Lo aplicaste a los dos lados de la igualdad? Recuerda que una ecuación funciona como una balanza: si cambias un lado, debes cambiar el otro de la misma forma para que siga equilibrada.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 2947,
+      "tokens_entrada": 523,
+      "tokens_salida": 587,
+      "costo_usd": 0.0003458,
+      "revela_solucion": false,
+      "palabras": 42,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "PC-085",
+      "categoria": "operacion_un_lado",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "operacion_un_lado",
+      "pista": "Buen intento al querer quitar la fracción. Piensa en la igualdad como una balanza: si cambias un lado, ¿qué debes hacer con el otro para que siga en equilibrio?",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 2633,
+      "tokens_entrada": 508,
+      "tokens_salida": 474,
+      "costo_usd": 0.0002878,
+      "revela_solucion": false,
+      "palabras": 29,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "PC-066",
+      "categoria": "simplificacion_aritmetica",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "simplificacion_aritmetica",
+      "pista": "Vuelve a revisar la suma del lado izquierdo, 12 + 28. Hazla paso a paso, sumando primero las unidades y luego las decenas. Si el resultado no coincide con lo que escribiste, corrígelo y continúa con la ecuación.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 5858,
+      "tokens_entrada": 541,
+      "tokens_salida": 419,
+      "costo_usd": 0.0002636,
+      "revela_solucion": false,
+      "palabras": 38,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP-034",
+      "categoria": "simplificacion_aritmetica",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "simplificacion_aritmetica",
+      "pista": "Vas bien al multiplicar numerador con numerador y denominador con denominador. Revisa con calma cada producto que hiciste, sobre todo el del numerador, haciendo la multiplicación paso a paso.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 3839,
+      "tokens_entrada": 543,
+      "tokens_salida": 706,
+      "costo_usd": 0.00040730000000000003,
+      "revela_solucion": false,
+      "palabras": 29,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "DEV-067",
+      "categoria": "simplificacion_aritmetica",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "simplificacion_aritmetica",
+      "pista": "Vuelve a mirar el lado izquierdo de tu paso anterior. Tienes 8x y también una x sola: ¿cuántas x hay en total al juntarlas? Revisa bien esa suma antes de despejar.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 3571,
+      "tokens_entrada": 537,
+      "tokens_salida": 702,
+      "costo_usd": 0.00040469999999999997,
+      "revela_solucion": false,
+      "palabras": 31,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "DEV-061",
+      "categoria": "simplificacion_aritmetica",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "simplificacion_aritmetica",
+      "pista": "Vas muy bien con las x, esa parte está correcta. Revisa con calma el lado derecho: vuelve a calcular la suma de -36 y -15 y fíjate bien en el signo del resultado.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 2140,
+      "tokens_entrada": 536,
+      "tokens_salida": 288,
+      "costo_usd": 0.0001976,
+      "revela_solucion": false,
+      "palabras": 33,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP-037",
+      "categoria": "division_coeficiente_equivocado",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "division_coeficiente_equivocado",
+      "pista": "Revisa el número por el que dividiste ambos lados y compáralo con el que acompaña a la x en 5x = 15. Para despejar la x, piensa en qué número debes dividir: el que multiplica a la incógnita.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 3781,
+      "tokens_entrada": 511,
+      "tokens_salida": 786,
+      "costo_usd": 0.0004441,
+      "revela_solucion": false,
+      "palabras": 38,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "DEV-083",
+      "categoria": "division_coeficiente_equivocado",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "division_coeficiente_equivocado",
+      "pista": "Revisa con calma qué número está multiplicando a la x en el paso anterior. Para despejarla, necesitas dividir entre ese mismo número, no entre otro. ¿Cuál es?",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 2790,
+      "tokens_entrada": 511,
+      "tokens_salida": 541,
+      "costo_usd": 0.0003216,
+      "revela_solucion": false,
+      "palabras": 27,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "PC-067",
+      "categoria": "division_coeficiente_equivocado",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "division_coeficiente_equivocado",
+      "pista": "Revisa bien el número que acompaña a la x en el paso anterior y fíjate en su signo. Para dejar la x sola, ¿entre qué número debes dividir ambos lados?",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 3131,
+      "tokens_entrada": 511,
+      "tokens_salida": 614,
+      "costo_usd": 0.00035810000000000003,
+      "revela_solucion": false,
+      "palabras": 30,
+      "muy_larga": false,
+      "cortada": false
+    },
+    {
+      "caso": "AMP2-018",
+      "categoria": "division_coeficiente_equivocado",
+      "modelo": "claude-haiku-5-5",
+      "diagnostico": "division_coeficiente_equivocado",
+      "pista": "Mira con atención el número que acompaña a la x en el paso anterior, incluyendo su signo. ¿Con qué número debes dividir ambos lados para que la x quede sola? Revisa tu división y vuelve a intentarlo.",
+      "error": null,
+      "motivo_fin": "end_turn",
+      "tipos_bloque": [
+        "thinking",
+        "text"
+      ],
+      "latencia_ms": 3306,
+      "tokens_entrada": 511,
+      "tokens_salida": 690,
+      "costo_usd": 0.00039610000000000003,
+      "revela_solucion": false,
+      "palabras": 37,
+      "muy_larga": false,
+      "cortada": false
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "AMP2-078",
+    "conjunto": "ampliado_2",
+    "categoria": "error_signo",
+    "enunciado": "Resuelve: 2(x - 5) = 7x + 15",
+    "paso_anterior": "2x - 10 = 7x + 15",
+    "paso_erroneo": "2x - 7x = 15 - 10",
+    "correccion_esperada": "2x - 7x = 15 + 10"
+  },
+  {
+    "id": "DEV-014",
+    "conjunto": "dev",
+    "categoria": "error_signo",
+    "enunciado": "Resuelve: 6x - 7 = 2x + 5",
+    "paso_anterior": "6x - 7 = 2x + 5",
+    "paso_erroneo": "6x + 2x = 5 + 7",
+    "correccion_esperada": "6x - 2x = 5 + 7"
+  },
+  {
+    "id": "DEV-020",
+    "conjunto": "dev",
+    "categoria": "error_signo",
+    "enunciado": "Resuelve: -2(x + 3) = 10",
+    "paso_anterior": "-2x - 6 = 10",
+    "paso_erroneo": "-2x = 10 - 6",
+    "correccion_esperada": "-2x = 10 + 6"
+  },
+  {
+    "id": "PC-053",
+    "conjunto": "prueba_ciega",
+    "categoria": "error_signo",
+    "enunciado": "Resuelve: x/2 + 5 = x/4 + 8",
+    "paso_anterior": "x/2 + 5 = x/4 + 8",
+    "paso_erroneo": "x/2 + x/4 = 8 - 5",
+    "correccion_esperada": "x/2 - x/4 = 8 - 5"
+  },
+  {
+    "id": "DEV-037",
+    "conjunto": "dev",
+    "categoria": "distributiva_incorrecta",
+    "enunciado": "Resuelve: 3/5(2x + 5) - 2(x -1) = 4",
+    "paso_anterior": "3/5(2x + 5) - 2(x -1) = 4",
+    "paso_erroneo": "6x/5 + 15/5 - 2x - 2 = 4",
+    "correccion_esperada": "6x/5 + 15/5 - 2x + 2 = 4"
+  },
+  {
+    "id": "AMP-006",
+    "conjunto": "ampliado",
+    "categoria": "distributiva_incorrecta",
+    "enunciado": "Resuelve: 4(x + 2) - 3 = 2x + 15",
+    "paso_anterior": "4(x + 2) - 3 = 2x + 15",
+    "paso_erroneo": "4x + 8 - 12 = 2x + 15",
+    "correccion_esperada": "4x + 8 - 3 = 2x + 15"
+  },
+  {
+    "id": "AMP2-006",
+    "conjunto": "ampliado_2",
+    "categoria": "distributiva_incorrecta",
+    "enunciado": "Resuelve: -2(x + 5) = 6",
+    "paso_anterior": "-2(x + 5) = 6",
+    "paso_erroneo": "-2x + 10 = 6",
+    "correccion_esperada": "-2x - 10 = 6"
+  },
+  {
+    "id": "AMP2-080",
+    "conjunto": "ampliado_2",
+    "categoria": "distributiva_incorrecta",
+    "enunciado": "Resuelve: 8(x + 0.5) = 20",
+    "paso_anterior": "8(x + 0.5) = 20",
+    "paso_erroneo": "8x + 0.5 = 20",
+    "correccion_esperada": "8x + 4 = 20"
+  },
+  {
+    "id": "AMP-011",
+    "conjunto": "ampliado",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: 0.3x + 1.2 = 0.1x + 3",
+    "paso_anterior": "0.2x = 1.8",
+    "paso_erroneo": "2x = 1.8",
+    "correccion_esperada": "2x = 18"
+  },
+  {
+    "id": "PC-036",
+    "conjunto": "prueba_ciega",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: 4(x - 1) = 2x + 10",
+    "paso_anterior": "4x - 4 = 2x + 10",
+    "paso_erroneo": "4x - 4 + 4 = 2x + 10",
+    "correccion_esperada": "4x - 4 + 4 = 2x + 10 + 4"
+  },
+  {
+    "id": "PC-061",
+    "conjunto": "prueba_ciega",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: x/3 + 4 = x/4 + 5",
+    "paso_anterior": "x/3 + 4 = x/4 + 5",
+    "paso_erroneo": "x/3 + 4 = 12 * (x/4 + 5)",
+    "correccion_esperada": "12 * (x/3 + 4) = 12 * (x/4 + 5)"
+  },
+  {
+    "id": "PC-085",
+    "conjunto": "prueba_ciega",
+    "categoria": "operacion_un_lado",
+    "enunciado": "Resuelve: -x/2 = 7",
+    "paso_anterior": "-x/2 = 7",
+    "paso_erroneo": "-2 * (-x/2) = 7",
+    "correccion_esperada": "-2 * (-x/2) = -2 * 7"
+  },
+  {
+    "id": "PC-066",
+    "conjunto": "prueba_ciega",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: 3(x + 4) = 7(x - 4)",
+    "paso_anterior": "12 + 28 = 7x - 3x",
+    "paso_erroneo": "30 = 4x",
+    "correccion_esperada": "40 = 4x"
+  },
+  {
+    "id": "AMP-034",
+    "conjunto": "ampliado",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: (3/4)x + 2 = 12/5",
+    "paso_anterior": "x = 2/5 * 4/3",
+    "paso_erroneo": "x = 6/20",
+    "correccion_esperada": "x = 8/15"
+  },
+  {
+    "id": "DEV-067",
+    "conjunto": "dev",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: 4x - 5 = 13 - x/2",
+    "paso_anterior": "8x + x = 26 + 10",
+    "paso_erroneo": "8x = 36",
+    "correccion_esperada": "9x = 36"
+  },
+  {
+    "id": "DEV-061",
+    "conjunto": "dev",
+    "categoria": "simplificacion_aritmetica",
+    "enunciado": "Resuelve: 2x/3 + 5 = x - 12",
+    "paso_anterior": "2x - 3x = -36 - 15",
+    "paso_erroneo": "-x = -50",
+    "correccion_esperada": "-x = -51"
+  },
+  {
+    "id": "AMP-037",
+    "conjunto": "ampliado",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: 7x - 2x + 4 = 19",
+    "paso_anterior": "5x = 15",
+    "paso_erroneo": "x = 15/7",
+    "correccion_esperada": "x = 15/5"
+  },
+  {
+    "id": "DEV-083",
+    "conjunto": "dev",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: x/2 + 3x - 5 = 13",
+    "paso_anterior": "7x = 36",
+    "paso_erroneo": "x = 36/5",
+    "correccion_esperada": "x = 36/7"
+  },
+  {
+    "id": "PC-067",
+    "conjunto": "prueba_ciega",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: 12 - 4x = 0",
+    "paso_anterior": "-4x = -12",
+    "paso_erroneo": "x = -12/4",
+    "correccion_esperada": "x = -12/(-4)"
+  },
+  {
+    "id": "AMP2-018",
+    "conjunto": "ampliado_2",
+    "categoria": "division_coeficiente_equivocado",
+    "enunciado": "Resuelve: -3x + 4 = 19",
+    "paso_anterior": "-3x = 15",
+    "paso_erroneo": "x = 15/3",
+    "correccion_esperada": "x = 15/(-3)"
+  }
+]

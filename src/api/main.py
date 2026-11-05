@@ -18,7 +18,7 @@ import sympy as sp
 from src.verificador.verificador import verificar_paso, parsear_ecuacion, ErrorDeParseo
 from src.diagnostico.diagnostico import diagnosticar, obtener_categoria
 from src.generador import llm as generador_llm
-from src.generador.plantillas import generar_retroalimentacion_plantilla
+from src.generador.plantillas import TEXTOS, generar_retroalimentacion_plantilla
 
 INTERFAZ = Path(__file__).parent / "static" / "index.html"
 
@@ -84,9 +84,7 @@ def verificar(paso: PasoRequest):
     try:
         if _solucion_es_cero(paso.s_i):
             raise ErrorDeParseo(
-                "Por ahora no reviso ecuaciones cuya solución es x = 0 (las que no tienen un número "
-                "suelto, como 2x = 5x), porque no puedo distinguir un paso correcto de uno incorrecto. "
-                "Prueba con otra ecuación.",
+                TEXTOS["avisos_api"]["solucion_cero"],
                 tipo="entrada_no_permitida",
             )
         resultado_verificacion = verificar_paso(paso.s_i, paso.s_i_mas_1)
@@ -117,7 +115,7 @@ def verificar(paso: PasoRequest):
                       "tokens_salida": g.tokens_salida}
     else:
         inicio = time.perf_counter()
-        pista = generar_retroalimentacion_plantilla(resultado_diagnostico)
+        pista = generar_retroalimentacion_plantilla(resultado_diagnostico, paso.s_i, paso.s_i_mas_1)
         generacion = {"latencia_ms": round((time.perf_counter() - inicio) * 1000, 3),
                       "usado_llm": False}
 

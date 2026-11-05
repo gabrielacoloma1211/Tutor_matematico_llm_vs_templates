@@ -4,75 +4,49 @@ Toma el resultado del diagnóstico y rellena la plantilla de la categoría con
 los datos del paso del estudiante (término, factor, coeficiente). No usa LLM:
 es determinista y no inventa contenido.
 """
+import json
 import re
 from fractions import Fraction
+from pathlib import Path
 
 import sympy as sp
 
 from src.diagnostico.diagnostico import ResultadoDiagnostico, obtener_categoria
 from src.verificador.verificador import ErrorDeParseo, parsear_ecuacion
 
-MENSAJE_GENERAL = (
-    "Revisa este paso con más cuidado. No pudimos identificar el tipo exacto de error."
-)
+# Los textos de las pistas no están en el código: viven en data/plantillas.json (igual que las
+# plantillas de la taxonomía en data/taxonomia.json), para poder revisarlos y cambiarlos sin tocar el programa.
+RUTA_TEXTOS = Path(__file__).resolve().parents[2] / "data" / "plantillas.json"
+
+
+def cargar_textos() -> dict:
+    with open(RUTA_TEXTOS, encoding="utf-8") as f:
+        return json.load(f)
+
+
+TEXTOS = cargar_textos()
+
+MENSAJE_GENERAL = TEXTOS["mensaje_general"]
 
 # El diagnóstico llama error_signo a varias situaciones y la plantilla de la taxonomía ("al moverlo
 # al otro lado, su signo debe cambiar") solo describe una. Según cómo escribió el estudiante el
 # término, se elige entre estas pistas; ninguna dice que el término cambió de lado si no lo hizo.
-PLANTILLA_SIGNO_MISMO_LADO = (
-    "Revisa el signo del término {termino}: como sigue en el mismo lado de la ecuación, "
-    "su signo no debe cambiar."
-)
-PLANTILLA_SIGNO_NEUTRA = (
-    "Revisa los signos de este paso: un término solo cambia de signo cuando lo pasas "
-    "al otro lado de la ecuación."
-)
-PLANTILLA_SIGNO_AL_MULTIPLICAR = (
-    "Al multiplicar por {multiplicador}, cada término conserva su signo: "
-    "revisa los signos de tu resultado."
-)
-PLANTILLA_SIGNO_OPERACION_OPUESTA = (
-    "Revisa los signos: si sumas o restas {termino} en los dos lados de la ecuación, "
-    "la operación debe ser la misma en cada lado."
-)
-PLANTILLA_SIGNO_PARENTESIS = (
-    "Al pasar un término con paréntesis al otro lado, cambia el signo de todo lo que tiene "
-    "dentro, no solo el del primer término."
-)
+PLANTILLA_SIGNO_MISMO_LADO = TEXTOS["signo"]["mismo_lado"]
+PLANTILLA_SIGNO_NEUTRA = TEXTOS["signo"]["neutra"]
+PLANTILLA_SIGNO_AL_MULTIPLICAR = TEXTOS["signo"]["al_multiplicar"]
+PLANTILLA_SIGNO_OPERACION_OPUESTA = TEXTOS["signo"]["operacion_opuesta"]
+PLANTILLA_SIGNO_PARENTESIS = TEXTOS["signo"]["parentesis"]
 
 # Propiedad distributiva: la plantilla de la taxonomía ("multiplicar {factor} por cada término dentro
 # del paréntesis, no solo por el primero") solo describe el error de omitir un término; el diagnóstico
 # distingue más variantes y cada una tiene su pista.
-PISTAS_DISTRIBUTIVA = {
-    "signo": "Al multiplicar {factor} por cada término del paréntesis, revisa el signo de cada resultado.",
-    "suma_factor": "La propiedad distributiva pide multiplicar, no sumar: multiplica {factor} por cada término del paréntesis.",
-    "suma_magnitudes": "La propiedad distributiva pide multiplicar, no sumar: multiplica {factor} por cada término del paréntesis.",
-    "agrega_incognita": "Al multiplicar {factor} por un número, el resultado no lleva x: la x solo aparece si el término que multiplicas ya la tenía.",
-    "pierde_incognita": "Al multiplicar {factor} por un término que tiene x, el resultado también tiene x: revisa que no se haya perdido.",
-    "parentesis_con_mas": "Cuando el paréntesis tiene un + delante, al quitarlo los signos de adentro no cambian.",
-    "factor_doble": "Revisa que el {factor} multiplique a cada término una sola vez.",
-    "termino_externo": "El {factor} solo multiplica lo que está dentro del paréntesis: los términos que quedan fuera no se multiplican.",
-    "factor_repetido_afuera": "Después de multiplicar {factor} por cada término del paréntesis, el {factor} ya no debe quedar escrito afuera.",
-    "un_termino_del_factor": "Al multiplicar dos paréntesis, cada término de uno debe multiplicar a cada término del otro.",
-}
+PISTAS_DISTRIBUTIVA = TEXTOS["distributiva"]
 
-PLANTILLA_DIVISION_FACTOR = (
-    "Para quitar el {coeficiente} que multiplica al paréntesis, debes dividir ambos lados entre {coeficiente}."
-)
-PLANTILLA_DIVISION_SUMA = (
-    "Para despejar la incógnita, debes dividir ambos lados entre todo el coeficiente que la acompaña, "
-    "en este caso ({coeficiente}), no solo entre uno de sus términos."
-)
-PLANTILLA_ARITMETICA_LADO = (
-    "Revisa el cálculo numérico del lado {lado}: la operación que aplicaste es correcta, "
-    "pero el resultado no lo es."
-)
-PLANTILLA_UN_LADO = (
-    "{operacion} solo en el lado {lado}, pero cualquier operación que realices debe aplicarse a "
-    "ambos lados de la ecuación para mantener la igualdad."
-)
-_VERBOS_UN_LADO = {"restó": "Restaste", "sumó": "Sumaste",
-                   "multiplicó por": "Multiplicaste por", "dividió entre": "Dividiste entre"}
+PLANTILLA_DIVISION_FACTOR = TEXTOS["division"]["factor"]
+PLANTILLA_DIVISION_SUMA = TEXTOS["division"]["suma"]
+PLANTILLA_ARITMETICA_LADO = TEXTOS["aritmetica"]["lado"]
+PLANTILLA_UN_LADO = TEXTOS["un_lado"]["plantilla"]
+_VERBOS_UN_LADO = TEXTOS["un_lado"]["verbos"]
 _UN_LADO = re.compile(r"^(restó|sumó|multiplicó por|dividió entre) (\d+(?:\.\d+)?) solo en el lado (izquierdo|derecho)$")
 
 # Variable de cada plantilla -> clave de ResultadoDiagnostico.detalles

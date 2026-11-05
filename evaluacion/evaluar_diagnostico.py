@@ -27,65 +27,9 @@ if str(RAIZ) not in sys.path:
     sys.path.insert(0, str(RAIZ))
 
 from benchmark.validar_casos import cargar_casos  # noqa: E402
-from src.diagnostico.diagnostico import diagnosticar  # noqa: E402
-from src.verificador.verificador import verificar_paso  # noqa: E402
-
-CATEGORIAS = [
-    "error_signo",
-    "distributiva_incorrecta",
-    "operacion_un_lado",
-    "simplificacion_aritmetica",
-    "division_coeficiente_equivocado",
-    "indeterminado",
-]
-CORTO = {
-    "error_signo": "SIGNO",
-    "distributiva_incorrecta": "DISTRIB",
-    "operacion_un_lado": "UNLADO",
-    "simplificacion_aritmetica": "ARITM",
-    "division_coeficiente_equivocado": "DIV",
-    "indeterminado": "INDET",
-}
-
-
-def predecir(caso) -> str:
-    """Categoría que asigna el diagnóstico al paso erróneo del caso."""
-    k = caso["indice_paso_erroneo"]
-    pasos = caso["resolucion_estudiante"]
-    resultado = verificar_paso(pasos[k - 1], pasos[k])
-    return diagnosticar(resultado.discrepancia).categoria_id
-
-
-def metricas(confusion):
-    """Precisión, recall y F1 por categoría, y macro-F1."""
-    filas = {}
-    for cat in CATEGORIAS:
-        tp = confusion[(cat, cat)]
-        fp = sum(confusion[(otra, cat)] for otra in CATEGORIAS if otra != cat)
-        fn = sum(confusion[(cat, otra)] for otra in CATEGORIAS if otra != cat)
-        precision = tp / (tp + fp) if tp + fp else 0.0
-        recall = tp / (tp + fn) if tp + fn else 0.0
-        f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
-        filas[cat] = (precision, recall, f1, tp + fn)
-    macro_f1 = sum(f[2] for f in filas.values()) / len(CATEGORIAS)
-    return filas, macro_f1
-
-
-def macro_f1_presentes(filas):
-    """Macro-F1 solo con las categorías que tienen casos. Devuelve (valor, cuántas categorías, cuáles faltan)."""
-    presentes = [c for c in CATEGORIAS if filas[c][3] > 0]
-    faltan = [c for c in CATEGORIAS if filas[c][3] == 0]
-    valor = sum(filas[c][2] for c in presentes) / len(presentes) if presentes else 0.0
-    return valor, len(presentes), faltan
-
-
-def texto_macro_presentes(filas):
-    valor, n, faltan = macro_f1_presentes(filas)
-    if not faltan:
-        return ""
-    nombres = ", ".join(CORTO[c] for c in faltan)
-    return (f"macro-F1 solo con las {n} categorías que tienen casos: {valor:.2f} "
-            f"(sin casos, no evaluadas: {nombres}; con las 6 categorías la categoría sin casos cuenta F1 = 0)")
+from evaluacion.comun import (  # noqa: E402,F401  (algunos nombres los importan otros scripts y las pruebas)
+    CATEGORIAS, CORTO, macro_f1_presentes, metricas, predecir, texto_macro_presentes,
+)
 
 
 def main(argv=None):

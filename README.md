@@ -42,16 +42,25 @@ es cómo se genera la pista pedagógica.
 │   ├── casos/variaciones/# 2 lotes de 50 variaciones de AMP-010 y AMP-071 (otros números)
 │   ├── casos/ampliado_2/   # primera prueba ciega, ya usada para ajustar (75 de ajuste, 25 reservados)
 │   ├── casos/prueba_ciega/ # nueva prueba ciega: 100 casos solo para medir (no se ajusta nada con ellos)
+│   ├── casos/evaluacion_docente/ # 30 casos para los docentes y 20 del piloto (seleccionados al azar con semilla fija)
 │   ├── validar_casos.py  # comprueba la consistencia matemática de los casos (enunciado, pasos, despeje)
 ├── evaluacion/
+│   ├── comun.py                # lo que comparten los scripts: predecir, métricas, resumen, guardado con fecha
 │   ├── evaluar_diagnostico.py  # exactitud y macro-F1 sobre dev (o test, una sola vez)
 │   ├── evaluar_ampliado.py     # lo mismo sobre el conjunto ampliado, separado en ajuste y reservados
 │   ├── evaluar_variaciones.py  # el diagnóstico sobre las variaciones
 │   ├── evaluar_prueba_ciega.py # mide el diagnóstico sobre la prueba ciega (guarda huellas del código y los casos)
 │   ├── medir_latencia.py       # latencia del verificador y del diagnóstico (dev)
-│   └── resultados/             # resultados guardados con fecha + notas de los ajustes
+│   ├── seleccionar_casos_pistas.py # elige los 30 casos de la evaluación docente y los 20 del piloto del LLM
+│   ├── piloto_modelos.py       # compara modelos de LLM sobre los 20 casos del piloto (lectura ciega)
+│   └── resultados/             # resultados guardados con fecha, una carpeta por tema:
+│       ├── ampliado/  ampliado_2/  variaciones/  prueba_ciega/   # el diagnóstico sobre cada conjunto
+│       ├── latencia/                                             # latencia del verificador y del diagnóstico
+│       └── piloto_llm/                                           # piloto para elegir el modelo de LLM
 └── data/
-    └── taxonomia.json    # Las 6 categorías de error (5 + indeterminado)
+    ├── taxonomia.json    # Las 6 categorías de error (5 + indeterminado)
+    ├── plantillas.json   # Los textos de las pistas con plantillas y los avisos de la API (no están en el código)
+    └── prompt_llm.txt    # El prompt del LLM (no está en el código)
 ```
 
 ## Estado actual

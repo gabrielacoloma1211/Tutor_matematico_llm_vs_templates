@@ -84,7 +84,8 @@ def main(argv=None):
                      f"suma de medias (un paso inválido): {st.mean(tv) + st.mean(td):.1f} ms"])
     print(out)
     if a.guardar:
-        dest = RAIZ / "evaluacion" / "resultados" / f"latencia_{date.today().isoformat()}.txt"
+        dest = RAIZ / "evaluacion" / "resultados" / "latencia" / f"latencia_{date.today().isoformat()}.txt"
+        dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(out + "\n", encoding="utf-8")
         print("guardado en", dest.relative_to(RAIZ))
 

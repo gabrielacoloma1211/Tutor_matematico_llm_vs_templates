@@ -12,33 +12,35 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ))
-from evaluacion.evaluar_diagnostico import predecir  # noqa: E402
+from evaluacion.comun import predecir_todos  # noqa: E402
 
-ARCHIVO = next((a for a in sys.argv[1:] if a.endswith(".json")), "variaciones.json")
-ETQ = next((a for a in sys.argv[1:] if a.startswith("_")), "")
-casos = json.load(open(RAIZ / "benchmark/casos/variaciones" / ARCHIVO, encoding="utf-8"))
-preds = {}
-for c in casos:
-    try:
-        preds[c["id"]] = predecir(c)
-    except Exception as e:
-        preds[c["id"]] = "ERROR"
-out = []
-for sem in ("AMP-010", "AMP-071"):
-    sub = [c for c in casos if c["caso_semilla"] == sem]
-    cnt = Counter(preds[c["id"]] for c in sub)
-    ok = cnt["indeterminado"]
-    out.append(f"{sem}: {len(sub)} variaciones | etiqueta esperada: indeterminado | acierta {ok}/{len(sub)}")
-    out.append("   respuestas del diagnóstico: " + ", ".join(f"{k}={v}" for k, v in cnt.most_common()))
-tot = sum(preds[c["id"]] == c["categoria"] for c in casos)
-out.append(f"TOTAL: {tot}/{len(casos)}")
-out.append("Fallos:")
-for c in casos:
-    if preds[c["id"]] != c["categoria"]:
-        out.append(f"  {c['id']} {c['resolucion_estudiante'][0]} -> {c['resolucion_estudiante'][1]}  diag={preds[c['id']]}")
-txt = "\n".join(out)
-print(txt)
-if "--guardar" in sys.argv:
-    d = RAIZ / "evaluacion/resultados"
-    (d / f"{ARCHIVO[:-5]}_{date.today().isoformat()}{ETQ}.txt").write_text(txt + "\n", encoding="utf-8")
-    json.dump(preds, open(d / f"{ARCHIVO[:-5]}_{date.today().isoformat()}{ETQ}_predicciones.json", "w"), indent=1)
+
+def main():
+    ARCHIVO = next((a for a in sys.argv[1:] if a.endswith(".json")), "variaciones.json")
+    ETQ = next((a for a in sys.argv[1:] if a.startswith("_")), "")
+    casos = json.load(open(RAIZ / "benchmark/casos/variaciones" / ARCHIVO, encoding="utf-8"))
+    preds = predecir_todos(casos)
+    out = []
+    for sem in ("AMP-010", "AMP-071"):
+        sub = [c for c in casos if c["caso_semilla"] == sem]
+        cnt = Counter(preds[c["id"]] for c in sub)
+        ok = cnt["indeterminado"]
+        out.append(f"{sem}: {len(sub)} variaciones | etiqueta esperada: indeterminado | acierta {ok}/{len(sub)}")
+        out.append("   respuestas del diagnóstico: " + ", ".join(f"{k}={v}" for k, v in cnt.most_common()))
+    tot = sum(preds[c["id"]] == c["categoria"] for c in casos)
+    out.append(f"TOTAL: {tot}/{len(casos)}")
+    out.append("Fallos:")
+    for c in casos:
+        if preds[c["id"]] != c["categoria"]:
+            out.append(f"  {c['id']} {c['resolucion_estudiante'][0]} -> {c['resolucion_estudiante'][1]}  diag={preds[c['id']]}")
+    txt = "\n".join(out)
+    print(txt)
+    if "--guardar" in sys.argv:
+        d = RAIZ / "evaluacion/resultados/variaciones"
+        d.mkdir(parents=True, exist_ok=True)
+        (d / f"{ARCHIVO[:-5]}_{date.today().isoformat()}{ETQ}.txt").write_text(txt + "\n", encoding="utf-8")
+        json.dump(preds, open(d / f"{ARCHIVO[:-5]}_{date.today().isoformat()}{ETQ}_predicciones.json", "w"), indent=1)
+
+
+if __name__ == "__main__":
+    main()

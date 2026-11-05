@@ -29,12 +29,12 @@ RAIZ = Path(__file__).resolve().parent.parent
 if str(RAIZ) not in sys.path:
     sys.path.insert(0, str(RAIZ))
 
-from benchmark.validar_casos import validar_caso  
-from evaluacion.evaluar_ampliado import resumen  
-from evaluacion.evaluar_diagnostico import CATEGORIAS, CORTO, predecir  
+from benchmark.validar_casos import validar_caso  # noqa: E402
+from evaluacion.comun import (  # noqa: E402
+    TIPOS_DE_NOVEDAD as TIPOS, guardar_resultado, lista_de_fallos, predecir_todos, resumen, tabla_por_novedad,
+)
 
 ARCHIVO = RAIZ / "benchmark" / "casos" / "prueba_ciega" / "prueba_ciega.json"
-TIPOS = ("variante_nueva", "estructura_nueva", "combinado", "fuera_de_taxonomia")
 
 
 def _huella(rutas):
@@ -85,7 +85,7 @@ def main(argv=None):
         return 1
 
     codigo, datos = huella_codigo(), huella_casos()
-    d = RAIZ / "evaluacion" / "resultados"
+    d = RAIZ / "evaluacion" / "resultados" / "prueba_ciega"
     previos = sorted(d.glob("prueba_ciega_*.txt"))
     aviso = ""
     if previos:
@@ -96,39 +96,19 @@ def main(argv=None):
             if linea.startswith("huella de los casos:") and linea.split(":")[1].strip() != datos:
                 aviso += (f"\nAVISO: los casos o sus etiquetas cambiaron desde {previos[-1].name}.")
 
-    preds = {}
-    for c in casos:
-        try:
-            preds[c["id"]] = predecir(c)
-        except Exception as e:
-            preds[c["id"]] = "ERROR"
-            print(f"AVISO: {c['id']} produjo {type(e).__name__}")
+    preds = predecir_todos(casos)
 
     partes = [f"huella del código: {codigo}\nhuella de los casos: {datos}"]
     if aviso:
         partes.append(aviso)
     partes.append(resumen(casos, preds, "PRUEBA CIEGA"))
 
-    tabla = [f"{'tipo de novedad':<20}{'casos':>6}{'aciertos':>10}{'seguros':>9}{'peligrosos':>12}"]
-    for tipo in TIPOS:
-        cs = [c for c in casos if c["tipo_de_novedad"] == tipo]
-        ac = sum(preds[c["id"]] == c["categoria"] for c in cs)
-        seg = sum(preds[c["id"]] != c["categoria"] and preds[c["id"]] in ("indeterminado", "ERROR") for c in cs)
-        tabla.append(f"{tipo:<20}{len(cs):>6}{ac:>10}{seg:>9}{len(cs) - ac - seg:>12}")
-    partes.append("== Por tipo de novedad (seguro = responde indeterminado o falla sin clasificar; peligroso = otra categoría)\n"
-                  + "\n".join(tabla))
-
-    fallos = [f"  {c['id']:<8} tipo {c['tipo_de_novedad']:<18} autora: {CORTO[c['categoria']]:<8} "
-              f"diagnóstico: {CORTO.get(preds[c['id']], 'ERROR')}"
-              for c in casos if preds[c["id"]] != c["categoria"]]
-    partes.append(f"== Casos mal clasificados ({len(fallos)}). Se informan, no se usan para ajustar.\n" + "\n".join(fallos))
+    partes.append(tabla_por_novedad(casos, preds))
+    partes.append(lista_de_fallos(casos, preds, ". Se informan, no se usan para ajustar."))
     texto = "\n\n".join(partes)
     print(texto)
     if args.guardar:
-        d.mkdir(exist_ok=True)
-        base = f"prueba_ciega_{date.today().isoformat()}"
-        (d / f"{base}.txt").write_text(texto + "\n", encoding="utf-8")
-        (d / f"{base}_predicciones.json").write_text(json.dumps(preds, indent=2, ensure_ascii=False), encoding="utf-8")
+        guardar_resultado("prueba_ciega", f"prueba_ciega_{date.today().isoformat()}", texto, preds)
     return 0
 
 

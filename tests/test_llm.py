@@ -39,7 +39,7 @@ def test_envia_parametros_y_datos(caso):
     llamada = cliente.llamadas[0]
     assert llamada["model"] == llm.MODELO
     assert llamada["max_tokens"] == llm.MAX_TOKENS
-    assert llamada["temperature"] == llm.TEMPERATURA
+    assert ("temperature" in llamada) == (llm.TEMPERATURA is not None)
     assert caso["s_i"] in llamada["messages"][0]["content"]
     assert caso["s_i_mas_1"] in llamada["messages"][0]["content"]
     assert "{" not in llamada["system"]

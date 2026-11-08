@@ -15,6 +15,7 @@ Decisiones de diseño (a justificar en la tesis):
 - Parámetros fijos (la temperatura no se envía: los modelos 5.x la rechazan), para que la comparación sea lo más reproducible posible.
 """
 import os
+import re
 import time
 from dataclasses import dataclass
 from pathlib import Path
@@ -50,6 +51,14 @@ MAX_TOKENS = 4096
 TIMEOUT_SEGUNDOS = 20.0
 LLAMAR_EN_INDETERMINADO = False
 
+# Controles de la respuesta. El prompt pide una pista de hasta 45 palabras, en texto plano (sin emojis ni
+# Markdown). La respuesta se revisa después de generarla, pero NUNCA se modifica: los incumplimientos solo se
+# registran. Una respuesta que no terminó con normalidad (p. ej. cortada por el límite de tokens) no se entrega.
+MAX_PALABRAS = 45
+_FIN_NORMAL = ("end_turn", "stop_sequence", None)   # None: clientes falsos de las pruebas, sin stop_reason
+_EMOJI = re.compile("[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B00-\u2BFF\uFE0F\u200d]")
+_MARKDOWN = re.compile(r"\*\*\S|__\S|^\s*#{1,6}\s|^\s*[-*•]\s|`|\[[^\]]+\]\([^)]+\)", re.MULTILINE)
+
 # El prompt no está en el código: vive en data/prompt_llm.txt (con los marcadores {nombre_categoria}
 # y {definicion_categoria}, que se rellenan con la categoría del diagnóstico).
 RUTA_PROMPT = RUTA_TEXTOS.with_name("prompt_llm.txt")
@@ -76,6 +85,19 @@ class RespuestaGenerador:
     tokens_salida: int | None = None
     motivo_fin: str | None = None   # stop_reason del API ("max_tokens" = pista cortada)
     tipos_bloque: tuple = ()        # tipos de bloque devueltos (p. ej. text, thinking)
+    incumplimientos: tuple = ()     # "demasiado_larga", "emojis", "markdown" (la pista no se altera)
+
+
+def revisar_formato(texto: str) -> list[str]:
+    """Incumplimientos del formato que pide el prompt. Solo informa: no corrige ni descarta la pista."""
+    problemas = []
+    if len(texto.split()) > MAX_PALABRAS:
+        problemas.append("demasiado_larga")
+    if _EMOJI.search(texto):
+        problemas.append("emojis")
+    if _MARKDOWN.search(texto):
+        problemas.append("markdown")
+    return problemas
 
 
 def _construir_prompt(resultado: ResultadoDiagnostico) -> str:
@@ -146,12 +168,18 @@ def generar_retroalimentacion_llm(resultado: ResultadoDiagnostico, s_i: str = ""
             f"(fin={getattr(respuesta, 'stop_reason', None)}, "
             f"bloques={[getattr(b, 'type', '?') for b in bloques]}, "
             f"tokens_salida={getattr(uso_, 'output_tokens', None)}, max_tokens={MAX_TOKENS}).")
+    motivo_fin = getattr(respuesta, "stop_reason", None)
+    if motivo_fin not in _FIN_NORMAL:
+        raise LLMNoDisponible(
+            f"La respuesta del LLM no terminó con normalidad (fin={motivo_fin}): puede estar incompleta "
+            "y no se entrega como pista.")
     uso = getattr(respuesta, "usage", None)
     return RespuestaGenerador(
         texto=texto, modo="llm", usado_llm=True,
         latencia_ms=(time.perf_counter() - inicio) * 1000, modelo=MODELO,
         tokens_entrada=getattr(uso, "input_tokens", None),
         tokens_salida=getattr(uso, "output_tokens", None),
-        motivo_fin=getattr(respuesta, "stop_reason", None),
+        motivo_fin=motivo_fin,
         tipos_bloque=tuple(getattr(b, "type", "text") for b in bloques),
+        incumplimientos=tuple(revisar_formato(texto)),
     )

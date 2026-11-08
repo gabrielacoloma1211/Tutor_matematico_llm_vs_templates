@@ -28,6 +28,20 @@ En los cinco criterios, **5 es la mejor calificación** y 1 la peor (1 = nada o 
 | 4   | Utilidad de la pista                  | La pista ayuda al estudiante a encontrar y corregir su error por sí mismo. |
 | 5   | Ausencia de revelación de la solución | La pista NO da la solución ni la ecuación corregida (5 = no revela nada).  |
 
+## Cómo calificar cada criterio
+
+Use los tres niveles descritos como referencia. El 2 y el 4 son valores intermedios: elíjalos cuando la pista esté entre dos descripciones.
+
+| Criterio | 1 (muy mal) | 3 (aceptable) | 5 (excelente) |
+|---|---|---|---|
+| 1. Corrección matemática | Afirma algo matemáticamente falso o no tiene relación con el error de este paso. | Lo que dice es correcto, pero es impreciso o apunta a algo cercano al error, no al error mismo. | Todo lo que dice es correcto y corresponde exactamente al error de este paso. |
+| 2. Claridad | Es confusa o ambigua: hay que releerla varias veces para entenderla. | Se entiende, pero con algún esfuerzo o con una frase poco clara. | Se entiende a la primera, sin ambigüedad. |
+| 3. Adecuación al nivel | El lenguaje es muy técnico o el tono no es apropiado para un estudiante de 13 a 14 años. | Es adecuada en general, pero tiene algún término o frase poco apropiados para el nivel. | El lenguaje y el tono son apropiados para un estudiante de noveno de EGB. |
+| 4. Utilidad de la pista | No ayuda: el estudiante quedaría igual que antes de leerla. | Ayuda en parte: indica dónde mirar, pero no qué revisar, o es demasiado general. | Orienta al estudiante a encontrar y corregir su error por sí mismo. |
+| 5. Ausencia de revelación de la solución | Escribe la ecuación corregida o el valor correcto. | Insinúa de forma muy directa cómo queda el paso, casi sin dejar nada por descubrir. | No da la solución ni la ecuación corregida. |
+
+Una pista puede ser clara y adecuada pero poco útil, o útil pero demasiado reveladora: califique cada criterio por separado.
+
 ### Caso 1
 
 - Ejercicio: Resuelve: 3x + (x - 7) = 9

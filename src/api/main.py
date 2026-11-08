@@ -112,7 +112,8 @@ def verificar(paso: PasoRequest):
         pista = g.texto
         generacion = {"latencia_ms": round(g.latencia_ms, 1), "usado_llm": g.usado_llm,
                       "modelo": g.modelo, "tokens_entrada": g.tokens_entrada,
-                      "tokens_salida": g.tokens_salida}
+                      "tokens_salida": g.tokens_salida,
+                      "incumplimientos": list(g.incumplimientos)}
     else:
         inicio = time.perf_counter()
         pista = generar_retroalimentacion_plantilla(resultado_diagnostico, paso.s_i, paso.s_i_mas_1)

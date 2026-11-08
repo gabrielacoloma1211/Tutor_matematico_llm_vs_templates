@@ -6,7 +6,7 @@ docente). Para cada modelo genera la pista de cada caso con el mismo código y l
 prototipo (src/generador/llm.py, solo cambia el modelo) y registra: la pista, la latencia, los tokens y el costo,
 y revisa automáticamente tres cosas:
   - la pista no contiene la corrección esperada ni el valor correcto (no revela la solución);
-  - la pista es breve (hasta 60 palabras) y está en español (no vacía);
+  - la pista es breve (hasta 45 palabras, como pide el prompt), sin emojis ni Markdown, y no está vacía;
   - la llamada funcionó.
 También escribe una hoja de lectura ciega: las pistas de todos los modelos mezcladas, con un código, para que
 una persona las lea sin saber de qué modelo salió cada una. La clave está en el JSON de resultados.
@@ -28,6 +28,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 if str(RAIZ) not in sys.path:
     sys.path.insert(0, str(RAIZ))
 
+from evaluacion.comun import configuracion_experimento  # noqa: E402
 from src.diagnostico.diagnostico import diagnosticar  # noqa: E402
 from src.generador import llm  # noqa: E402
 from src.generador.plantillas import generar_retroalimentacion_plantilla  # noqa: E402
@@ -36,7 +37,7 @@ from src.verificador.verificador import verificar_paso  # noqa: E402
 # USD por millón de tokens (entrada, salida). Verificar en la página oficial de precios de Anthropic.
 PRECIOS = {"claude-sonnet-5-5": (2.00, 10.00), "claude-haiku-5-5": (0.10, 0.50)}
 MODELOS_POR_DEFECTO = ["claude-sonnet-5-5", "claude-haiku-5-5"]
-MAX_PALABRAS = 60
+MAX_PALABRAS = llm.MAX_PALABRAS
 CASOS = RAIZ / "benchmark" / "casos" / "evaluacion_docente" / "piloto_20.json"
 
 
@@ -76,6 +77,7 @@ def generar(modelo: str, caso: dict, cliente) -> dict:
     fila["revela_solucion"] = revela_solucion(r.texto, caso, res.detalles.get("valor_correcto", ""))
     fila["palabras"] = len(r.texto.split())
     fila["muy_larga"] = fila["palabras"] > MAX_PALABRAS
+    fila["incumplimientos"] = list(r.incumplimientos)   # formato revisado por llm.revisar_formato
     fila["cortada"] = r.motivo_fin == "max_tokens"
     return fila
 
@@ -111,6 +113,7 @@ def main(argv=None, cliente=None):
         r = {"llamadas": len(fs), "fallaron": len(fs) - len(ok),
              "revelan_solucion": sum(f["revela_solucion"] for f in ok),
              "muy_largas": sum(f["muy_larga"] for f in ok),
+             "con_incumplimientos": sum(bool(f["incumplimientos"]) for f in ok),
              "cortadas": sum(f["cortada"] for f in ok),
              "latencia_media_ms": round(sum(f["latencia_ms"] for f in ok) / len(ok)) if ok else None,
              "costo_total_usd": round(sum(f["costo_usd"] or 0 for f in ok), 4)}
@@ -122,7 +125,8 @@ def main(argv=None, cliente=None):
         salida.mkdir(parents=True, exist_ok=True)
         base = f"piloto_modelos_{date.today().isoformat()}"
         (salida / f"{base}.json").write_text(json.dumps(
-            {"parametros": {"temperatura": llm.TEMPERATURA, "max_tokens": llm.MAX_TOKENS},
+            {"configuracion": configuracion_experimento(),
+             "parametros": {"temperatura": llm.TEMPERATURA, "max_tokens": llm.MAX_TOKENS},
              "resumen": resumen, "filas": filas}, ensure_ascii=False, indent=2), encoding="utf-8")
         # hoja de lectura ciega: pistas mezcladas, sin el nombre del modelo
         rnd = random.Random(7)

@@ -5,8 +5,11 @@ las métricas, el resumen de resultados y el guardado con fecha.
 Estaban repartidas entre evaluar_diagnostico.py y evaluar_ampliado.py (un script importaba a otro);
 aquí viven en un solo lugar y los scripts solo arman su propio informe.
 """
+import hashlib
 import json
+import subprocess
 from collections import Counter
+from datetime import date
 from pathlib import Path
 
 from src.diagnostico.diagnostico import diagnosticar
@@ -32,6 +35,34 @@ CORTO = {
     "indeterminado": "INDET",
 }
 TIPOS_DE_NOVEDAD = ("variante_nueva", "estructura_nueva", "combinado", "fuera_de_taxonomia")
+
+
+def _commit_actual():
+    """Commit del repositorio (y si hay cambios sin guardar), o None si no se puede consultar git."""
+    try:
+        commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=RAIZ, capture_output=True,
+                                text=True, timeout=10, check=True).stdout.strip()
+        sucio = bool(subprocess.run(["git", "status", "--porcelain"], cwd=RAIZ, capture_output=True,
+                                    text=True, timeout=10, check=True).stdout.strip())
+    except (OSError, subprocess.SubprocessError):
+        return {"commit": None, "cambios_sin_guardar": None}
+    return {"commit": commit, "cambios_sin_guardar": sucio}
+
+
+def configuracion_experimento(prompts=None):
+    """Lo que hace reproducible una corrida con el LLM: modelo exacto, parámetros, versión de cada
+    prompt (huella SHA-256 de su texto), fecha y commit. Se guarda junto a los resultados."""
+    from src.generador import llm  # import tardío: los scripts del diagnóstico no necesitan el LLM
+    rutas = [Path(p) for p in (prompts or [llm.RUTA_PROMPT])]
+    return {
+        "fecha": date.today().isoformat(),
+        "modelo": llm.MODELO,
+        "temperatura": llm.TEMPERATURA,   # None = no se envía (los modelos 5.x la rechazan)
+        "max_tokens": llm.MAX_TOKENS,
+        "timeout_segundos": llm.TIMEOUT_SEGUNDOS,
+        "prompts": {r.name: hashlib.sha256(r.read_bytes()).hexdigest()[:16] for r in rutas},
+        **_commit_actual(),
+    }
 
 
 def predecir(caso) -> str:
@@ -60,7 +91,10 @@ def metricas(confusion):
     for cat in CATEGORIAS:
         tp = confusion[(cat, cat)]
         fp = sum(confusion[(otra, cat)] for otra in CATEGORIAS if otra != cat)
-        fn = sum(confusion[(cat, otra)] for otra in CATEGORIAS if otra != cat)
+        # fn: todo caso de la categoría real que no se predijo como ella, incluido ERROR (una excepción del
+        # diagnóstico), que no es una de las seis categorías pero sí es un fallo.
+        fn = sum(cantidad for (real, predicha), cantidad in confusion.items()
+                 if real == cat and predicha != cat)
         precision = tp / (tp + fp) if tp + fp else 0.0
         recall = tp / (tp + fn) if tp + fn else 0.0
         f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
@@ -91,9 +125,11 @@ def resumen(casos, preds, titulo):
     filas, macro = metricas(confusion)
     ok = sum(confusion[(k, k)] for k in CATEGORIAS)
     out = [f"== {titulo}: {len(casos)} casos | exactitud {ok}/{len(casos)} = {ok/len(casos):.2f} | macro-F1 {macro:.2f}"]
-    out.append(f"{'':<9}" + "".join(f"{CORTO[c]:>8}" for c in CATEGORIAS))
+    # la columna ERROR (el diagnóstico lanzó una excepción) solo aparece si hubo alguna
+    columnas = CATEGORIAS + (["ERROR"] if any(p == "ERROR" for _, p in confusion) else [])
+    out.append(f"{'':<9}" + "".join(f"{CORTO.get(c, c):>8}" for c in columnas))
     for real in CATEGORIAS:
-        out.append(f"{CORTO[real]:<9}" + "".join(f"{confusion[(real, p)]:>8}" for p in CATEGORIAS))
+        out.append(f"{CORTO[real]:<9}" + "".join(f"{confusion[(real, p)]:>8}" for p in columnas))
     out.append(f"{'categoría':<10}{'casos':>6}{'prec':>7}{'recall':>8}{'F1':>6}")
     for cat in CATEGORIAS:
         p, r, f, n = filas[cat]

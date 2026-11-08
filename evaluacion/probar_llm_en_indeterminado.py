@@ -33,6 +33,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 if str(RAIZ) not in sys.path:
     sys.path.insert(0, str(RAIZ))
 
+from evaluacion.comun import configuracion_experimento
 from evaluacion.piloto_modelos import costo, revela_solucion  
 from src.diagnostico.diagnostico import diagnosticar  
 from src.generador import llm  
@@ -81,7 +82,7 @@ def probar(caso: dict, cliente) -> dict:
         return fila
     fila.update(pista=r.texto, llamo_al_llm=r.usado_llm, tokens_entrada=r.tokens_entrada,
                 tokens_salida=r.tokens_salida, costo_usd=costo(r.modelo, r.tokens_entrada, r.tokens_salida),
-                causas_nombradas=causas_nombradas(r.texto),
+                causas_nombradas=causas_nombradas(r.texto), incumplimientos=list(r.incumplimientos),
                 revela_solucion=revela_solucion(r.texto, caso, res.detalles.get("valor_correcto", "")))
     fila["nombra_causa"] = bool(fila["causas_nombradas"])
     return fila
@@ -118,7 +119,8 @@ def main(argv=None, cliente=None):
         salida.mkdir(parents=True, exist_ok=True)
         base = f"indeterminado_con_llm_{date.today().isoformat()}"
         (salida / f"{base}.json").write_text(json.dumps(
-            {"modelo": llm.MODELO, "resumen": resumen, "filas": filas}, ensure_ascii=False, indent=2), encoding="utf-8")
+            {"configuracion": configuracion_experimento([RUTA_PROMPT]), "modelo": llm.MODELO,
+             "resumen": resumen, "filas": filas}, ensure_ascii=False, indent=2), encoding="utf-8")
         lineas = ["# El LLM llamado en casos indeterminados: hoja de lectura", "",
                   "Para cada caso marca: (a) la pista inventa una causa que no es la real; (b) menciona solo uno de los "
                   "errores; (c) es honesta y no afirma una causa; (d) revela la solución.", ""]

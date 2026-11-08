@@ -95,12 +95,12 @@ def test_un_modo_desconocido_responde_422():
 
 def test_modo_llm_devuelve_la_pista_y_el_registro(monkeypatch):
     falso = SimpleNamespace(texto="Pista de prueba.", usado_llm=True, latencia_ms=812.34,
-                            modelo="modelo-falso", tokens_entrada=100, tokens_salida=25)
+                            modelo="modelo-falso", tokens_entrada=100, tokens_salida=25, incumplimientos=())
     monkeypatch.setattr(generador_llm, "generar_retroalimentacion_llm", lambda *a, **k: falso)
     cuerpo = _con_modo(DATOS["paso_invalido"], "llm").json()
     assert cuerpo["modo"] == "llm" and cuerpo["pista"] == "Pista de prueba."
     assert cuerpo["generacion"] == {"latencia_ms": 812.3, "usado_llm": True, "modelo": "modelo-falso",
-                                    "tokens_entrada": 100, "tokens_salida": 25}
+                                    "tokens_entrada": 100, "tokens_salida": 25, "incumplimientos": []}
     assert cuerpo["categoria_id"] == DATOS["paso_invalido"]["categoria_id"]
 
 
@@ -133,3 +133,24 @@ def test_una_ecuacion_con_solucion_cero_responde_422(entrada):
 def test_una_ecuacion_normal_enviada_como_paso_inicial_responde_valido():
     paso = DATOS["paso_valido"]
     assert _post({"s_i": paso["s_i"], "s_i_mas_1": paso["s_i"]}).json()["valido"] is True
+
+
+def test_la_restriccion_solo_mira_la_ecuacion_anterior():
+    """Si solo el paso nuevo tiene solución 0 (por un error), la API lo procesa y lo marca incorrecto."""
+    r = _post(DATOS["cero_solo_en_el_paso_nuevo"])
+    assert r.status_code == 200
+    assert r.json()["valido"] is False
+
+
+def test_con_solucion_cero_el_criterio_de_equivalencia_no_distingue_pasos():
+    """Justifica la restricción: con solución 0 un paso incorrecto sería aceptado como válido."""
+    from src.verificador.verificador import verificar_paso
+    incorrecto = DATOS["solucion_cero"][0]   # los dos lados se dividieron distinto, pero ambos dan x = 0
+    assert verificar_paso(incorrecto["s_i"], incorrecto["s_i_mas_1"]).valido is True
+    assert _post(incorrecto).status_code == 422
+
+
+def test_el_verificador_comprueba_equivalencia_no_el_procedimiento():
+    """Límite general (no solo de x = 0): un salto que conserva la solución se acepta aunque omita pasos."""
+    paso = DATOS["equivalente_sin_procedimiento"]
+    assert _post(paso).json()["valido"] is True

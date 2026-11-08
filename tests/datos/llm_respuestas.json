@@ -1,0 +1,55 @@
+[
+  {
+    "id": "limpia",
+    "texto": "Revisa con calma el paso que escribiste y compáralo con el anterior.",
+    "esperado": []
+  },
+  {
+    "id": "asterisco_como_producto",
+    "texto": "Revisa el producto 4 * 2 con calma.",
+    "esperado": []
+  },
+  {
+    "id": "con_emoji",
+    "texto": "Muy bien, revisa el paso 😀 con calma.",
+    "esperado": [
+      "emojis"
+    ]
+  },
+  {
+    "id": "con_negrita",
+    "texto": "Revisa **este** paso con calma.",
+    "esperado": [
+      "markdown"
+    ]
+  },
+  {
+    "id": "con_lista",
+    "texto": "Revisa:\n- el signo\n- el número",
+    "esperado": [
+      "markdown"
+    ]
+  },
+  {
+    "id": "con_titulo",
+    "texto": "## Pista\nRevisa el paso con calma.",
+    "esperado": [
+      "markdown"
+    ]
+  },
+  {
+    "id": "con_codigo",
+    "texto": "Mira `este` paso otra vez.",
+    "esperado": [
+      "markdown"
+    ]
+  },
+  {
+    "id": "emoji_y_negrita",
+    "texto": "**Ojo** 🙂 revisa el paso.",
+    "esperado": [
+      "emojis",
+      "markdown"
+    ]
+  }
+]

@@ -15,9 +15,9 @@ CON_CATEGORIA = [c for c in CASOS if c["categoria_esperada"] != "indeterminado"]
 
 
 class ClienteFalso:
-    def __init__(self, texto="Mira el signo de ese término.", falla=None):
+    def __init__(self, texto="Mira el signo de ese término.", falla=None, fin=None):
         self.llamadas = []
-        self._texto, self._falla = texto, falla
+        self._texto, self._falla, self._fin = texto, falla, fin
         self.messages = self
 
     def create(self, **kwargs):
@@ -25,7 +25,8 @@ class ClienteFalso:
         if self._falla:
             raise self._falla
         return SimpleNamespace(content=[SimpleNamespace(text=self._texto)],
-                               usage=SimpleNamespace(input_tokens=120, output_tokens=30))
+                               usage=SimpleNamespace(input_tokens=120, output_tokens=30),
+                               stop_reason=self._fin)
 
 
 def _diag(caso):
@@ -86,3 +87,34 @@ def test_sin_clave_de_api(monkeypatch):
     caso = CON_CATEGORIA[0]
     with pytest.raises(llm.LLMNoDisponible):
         llm.generar_retroalimentacion_llm(_diag(caso))
+
+
+# ---- controles de la respuesta: terminó con normalidad, límite de palabras y formato ----
+RESPUESTAS = json.loads((Path(__file__).parent / "datos" / "llm_respuestas.json").read_text(encoding="utf-8"))
+
+
+def _generar(texto, fin="end_turn"):
+    return llm.generar_retroalimentacion_llm(_diag(CON_CATEGORIA[0]), cliente=ClienteFalso(texto, fin=fin))
+
+
+def test_una_respuesta_cortada_por_el_limite_de_tokens_no_se_entrega():
+    with pytest.raises(llm.LLMNoDisponible, match="max_tokens"):
+        _generar("Para corregir el error, primero debes dividir ambos lados entre", fin="max_tokens")
+
+
+@pytest.mark.parametrize("fin", ["end_turn", "stop_sequence"])
+def test_una_respuesta_que_termino_con_normalidad_se_entrega(fin):
+    assert _generar("Revisa el paso.", fin=fin).motivo_fin == fin
+
+
+@pytest.mark.parametrize("caso", RESPUESTAS, ids=[c["id"] for c in RESPUESTAS])
+def test_el_formato_se_revisa_y_la_pista_no_se_modifica(caso):
+    r = _generar(caso["texto"])
+    assert list(r.incumplimientos) == caso["esperado"]
+    assert r.texto == caso["texto"].strip()
+
+
+def test_el_limite_de_palabras_se_cumple_en_el_limite_y_se_registra_al_pasarlo():
+    en_el_limite = " ".join(["palabra"] * llm.MAX_PALABRAS)
+    assert llm.revisar_formato(en_el_limite) == []
+    assert llm.revisar_formato(en_el_limite + " palabra") == ["demasiado_larga"]

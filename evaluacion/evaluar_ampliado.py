@@ -48,7 +48,7 @@ def main(argv=None):
     for nombre, ids in (("AJUSTE", part["ajuste"]), ("RESERVADOS", (part.get("reservados_30") or part["reservados"]))):
         partes.append(resumen([c for c in casos if c["id"] in set(ids)], preds, nombre))
 
-    # fallos por tipo de novedad: seguros (dice indeterminado) o peligrosos (otra categoría)
+    # fallos por tipo de novedad: abstención (indeterminado), ERROR (excepción) u otra categoría
     partes.append(tabla_por_novedad(casos, preds))
     partes.append(lista_de_fallos(casos, preds))
     texto = "\n\n".join(partes)

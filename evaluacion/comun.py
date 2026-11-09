@@ -141,15 +141,19 @@ def resumen(casos, preds, titulo):
 
 
 def tabla_por_novedad(casos, preds):
-    """Fallos por tipo de novedad: seguros (dice indeterminado) o peligrosos (otra categoría)."""
-    tabla = [f"{'tipo de novedad':<20}{'casos':>6}{'aciertos':>10}{'seguros':>9}{'peligrosos':>12}"]
+    """Resultados por tipo de novedad, con los fallos separados según su significado:
+    abstención = el diagnóstico respondió `indeterminado` (decisión prevista en el diseño);
+    ERROR = el diagnóstico lanzó una excepción (falla del programa, no una decisión);
+    otra categoría = clasificó el paso con una categoría equivocada (el fallo más peligroso)."""
+    tabla = [f"{'tipo de novedad':<20}{'casos':>6}{'aciertos':>10}{'abstención':>12}{'ERROR':>7}{'otra categoría':>16}"]
     for tipo in TIPOS_DE_NOVEDAD:
         cs = [c for c in casos if c["tipo_de_novedad"] == tipo]
         ac = sum(preds[c["id"]] == c["categoria"] for c in cs)
-        seg = sum(preds[c["id"]] != c["categoria"] and preds[c["id"]] in ("indeterminado", "ERROR") for c in cs)
-        tabla.append(f"{tipo:<20}{len(cs):>6}{ac:>10}{seg:>9}{len(cs) - ac - seg:>12}")
-    return ("== Por tipo de novedad (seguro = responde indeterminado o falla sin clasificar; peligroso = otra categoría)\n"
-            + "\n".join(tabla))
+        abst = sum(preds[c["id"]] != c["categoria"] and preds[c["id"]] == "indeterminado" for c in cs)
+        err = sum(preds[c["id"]] == "ERROR" and c["categoria"] != "ERROR" for c in cs)
+        tabla.append(f"{tipo:<20}{len(cs):>6}{ac:>10}{abst:>12}{err:>7}{len(cs) - ac - abst - err:>16}")
+    return ("== Por tipo de novedad (abstención = responde indeterminado; ERROR = el diagnóstico lanzó una excepción; "
+            "otra categoría = clasificación equivocada)\n" + "\n".join(tabla))
 
 
 def lista_de_fallos(casos, preds, nota=""):

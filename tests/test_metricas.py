@@ -37,3 +37,18 @@ def test_el_resumen_muestra_la_columna_error_solo_si_hay_excepciones():
     assert "ERROR" in texto.splitlines()[1]
     assert "exactitud 9/10" in texto
     assert len(CATEGORIAS) == 6
+
+
+def test_la_tabla_por_novedad_separa_abstencion_error_y_otra_categoria():
+    from evaluacion.comun import TIPOS_DE_NOVEDAD, tabla_por_novedad
+    tipo = TIPOS_DE_NOVEDAD[0]
+    predicciones = ["error_signo", "indeterminado", "ERROR", "ERROR", "simplificacion_aritmetica"]
+    casos = [{"id": f"C{i}", "categoria": "error_signo", "tipo_de_novedad": tipo} for i in range(5)]
+    preds = {c["id"]: p for c, p in zip(casos, predicciones)}
+    texto = tabla_por_novedad(casos, preds)
+    cabecera, *filas = texto.splitlines()[1:]
+    columnas = cabecera.split()
+    fila = next(f for f in filas if f.startswith(tipo)).split()[-5:]
+    valores = dict(zip(["casos", "aciertos", "abstención", "ERROR", "otra"], fila))
+    assert valores == {"casos": "5", "aciertos": "1", "abstención": "1", "ERROR": "2", "otra": "1"}
+    assert "seguros" not in texto and "ERROR" in columnas

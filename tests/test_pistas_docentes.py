@@ -105,3 +105,115 @@ def test_solo_comprobar_no_llama_al_llm_ni_escribe_archivos(carpeta):
     assert g.main(["--carpeta", str(carpeta), "--solo-comprobar"], cliente=cliente) == 0
     assert cliente.llamadas == 0
     assert [p.name for p in carpeta.iterdir()] == ["PLANTILLA_DOCENTES.md"]
+
+
+# --- Protección del cegamiento: los archivos que revelan el origen de las pistas no deben llegar a Git ---
+
+RAIZ = Path(g.RAIZ)
+
+
+def test_gitignore_excluye_los_archivos_que_rompen_el_cegamiento():
+    from fnmatch import fnmatch
+    reglas = [linea.strip() for linea in (RAIZ / ".gitignore").read_text(encoding="utf-8").splitlines()
+              if linea.strip() and not linea.startswith("#")]
+    for nombre in g.ARCHIVOS_PRIVADOS:
+        ruta = f"evaluacion/docentes/{nombre}"
+        assert any(fnmatch(ruta, r.lstrip("/")) or fnmatch(nombre, r) for r in reglas), nombre
+    assert "PLANTILLA_DOCENTES.md" not in reglas  # la hoja vacía sí es parte del repositorio
+
+
+def test_la_hoja_para_los_docentes_no_contiene_la_clave(carpeta):
+    g.main(["--carpeta", str(carpeta)], cliente=ClienteFalso())
+    hoja = (carpeta / "HOJAS_DOCENTES_con_pistas.md").read_text(encoding="utf-8")
+    clave = _leer(carpeta, "CLAVE_AB_no_entregar.json")
+    assert "CLAVE" not in hoja and "asignacion" not in hoja and clave["semilla"] is not None
+    for nombre in ("llm", "plantilla"):
+        assert nombre not in hoja.lower().replace("plantilla_docentes", "")
+
+
+def _repo_git(carpeta, gitignore):
+    import subprocess
+    subprocess.run(["git", "init", "-q", str(carpeta)], check=True)
+    if gitignore is not None:
+        (carpeta / ".gitignore").write_text(gitignore, encoding="utf-8")
+
+
+def test_el_script_se_detiene_si_los_archivos_privados_no_estan_en_gitignore(carpeta):
+    _repo_git(carpeta, gitignore="")
+    with pytest.raises(SystemExit) as e:
+        g.main(["--carpeta", str(carpeta)], cliente=ClienteFalso())
+    assert "CLAVE_AB_no_entregar.json" in str(e.value)
+    assert not (carpeta / "CLAVE_AB_no_entregar.json").exists()
+
+
+def test_el_script_sigue_si_los_archivos_privados_estan_en_gitignore(carpeta):
+    _repo_git(carpeta, gitignore="\n".join(g.ARCHIVOS_PRIVADOS) + "\n")
+    g.main(["--carpeta", str(carpeta)], cliente=ClienteFalso())
+    assert (carpeta / "CLAVE_AB_no_entregar.json").exists()
+
+
+# --- Una ejecución reanudada debe tener la misma configuración que la que empezó ---
+
+def _primera_ejecucion_incompleta(carpeta):
+    """Genera todo salvo la pista del LLM de un caso (la llamada número 10 falla), como si se hubiera cortado."""
+    assert g.main(["--carpeta", str(carpeta)], cliente=ClienteFalso(fallan={10})) == 1
+    return _leer(carpeta, "pistas_originales.json")
+
+
+def _modelo_nuevo(monkeypatch):
+    monkeypatch.setattr(llm, "MODELO", "otro-modelo-distinto")
+
+
+def _prompt_nuevo(monkeypatch, tmp_path):
+    nuevo = tmp_path / "prompt_llm.txt"
+    nuevo.write_text(llm.RUTA_PROMPT.read_text(encoding="utf-8") + "\nUna frase más.", encoding="utf-8")
+    monkeypatch.setattr(llm, "RUTA_PROMPT", nuevo)
+
+
+def _tokens_nuevos(monkeypatch):
+    monkeypatch.setattr(llm, "MAX_TOKENS", llm.MAX_TOKENS + 1)
+
+
+def _temperatura_nueva(monkeypatch):
+    monkeypatch.setattr(llm, "TEMPERATURA", 0.2)
+
+
+def _commit_nuevo(monkeypatch, tmp_path):
+    from evaluacion import comun
+    monkeypatch.setattr(comun, "_commit_actual", lambda: {"commit": "otro-commit", "cambios_sin_guardar": False})
+
+
+@pytest.mark.parametrize("cambio, mencion", [
+    ("modelo", "modelo"), ("prompt", "prompt_llm.txt"), ("tokens", "max_tokens"),
+    ("temperatura", "temperatura"), ("commit", "commit"),
+])
+def test_no_se_reanuda_si_cambio_la_configuracion(carpeta, tmp_path, monkeypatch, cambio, mencion):
+    antes = _primera_ejecucion_incompleta(carpeta)
+    {"modelo": lambda: _modelo_nuevo(monkeypatch), "prompt": lambda: _prompt_nuevo(monkeypatch, tmp_path),
+     "tokens": lambda: _tokens_nuevos(monkeypatch), "temperatura": lambda: _temperatura_nueva(monkeypatch),
+     "commit": lambda: _commit_nuevo(monkeypatch, tmp_path)}[cambio]()
+    cliente = ClienteFalso()
+    with pytest.raises(SystemExit) as e:
+        g.main(["--carpeta", str(carpeta), "--reintentar"], cliente=cliente)
+    assert mencion in str(e.value) and "no se reanuda" in str(e.value)
+    assert cliente.llamadas == 0                                             # no se llamó al LLM
+    assert _leer(carpeta, "pistas_originales.json") == antes                 # no se tocó nada
+    assert not (carpeta / "CLAVE_AB_no_entregar.json").exists()
+    assert not (carpeta / "HOJAS_DOCENTES_con_pistas.md").exists()
+
+
+def test_se_reanuda_si_la_configuracion_es_la_misma_aunque_cambie_la_fecha(carpeta, monkeypatch):
+    _primera_ejecucion_incompleta(carpeta)
+    ruta = carpeta / "pistas_originales.json"
+    datos = json.loads(ruta.read_text(encoding="utf-8"))
+    datos["configuracion"]["fecha"] = "2020-01-01"          # otra fecha: no cuenta como cambio
+    ruta.write_text(json.dumps(datos), encoding="utf-8")
+    cliente = ClienteFalso()
+    assert g.main(["--carpeta", str(carpeta), "--reintentar"], cliente=cliente) == 0
+    assert cliente.llamadas == 1
+
+
+def test_diferencias_de_configuracion_vacia_si_son_iguales():
+    c = {"fecha": "2026-11-09", "modelo": "m", "prompts": {"a.txt": "1"}, "commit": "x"}
+    assert g.diferencias_de_configuracion(c, {**c, "fecha": "2026-11-10"}) == []
+    assert g.diferencias_de_configuracion(c, {**c, "prompts": {"a.txt": "2"}}) == ["prompt a.txt: 1 -> 2"]

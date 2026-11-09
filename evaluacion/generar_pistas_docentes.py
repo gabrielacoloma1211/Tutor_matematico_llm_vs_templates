@@ -19,6 +19,7 @@ Uso:
     python evaluacion/generar_pistas_docentes.py --reintentar       # vuelve a llamar solo a los casos que fallaron
 """
 import argparse
+import subprocess
 import json
 import random
 import re
@@ -119,6 +120,52 @@ def armar_hoja(texto_md: str, casos: list[tuple[int, dict]], originales: dict, c
     return "".join(salida)
 
 
+# Lo que debe ser idéntico entre la primera ejecución y las que la reanudan. La fecha es lo único que puede cambiar.
+CAMPOS_DE_CONFIGURACION_IGNORADOS = ("fecha",)
+
+
+def diferencias_de_configuracion(registrada: dict, actual: dict) -> list[str]:
+    """Lista legible de lo que cambió entre la configuración registrada al empezar y la actual (vacía si coinciden)."""
+    diferencias = []
+    for campo in sorted(set(registrada) | set(actual)):
+        if campo in CAMPOS_DE_CONFIGURACION_IGNORADOS:
+            continue
+        antes, ahora = registrada.get(campo), actual.get(campo)
+        if campo == "prompts" and isinstance(antes, dict) and isinstance(ahora, dict):
+            for nombre in sorted(set(antes) | set(ahora)):
+                if antes.get(nombre) != ahora.get(nombre):
+                    diferencias.append(f"prompt {nombre}: {antes.get(nombre)} -> {ahora.get(nombre)}")
+        elif antes != ahora:
+            diferencias.append(f"{campo}: {antes} -> {ahora}")
+    return diferencias
+
+
+ARCHIVOS_PRIVADOS = ("pistas_originales.json", "CLAVE_AB_no_entregar.json", "HOJAS_DOCENTES_con_pistas.md")
+
+
+def comprobar_que_no_se_suben(carpeta: Path) -> None:
+    """Si la carpeta está dentro de un repositorio de Git, exige que los archivos privados estén en .gitignore.
+
+    Estos archivos permiten saber qué mecanismo escribió cada pista: si llegaran al repositorio público se perdería
+    el cegamiento. Fuera de un repositorio (o sin Git instalado) no hace nada.
+    """
+    try:
+        dentro = subprocess.run(["git", "-C", str(carpeta), "rev-parse", "--is-inside-work-tree"],
+                                capture_output=True, text=True)
+    except OSError:
+        return
+    if dentro.returncode != 0:
+        return
+    sin_excluir = []
+    for nombre in ARCHIVOS_PRIVADOS:
+        r = subprocess.run(["git", "-C", str(carpeta), "check-ignore", "-q", str(Path(carpeta) / nombre)])
+        if r.returncode != 0:
+            sin_excluir.append(nombre)
+    if sin_excluir:
+        raise SystemExit("Estos archivos revelarían el origen de las pistas y NO están en .gitignore: "
+                         + ", ".join(sin_excluir) + ". Agrégalos a .gitignore antes de generar las pistas.")
+
+
 def main(argv=None, cliente=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--carpeta", type=Path, default=CARPETA)
@@ -126,6 +173,7 @@ def main(argv=None, cliente=None):
     ap.add_argument("--reintentar", action="store_true", help="vuelve a llamar al LLM en los casos que fallaron")
     args = ap.parse_args(argv)
 
+    comprobar_que_no_se_suben(args.carpeta)
     plantilla = (args.carpeta / "PLANTILLA_DOCENTES.md").read_text(encoding="utf-8")
     seleccion = json.loads(SELECCION.read_text(encoding="utf-8"))
     casos = leer_casos_de_la_hoja(plantilla, seleccion)
@@ -142,8 +190,20 @@ def main(argv=None, cliente=None):
             cliente = llm._crear_cliente()
         except llm.LLMNoDisponible as e:
             raise SystemExit(f"No se puede llamar al LLM: {e}")
+    actual = configuracion_experimento()
     if originales["configuracion"] is None:
-        originales["configuracion"] = configuracion_experimento()
+        originales["configuracion"] = actual
+        if actual.get("cambios_sin_guardar"):
+            print("AVISO: hay cambios sin guardar en Git; el commit registrado no describe exactamente el código usado. "
+                  "Haz commit antes de generar las pistas definitivas.")
+    else:
+        diferencias = diferencias_de_configuracion(originales["configuracion"], actual)
+        if diferencias:
+            raise SystemExit(
+                "La configuración cambió desde que se empezaron a generar las pistas; no se reanuda para no mezclar "
+                "respuestas obtenidas en condiciones distintas:\n  - " + "\n  - ".join(diferencias)
+                + "\nVuelve a la configuración original (mismo commit y mismos prompts) o, si el cambio es intencional, "
+                "empieza de nuevo borrando pistas_originales.json y CLAVE_AB_no_entregar.json (se genera un juego nuevo).")
 
     for numero, caso in casos:
         cid = caso["id"]

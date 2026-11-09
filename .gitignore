@@ -20,3 +20,10 @@ __pycache__/
 .vscode/
 .idea/
 .DS_Store
+
+# Evaluación ciega con docentes: estos archivos revelan qué mecanismo (LLM o plantilla) escribió cada pista.
+# No deben subirse al repositorio público hasta que termine la evaluación.
+evaluacion/docentes/pistas_originales.json
+evaluacion/docentes/CLAVE_AB_no_entregar.json
+evaluacion/docentes/HOJAS_DOCENTES_con_pistas.md
+evaluacion/docentes/calificaciones*

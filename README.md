@@ -35,6 +35,9 @@ es cómo se genera la pista pedagógica.
 │   └── api/              # Backend FastAPI que expone el sistema
 ├── tests/                # Pruebas (verificador, entrada, API, diagnóstico, benchmark y prueba ciega)
 │   └── datos/            # ejemplos de las pruebas en JSON (no están escritos dentro del código)
+├── análisis/
+│   ├── analisis_docentes.ipynb # cuaderno del análisis estadístico y cualitativo de las calificaciones (con gráficos)
+│   └── medir_plantillas_30.py  # latencia de las plantillas sobre los 30 casos de la evaluación con docentes
 ├── benchmark/
 │   ├── casos/dev/        # 100 casos de desarrollo (para diseñar y probar las reglas)
 │   ├── casos/test/       # 50 casos de evaluación final (no se usan para diseñar reglas)
@@ -54,7 +57,7 @@ es cómo se genera la pista pedagógica.
 │   ├── piloto_modelos.py       # compara modelos de LLM sobre los 20 casos del piloto (lectura ciega)
 │   ├── probar_llm_en_indeterminado.py # llama al LLM en los casos indeterminados para ver si inventa una causa
 │   ├── generar_pistas_docentes.py # genera las pistas de los 30 casos (LLM y plantillas), las asigna A/B y arma la hoja
-│   ├── docentes/               # hoja para los docentes (PLANTILLA_DOCENTES.md) y sus pistas, clave A/B y hoja final
+│   ├── docentes/               # hoja para los docentes, pistas originales, clave A/B, calificaciones y figuras del análisis
 │   └── resultados/             # resultados guardados con fecha, una carpeta por tema:
 │       ├── ampliado/  ampliado_2/  variaciones/  prueba_ciega/   # el diagnóstico sobre cada conjunto
 │       ├── latencia/                                             # latencia del verificador y del diagnóstico
@@ -74,10 +77,13 @@ es cómo se genera la pista pedagógica.
 | Verificador simbólico | Implementado y probado (casos válidos, inválidos y errores de parseo). La discrepancia conserva las expresiones de cada lado sin expandir y también el texto de las ecuaciones tal como se escribieron (SymPy simplifica y pierde, por ejemplo, el paréntesis de `3x + (x - 7)` o el `- 7` de `2x + 7 - 7`). |
 | Benchmark | 150 casos (100 dev + 50 test), elaborados y etiquetados por la autora y validados con el verificador. Además, dos conjuntos ampliados de 100 casos cada uno (generados por un LLM y etiquetados por la autora; el segundo fue la primera prueba ciega), 100 variaciones y una nueva prueba ciega de 100 casos solo para medir (ver abajo). El validador comprueba también que el enunciado coincida con la ecuación inicial y que el último paso sea el despeje (`x = valor`) y satisfaga esa ecuación. |
 | Módulo de diagnóstico | Implementado: árbol de decisión de 6 categorías (distributiva, un solo lado, aritmética, división, signo, indeterminado) más detectores de errores que la taxonomía no tiene como categoría (orden de operaciones, factor común mal sacado, cada lado por su propio denominador), que se informan como `indeterminado` con su explicación. Sobre los casos dev: 100/100. |
-| Evaluación del diagnóstico | Dev 100/100. El conjunto test (50) está reservado para una única evaluación final. Primera prueba ciega: 83/100, macro-F1 0.83 (medición sin ajustes), luego ajustada y usada como ampliado 2 (96/100 con etiquetas corregidas, optimista). Nueva prueba ciega: 89/100, macro-F1 0.90. Conjuntos ampliados y variaciones: ver las secciones de abajo. |
+| Evaluación del diagnóstico | Dev 100/100. Conjunto test (50), medido una sola vez con el código congelado (`v1.0-congelado`, 10 de noviembre de 2026): 49/50, macro-F1 0.98, un fallo seguro y ninguno peligroso. Primera prueba ciega: 83/100, macro-F1 0.83 (medición sin ajustes), luego ajustada y usada como ampliado 2 (96/100 con etiquetas corregidas, optimista). Nueva prueba ciega: 89/100, macro-F1 0.90. Conjuntos ampliados y variaciones: ver las secciones de abajo. |
 | Generador con plantillas | Implementado (`src/generador/plantillas.py`): rellena `{termino}`, `{factor}` y `{coeficiente}` con los detalles del diagnóstico, usa una segunda plantilla para el signo perdido al multiplicar y responde con un mensaje general si el diagnóstico es `indeterminado` o falta un dato. Sin LLM, determinista. |
 | Generador con LLM | Implementado (`src/generador/llm.py`) con el SDK de Anthropic, cliente inyectable y registro de latencia y tokens. Modelo elegido con un piloto de 20 casos (`claude-haiku-5-5`; ver "Experimentos con llamadas reales al LLM"). Las pruebas automáticas usan un cliente falso; las llamadas reales se hicieron en los pilotos y en la prueba con casos indeterminados, y sus resultados quedan guardados con su configuración. |
 | API | `/salud`, `/verificar` (verificador → diagnóstico → pista con `modo` plantilla o llm) e interfaz web en `/`; una ecuación mal escrita responde HTTP 422 (error de formato), no `valido=false`; el LLM no disponible responde 503. Toda entrada pasa por `src/verificador/entrada.py` antes de llegar a SymPy (solo expresiones de primer grado, con límites de longitud y complejidad). |
+
+| Evaluación con docentes | Terminada. 30 casos, 2 pistas por caso (LLM y plantilla) asignadas al azar a A/B (ciego), 4 docentes (D1 a D3 enseñan Matemática; D4 no), 240 calificaciones completas en `evaluacion/docentes/calificaciones_docentes.csv`. |
+| Análisis de resultados | `análisis/analisis_docentes.ipynb`: promedios, diferencia LLM − plantilla con IC bootstrap, Wilcoxon con Holm y prueba de signos, tamaño de la diferencia, alfa de Krippendorff, sensibilidad y análisis cualitativo. Resultados resumidos abajo. |
 
 ## Instalación
 
@@ -85,6 +91,12 @@ es cómo se genera la pista pedagógica.
 python -m venv venv
 source venv/bin/activate  # En Windows: venv\Scripts\activate
 pip install -r requirements.txt
+```
+
+Para el cuaderno de análisis hacen falta además `jupyter`, `pandas`, `scipy`, `statsmodels`, `krippendorff` y `matplotlib`:
+
+```bash
+pip install jupyter pandas scipy statsmodels krippendorff matplotlib
 ```
 
 ## Ejecutar las pruebas
@@ -258,9 +270,32 @@ Cómo se genera, con `python evaluacion/generar_pistas_docentes.py` (después de
 4. Se escribe `HOJAS_DOCENTES_con_pistas.md`: la hoja con las pistas en su lugar, sin decir de qué mecanismo es cada una.
 5. Un informe final señala las pistas con incumplimientos de formato o que parecen revelar la solución; no se corrigen ni se reemplazan en silencio.
 
-**Protección del cegamiento.** `pistas_originales.json`, `CLAVE_AB_no_entregar.json`, `HOJAS_DOCENTES_con_pistas.md` y las calificaciones (`calificaciones*`) están en `.gitignore`: no se suben al repositorio público mientras dure la evaluación, porque con ellos se podría saber qué mecanismo escribió cada pista. El script se detiene, antes de escribir nada, si trabaja dentro de un repositorio de Git y esos archivos no están excluidos. A los docentes solo se les entrega la hoja impresa; la clave queda en el computador de la autora. Una vez terminada la evaluación se publicarán las pistas originales, la clave y las calificaciones para que el análisis se pueda reproducir.
+**Protección del cegamiento.** Mientras duró la evaluación, `pistas_originales.json`, `CLAVE_AB_no_entregar.json`, `HOJAS_DOCENTES_con_pistas.md` y las calificaciones estuvieron fuera del repositorio (`.gitignore`), porque con ellos se podría saber qué mecanismo escribió cada pista. A los docentes solo se les entregó la hoja impresa. **La evaluación terminó el 17 de noviembre de 2026**, por lo que esos archivos se publican para que el análisis se pueda reproducir.
+
+**Análisis de las calificaciones.** El plan se fijó por escrito antes de abrir las hojas (criterio principal: utilidad; Wilcoxon pareado por caso, IC bootstrap, Holm en los criterios secundarios, alfa de Krippendorff entre docentes y sensibilidad sin el caso marcado). El análisis está en `análisis/analisis_docentes.ipynb` y usa librerías estándar: pandas, SciPy (Wilcoxon, bootstrap y prueba binomial), statsmodels (Holm) y krippendorff. Para reproducirlo, abre el cuaderno y ejecuta *Restart & Run All*; lee `evaluacion/docentes/calificaciones_docentes.csv`, `pistas_originales.json` y `CLAVE_AB_no_entregar.json`, y guarda los gráficos en `evaluacion/docentes/figuras/`. Cada medida se explica en el cuaderno (qué calcula, para qué sirve y qué significa el resultado).
+
+El análisis principal usa a los tres docentes de Matemática (`EXCLUIR = ("D4",)` en la primera celda). Esa decisión se tomó **después de ver los resultados**, por lo que el cuaderno muestra también el análisis con los cuatro docentes, que era el plan original. Con `EXCLUIR = ()` el análisis principal incluye a todos.
 
 Los casos `indeterminado` no entran en esta comparación (el sistema no llama al LLM en ellos). Los resultados de las pruebas ciegas del diagnóstico miden solo la clasificación del error; no permiten concluir que el LLM genere mejores pistas que las plantillas. Esa conclusión depende únicamente de las calificaciones de los docentes.
+
+## Resultados de la evaluación con docentes
+
+Diferencia media LLM − plantilla (escala de 1 a 5; positivo = mejor el LLM). Solo se considera significativa una diferencia con p (o p corregido por Holm) menor que 0,05 y un IC del 95 % que no incluye el 0.
+
+| Criterio | 3 docentes de Matemática | 4 docentes |
+|---|---|---|
+| Utilidad (principal) | +0,11, sin diferencia clara | −0,18, a favor de la plantilla (pequeña) |
+| Claridad | +0,07, sin diferencia clara | −0,18, sin diferencia clara |
+| Corrección matemática | +0,21, a favor del LLM (pequeña) | +0,05, sin diferencia clara |
+| Adecuación al nivel | +0,26, a favor del LLM (pequeña) | +0,06, sin diferencia clara |
+| No revela la solución | +1,20, a favor del LLM (grande) | +1,08, a favor del LLM (grande) |
+
+- Lo único que se mantiene con los dos grupos de docentes es que el LLM revela menos la respuesta (mejor en 25 de 30 casos).
+- En el criterio principal no hay evidencia de que las pistas del LLM sean más útiles que las de plantilla.
+- El acuerdo entre docentes fue bajo (alfa de Krippendorff de 0,06 en utilidad), por lo que las diferencias deben leerse con cautela.
+- Las plantillas de mayor utilidad son también las que más revelan: las 8 pistas con nota media de 2,5 o menos en «No revela» son plantillas que indican el divisor exacto o el término cuyo signo cambia.
+
+El detalle, las tablas y los gráficos están en el cuaderno y en el documento de la tesis (sección 6.3).
 
 ## Próximos pasos
 
@@ -273,5 +308,7 @@ Los casos `indeterminado` no entran en esta comparación (el sistema no llama al
 - [x] Implementar `src/generador/llm.py` con la integración a la API del LLM y probarla con la clave real (pilotos).
 - [x] Conectar ambos generadores a `/verificar` y crear la interfaz del estudiante.
 - [x] Preparar la hoja para los docentes y el script que genera las pistas pareadas y ciegas (`evaluacion/generar_pistas_docentes.py`).
-- [ ] Congelar el código (commit y tag), generar las 60 pistas una sola vez y entregarlas a los docentes.
-- [ ] Evaluación final: exactitud y macro-F1 sobre los casos test (una sola vez), y rúbrica de calidad pedagógica con docentes.
+- [x] Congelar el código (commit y tag `v1.0-congelado`), generar las 60 pistas una sola vez y entregarlas a los docentes.
+- [x] Evaluación final del diagnóstico sobre los casos test (una sola vez): 49/50, macro-F1 0.98.
+- [x] Evaluación con docentes y análisis de las calificaciones (`análisis/analisis_docentes.ipynb`).
+

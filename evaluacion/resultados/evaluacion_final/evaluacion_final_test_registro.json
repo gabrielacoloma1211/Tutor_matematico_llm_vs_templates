@@ -1,0 +1,413 @@
+{
+  "descripcion": "Registro de la evaluación final del diagnóstico sobre el conjunto TEST (medido una sola vez, sin ajustes).",
+  "conjunto": "test",
+  "n_casos": 50,
+  "fecha_evaluacion_original": "2026-11-11",
+  "fecha_de_este_registro": "2026-11-19",
+  "etiqueta_codigo_congelado": "v1.0-congelado",
+  "commit_codigo_congelado": "913a52ae0be5293c1b2e5640e864b821275f43c9",
+  "commit_al_generar_registro": "43cfbefa354e9b5e80e67a423db5a461cd734ee6",
+  "codigo_evaluado_identico_a_la_etiqueta": true,
+  "huella_codigo": "ca338ae22045a341",
+  "huella_casos_test": "2e1a7068b8f0d62b",
+  "aciertos": 49,
+  "exactitud": 0.98,
+  "macro_f1": 0.9784,
+  "metricas_por_categoria": {
+    "error_signo": {
+      "casos": 13,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "distributiva_incorrecta": {
+      "casos": 10,
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474
+    },
+    "operacion_un_lado": {
+      "casos": 7,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "simplificacion_aritmetica": {
+      "casos": 7,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "division_coeficiente_equivocado": {
+      "casos": 7,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "indeterminado": {
+      "casos": 6,
+      "precision": 0.8571,
+      "recall": 1.0,
+      "f1": 0.9231
+    }
+  },
+  "matriz_confusion": {
+    "error_signo": {
+      "error_signo": 13,
+      "distributiva_incorrecta": 0,
+      "operacion_un_lado": 0,
+      "simplificacion_aritmetica": 0,
+      "division_coeficiente_equivocado": 0,
+      "indeterminado": 0
+    },
+    "distributiva_incorrecta": {
+      "error_signo": 0,
+      "distributiva_incorrecta": 9,
+      "operacion_un_lado": 0,
+      "simplificacion_aritmetica": 0,
+      "division_coeficiente_equivocado": 0,
+      "indeterminado": 1
+    },
+    "operacion_un_lado": {
+      "error_signo": 0,
+      "distributiva_incorrecta": 0,
+      "operacion_un_lado": 7,
+      "simplificacion_aritmetica": 0,
+      "division_coeficiente_equivocado": 0,
+      "indeterminado": 0
+    },
+    "simplificacion_aritmetica": {
+      "error_signo": 0,
+      "distributiva_incorrecta": 0,
+      "operacion_un_lado": 0,
+      "simplificacion_aritmetica": 7,
+      "division_coeficiente_equivocado": 0,
+      "indeterminado": 0
+    },
+    "division_coeficiente_equivocado": {
+      "error_signo": 0,
+      "distributiva_incorrecta": 0,
+      "operacion_un_lado": 0,
+      "simplificacion_aritmetica": 0,
+      "division_coeficiente_equivocado": 7,
+      "indeterminado": 0
+    },
+    "indeterminado": {
+      "error_signo": 0,
+      "distributiva_incorrecta": 0,
+      "operacion_un_lado": 0,
+      "simplificacion_aritmetica": 0,
+      "division_coeficiente_equivocado": 0,
+      "indeterminado": 6
+    }
+  },
+  "fallos": [
+    {
+      "id": "TEST-017",
+      "referencia": "distributiva_incorrecta",
+      "prediccion": "indeterminado"
+    }
+  ],
+  "casos": [
+    {
+      "id": "TEST-001",
+      "referencia": "error_signo",
+      "prediccion": "error_signo",
+      "acierto": true
+    },
+    {
+      "id": "TEST-002",
+      "referencia": "error_signo",
+      "prediccion": "error_signo",
+      "acierto": true
+    },
+    {
+      "id": "TEST-003",
+      "referencia": "error_signo",
+      "prediccion": "error_signo",
+      "acierto": true
+    },
+    {
+      "id": "TEST-004",
+      "referencia": "error_signo",
+      "prediccion": "error_signo",
+      "acierto": true
+    },
+    {
+      "id": "TEST-005",
+      "referencia": "error_signo",
+      "prediccion": "error_signo",
+      "acierto": true
+    },
+    {
+      "id": "TEST-006",
+      "referencia": "error_signo",
+      "prediccion": "error_signo",
+      "acierto": true
+    },
+    {
+      "id": "TEST-007",
+      "referencia": "error_signo",
+      "prediccion": "error_signo",
+      "acierto": true
+    },
+    {
+      "id": "TEST-008",
+      "referencia": "error_signo",
+      "prediccion": "error_signo",
+      "acierto": true
+    },
+    {
+      "id": "TEST-009",
+      "referencia": "error_signo",
+      "prediccion": "error_signo",
+      "acierto": true
+    },
+    {
+      "id": "TEST-010",
+      "referencia": "error_signo",
+      "prediccion": "error_signo",
+      "acierto": true
+    },
+    {
+      "id": "TEST-011",
+      "referencia": "error_signo",
+      "prediccion": "error_signo",
+      "acierto": true
+    },
+    {
+      "id": "TEST-012",
+      "referencia": "error_signo",
+      "prediccion": "error_signo",
+      "acierto": true
+    },
+    {
+      "id": "TEST-013",
+      "referencia": "error_signo",
+      "prediccion": "error_signo",
+      "acierto": true
+    },
+    {
+      "id": "TEST-014",
+      "referencia": "distributiva_incorrecta",
+      "prediccion": "distributiva_incorrecta",
+      "acierto": true
+    },
+    {
+      "id": "TEST-015",
+      "referencia": "distributiva_incorrecta",
+      "prediccion": "distributiva_incorrecta",
+      "acierto": true
+    },
+    {
+      "id": "TEST-016",
+      "referencia": "distributiva_incorrecta",
+      "prediccion": "distributiva_incorrecta",
+      "acierto": true
+    },
+    {
+      "id": "TEST-017",
+      "referencia": "distributiva_incorrecta",
+      "prediccion": "indeterminado",
+      "acierto": false
+    },
+    {
+      "id": "TEST-018",
+      "referencia": "distributiva_incorrecta",
+      "prediccion": "distributiva_incorrecta",
+      "acierto": true
+    },
+    {
+      "id": "TEST-019",
+      "referencia": "distributiva_incorrecta",
+      "prediccion": "distributiva_incorrecta",
+      "acierto": true
+    },
+    {
+      "id": "TEST-020",
+      "referencia": "distributiva_incorrecta",
+      "prediccion": "distributiva_incorrecta",
+      "acierto": true
+    },
+    {
+      "id": "TEST-021",
+      "referencia": "distributiva_incorrecta",
+      "prediccion": "distributiva_incorrecta",
+      "acierto": true
+    },
+    {
+      "id": "TEST-022",
+      "referencia": "distributiva_incorrecta",
+      "prediccion": "distributiva_incorrecta",
+      "acierto": true
+    },
+    {
+      "id": "TEST-023",
+      "referencia": "distributiva_incorrecta",
+      "prediccion": "distributiva_incorrecta",
+      "acierto": true
+    },
+    {
+      "id": "TEST-024",
+      "referencia": "operacion_un_lado",
+      "prediccion": "operacion_un_lado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-025",
+      "referencia": "operacion_un_lado",
+      "prediccion": "operacion_un_lado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-026",
+      "referencia": "operacion_un_lado",
+      "prediccion": "operacion_un_lado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-027",
+      "referencia": "operacion_un_lado",
+      "prediccion": "operacion_un_lado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-028",
+      "referencia": "operacion_un_lado",
+      "prediccion": "operacion_un_lado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-029",
+      "referencia": "operacion_un_lado",
+      "prediccion": "operacion_un_lado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-030",
+      "referencia": "operacion_un_lado",
+      "prediccion": "operacion_un_lado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-031",
+      "referencia": "simplificacion_aritmetica",
+      "prediccion": "simplificacion_aritmetica",
+      "acierto": true
+    },
+    {
+      "id": "TEST-032",
+      "referencia": "simplificacion_aritmetica",
+      "prediccion": "simplificacion_aritmetica",
+      "acierto": true
+    },
+    {
+      "id": "TEST-033",
+      "referencia": "simplificacion_aritmetica",
+      "prediccion": "simplificacion_aritmetica",
+      "acierto": true
+    },
+    {
+      "id": "TEST-034",
+      "referencia": "simplificacion_aritmetica",
+      "prediccion": "simplificacion_aritmetica",
+      "acierto": true
+    },
+    {
+      "id": "TEST-035",
+      "referencia": "simplificacion_aritmetica",
+      "prediccion": "simplificacion_aritmetica",
+      "acierto": true
+    },
+    {
+      "id": "TEST-036",
+      "referencia": "simplificacion_aritmetica",
+      "prediccion": "simplificacion_aritmetica",
+      "acierto": true
+    },
+    {
+      "id": "TEST-037",
+      "referencia": "simplificacion_aritmetica",
+      "prediccion": "simplificacion_aritmetica",
+      "acierto": true
+    },
+    {
+      "id": "TEST-038",
+      "referencia": "division_coeficiente_equivocado",
+      "prediccion": "division_coeficiente_equivocado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-039",
+      "referencia": "division_coeficiente_equivocado",
+      "prediccion": "division_coeficiente_equivocado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-040",
+      "referencia": "division_coeficiente_equivocado",
+      "prediccion": "division_coeficiente_equivocado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-041",
+      "referencia": "division_coeficiente_equivocado",
+      "prediccion": "division_coeficiente_equivocado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-042",
+      "referencia": "division_coeficiente_equivocado",
+      "prediccion": "division_coeficiente_equivocado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-043",
+      "referencia": "division_coeficiente_equivocado",
+      "prediccion": "division_coeficiente_equivocado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-044",
+      "referencia": "division_coeficiente_equivocado",
+      "prediccion": "division_coeficiente_equivocado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-045",
+      "referencia": "indeterminado",
+      "prediccion": "indeterminado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-046",
+      "referencia": "indeterminado",
+      "prediccion": "indeterminado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-047",
+      "referencia": "indeterminado",
+      "prediccion": "indeterminado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-048",
+      "referencia": "indeterminado",
+      "prediccion": "indeterminado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-049",
+      "referencia": "indeterminado",
+      "prediccion": "indeterminado",
+      "acierto": true
+    },
+    {
+      "id": "TEST-050",
+      "referencia": "indeterminado",
+      "prediccion": "indeterminado",
+      "acierto": true
+    }
+  ]
+}

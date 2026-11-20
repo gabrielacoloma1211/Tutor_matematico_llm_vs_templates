@@ -77,7 +77,7 @@ es cómo se genera la pista pedagógica.
 | Verificador simbólico | Implementado y probado (casos válidos, inválidos y errores de parseo). La discrepancia conserva las expresiones de cada lado sin expandir y también el texto de las ecuaciones tal como se escribieron (SymPy simplifica y pierde, por ejemplo, el paréntesis de `3x + (x - 7)` o el `- 7` de `2x + 7 - 7`). |
 | Benchmark | 150 casos (100 dev + 50 test), elaborados y etiquetados por la autora y validados con el verificador. Además, dos conjuntos ampliados de 100 casos cada uno (generados por un LLM y etiquetados por la autora; el segundo fue la primera prueba ciega), 100 variaciones y una nueva prueba ciega de 100 casos solo para medir (ver abajo). El validador comprueba también que el enunciado coincida con la ecuación inicial y que el último paso sea el despeje (`x = valor`) y satisfaga esa ecuación. |
 | Módulo de diagnóstico | Implementado: árbol de decisión de 6 categorías (distributiva, un solo lado, aritmética, división, signo, indeterminado) más detectores de errores que la taxonomía no tiene como categoría (orden de operaciones, factor común mal sacado, cada lado por su propio denominador), que se informan como `indeterminado` con su explicación. Sobre los casos dev: 100/100. |
-| Evaluación del diagnóstico | Dev 100/100. Conjunto test (50), medido una sola vez con el código congelado (`v1.0-congelado`, 10 de noviembre de 2026): 49/50, macro-F1 0.98, un fallo seguro y ninguno peligroso. Primera prueba ciega: 83/100, macro-F1 0.83 (medición sin ajustes), luego ajustada y usada como ampliado 2 (96/100 con etiquetas corregidas, optimista). Nueva prueba ciega: 89/100, macro-F1 0.90. Conjuntos ampliados y variaciones: ver las secciones de abajo. |
+| Evaluación del diagnóstico | Dev 100/100. Conjunto test (50), medido una sola vez el 11 de noviembre de 2026 con el código congelado el 10 de noviembre (`v1.0-congelado`): 49/50, macro-F1 0.98, un fallo seguro (TEST-017, distributiva → indeterminado) y ninguno peligroso; registro completo en `evaluacion/resultados/evaluacion_final/`. Primera prueba ciega: 83/100, macro-F1 0.83 (medición sin ajustes), luego ajustada y usada como ampliado 2 (96/100 con etiquetas corregidas, optimista). Nueva prueba ciega: 89/100, macro-F1 0.90. Conjuntos ampliados y variaciones: ver las secciones de abajo. |
 | Generador con plantillas | Implementado (`src/generador/plantillas.py`): rellena `{termino}`, `{factor}` y `{coeficiente}` con los detalles del diagnóstico, usa una segunda plantilla para el signo perdido al multiplicar y responde con un mensaje general si el diagnóstico es `indeterminado` o falta un dato. Sin LLM, determinista. |
 | Generador con LLM | Implementado (`src/generador/llm.py`) con el SDK de Anthropic, cliente inyectable y registro de latencia y tokens. Modelo elegido con un piloto de 20 casos (`claude-haiku-5-5`; ver "Experimentos con llamadas reales al LLM"). Las pruebas automáticas usan un cliente falso; las llamadas reales se hicieron en los pilotos y en la prueba con casos indeterminados, y sus resultados quedan guardados con su configuración. |
 | API | `/salud`, `/verificar` (verificador → diagnóstico → pista con `modo` plantilla o llm) e interfaz web en `/`; una ecuación mal escrita responde HTTP 422 (error de formato), no `valido=false`; el LLM no disponible responde 503. Toda entrada pasa por `src/verificador/entrada.py` antes de llegar a SymPy (solo expresiones de primer grado, con límites de longitud y complejidad). |
@@ -120,6 +120,7 @@ python benchmark/validar_casos.py benchmark/casos/ampliado_2   # (y prueba_ciega
 ```bash
 python evaluacion/evaluar_diagnostico.py                                  # dev
 python evaluacion/evaluar_diagnostico.py --conjunto test --evaluacion-final   # una sola vez, al final
+python evaluacion/registrar_evaluacion_final.py --evaluacion-final --guardar   # registro de esa evaluación (ids, etiquetas, predicciones, matriz, métricas, commit)
 python evaluacion/evaluar_ampliado.py --guardar --etiqueta _ajustado      # conjunto ampliado
 python evaluacion/evaluar_variaciones.py variaciones_nuevas.json --guardar
 python evaluacion/medir_latencia.py --repeticiones 10 --guardar   # latencia (no usa test)
@@ -153,6 +154,8 @@ Por eso, en esta tesis la API no se publica. Los docentes evalúan hojas impresa
 ### Alcance: ecuaciones con solución x = 0
 
 **Qué hace el verificador.** Comprueba equivalencia: un paso es válido si la ecuación nueva tiene la misma solución que la anterior. No comprueba el procedimiento. Por eso acepta un salto que conserva la solución aunque omita pasos (de `3x + 2 = 8` a `x = 2`), y en principio también aceptaría un paso con dos errores que se compensan. Es un límite general del criterio, no solo del caso x = 0, y se acepta para este prototipo: construir un verificador procedimental está fuera del alcance.
+
+**Qué se verifica y qué se infiere.** La equivalencia algebraica de cada paso se comprueba de forma simbólica y exacta. La categoría del error, en cambio, la infiere el diagnóstico con reglas y puede ser incorrecta (ver las tasas de fallo en la tabla de estado y en las pruebas ciegas); por eso se habla de un diagnóstico determinista y evaluado, no de un diagnóstico «verificado». Si el diagnóstico se equivoca, las dos versiones (LLM y plantillas) producen una pista sobre un error que el estudiante no cometió.
 
 **Por qué se rechaza x = 0.** Con una ecuación sin número suelto (`ax = bx`) todas las ecuaciones de ese tipo tienen la misma solución, x = 0, así que el criterio no puede marcar ningún paso como incorrecto: `(3333x)/2 = 1234x` y `3333x = 1234x` salen como equivalentes aunque el segundo paso es erróneo. En el resto de las ecuaciones, un error casi siempre cambia la solución y se detecta; aquí no, de forma sistemática. Por eso `/verificar` responde HTTP 422 (`entrada_no_permitida`) si la ecuación **anterior** del paso tiene solución x = 0, y la interfaz lo avisa al escribir la ecuación inicial. Un paso nuevo con solución 0 producto de un error (por ejemplo `3x + 2 + 2x = 2`) sí se procesa y se marca incorrecto.
 
@@ -274,7 +277,7 @@ Cómo se genera, con `python evaluacion/generar_pistas_docentes.py` (después de
 
 **Análisis de las calificaciones.** El plan se fijó por escrito antes de abrir las hojas (criterio principal: utilidad; Wilcoxon pareado por caso, IC bootstrap, Holm en los criterios secundarios, alfa de Krippendorff entre docentes y sensibilidad sin el caso marcado). El análisis está en `análisis/analisis_docentes.ipynb` y usa librerías estándar: pandas, SciPy (Wilcoxon, bootstrap y prueba binomial), statsmodels (Holm) y krippendorff. Para reproducirlo, abre el cuaderno y ejecuta *Restart & Run All*; lee `evaluacion/docentes/calificaciones_docentes.csv`, `pistas_originales.json` y `CLAVE_AB_no_entregar.json`, y guarda los gráficos en `evaluacion/docentes/figuras/`. Cada medida se explica en el cuaderno (qué calcula, para qué sirve y qué significa el resultado).
 
-El análisis principal usa a los tres docentes de Matemática (`EXCLUIR = ("D4",)` en la primera celda). Esa decisión se tomó **después de ver los resultados**, por lo que el cuaderno muestra también el análisis con los cuatro docentes, que era el plan original. Con `EXCLUIR = ()` el análisis principal incluye a todos.
+El análisis principal usa a los **cuatro docentes**, como se planificó. Como análisis adicional de sensibilidad se repite todo solo con los tres docentes de Matemática (`EXCLUIR = ("D4",)` en la primera celda). Esa exclusión se pensó **después de ver los resultados**, por eso no sustituye al análisis principal.
 
 Los casos `indeterminado` no entran en esta comparación (el sistema no llama al LLM en ellos). Los resultados de las pruebas ciegas del diagnóstico miden solo la clasificación del error; no permiten concluir que el LLM genere mejores pistas que las plantillas. Esa conclusión depende únicamente de las calificaciones de los docentes.
 
@@ -282,18 +285,20 @@ Los casos `indeterminado` no entran en esta comparación (el sistema no llama al
 
 Diferencia media LLM − plantilla (escala de 1 a 5; positivo = mejor el LLM). Solo se considera significativa una diferencia con p (o p corregido por Holm) menor que 0,05 y un IC del 95 % que no incluye el 0.
 
-| Criterio | 3 docentes de Matemática | 4 docentes |
+| Criterio | 4 docentes (análisis principal) | 3 docentes de Matemática (sensibilidad) |
 |---|---|---|
-| Utilidad (principal) | +0,11, sin diferencia clara | −0,18, a favor de la plantilla (pequeña) |
-| Claridad | +0,07, sin diferencia clara | −0,18, sin diferencia clara |
-| Corrección matemática | +0,21, a favor del LLM (pequeña) | +0,05, sin diferencia clara |
-| Adecuación al nivel | +0,26, a favor del LLM (pequeña) | +0,06, sin diferencia clara |
-| No revela la solución | +1,20, a favor del LLM (grande) | +1,08, a favor del LLM (grande) |
+| Utilidad (principal) | −0,18, a favor de la plantilla (pequeña; p = 0,034) | +0,11, sin diferencia clara |
+| Claridad | −0,18, sin diferencia clara | +0,07, sin diferencia clara |
+| Corrección matemática | +0,05, sin diferencia clara | +0,21, a favor del LLM (pequeña) |
+| Adecuación al nivel | +0,06, sin diferencia clara | +0,26, a favor del LLM (pequeña) |
+| No revela la solución | +1,08, a favor del LLM (grande) | +1,20, a favor del LLM (grande) |
 
-- Lo único que se mantiene con los dos grupos de docentes es que el LLM revela menos la respuesta (mejor en 25 de 30 casos).
-- En el criterio principal no hay evidencia de que las pistas del LLM sean más útiles que las de plantilla.
-- El acuerdo entre docentes fue bajo (alfa de Krippendorff de 0,06 en utilidad), por lo que las diferencias deben leerse con cautela.
-- Las plantillas de mayor utilidad son también las que más revelan: las 8 pistas con nota media de 2,5 o menos en «No revela» son plantillas que indican el divisor exacto o el término cuyo signo cambia.
+- Lo único que se mantiene en los dos análisis es que, según la rúbrica, el LLM deja más por descubrir al estudiante (mejor en 25 de 30 casos). Ninguna pista de ninguna versión entregó la solución: las plantillas indican la operación a hacer («divide ambos lados entre 7», «su signo debe cambiar»), y la rúbrica penalizaba eso.
+- En el criterio principal, con los cuatro docentes, las pistas del LLM no fueron más útiles que las de plantilla (ventaja pequeña y frágil de la plantilla; el p pasa de 0,034 a 0,050 sin el caso marcado). Con los tres docentes de Matemática no hay diferencia clara. Un resultado no significativo no demuestra que ambas versiones sean igual de útiles.
+- La diferencia entre los dos análisis viene sobre todo de D4, que favoreció a la plantilla en utilidad (−1,03).
+- El acuerdo entre docentes fue bajo (alfa de Krippendorff de 0,01 en utilidad con cuatro docentes y 0,06 con tres): una misma pista pudo recibir 5 puntos de un docente y 3 de otro. Por eso las diferencias pequeñas (incluidas las de corrección y adecuación con los tres docentes de Matemática) no se consideran ventajas consolidadas del LLM; solo la ausencia de revelación es consistente entre los cuatro docentes.
+- Las 8 pistas con nota media de 2,5 o menos en «No revela» son plantillas que indican el divisor exacto o el término cuyo signo cambia. No escriben x ni la ecuación corregida, y su utilidad fue alta (4,78 de media): la nota baja refleja que dan la instrucción explícita, no que entreguen la respuesta.
+- Estos resultados se refieren a las implementaciones y criterios de este experimento (estas plantillas, `claude-haiku-5-5` con el prompt usado, 30 casos y la rúbrica descrita); no se generalizan a todos los LLM ni a todas las plantillas contextualizadas.
 
 El detalle, las tablas y los gráficos están en el cuaderno y en el documento de la tesis (sección 6.3).
 

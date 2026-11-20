@@ -1,0 +1,21 @@
+== EVALUACIÓN FINAL (TEST): 50 casos | exactitud 49/50 = 0.98 | macro-F1 0.98
+            SIGNO DISTRIB  UNLADO   ARITM     DIV   INDET
+SIGNO          13       0       0       0       0       0
+DISTRIB         0       9       0       0       0       1
+UNLADO          0       0       7       0       0       0
+ARITM           0       0       0       7       0       0
+DIV             0       0       0       0       7       0
+INDET           0       0       0       0       0       6
+categoría  casos   prec  recall    F1
+SIGNO         13   1.00    1.00  1.00
+DISTRIB       10   1.00    0.90  0.95
+UNLADO         7   1.00    1.00  1.00
+ARITM          7   1.00    1.00  1.00
+DIV            7   1.00    1.00  1.00
+INDET          6   0.86    1.00  0.92
+
+Casos mal clasificados (1): TEST-017 (referencia DISTRIB, diagnóstico INDET)
+
+commit del código congelado (v1.0-congelado): 913a52ae0be5293c1b2e5640e864b821275f43c9
+código idéntico a la etiqueta: True
+huella del código: ca338ae22045a341 | huella de los casos test: 2e1a7068b8f0d62b
